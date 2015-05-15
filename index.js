@@ -1,10 +1,26 @@
 $(function(){
 	var transforms=[
-		'Discrete-time Fourier transform (DTFT)',
-		'Discrete Fourier transform (DFT)'
+		{
+			name:'Discrete-time Fourier transform (DTFT)',
+			timeFormula:function(neg,inv,conj){
+				return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
+			},
+			freqFormula:function(neg,inv,conj){
+				return (neg?'-':'')+'X'+(conj?'^*':'')+'(e^{'+(inv?'-':'')+'j\\omega})';
+			}
+		},{
+			name:'Discrete Fourier transform (DFT)',
+			timeFormula:function(neg,inv,conj){
+				return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
+			},
+			freqFormula:function(neg,inv,conj){
+				return (neg?'-':'')+'X'+(conj?'^*':'')+'['+(inv?'-':'')+'k]';
+			}
+		}
 	];
 	$('.signal-transform-properties').each(function(){
-		var transformElm=$('caption'); // TODO check if it's relative to the table
+		var tableElm=$(this);
+		var transformElm=tableElm.find('caption');
 		var transformSelectElm=null;
 		transformElm.wrapInner("<span class='signal-transform-dropdown'>");
 		var transformDropdownElm=transformElm.find('.signal-transform-dropdown');
@@ -13,10 +29,19 @@ $(function(){
 				transformSelectElm=$("<ul class='transform-select' />");
 				transforms.forEach(function(transform){
 					transformSelectElm.append(
-						$("<li>"+transform+"</li>").click(function(){
-							transformDropdownElm.text(transform);
+						$("<li>"+transform.name+"</li>").click(function(){
 							transformSelectElm.remove();
 							transformSelectElm=null;
+							transformDropdownElm.text(transform.name);
+							tableElm.find('tbody').children('tr').each(function(i){
+								$(this).children('td').text(function(j){
+									if (i==0 && j==0) return '$$'+transform.timeFormula(1,1,1)+'$$'; if (i==0 && j==1) return '$$'+transform.timeFormula(1,1,0)+'$$';
+									if (i==0 && j==4) return '$$'+transform.freqFormula(1,0,1)+'$$'; if (i==0 && j==5) return '$$'+transform.freqFormula(1,1,0)+'$$';
+									// TODO the rest
+									return '';
+								});
+							});
+							MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 						})
 					);
 				});
