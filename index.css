@@ -1,0 +1,9 @@
+.signal-transform-properties th,td {
+	width: 5em;
+}
+.signal-transform-properties .transform-select {
+	position: absolute;
+	background: #FFF;
+	color: #000;
+	z-index: 1;
+}
