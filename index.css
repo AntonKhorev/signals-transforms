@@ -1,10 +1,38 @@
 sup a {
 	text-decoration: none;
 }
+sup a:hover {
+	text-decoration: underline;
+}
+[role="button"] {
+	cursor: pointer;
+}
+caption {
+	position: relative;
+	border-radius: .5em;
+	border: 1px solid #888;
+}
+.signal-transform-dropdown {
+	display: block;
+}
+.signal-transform-dropdown:after {
+	display: block;
+	position: absolute;
+	width: 2em;
+	height: 100%;
+	vertical-align: bottom;
+	top: 0;
+	right: 0;
+	content: "▼";
+	color: rgba(106,122,212,0.3);
+}
+.signal-transform-dropdown:hover:after {
+	color: rgba(106,122,212,1);
+}
 .signal-transform-properties th,td {
 	width: 5em;
 }
-.signal-transform-properties .transform-select {
+.signal-transform-select {
 	position: absolute;
 	z-index: 1;
 	border-radius: .5em;
@@ -12,4 +40,14 @@ sup a {
 	background: #FFF;
 	color: #000;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.signal-transform-select li {
+	border-radius: .5em;
+}
+.signal-transform-select li:hover {
+	background: #FFC;
 }

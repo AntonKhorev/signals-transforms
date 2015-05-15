@@ -49,14 +49,14 @@ $(function(){
 		var tableElm=$(this);
 		var transformElm=tableElm.find('caption');
 		var transformSelectElm=null;
-		transformElm.wrapInner("<span class='signal-transform-dropdown'>");
+		transformElm.wrapInner("<span class='signal-transform-dropdown' role='button'>");
 		var transformDropdownElm=transformElm.find('.signal-transform-dropdown');
 		transformDropdownElm.click(function(){
 			if (transformSelectElm===null) {
-				transformSelectElm=$("<ul class='transform-select' />");
+				transformSelectElm=$("<ul class='signal-transform-select' />");
 				transforms.forEach(function(transform){
 					transformSelectElm.append(
-						$("<li>"+transform.name+"</li>").click(function(){
+						$("<li role='button'>"+transform.name+"</li>").click(function(){
 							transformSelectElm.remove();
 							transformSelectElm=null;
 							transformDropdownElm.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
