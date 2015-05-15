@@ -11,15 +11,19 @@ th,td {
 </head>
 <body>
 <table>
-<tr><th colspan='3'>signal</th><th colspan='3'><abbr title='discrete-time Fourier transform'>DTFT</abbr></th></tr>
+<caption><abbr title='discrete-time Fourier transform'>DTFT</abbr></caption>
+<tr><th colspan='3'>time domain</th><th></th><th colspan='3'>frequency domain</th></tr>
 <tr>
 	<td>$$-x^*[-n]$$</td>           <td>$$-x[-n]$$</td>           <td></td>
+<td></td>
 	<td>$$-X^*(e^{j\omega})$$</td>  <td>$$-X(e^{-j\omega})$$</td> <td></td>
 </tr><tr>
 	<td>$$-x^*[n]$$</td>            <td>$$x[n]$$</td>             <td>$$x^*[n]$$</td>
+<td></td>
 	<td>$$-X^*(e^{-j\omega})$$</td> <td>$$X(e^{j\omega})$$</td>   <td>$$X^*(e^{-j\omega})$$</td>
 </tr><tr>
 	<td></td>                       <td>$$x[-n]$$</td>            <td>$$x^*[-n]$$</td>
+<td></td>
 	<td></td>                       <td>$$X(e^{-j\omega})$$</td>  <td>$$X^*(e^{j\omega})$$</td>
 </tr>
 </table>
