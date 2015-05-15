@@ -3,7 +3,10 @@
 }
 .signal-transform-properties .transform-select {
 	position: absolute;
+	z-index: 1;
+	border-radius: .5em;
+	border: 1px solid #444;
 	background: #FFF;
 	color: #000;
-	z-index: 1;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
