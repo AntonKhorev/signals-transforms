@@ -11,15 +11,15 @@ $(function(){
 		transformDropdownElm.click(function(){
 			if (transformSelectElm===null) {
 				transformSelectElm=$("<ul class='transform-select' />");
-				for (var i=0;i<transforms.length;i++) {
+				transforms.forEach(function(transform){
 					transformSelectElm.append(
-						$("<li>"+transforms[i]+"</li>").click(transforms[i],function(e){
-							transformDropdownElm.text(e.data);
+						$("<li>"+transform+"</li>").click(function(){
+							transformDropdownElm.text(transform);
 							transformSelectElm.remove();
 							transformSelectElm=null;
 						})
 					);
-				}
+				});
 				transformElm.append(transformSelectElm);
 			} else {
 				transformSelectElm.remove();
