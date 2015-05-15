@@ -18,6 +18,16 @@ $(function(){
 			}
 		}
 	];
+	var timePatterns=[
+		[[1,1,1],[1,1,0],null],
+		[[1,0,1],[0,0,0],[0,0,1]],
+		[null,   [0,1,0],[0,1,1]]
+	];
+	var freqPatterns=[
+		[[1,0,1],[1,1,0],null],
+		[[1,1,1],[0,0,0],[0,1,1]],
+		[null,   [0,1,0],[0,0,1]]
+	];
 	$('.signal-transform-properties').each(function(){
 		var tableElm=$(this);
 		var transformElm=tableElm.find('caption');
@@ -35,10 +45,21 @@ $(function(){
 							transformDropdownElm.text(transform.name);
 							tableElm.find('tbody').children('tr').each(function(i){
 								$(this).children('td').text(function(j){
-									if (i==0 && j==0) return '$$'+transform.timeFormula(1,1,1)+'$$'; if (i==0 && j==1) return '$$'+transform.timeFormula(1,1,0)+'$$';
-									if (i==0 && j==4) return '$$'+transform.freqFormula(1,0,1)+'$$'; if (i==0 && j==5) return '$$'+transform.freqFormula(1,1,0)+'$$';
-									// TODO the rest
-									return '';
+									var pattern,formula;
+									if (j<3) {
+										pattern=timePatterns[i][j];
+										formula=transform.timeFormula;
+									} else if (j>3) {
+										pattern=freqPatterns[i][j-4];
+										formula=transform.freqFormula;
+									} else {
+										pattern=null;
+									}
+									if (pattern===null) {
+										return '';
+									} else {
+										return '$$'+formula.apply(null,pattern)+'$$';
+									}
 								});
 							});
 							MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
