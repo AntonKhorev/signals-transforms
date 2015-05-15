@@ -1,8 +1,20 @@
 $(function(){
 	var transforms=[
 		{
+			name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
+			wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
+			timeDefinition:'x(t) = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} X(j\\omega) e^{j\\omega t} \\,\\mathrm{d}\\omega',
+			freqDefinition:'X(j\\omega) = \\int\\limits_{-\\infty}^{+\\infty} x(t) e^{-j\\omega t} \\,\\mathrm{d}t',
+			timeFormula:function(neg,inv,conj){
+				return (neg?'-':'')+'x'+(conj?'^*':'')+'('+(inv?'-':'')+'t)';
+			},
+			freqFormula:function(neg,inv,conj){
+				return (neg?'-':'')+'X'+(conj?'^*':'')+'('+(inv?'-':'')+'j\\omega)';
+			}
+		},{
 			name:'Discrete-time Fourier transform (DTFT)',
-			timeDefinition:'x[n] = \\frac{1}{2\\pi} \\int \\limits_{\\langle 2\\pi \\rangle} X(e^{j\\omega}) e^{j\\omega n} \\, \\mathrm{d}\\omega',
+			wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
+			timeDefinition:'x[n] = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} X(e^{j\\omega}) e^{j\\omega n} \\,\\mathrm{d}\\omega',
 			freqDefinition:'X(e^{j\\omega}) = \\sum_{n=-\\infty}^{+\\infty} x[n] e^{-j\\omega n}',
 			timeFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
@@ -11,9 +23,10 @@ $(function(){
 				return (neg?'-':'')+'X'+(conj?'^*':'')+'(e^{'+(inv?'-':'')+'j\\omega})';
 			}
 		},{
+			name:'Discrete Fourier transform (DFT)',
+			wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
 			timeDefinition:'x[n] = \\frac 1 N \\sum_{k=0}^{N-1} X[k] W_N^{-kn}',
 			freqDefinition:'X[k] = \\sum_{k=0}^{N-1} x[n] W_N^{kn}',
-			name:'Discrete Fourier transform (DFT)',
 			timeFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
 			},
