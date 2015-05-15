@@ -2,16 +2,24 @@
 <html>
 <head>
 <meta charset='utf-8' />
+<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='index.js'></script>
 <style>
 th,td {
 	width: 5em;
 }
+.transform-select {
+	position: absolute;
+	background: #FFF;
+	color: #000;
+	z-index: 1;
+}
 </style>
 </head>
 <body>
-<table>
-<caption><abbr title='discrete-time Fourier transform'>DTFT</abbr></caption>
+<table class='signal-transform-properties'>
+<caption>Discrete-time Fourier transform (DTFT)</caption>
 <tr><th colspan='3'>time domain</th><th></th><th colspan='3'>frequency domain</th></tr>
 <tr>
 	<td>$$-x^*[-n]$$</td>           <td>$$-x[-n]$$</td>           <td></td>
