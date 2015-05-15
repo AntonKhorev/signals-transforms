@@ -10,8 +10,17 @@
 <body>
 <table class='signal-transform-properties'>
 <caption>Discrete-time Fourier transform (DTFT)</caption>
-<thead><tr><th colspan='3'>time domain</th><th></th><th colspan='3'>frequency domain</th></tr></thead>
-<tbody><tr>
+<thead><tr>
+	<th colspan='3'>time domain</th>
+<th></th>
+	<th colspan='3'>frequency domain</th>
+</tr></thead>
+<tbody class='signal-transform-properties-definition'><tr>
+	<td colspan='3'>$$x[n] = \frac{1}{2\pi} \int \limits_{\langle 2\pi \rangle} X(e^{j\omega}) e^{j\omega n} \, \mathrm{d}\omega$$</td>
+<td></td>
+	<td colspan='3'>$$X(e^{j\omega}) = \sum_{n=-\infty}^{+\infty} x[n] e^{-j\omega n}$$</td>
+</tr></tbody>
+<tbody class='signal-transform-properties-conjinv'><tr>
 	<td>$$-x^*[-n]$$</td>           <td>$$-x[-n]$$</td>           <td></td>
 <td></td>
 	<td>$$-X^*(e^{j\omega})$$</td>  <td>$$-X(e^{-j\omega})$$</td> <td></td>
