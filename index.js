@@ -59,7 +59,7 @@ $(function(){
 						$("<li>"+transform.name+"</li>").click(function(){
 							transformSelectElm.remove();
 							transformSelectElm=null;
-							transformDropdownElm.text(transform.name);
+							transformDropdownElm.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 							tableElm.find('.signal-transform-properties-definition').children('tr').children('td').text(function(j){
 								if (j==0) {
 									return '$$'+transform.timeDefinition+'$$';
