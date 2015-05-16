@@ -10,6 +10,12 @@ $(function(){
 			},
 			conjinvFreqFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'X'+(conj?'^*':'')+'('+(inv?'-':'')+'j\\omega)';
+			},
+			modshiftTimeFormula:function(mod,shift){
+				return (mod?'e^{'+(mod<0?'-':'')+'j\\omega_0 t}':'')+'x(t'+(shift?(shift<0?'-':'+')+'t_0':'')+')';
+			},
+			modshiftFreqFormula:function(mod,shift){
+				return (mod?'e^{'+(mod<0?'-':'')+'j\\omega t_0}':'')+'X(j'+(shift?'(\\omega'+(shift<0?'-':'+')+'\\omega_0)':'\\omega')+')';
 			}
 		},{
 			name:'Discrete-time Fourier transform (DTFT)',
@@ -21,6 +27,12 @@ $(function(){
 			},
 			conjinvFreqFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'X'+(conj?'^*':'')+'(e^{'+(inv?'-':'')+'j\\omega})';
+			},
+			modshiftTimeFormula:function(mod,shift){
+				return (mod?'e^{'+(mod<0?'-':'')+'j\\omega_0 n}':'')+'x[n'+(shift?(shift<0?'-':'+')+'n_0':'')+']';
+			},
+			modshiftFreqFormula:function(mod,shift){
+				return (mod?'e^{'+(mod<0?'-':'')+'j\\omega n_0}':'')+'X(e^{j'+(shift?'(\\omega'+(shift<0?'-':'+')+'\\omega_0)':'\\omega')+'})';
 			}
 		},{
 			name:'Discrete Fourier transform (DFT)',
@@ -32,6 +44,12 @@ $(function(){
 			},
 			conjinvFreqFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'X'+(conj?'^*':'')+'['+(inv?'-':'')+'k]';
+			},
+			modshiftTimeFormula:function(mod,shift){
+				return (mod?'W_N^{'+(mod>0?'-':'')+'k_0 n}':'')+'x[n'+(shift?(shift<0?'-':'+')+'n_0':'')+']';
+			},
+			modshiftFreqFormula:function(mod,shift){
+				return (mod?'W_N^{'+(mod>0?'-':'')+'k n_0}':'')+'X[k'+(shift?(shift<0?'-':'+')+'k_0':'')+']';
 			}
 		}
 	];
@@ -44,6 +62,16 @@ $(function(){
 		[1,0,1],[1,1,0],
 		[1,1,1],[0,0,0],[0,1,1],
 		        [0,1,0],[0,0,1]
+	];
+	var modshiftTimePatterns=[
+		        [ 0,+1],
+		[-1, 0],[ 0, 0],[+1, 0],
+		        [ 0,-1]
+	];
+	var modshiftFreqPatterns=[
+		        [+1, 0],
+		[ 0,+1],[ 0, 0],[ 0,-1],
+		        [-1, 0]
 	];
 	$('.signal-transform-properties').each(function(){
 		var tableElm=$(this);
@@ -67,6 +95,12 @@ $(function(){
 							});
 							tableElm.find('.signal-transform-properties-conjinv td.freq.formula').text(function(i){
 								return '$$'+transform.conjinvFreqFormula.apply(null,conjinvFreqPatterns[i])+'$$';
+							});
+							tableElm.find('.signal-transform-properties-modshift td.time.formula').text(function(i){
+								return '$$'+transform.modshiftTimeFormula.apply(null,modshiftTimePatterns[i])+'$$';
+							});
+							tableElm.find('.signal-transform-properties-modshift td.freq.formula').text(function(i){
+								return '$$'+transform.modshiftFreqFormula.apply(null,modshiftFreqPatterns[i])+'$$';
 							});
 							MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 						})
