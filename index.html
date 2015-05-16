@@ -21,17 +21,30 @@
 	<td colspan='3' class='freq formula'>$$X(e^{j\omega}) = \sum_{n=-\infty}^{+\infty} x[n] e^{-j\omega n}$$</td>
 </tr></tbody>
 <tbody class='signal-transform-properties-conjinv'><tr>
-	<td class='time formula'>$$-x^*[-n]$$</td>           <td class='time formula'>$$-x[-n]$$</td>           <td class='time filler'></td>
+	<td class='time formula'>$$-x^*[-n]$$</td>           <td class='time formula'>$$-x[-n]$$</td>           <td></td>
 <td></td>
-	<td class='freq formula'>$$-X^*(e^{j\omega})$$</td>  <td class='freq formula'>$$-X(e^{-j\omega})$$</td> <td class='freq filler'></td>
+	<td class='freq formula'>$$-X^*(e^{j\omega})$$</td>  <td class='freq formula'>$$-X(e^{-j\omega})$$</td> <td></td>
 </tr><tr>
 	<td class='time formula'>$$-x^*[n]$$</td>            <td class='time formula'>$$x[n]$$</td>             <td class='time formula'>$$x^*[n]$$</td>
 <td></td>
 	<td class='freq formula'>$$-X^*(e^{-j\omega})$$</td> <td class='freq formula'>$$X(e^{j\omega})$$</td>   <td class='freq formula'>$$X^*(e^{-j\omega})$$</td>
 </tr><tr>
-	<td class='time filler'></td>                        <td class='time formula'>$$x[-n]$$</td>            <td class='time formula'>$$x^*[-n]$$</td>
+	<td></td>                                            <td class='time formula'>$$x[-n]$$</td>            <td class='time formula'>$$x^*[-n]$$</td>
 <td></td>
-	<td class='freq filler'></td>                        <td class='freq formula'>$$X(e^{-j\omega})$$</td>  <td class='freq formula'>$$X^*(e^{j\omega})$$</td>
+	<td></td>                                            <td class='freq formula'>$$X(e^{-j\omega})$$</td>  <td class='freq formula'>$$X^*(e^{j\omega})$$</td>
+</tr></tbody>
+<tbody class='signal-transform-properties-modshift'><tr>
+	<td></td>                                                   <td class='time formula'>$$x[n+n_0]$$</td>                       <td></td>
+<td></td>
+	<td></td>                                                   <td class='freq formula'>$$e^{j\omega n_0}X(e^{j\omega})$$</td>  <td></td>
+</tr><tr>
+	<td class='time formula'>$$e^{-j\omega_0 n}x[n]$$</td>      <td class='time formula'>$$x[n]$$</td>                           <td class='time formula'>$$e^{j\omega_0 n}x[n]$$</td>
+<td></td>
+	<td class='freq formula'>$$X(e^{j(\omega+\omega_0)})$$</td> <td class='freq formula'>$$X(e^{j\omega})$$</td>                 <td class='freq formula'>$$X(e^{j(\omega-\omega_0)})$$</td>
+</tr><tr>
+	<td></td>                                                   <td class='time formula'>$$x[n-n_0]$$</td>                       <td></td>
+<td></td>
+	<td></td>                                                   <td class='freq formula'>$$e^{-j\omega n_0}X(e^{j\omega})$$</td> <td></td>
 </tr></tbody>
 </table>
 </body>

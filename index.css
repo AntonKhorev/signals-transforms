@@ -48,6 +48,12 @@ caption {
 .signal-transform-select li:hover {
 	background: #EEC;
 }
+.signal-transform-properties {
+	border-collapse: collapse;
+}
+.signal-transform-properties tbody {
+	border-top: solid 1px #888;
+}
 .signal-transform-properties th,td {
 	width: 5em;
 }
