@@ -119,8 +119,17 @@ $(function(){
 				timeFormulaElm.add(freqFormulaElm).hover(function(){
 					timeFormulaElm.addClass('active');
 					freqFormulaElm.addClass('active');
+					var tOffset=timeFormulaElm.offset();
+					var fOffset=freqFormulaElm.offset();
+					var tWidth=timeFormulaElm.width();
+					var tHeight=timeFormulaElm.height();
+					var line=$("<div class='line' />")
+						.appendTo(timeFormulaElm)
+						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
+						.width(fOffset.left-tOffset.left-tWidth)
+					;
 				},function(){
-					timeFormulaElm.removeClass('active');
+					timeFormulaElm.removeClass('active').find('.line').remove();
 					freqFormulaElm.removeClass('active');
 				});
 			});

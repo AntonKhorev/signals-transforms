@@ -61,3 +61,9 @@ caption {
 .signal-transform-properties td.active {
 	background: #EEC;
 }
+.signal-transform-properties .line {
+	position: absolute;
+	background: #EEC;
+	z-index: 1;
+	height: 4px;
+}
