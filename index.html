@@ -16,22 +16,22 @@
 	<th colspan='3'>frequency domain</th>
 </tr></thead>
 <tbody class='signal-transform-properties-definition'><tr>
-	<td colspan='3'>$$x[n] = \frac{1}{2\pi} \int \limits_{\langle 2\pi \rangle} X(e^{j\omega}) e^{j\omega n} \, \mathrm{d}\omega$$</td>
+	<td colspan='3' class='time formula'>$$x[n] = \frac{1}{2\pi} \int \limits_{\langle 2\pi \rangle} X(e^{j\omega}) e^{j\omega n} \, \mathrm{d}\omega$$</td>
 <td></td>
-	<td colspan='3'>$$X(e^{j\omega}) = \sum_{n=-\infty}^{+\infty} x[n] e^{-j\omega n}$$</td>
+	<td colspan='3' class='freq formula'>$$X(e^{j\omega}) = \sum_{n=-\infty}^{+\infty} x[n] e^{-j\omega n}$$</td>
 </tr></tbody>
 <tbody class='signal-transform-properties-conjinv'><tr>
-	<td>$$-x^*[-n]$$</td>           <td>$$-x[-n]$$</td>           <td></td>
+	<td class='time formula'>$$-x^*[-n]$$</td>           <td class='time formula'>$$-x[-n]$$</td>           <td class='time filler'></td>
 <td></td>
-	<td>$$-X^*(e^{j\omega})$$</td>  <td>$$-X(e^{-j\omega})$$</td> <td></td>
+	<td class='freq formula'>$$-X^*(e^{j\omega})$$</td>  <td class='freq formula'>$$-X(e^{-j\omega})$$</td> <td class='freq filler'></td>
 </tr><tr>
-	<td>$$-x^*[n]$$</td>            <td>$$x[n]$$</td>             <td>$$x^*[n]$$</td>
+	<td class='time formula'>$$-x^*[n]$$</td>            <td class='time formula'>$$x[n]$$</td>             <td class='time formula'>$$x^*[n]$$</td>
 <td></td>
-	<td>$$-X^*(e^{-j\omega})$$</td> <td>$$X(e^{j\omega})$$</td>   <td>$$X^*(e^{-j\omega})$$</td>
+	<td class='freq formula'>$$-X^*(e^{-j\omega})$$</td> <td class='freq formula'>$$X(e^{j\omega})$$</td>   <td class='freq formula'>$$X^*(e^{-j\omega})$$</td>
 </tr><tr>
-	<td></td>                       <td>$$x[-n]$$</td>            <td>$$x^*[-n]$$</td>
+	<td class='time filler'></td>                        <td class='time formula'>$$x[-n]$$</td>            <td class='time formula'>$$x^*[-n]$$</td>
 <td></td>
-	<td></td>                       <td>$$X(e^{-j\omega})$$</td>  <td>$$X^*(e^{j\omega})$$</td>
+	<td class='freq filler'></td>                        <td class='freq formula'>$$X(e^{-j\omega})$$</td>  <td class='freq formula'>$$X^*(e^{j\omega})$$</td>
 </tr></tbody>
 </table>
 </body>

@@ -60,15 +60,8 @@ $(function(){
 							transformSelectElm.remove();
 							transformSelectElm=null;
 							transformDropdownElm.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
-							tableElm.find('.signal-transform-properties-definition').children('tr').children('td').text(function(j){
-								if (j==0) {
-									return '$$'+transform.timeDefinition+'$$';
-								} else if (j==2) {
-									return '$$'+transform.freqDefinition+'$$';
-								} else {
-									return '';
-								}
-							});
+							tableElm.find('.signal-transform-properties-definition td.time.formula').text('$$'+transform.timeDefinition+'$$');
+							tableElm.find('.signal-transform-properties-definition td.freq.formula').text('$$'+transform.freqDefinition+'$$');
 							tableElm.find('.signal-transform-properties-conjinv').children('tr').each(function(i){
 								$(this).children('td').text(function(j){
 									var pattern,formula;
@@ -98,15 +91,19 @@ $(function(){
 				transformSelectElm=null;
 			}
 		});
-		tableElm.find('.signal-transform-properties-conjinv').children('tr').each(function(i){
-			$(this).children('td').each(function(j){
-				var td=$(this);
-				if (td.text()!='') {
-					td.hover(function(){
-						$(this).toggleClass('active').parent('tr').children('td').eq(j<3?j+4:j-4).toggleClass('active');
-					});
-				}
-			})
+                tableElm.find('tr').each(function(){
+			$(this).children('td.time.formula').each(function(i){
+				var timeFormulaElm=$(this);
+				var freqFormulaElm=timeFormulaElm.parent('tr').children('td.freq.formula').eq(i);
+				timeFormulaElm.add(freqFormulaElm).hover(function(){
+					timeFormulaElm.addClass('active');
+					freqFormulaElm.addClass('active');
+				},function(){
+					timeFormulaElm.removeClass('active');
+					freqFormulaElm.removeClass('active');
+				});
+			});
 		});
+		// $$\overset{\mathcal F}{\rightarrow}$$
 	});
 });
