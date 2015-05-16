@@ -59,11 +59,29 @@ caption {
 	width: 14.28%;
 }
 .signal-transform-properties td.active {
-	background: #EEC;
+	background: #EDB;
 }
 .signal-transform-properties .line {
 	position: absolute;
-	background: #EEC;
-	z-index: 1;
+	background: #EDB;
+	color: #EDB;
+	z-index: -1;
 	height: 4px;
+	vertical-align: middle;
+}
+.signal-transform-properties .line .arrowhead {
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: #EDB;
+	height: 4px;
+	width: 20px;
+	transform-origin: right;
+}
+.signal-transform-properties .line .arrowhead.top {
+	transform: rotate(45deg);
+}
+.signal-transform-properties .line .arrowhead.bottom {
+	transform: rotate(-45deg);
 }

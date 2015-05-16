@@ -123,7 +123,7 @@ $(function(){
 					var fOffset=freqFormulaElm.offset();
 					var tWidth=timeFormulaElm.width();
 					var tHeight=timeFormulaElm.height();
-					var line=$("<div class='line' />")
+					var line=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>")
 						.appendTo(timeFormulaElm)
 						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
 						.width(fOffset.left-tOffset.left-tWidth)
