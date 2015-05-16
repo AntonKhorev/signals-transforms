@@ -50,12 +50,13 @@ caption {
 }
 .signal-transform-properties {
 	border-collapse: collapse;
+	margin: auto;
 }
 .signal-transform-properties tbody {
 	border-top: solid 1px #888;
 }
 .signal-transform-properties th,td {
-	width: 5em;
+	width: 14.28%;
 }
 .signal-transform-properties td.active {
 	background: #EEC;
