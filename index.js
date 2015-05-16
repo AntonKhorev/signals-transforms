@@ -98,5 +98,15 @@ $(function(){
 				transformSelectElm=null;
 			}
 		});
+		tableElm.find('.signal-transform-properties-conjinv').children('tr').each(function(i){
+			$(this).children('td').each(function(j){
+				var td=$(this);
+				if (td.text()!='') {
+					td.hover(function(){
+						$(this).toggleClass('active').parent('tr').children('td').eq(j<3?j+4:j-4).toggleClass('active');
+					});
+				}
+			})
+		});
 	});
 });

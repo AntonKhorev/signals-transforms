@@ -29,9 +29,6 @@ caption {
 .signal-transform-dropdown:hover:after {
 	color: rgba(106,122,212,1);
 }
-.signal-transform-properties th,td {
-	width: 5em;
-}
 .signal-transform-select {
 	position: absolute;
 	z-index: 1;
@@ -49,5 +46,11 @@ caption {
 	border-radius: .5em;
 }
 .signal-transform-select li:hover {
-	background: #FFC;
+	background: #EEC;
+}
+.signal-transform-properties th,td {
+	width: 5em;
+}
+.signal-transform-properties td.active {
+	background: #EEC;
 }
