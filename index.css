@@ -93,10 +93,6 @@ sup a:hover {
 }
 .signal-transform-properties .note {
 	display: none;
-}
-.signal-transform-properties .formula:hover + .note,
-.signal-transform-properties .formula.active + .note {
-	display: block;
 	position: absolute;
 	font-size: .8em;
 	font-family: sans-serif;
@@ -105,6 +101,13 @@ sup a:hover {
 	left: 50%;
 	width: 10em;
 	margin-left: -5em;
+}
+.signal-transform-properties tbody tr:first-child + tr .note {
+	top: 0;
+}
+.signal-transform-properties .formula:hover + .note,
+.signal-transform-properties .formula.active + .note {
+	display: block;
 }
 .signal-transform-properties .link {
 	position: absolute;
