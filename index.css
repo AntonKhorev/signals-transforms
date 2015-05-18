@@ -103,8 +103,8 @@ sup a:hover {
 	color: #444;
 	text-align: center;
 	left: 50%;
-	width: 100%;
-	margin-left: -50%;
+	width: 10em;
+	margin-left: -5em;
 }
 .signal-transform-properties .line {
 	position: absolute;
