@@ -95,7 +95,7 @@ sup a:hover {
 	display: none;
 }
 .signal-transform-properties .formula:hover + .note,
-.signal-transform-properties .formula:active + .note {
+.signal-transform-properties .formula.active + .note {
 	display: block;
 	position: absolute;
 	font-size: .8em;
@@ -105,6 +105,29 @@ sup a:hover {
 	left: 50%;
 	width: 10em;
 	margin-left: -5em;
+}
+.signal-transform-properties .link {
+	position: absolute;
+	z-index: 1;
+	color: #444;
+	width: 2em;
+	height: 2em;
+	text-align: center;
+	line-height: 2em;
+}
+.signal-transform-properties .link:hover {
+	color: #000;
+	background: red;
+}
+.signal-transform-properties .link-r {
+	right: -2em;
+	top: 50%;
+	margin-top: -1em;
+}
+.signal-transform-properties .link-t {
+	top: -1em;
+	left: 50%;
+	margin-left: -1em;
 }
 .signal-transform-properties .line {
 	position: absolute;
