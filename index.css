@@ -78,6 +78,9 @@ sup a:hover {
 .signal-transform-properties tbody tr:last-child td {
 	padding-bottom: 1.5em;
 }
+.signal-transform-properties .cell {
+	position: relative;
+}
 .signal-transform-properties .formula {
 	margin: -1em 0;
 	overflow: hidden; /* disable margin collapse */
@@ -91,6 +94,21 @@ sup a:hover {
 .signal-transform-properties .formula:hover,
 .signal-transform-properties .formula.active {
 	background: #EDB;
+}
+.signal-transform-properties .note {
+	display: none;
+}
+.signal-transform-properties .formula:hover + .note,
+.signal-transform-properties .formula:active + .note {
+	display: block;
+	position: absolute;
+	font-size: .8em;
+	font-family: sans-serif;
+	color: #444;
+	text-align: center;
+	left: 50%;
+	width: 100%;
+	margin-left: -50%;
 }
 .signal-transform-properties .line {
 	position: absolute;
