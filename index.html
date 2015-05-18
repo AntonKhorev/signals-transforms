@@ -10,11 +10,15 @@
 <body>
 <table class='signal-transform-properties'>
 <caption>Discrete-time Fourier transform (DTFT)<sup><a href='http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform'>[W]</a></sup></caption>
+<colgroup class='time'><col /><col /><col /></colgroup>
+<colgroup class='freq'><col /><col /><col /></colgroup>
 <thead><tr>
-	<th colspan='3' class='time'>time domain</th>
-	<th colspan='3' class='freq'>frequency domain</th>
+	<th colspan='3' class='time'>Time domain</th>
+	<th colspan='3' class='freq'>Frequency domain</th>
 </tr></thead>
 <tbody class='signal-transform-properties-definition'><tr>
+	<th colspan='6'>Definitions</th>
+</tr><tr>
 	<td colspan='3' class='time'><div class='cell'>
 		<div class='formula'>$$x[n] = \frac{1}{2\pi} \int \limits_{\langle 2\pi \rangle} X(e^{j\omega}) e^{j\omega n} \, \mathrm{d}\omega$$</div>
 	</div></td>
@@ -23,6 +27,8 @@
 	</div></td>
 </tr></tbody>
 <tbody class='signal-transform-properties-conjinv'><tr>
+	<th colspan='6'>Complex conjugation and time inversion</th>
+</tr><tr>
 	<td class='time'><div class='cell'>
 		<div class='formula'>$$-x^*[-n]$$</div>
 	</div></td>
@@ -73,6 +79,8 @@
 	</div></td>
 </tr></tbody>
 <tbody class='signal-transform-properties-modshift'><tr>
+	<th colspan='6'>Modulation and time/frequency shift</th>
+</tr><tr>
 	<td class='time'></td>
 	<td class='time'><div class='cell'>
 		<div class='formula'>$$x[n+n_0]$$</div>

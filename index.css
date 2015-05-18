@@ -7,15 +7,19 @@ sup a:hover {
 [role="button"] {
 	cursor: pointer;
 }
-caption {
+.signal-transform-properties {
+	border-collapse: collapse;
+	margin: auto;
+}
+.signal-transform-properties caption {
 	position: relative;
 	border-radius: .5em;
 	border: 1px solid #888;
 }
-.signal-transform-dropdown {
+.signal-transform-properties .signal-transform-dropdown {
 	display: block;
 }
-.signal-transform-dropdown:after {
+.signal-transform-properties .signal-transform-dropdown:after {
 	display: block;
 	position: absolute;
 	width: 2em;
@@ -26,10 +30,10 @@ caption {
 	content: "▼";
 	color: rgba(106,122,212,0.3);
 }
-.signal-transform-dropdown:hover:after {
+.signal-transform-properties .signal-transform-dropdown:hover:after {
 	color: rgba(106,122,212,1);
 }
-.signal-transform-select {
+.signal-transform-properties .signal-transform-select {
 	position: absolute;
 	z-index: 1;
 	border-radius: .5em;
@@ -42,23 +46,43 @@ caption {
 	margin: 0;
 	padding: 0;
 }
-.signal-transform-select li {
+.signal-transform-properties .signal-transform-select li {
 	border-radius: .5em;
 }
-.signal-transform-select li:hover {
+.signal-transform-properties .signal-transform-select li:hover {
 	background: #EEC;
-}
-.signal-transform-properties {
-	border-collapse: collapse;
-	margin: auto;
 }
 .signal-transform-properties tbody {
 	border-top: solid 1px #888;
 }
-.signal-transform-properties th,td {
-	width: 14.28%;
+.signal-transform-properties col {
+	width: 14%;
 }
-.signal-transform-properties td.active {
+.signal-transform-properties colgroup.freq col:first-child {
+	width: 30%;
+}
+.signal-transform-properties td {
+	padding: 1em;
+}
+.signal-transform-properties tr td.time + td.freq,
+.signal-transform-properties tr th.time + th.freq {
+	padding-left: 16%;
+}
+.signal-transform-properties tbody tr:first-child + tr td {
+	padding-top: 0;
+}
+.signal-transform-properties tbody tr:first-child th {
+	text-align: left;
+	visibility: hidden;
+}
+.signal-transform-properties tbody tr:last-child td {
+	padding-bottom: 1.5em;
+}
+.signal-transform-properties .MathJax_Display {
+	margin: 0;
+}
+.signal-transform-properties .formula:hover,
+.signal-transform-properties .formula.active {
 	background: #EDB;
 }
 .signal-transform-properties .line {
