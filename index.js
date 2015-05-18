@@ -5,6 +5,7 @@ $(function(){
 			wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
 			timeDefinition:'x(t) = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} X(j\\omega) e^{j\\omega t} \\,\\mathrm{d}\\omega',
 			freqDefinition:'X(j\\omega) = \\int\\limits_{-\\infty}^{+\\infty} x(t) e^{-j\\omega t} \\,\\mathrm{d}t',
+			bothDefinition:'',
 			conjinvTimeFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'x'+(conj?'^*':'')+'('+(inv?'-':'')+'t)';
 			},
@@ -22,6 +23,7 @@ $(function(){
 			wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
 			timeDefinition:'x[n] = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} X(e^{j\\omega}) e^{j\\omega n} \\,\\mathrm{d}\\omega',
 			freqDefinition:'X(e^{j\\omega}) = \\sum_{n=-\\infty}^{+\\infty} x[n] e^{-j\\omega n}',
+			bothDefinition:'',
 			conjinvTimeFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
 			},
@@ -39,6 +41,7 @@ $(function(){
 			wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
 			timeDefinition:'x[n] = \\frac 1 N \\sum_{k=0}^{N-1} X[k] W_N^{-kn}',
 			freqDefinition:'X[k] = \\sum_{k=0}^{N-1} x[n] W_N^{kn}',
+			bothDefinition:'W_N = e^{-j \\frac{2\\pi}{N}}',
 			conjinvTimeFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
 			},
@@ -90,6 +93,7 @@ $(function(){
 							transformDropdownElm.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 							tableElm.find('.signal-transform-properties-definition td.time .formula').text('$$'+transform.timeDefinition+'$$');
 							tableElm.find('.signal-transform-properties-definition td.freq .formula').text('$$'+transform.freqDefinition+'$$');
+							tableElm.find('.signal-transform-properties-definition td.both .formula').text('$$'+transform.bothDefinition+'$$');
 							tableElm.find('.signal-transform-properties-conjinv td.time .formula').text(function(i){
 								return '$$'+transform.conjinvTimeFormula.apply(null,conjinvTimePatterns[i])+'$$';
 							});

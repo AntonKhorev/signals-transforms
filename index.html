@@ -11,9 +11,11 @@
 <table class='signal-transform-properties'>
 <caption>Discrete-time Fourier transform (DTFT)<sup><a href='http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform'>[W]</a></sup></caption>
 <colgroup class='time'><col /><col /><col /></colgroup>
+<colgroup class='both'><col /></colgroup>
 <colgroup class='freq'><col /><col /><col /></colgroup>
 <thead><tr>
 	<th colspan='3' class='time'>Time domain</th>
+	<th class='both'></th>
 	<th colspan='3' class='freq'>Frequency domain</th>
 </tr></thead>
 <tbody class='signal-transform-properties-definition'><tr>
@@ -22,12 +24,15 @@
 	<td colspan='3' class='time'><div class='cell'>
 		<div class='formula'>$$x[n] = \frac{1}{2\pi} \int \limits_{\langle 2\pi \rangle} X(e^{j\omega}) e^{j\omega n} \, \mathrm{d}\omega$$</div>
 	</div></td>
+	<td class='both'><div class='cell'>
+		<div class='formula'></div>
+	</div></td>
 	<td colspan='3' class='freq'><div class='cell'>
 		<div class='formula'>$$X(e^{j\omega}) = \sum_{n=-\infty}^{+\infty} x[n] e^{-j\omega n}$$</div>
 	</div></td>
 </tr></tbody>
 <tbody class='signal-transform-properties-conjinv'><tr>
-	<th colspan='6'>Complex conjugation and time reversal</th>
+	<th colspan='7'>Complex conjugation and time reversal</th>
 </tr><tr>
 	<td class='time'><div class='cell'>
 		<div class='formula'>$$-x^*[-n]$$</div>
@@ -36,6 +41,7 @@
 		<div class='formula'>$$-x[-n]$$</div>
 	</div></td>
 	<td class='time'></td>
+	<td class='both'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>$$-X^*(e^{j\omega})$$</div>
 	</div></td>
@@ -54,6 +60,7 @@
 		<div class='formula'>$$x^*[n]$$</div>
 		<div class='note'>conjugation</div>
 	</div></td>
+	<td class='both'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>$$-X^*(e^{-j\omega})$$</div>
 	</div></td>
@@ -72,6 +79,7 @@
 	<td class='time'><div class='cell'>
 		<div class='formula'>$$x^*[-n]$$</div>
 	</div></td>
+	<td class='both'></td>
 	<td class='freq'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>$$X(e^{-j\omega})$$</div>
@@ -91,6 +99,7 @@
 		<div class='note'>shifting</div>
 	</div></td>
 	<td class='time'></td>
+	<td class='both'></td>
 	<td class='freq'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>$$e^{j\omega n_0}X(e^{j\omega})$$</div>
@@ -109,6 +118,7 @@
 		<div class='formula'>$$e^{j\omega_0 n}x[n]$$</div>
 		<div class='note'>modulation</div>
 	</div></td>
+	<td class='both'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>$$X(e^{j(\omega+\omega_0)})$$</div>
 		<div class='note'>shifting</div>
@@ -127,6 +137,7 @@
 		<div class='note'>shifting</div>
 	</div></td>
 	<td class='time'></td>
+	<td class='both'></td>
 	<td class='freq'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>$$e^{-j\omega n_0}X(e^{j\omega})$$</div>
