@@ -116,11 +116,10 @@ $(function(){
 				transformSelectElm=null;
 			}
 		});
-		/*
                 tableElm.find('tr').each(function(){
-			$(this).children('td.time .cell').each(function(i){
-				var timeFormulaElm=$(this); // TODO rename to 'cell'
-				var freqFormulaElm=timeFormulaElm.parent('tr').children('td.freq.formula').eq(i); // TODO probably requires 'parents'
+			$(this).find('td.time .formula').each(function(i){
+				var timeFormulaElm=$(this);
+				var freqFormulaElm=timeFormulaElm.parents('tr').find('td.freq .formula').eq(i); // TODO probably requires 'parents'
 				timeFormulaElm.add(freqFormulaElm).hover(function(){
 					timeFormulaElm.addClass('active');
 					freqFormulaElm.addClass('active');
@@ -139,7 +138,6 @@ $(function(){
 				});
 			});
 		});
-		*/
 		// $$\overset{\mathcal F}{\rightarrow}$$
 	});
 });
