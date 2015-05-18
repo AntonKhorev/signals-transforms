@@ -88,18 +88,18 @@ $(function(){
 							transformSelectElm.remove();
 							transformSelectElm=null;
 							transformDropdownElm.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
-							tableElm.find('.signal-transform-properties-definition td.time.formula').text('$$'+transform.timeDefinition+'$$');
-							tableElm.find('.signal-transform-properties-definition td.freq.formula').text('$$'+transform.freqDefinition+'$$');
-							tableElm.find('.signal-transform-properties-conjinv td.time.formula').text(function(i){
+							tableElm.find('.signal-transform-properties-definition td.time .formula').text('$$'+transform.timeDefinition+'$$');
+							tableElm.find('.signal-transform-properties-definition td.freq .formula').text('$$'+transform.freqDefinition+'$$');
+							tableElm.find('.signal-transform-properties-conjinv td.time .formula').text(function(i){
 								return '$$'+transform.conjinvTimeFormula.apply(null,conjinvTimePatterns[i])+'$$';
 							});
-							tableElm.find('.signal-transform-properties-conjinv td.freq.formula').text(function(i){
+							tableElm.find('.signal-transform-properties-conjinv td.freq .formula').text(function(i){
 								return '$$'+transform.conjinvFreqFormula.apply(null,conjinvFreqPatterns[i])+'$$';
 							});
-							tableElm.find('.signal-transform-properties-modshift td.time.formula').text(function(i){
+							tableElm.find('.signal-transform-properties-modshift td.time .formula').text(function(i){
 								return '$$'+transform.modshiftTimeFormula.apply(null,modshiftTimePatterns[i])+'$$';
 							});
-							tableElm.find('.signal-transform-properties-modshift td.freq.formula').text(function(i){
+							tableElm.find('.signal-transform-properties-modshift td.freq .formula').text(function(i){
 								return '$$'+transform.modshiftFreqFormula.apply(null,modshiftFreqPatterns[i])+'$$';
 							});
 							MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
@@ -112,10 +112,11 @@ $(function(){
 				transformSelectElm=null;
 			}
 		});
+		/*
                 tableElm.find('tr').each(function(){
-			$(this).children('td.time.formula').each(function(i){
-				var timeFormulaElm=$(this);
-				var freqFormulaElm=timeFormulaElm.parent('tr').children('td.freq.formula').eq(i);
+			$(this).children('td.time .cell').each(function(i){
+				var timeFormulaElm=$(this); // TODO rename to 'cell'
+				var freqFormulaElm=timeFormulaElm.parent('tr').children('td.freq.formula').eq(i); // TODO probably requires 'parents'
 				timeFormulaElm.add(freqFormulaElm).hover(function(){
 					timeFormulaElm.addClass('active');
 					freqFormulaElm.addClass('active');
@@ -134,6 +135,7 @@ $(function(){
 				});
 			});
 		});
+		*/
 		// $$\overset{\mathcal F}{\rightarrow}$$
 	});
 });
