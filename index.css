@@ -59,14 +59,14 @@ sup a:hover {
 	width: 14%;
 }
 .signal-transform-properties colgroup.freq col:first-child {
-	width: 30%;
+	width: 30%; /* 14|14|14|30|14|14 */
 }
 .signal-transform-properties td {
 	padding: 1em;
 }
 .signal-transform-properties tr td.time + td.freq,
 .signal-transform-properties tr th.time + th.freq {
-	padding-left: 16%;
+	padding-left: 16%; /* 30=16+14 */
 }
 .signal-transform-properties tbody tr:first-child + tr td {
 	padding-top: 0;
@@ -78,9 +78,16 @@ sup a:hover {
 .signal-transform-properties tbody tr:last-child td {
 	padding-bottom: 1.5em;
 }
+.signal-transform-properties .formula {
+	margin: -1em 0;
+	overflow: hidden; /* disable margin collapse */
+}
+/*
+.signal-transform-properties .MathJax_Preview,
 .signal-transform-properties .MathJax_Display {
 	margin: 0;
 }
+*/
 .signal-transform-properties .formula:hover,
 .signal-transform-properties .formula.active {
 	background: #EDB;
