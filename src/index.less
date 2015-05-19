@@ -22,20 +22,20 @@ sup a:hover {
 	}
 	.signal-transform-dropdown {
 		display: block;
-	}
-	.signal-transform-dropdown::after {
-		display: block;
-		position: absolute;
-		width: 2em;
-		height: 100%;
-		vertical-align: bottom;
-		top: 0;
-		right: 0;
-		content: "▼";
-		color: rgba(106,122,212,0.3);
-	}
-	.signal-transform-dropdown:hover::after {
-		color: rgba(106,122,212,1);
+		&::after {
+			display: block;
+			position: absolute;
+			width: 2em;
+			height: 100%;
+			vertical-align: bottom;
+			top: 0;
+			right: 0;
+			content: "▼";
+			color: rgba(106,122,212,0.3);
+		}
+		&:hover::after {
+			color: rgba(106,122,212,1);
+		}
 	}
 	.signal-transform-select {
 		position: absolute;
@@ -85,10 +85,9 @@ sup a:hover {
 		margin: -1em;
 		overflow: hidden; /* disable margin collapse */
 		padding: 0 .5em;
-	}
-	.formula:hover,
-	.formula.active {
-		background: #EDB;
+		&:hover, &.active {
+			background: #EDB;
+		}
 	}
 	.link {
 		position: absolute;
@@ -98,10 +97,10 @@ sup a:hover {
 		height: 2em;
 		text-align: center;
 		line-height: 2em;
-	}
-	.link:hover {
-		color: #000;
-		background: #CF8;
+		&:hover {
+			color: #000;
+			background: #CF8;
+		}
 	}
 	.link-t {
 		top: -1em;
