@@ -1,4 +1,8 @@
 /* TODO safari prefixes for transform */
+
+@n-timefreq-cols: 6;
+@timefreq-col-width: 15%;
+
 sup a {
 	text-decoration: none;
 }
@@ -56,10 +60,10 @@ sup a:hover {
 		border-top: solid 1px #888;
 	}
 	col {
-		width: 15%;
+		width: @timefreq-col-width;
 	}
 	colgroup.both col {
-		width: 10%; /* 15|15|15|10|15|15|15 */
+		width: 100% - @timefreq-col-width * @n-timefreq-cols;
 	}
 	td {
 		padding: 1em;
