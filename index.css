@@ -154,10 +154,15 @@ sup a:hover {
 .signal-transform-properties .link .note {
 	background: #CF8;
 }
-.signal-transform-properties .link-t .note,
-.signal-transform-properties .link-b .note {
+.signal-transform-properties td.time .link-t .note,
+.signal-transform-properties td.time .link-b .note {
 	top: 0;
 	right: 60%;
+}
+.signal-transform-properties td.freq .link-t .note,
+.signal-transform-properties td.freq .link-b .note {
+	top: 0;
+	left: 60%;
 }
 .signal-transform-properties .link-l .note,
 .signal-transform-properties .link-r .note {
