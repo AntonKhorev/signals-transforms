@@ -11,219 +11,213 @@ sup a:hover {
 .signal-transform-properties {
 	border-collapse: collapse;
 	margin: auto;
-}
-.signal-transform-properties caption {
-	position: relative;
-	border-radius: .5em;
-	border: 1px solid #888;
-}
-.signal-transform-properties .signal-transform-dropdown {
-	display: block;
-}
-.signal-transform-properties .signal-transform-dropdown::after {
-	display: block;
-	position: absolute;
-	width: 2em;
-	height: 100%;
-	vertical-align: bottom;
-	top: 0;
-	right: 0;
-	content: "▼";
-	color: rgba(106,122,212,0.3);
-}
-.signal-transform-properties .signal-transform-dropdown:hover::after {
-	color: rgba(106,122,212,1);
-}
-.signal-transform-properties .signal-transform-select {
-	position: absolute;
-	z-index: 1;
-	border-radius: .5em;
-	border: 1px solid #444;
-	background: #FFF;
-	color: #000;
-	box-shadow: 0 0 10px rgba(0,0,0,0.5);
-	width: 100%;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-.signal-transform-properties .signal-transform-select li {
-	border-radius: .5em;
-}
-.signal-transform-properties .signal-transform-select li:hover {
-	background: #EEC;
-}
-.signal-transform-properties tbody {
-	border-top: solid 1px #888;
-}
-.signal-transform-properties col {
-	width: 15%;
-}
-.signal-transform-properties colgroup.both col {
-	width: 10%; /* 15|15|15|10|15|15|15 */
-}
-.signal-transform-properties td {
-	padding: 1em;
-}
-.signal-transform-properties tbody tr:first-child + tr td {
-	padding-top: 0;
-}
-.signal-transform-properties tbody tr:first-child th {
-	text-align: left;
-	visibility: hidden;
-}
-.signal-transform-properties tbody tr:last-child td {
-	padding-bottom: 1.5em;
-}
-.signal-transform-properties .cell {
-	position: relative;
-}
-.signal-transform-properties .formula {
-	margin: -1em;
-	overflow: hidden; /* disable margin collapse */
-	padding: 0 .5em;
-}
-/*
-.signal-transform-properties .MathJax_Preview,
-.signal-transform-properties .MathJax_Display {
-	margin: 0;
-}
-*/
-.signal-transform-properties .formula:hover,
-.signal-transform-properties .formula.active {
-	background: #EDB;
-}
-.signal-transform-properties .link {
-	position: absolute;
-	z-index: 1;
-	color: #888;
-	width: 2em;
-	height: 2em;
-	text-align: center;
-	line-height: 2em;
-}
-.signal-transform-properties .link:hover {
-	color: #000;
-	background: #CF8;
-}
-.signal-transform-properties .link-t {
-	top: -1em;
-	left: 50%;
-	margin-left: -1em;
-}
-.signal-transform-properties .link-b {
-	bottom: -1em;
-	left: 50%;
-	margin-left: -1em;
-}
-.signal-transform-properties .link-l {
-	left: -2em;
-	top: 50%;
-	margin-top: -1em;
-}
-.signal-transform-properties .link-r {
-	right: -2em;
-	top: 50%;
-	margin-top: -1em;
-}
-.signal-transform-properties .link-br {
-	bottom: -1em;
-	right: -2em;
-}
-.signal-transform-properties .link .item::after {
-	content: "⋮";
-}
-.signal-transform-properties .link:hover .item::after {
-	content: "║";
-}
-.signal-transform-properties .link-l .item,
-.signal-transform-properties .link-r .item {
-	transform: rotate(90deg);
-}
-.signal-transform-properties .link-br .item {
-	transform: rotate(-45deg);
-}
-.signal-transform-properties .note {
-	display: none;
-	position: absolute;
-	font-size: .8em;
-	font-family: sans-serif;
-	color: #444;
-}
-.signal-transform-properties .formula .note {
-	bottom: 0;
-	text-align: center;
-	/*
-	left: 50%;
-	width: 10em;
-	margin-left: -5em;
-	*/
-	left: 0; margin-left: auto;
-	right: 0; margin-right: auto;
-}
-.signal-transform-properties tbody tr:first-child + tr .formula .note {
-	top: 0;
-}
-.signal-transform-properties .formula:hover .note,
-.signal-transform-properties .formula.active .note {
-	display: block;
-}
-.signal-transform-properties .link .note {
-	background: #CF8;
-}
-.signal-transform-properties td.time .link-t .note,
-.signal-transform-properties td.time .link-b .note {
-	top: 0;
-	right: 70%;
-}
-.signal-transform-properties td.freq .link-t .note,
-.signal-transform-properties td.freq .link-b .note {
-	top: 0;
-	left: 70%;
-}
-.signal-transform-properties .link-l .note,
-.signal-transform-properties .link-r .note {
-	line-height: 1em;
-	top: 80%;
-	/*
-	left: 0; margin-left: auto;
-	right: 0; margin-right: auto;
-	*/
-	left: 50%;
-	transform: translate(-50%, 0);
-	text-align: center;
-	min-width: 2.5em; /* 2.5em = 2em / 80% = (width of link box) / (note font size) */
-}
-.signal-transform-properties .link-br .note {
-	top: 0;
-	left: 100%;
-	line-height: 1em;
-}
-.signal-transform-properties .link:hover .note,
-.signal-transform-properties .link.active .note {
-	display: block;
-}
-.signal-transform-properties .line {
-	position: absolute;
-	background: #EDB;
-	color: #EDB;
-	z-index: -1;
-	height: 4px;
-	vertical-align: middle;
-}
-.signal-transform-properties .line .arrowhead {
-	display: block;
-	position: absolute;
-	right: 0;
-	top: 0;
-	background: #EDB;
-	height: 4px;
-	width: 20px;
-	transform-origin: right;
-}
-.signal-transform-properties .line .arrowhead.top {
-	transform: rotate(45deg);
-}
-.signal-transform-properties .line .arrowhead.bottom {
-	transform: rotate(-45deg);
+	caption {
+		position: relative;
+		border-radius: .5em;
+		border: 1px solid #888;
+	}
+	.signal-transform-dropdown {
+		display: block;
+	}
+	.signal-transform-dropdown::after {
+		display: block;
+		position: absolute;
+		width: 2em;
+		height: 100%;
+		vertical-align: bottom;
+		top: 0;
+		right: 0;
+		content: "▼";
+		color: rgba(106,122,212,0.3);
+	}
+	.signal-transform-dropdown:hover::after {
+		color: rgba(106,122,212,1);
+	}
+	.signal-transform-select {
+		position: absolute;
+		z-index: 1;
+		border-radius: .5em;
+		border: 1px solid #444;
+		background: #FFF;
+		color: #000;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		width: 100%;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		li {
+			border-radius: .5em;
+		}
+		li:hover {
+			background: #EEC;
+		}
+	}
+	tbody {
+		border-top: solid 1px #888;
+	}
+	col {
+		width: 15%;
+	}
+	colgroup.both col {
+		width: 10%; /* 15|15|15|10|15|15|15 */
+	}
+	td {
+		padding: 1em;
+	}
+	tbody tr:first-child + tr td {
+		padding-top: 0;
+	}
+	tbody tr:first-child th {
+		text-align: left;
+		visibility: hidden;
+	}
+	tbody tr:last-child td {
+		padding-bottom: 1.5em;
+	}
+	.cell {
+		position: relative;
+	}
+	.formula {
+		margin: -1em;
+		overflow: hidden; /* disable margin collapse */
+		padding: 0 .5em;
+	}
+	.formula:hover,
+	.formula.active {
+		background: #EDB;
+	}
+	.link {
+		position: absolute;
+		z-index: 1;
+		color: #888;
+		width: 2em;
+		height: 2em;
+		text-align: center;
+		line-height: 2em;
+	}
+	.link:hover {
+		color: #000;
+		background: #CF8;
+	}
+	.link-t {
+		top: -1em;
+		left: 50%;
+		margin-left: -1em;
+	}
+	.link-b {
+		bottom: -1em;
+		left: 50%;
+		margin-left: -1em;
+	}
+	.link-l {
+		left: -2em;
+		top: 50%;
+		margin-top: -1em;
+	}
+	.link-r {
+		right: -2em;
+		top: 50%;
+		margin-top: -1em;
+	}
+	.link-br {
+		bottom: -1em;
+		right: -2em;
+	}
+	.link .item::after {
+		content: "⋮";
+	}
+	.link:hover .item::after {
+		content: "║";
+	}
+	.link-l .item,
+	.link-r .item {
+		transform: rotate(90deg);
+	}
+	.link-br .item {
+		transform: rotate(-45deg);
+	}
+	.note {
+		display: none;
+		position: absolute;
+		font-size: .8em;
+		font-family: sans-serif;
+		color: #444;
+	}
+	.formula .note {
+		bottom: 0;
+		text-align: center;
+		/*
+		left: 50%;
+		width: 10em;
+		margin-left: -5em;
+		*/
+		left: 0; margin-left: auto;
+		right: 0; margin-right: auto;
+	}
+	tbody tr:first-child + tr .formula .note {
+		top: 0;
+	}
+	.formula:hover .note,
+	.formula.active .note {
+		display: block;
+	}
+	.link .note {
+		background: #CF8;
+	}
+	td.time .link-t .note,
+	td.time .link-b .note {
+		top: 0;
+		right: 70%;
+	}
+	td.freq .link-t .note,
+	td.freq .link-b .note {
+		top: 0;
+		left: 70%;
+	}
+	.link-l .note,
+	.link-r .note {
+		line-height: 1em;
+		top: 80%;
+		/*
+		left: 0; margin-left: auto;
+		right: 0; margin-right: auto;
+		*/
+		left: 50%;
+		transform: translate(-50%, 0);
+		text-align: center;
+		min-width: 2.5em; /* 2.5em = 2em / 80% = (width of link box) / (note font size) */
+	}
+	.link-br .note {
+		top: 0;
+		left: 100%;
+		line-height: 1em;
+	}
+	.link:hover .note,
+	.link.active .note {
+		display: block;
+	}
+	.line {
+		position: absolute;
+		background: #EDB;
+		color: #EDB;
+		z-index: -1;
+		height: 4px;
+		vertical-align: middle;
+		.arrowhead {
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 0;
+			background: #EDB;
+			height: 4px;
+			width: 20px;
+			transform-origin: right;
+		}
+		.arrowhead.top {
+			transform: rotate(45deg);
+		}
+		.arrowhead.bottom {
+			transform: rotate(-45deg);
+		}
+	}
 }
