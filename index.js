@@ -94,16 +94,16 @@ $(function(){
 							tableElm.find('.signal-transform-properties-definition td.time .formula').text('$$'+transform.timeDefinition+'$$');
 							tableElm.find('.signal-transform-properties-definition td.freq .formula').text('$$'+transform.freqDefinition+'$$');
 							tableElm.find('.signal-transform-properties-definition td.both .formula').text('$$'+transform.bothDefinition+'$$');
-							tableElm.find('.signal-transform-properties-conjinv td.time .formula').text(function(i){
+							tableElm.find('.signal-transform-properties-conjinv td.time .formula .item').text(function(i){
 								return '$$'+transform.conjinvTimeFormula.apply(null,conjinvTimePatterns[i])+'$$';
 							});
-							tableElm.find('.signal-transform-properties-conjinv td.freq .formula').text(function(i){
+							tableElm.find('.signal-transform-properties-conjinv td.freq .formula .item').text(function(i){
 								return '$$'+transform.conjinvFreqFormula.apply(null,conjinvFreqPatterns[i])+'$$';
 							});
-							tableElm.find('.signal-transform-properties-modshift td.time .formula').text(function(i){
+							tableElm.find('.signal-transform-properties-modshift td.time .formula .item').text(function(i){
 								return '$$'+transform.modshiftTimeFormula.apply(null,modshiftTimePatterns[i])+'$$';
 							});
-							tableElm.find('.signal-transform-properties-modshift td.freq .formula').text(function(i){
+							tableElm.find('.signal-transform-properties-modshift td.freq .formula .item').text(function(i){
 								return '$$'+transform.modshiftFreqFormula.apply(null,modshiftFreqPatterns[i])+'$$';
 							});
 							MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
