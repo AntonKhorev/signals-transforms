@@ -20,7 +20,7 @@ sup a:hover {
 .signal-transform-properties .signal-transform-dropdown {
 	display: block;
 }
-.signal-transform-properties .signal-transform-dropdown:after {
+.signal-transform-properties .signal-transform-dropdown::after {
 	display: block;
 	position: absolute;
 	width: 2em;
@@ -31,7 +31,7 @@ sup a:hover {
 	content: "▼";
 	color: rgba(106,122,212,0.3);
 }
-.signal-transform-properties .signal-transform-dropdown:hover:after {
+.signal-transform-properties .signal-transform-dropdown:hover::after {
 	color: rgba(106,122,212,1);
 }
 .signal-transform-properties .signal-transform-select {
@@ -126,6 +126,16 @@ sup a:hover {
 	top: 50%;
 	margin-top: -1em;
 }
+.signal-transform-properties .link .item::after {
+	content: "⋮";
+}
+.signal-transform-properties .link:hover .item::after {
+	content: "║";
+}
+.signal-transform-properties .link-l .item,
+.signal-transform-properties .link-r .item {
+	transform: rotate(90deg);
+}
 .signal-transform-properties .note {
 	display: none;
 	position: absolute;
@@ -157,12 +167,12 @@ sup a:hover {
 .signal-transform-properties td.time .link-t .note,
 .signal-transform-properties td.time .link-b .note {
 	top: 0;
-	right: 60%;
+	right: 70%;
 }
 .signal-transform-properties td.freq .link-t .note,
 .signal-transform-properties td.freq .link-b .note {
 	top: 0;
-	left: 60%;
+	left: 70%;
 }
 .signal-transform-properties .link-l .note,
 .signal-transform-properties .link-r .note {
