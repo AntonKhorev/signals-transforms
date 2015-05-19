@@ -1,3 +1,4 @@
+/* TODO safari prefixes for transform */
 sup a {
 	text-decoration: none;
 }
@@ -149,10 +150,26 @@ sup a:hover {
 .signal-transform-properties .formula.active .note {
 	display: block;
 }
-.signal-transform-properties .link-t .note {
+.signal-transform-properties .link .note {
+	background: #CF8;
+}
+.signal-transform-properties .link-t .note,
+.signal-transform-properties .link-b .note {
 	top: 0;
 	right: 60%;
-	background: #CF8;
+}
+.signal-transform-properties .link-l .note,
+.signal-transform-properties .link-r .note {
+	line-height: 1em;
+	top: 80%;
+	/*
+	left: 0; margin-left: auto;
+	right: 0; margin-right: auto;
+	*/
+	left: 50%;
+	transform: translate(-50%, 0);
+	text-align: center;
+	min-width: 2.5em; /* 2.5em = 2em / 80% = (width of link box) / (note font size) */
 }
 .signal-transform-properties .link:hover .note,
 .signal-transform-properties .link.active .note {
