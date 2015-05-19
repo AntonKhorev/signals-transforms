@@ -91,29 +91,10 @@ sup a:hover {
 .signal-transform-properties .formula.active {
 	background: #EDB;
 }
-.signal-transform-properties .note {
-	display: none;
-	position: absolute;
-	bottom: 0;
-	font-size: .8em;
-	font-family: sans-serif;
-	color: #444;
-	text-align: center;
-	left: 50%;
-	width: 10em;
-	margin-left: -5em;
-}
-.signal-transform-properties tbody tr:first-child + tr .note {
-	top: 0;
-}
-.signal-transform-properties .formula:hover .note,
-.signal-transform-properties .formula.active .note {
-	display: block;
-}
 .signal-transform-properties .link {
 	position: absolute;
 	z-index: 1;
-	color: #444;
+	color: #888;
 	width: 2em;
 	height: 2em;
 	text-align: center;
@@ -121,17 +102,61 @@ sup a:hover {
 }
 .signal-transform-properties .link:hover {
 	color: #000;
-	background: red;
+	background: #CF8;
+}
+.signal-transform-properties .link-t {
+	top: -1em;
+	left: 50%;
+	margin-left: -1em;
+}
+.signal-transform-properties .link-b {
+	bottom: -1em;
+	left: 50%;
+	margin-left: -1em;
+}
+.signal-transform-properties .link-l {
+	left: -2em;
+	top: 50%;
+	margin-top: -1em;
 }
 .signal-transform-properties .link-r {
 	right: -2em;
 	top: 50%;
 	margin-top: -1em;
 }
-.signal-transform-properties .link-t {
-	top: -1em;
+.signal-transform-properties .note {
+	display: none;
+	position: absolute;
+	font-size: .8em;
+	font-family: sans-serif;
+	color: #444;
+}
+.signal-transform-properties .formula .note {
+	bottom: 0;
+	text-align: center;
+	/*
 	left: 50%;
-	margin-left: -1em;
+	width: 10em;
+	margin-left: -5em;
+	*/
+	left: 0; margin-left: auto;
+	right: 0; margin-right: auto;
+}
+.signal-transform-properties tbody tr:first-child + tr .formula .note {
+	top: 0;
+}
+.signal-transform-properties .formula:hover .note,
+.signal-transform-properties .formula.active .note {
+	display: block;
+}
+.signal-transform-properties .link-t .note {
+	top: 0;
+	right: 60%;
+	background: #CF8;
+}
+.signal-transform-properties .link:hover .note,
+.signal-transform-properties .link.active .note {
+	display: block;
 }
 .signal-transform-properties .line {
 	position: absolute;
