@@ -57,10 +57,10 @@ sup a:hover {
 	border-top: solid 1px #888;
 }
 .signal-transform-properties col {
-	width: 14%;
+	width: 15%;
 }
 .signal-transform-properties colgroup.both col {
-	width: 16%; /* 14|14|14|16|14|14|14 */
+	width: 10%; /* 15|15|15|10|15|15|15 */
 }
 .signal-transform-properties td {
 	padding: 1em;
@@ -81,6 +81,7 @@ sup a:hover {
 .signal-transform-properties .formula {
 	margin: -1em;
 	overflow: hidden; /* disable margin collapse */
+	padding: 0 .5em;
 }
 /*
 .signal-transform-properties .MathJax_Preview,
