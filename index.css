@@ -126,6 +126,10 @@ sup a:hover {
 	top: 50%;
 	margin-top: -1em;
 }
+.signal-transform-properties .link-br {
+	bottom: -1em;
+	right: -2em;
+}
 .signal-transform-properties .link .item::after {
 	content: "⋮";
 }
@@ -135,6 +139,9 @@ sup a:hover {
 .signal-transform-properties .link-l .item,
 .signal-transform-properties .link-r .item {
 	transform: rotate(90deg);
+}
+.signal-transform-properties .link-br .item {
+	transform: rotate(-45deg);
 }
 .signal-transform-properties .note {
 	display: none;
@@ -186,6 +193,11 @@ sup a:hover {
 	transform: translate(-50%, 0);
 	text-align: center;
 	min-width: 2.5em; /* 2.5em = 2em / 80% = (width of link box) / (note font size) */
+}
+.signal-transform-properties .link-br .note {
+	top: 0;
+	left: 100%;
+	line-height: 1em;
 }
 .signal-transform-properties .link:hover .note,
 .signal-transform-properties .link.active .note {
