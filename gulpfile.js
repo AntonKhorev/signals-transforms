@@ -7,4 +7,8 @@ gulp.task('index.css',function(){
 		.pipe(gulp.dest('public_html'));
 });
 
+gulp.task('watch',function(){
+	gulp.watch('src/index.less',['index.css']);
+});
+
 gulp.task('default',['index.css']);

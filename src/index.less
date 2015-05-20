@@ -2,8 +2,9 @@
 
 @n-timefreq-cols: 6;
 @timefreq-col-width: 15%;
-@note-font-size: 80%;
+@note-font-size: .8em;
 @cell-spacing: 2em; // need to fiddle with MathJax styles if it's lower than 2em
+@formula-highlight-background: #EDB;
 
 sup a {
 	text-decoration: none;
@@ -83,12 +84,30 @@ sup a:hover {
 	.cell {
 		position: relative;
 	}
+	.note {
+		display: none;
+		position: absolute;
+		font-size: @note-font-size;
+		font-family: sans-serif;
+		color: #444;
+	}
 	.formula {
 		margin: -@cell-spacing/2; // vertically negates MathJax-imposed margins
 		overflow: hidden; // disable margin collapse
 		padding: 0 .5em; // extra horizontal padding required for links not to overlap with formulas
+		.note {
+			top: 100%;
+			left: 0;
+			text-align: center;
+			min-width: 100%;
+			margin-top: -@cell-spacing/2/@note-font-size;
+			background: @formula-highlight-background;
+		}
 		&:hover, &.active {
-			background: #EDB;
+			background: @formula-highlight-background;
+			.note {
+				display: block;
+			}
 		}
 	}
 	.link {
@@ -147,18 +166,8 @@ sup a:hover {
 			color: #000;
 		}
 	}
-	.note {
-		display: none;
-	}
 
 	/*
-	.note {
-		display: none;
-		position: absolute;
-		font-size: .8em;
-		font-family: sans-serif;
-		color: #444;
-	}
 	.formula .note {
 		bottom: 0;
 		text-align: center;
