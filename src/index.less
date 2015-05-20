@@ -98,11 +98,16 @@ sup a:hover {
 			padding: 1px .5em; // extra horizontal padding required for links not to overlap with formulas
 		}
 		.note {
-			top: 100%;
+				top: 100%;
+				margin-top: -@cell-spacing/2/@note-font-size;
+			&.at-t {
+				top: auto;
+				bottom: 100%;
+				margin-bottom: -@cell-spacing/2/@note-font-size;
+			}
 			left: 0;
 			text-align: center;
 			min-width: 100%;
-			margin-top: -@cell-spacing/2/@note-font-size;
 			background: @formula-highlight-background;
 		}
 		&:hover, &.active {
