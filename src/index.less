@@ -1,7 +1,9 @@
-/* TODO safari prefixes for transform */
+/* TODO autoprefixer: safari prefixes for transform */
 
 @n-timefreq-cols: 6;
 @timefreq-col-width: 15%;
+@note-font-size: 80%;
+@cell-spacing: 2em; // need to fiddle with MathJax styles if it's lower than 2em
 
 sup a {
 	text-decoration: none;
@@ -66,7 +68,7 @@ sup a:hover {
 		width: 100% - @timefreq-col-width * @n-timefreq-cols;
 	}
 	td {
-		padding: 1em;
+		padding: @cell-spacing/2;
 	}
 	tbody tr:first-child + tr td {
 		padding-top: 0;
@@ -82,9 +84,9 @@ sup a:hover {
 		position: relative;
 	}
 	.formula {
-		margin: -1em;
-		overflow: hidden; /* disable margin collapse */
-		padding: 0 .5em;
+		margin: -@cell-spacing/2; // vertically negates MathJax-imposed margins
+		overflow: hidden; // disable margin collapse
+		padding: 0 .5em; // extra horizontal padding required for links not to overlap with formulas
 		&:hover, &.active {
 			background: #EDB;
 		}
@@ -92,53 +94,64 @@ sup a:hover {
 	.link {
 		position: absolute;
 		z-index: 1;
-		color: #888;
-		width: 2em;
-		height: 2em;
+		width: @cell-spacing;
+		height: @cell-spacing;
+		line-height: @cell-spacing;
 		text-align: center;
-		line-height: 2em;
+		&.at-t, &.at-b {
+			left: 50%;
+			margin-left: -@cell-spacing/2;
+		}
+		&.at-t {
+			top: -@cell-spacing/2;
+		}
+		&.at-b {
+			bottom: -@cell-spacing/2;
+		}
+		&.at-l, &.at-r {
+			top: 50%;
+			margin-top: -@cell-spacing/2;
+			&::before {
+				transform: rotate(-90deg);
+			}
+		}
+		&.at-l {
+			left: -@cell-spacing;
+		}
+		&.at-r {
+			right: -@cell-spacing;
+		}
+		&.at-tl, &.at-br {
+			&::before {
+				transform: rotate(-45deg);
+			}
+		}
+		&.at-tl {
+			top: -@cell-spacing/2;
+			left: -@cell-spacing;
+		}
+		&.at-br {
+			bottom: -@cell-spacing/2;
+			right: -@cell-spacing;
+		}
 		&:hover {
-			color: #000;
 			background: #CF8;
 		}
+		&::before {
+			display: block;
+			content: "⋮";
+			color: #888;
+		}
+		&:hover::before {
+			content: "║";
+			color: #000;
+		}
 	}
-	.link-t {
-		top: -1em;
-		left: 50%;
-		margin-left: -1em;
+	.note {
+		display: none;
 	}
-	.link-b {
-		bottom: -1em;
-		left: 50%;
-		margin-left: -1em;
-	}
-	.link-l {
-		left: -2em;
-		top: 50%;
-		margin-top: -1em;
-	}
-	.link-r {
-		right: -2em;
-		top: 50%;
-		margin-top: -1em;
-	}
-	.link-br {
-		bottom: -1em;
-		right: -2em;
-	}
-	.link .item::after {
-		content: "⋮";
-	}
-	.link:hover .item::after {
-		content: "║";
-	}
-	.link-l .item,
-	.link-r .item {
-		transform: rotate(90deg);
-	}
-	.link-br .item {
-		transform: rotate(-45deg);
-	}
+
+	/*
 	.note {
 		display: none;
 		position: absolute;
@@ -149,11 +162,6 @@ sup a:hover {
 	.formula .note {
 		bottom: 0;
 		text-align: center;
-		/*
-		left: 50%;
-		width: 10em;
-		margin-left: -5em;
-		*/
 		left: 0; margin-left: auto;
 		right: 0; margin-right: auto;
 	}
@@ -181,14 +189,10 @@ sup a:hover {
 	.link-r .note {
 		line-height: 1em;
 		top: 80%;
-		/*
-		left: 0; margin-left: auto;
-		right: 0; margin-right: auto;
-		*/
 		left: 50%;
 		transform: translate(-50%, 0);
 		text-align: center;
-		min-width: 2.5em; /* 2.5em = 2em / 80% = (width of link box) / (note font size) */
+		min-width: 2.5em; // 2.5em = 2em / 80% = (width of link box) / (note font size)
 	}
 	.link-br .note {
 		top: 0;
@@ -199,6 +203,7 @@ sup a:hover {
 	.link.active .note {
 		display: block;
 	}
+	*/
 	.line {
 		position: absolute;
 		background: #EDB;
@@ -215,12 +220,12 @@ sup a:hover {
 			height: 4px;
 			width: 20px;
 			transform-origin: right;
-		}
-		.arrowhead.top {
-			transform: rotate(45deg);
-		}
-		.arrowhead.bottom {
-			transform: rotate(-45deg);
+			&.top {
+				transform: rotate(45deg);
+			}
+			&.bottom {
+				transform: rotate(-45deg);
+			}
 		}
 	}
 }

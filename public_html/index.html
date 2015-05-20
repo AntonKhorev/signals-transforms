@@ -73,31 +73,29 @@
 		<div class='formula'>
 			<div class='item'>$$x[n]$$</div>
 		</div>
-		<div class='link link-t'>
-			<div class='item'></div>
-			<div class='note'>odd</div>
+		<div class='link at-t'>
+			<div class='note at-r'>odd</div>
 		</div>
-		<div class='link link-b'>
-			<div class='item'></div>
-			<div class='note'>even</div>
+		<div class='link at-b'>
+			<div class='note at-l'>even</div>
 		</div>
-		<div class='link link-l'>
-			<div class='item'></div>
-			<div class='note'>imaginary</div>
+		<div class='link at-l'>
+			<div class='note at-b'>imaginary</div>
 		</div>
-		<div class='link link-r'>
-			<div class='item'></div>
-			<div class='note'>real</div>
+		<div class='link at-r'>
+			<div class='note at-t'>real</div>
 		</div>
-		<div class='link link-br'>
-			<div class='item'></div>
-			<div class='note'>conjugate symmetric</div>
+		<div class='link at-tl'>
+			<div class='note at-l'>conjugate antisymmetric</div>
+		</div>
+		<div class='link at-br'>
+			<div class='note at-r'>conjugate symmetric</div>
 		</div>
 	</div></td>
 	<td class='time'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$x^*[n]$$</div>
-			<div class='note'>conjugation</div>
+			<div class='note at-t'>conjugation</div>
 		</div>
 	</div></td>
 	<td class='both'></td>
@@ -110,25 +108,23 @@
 		<div class='formula'>
 			<div class='item'>$$X(e^{j\omega})$$</div>
 		</div>
-		<div class='link link-t'>
-			<div class='item'></div>
-			<div class='note'>odd</div>
+		<div class='link at-t'>
+			<div class='note at-l'>odd</div>
 		</div>
-		<div class='link link-b'>
-			<div class='item'></div>
-			<div class='note'>even</div>
+		<div class='link at-b'>
+			<div class='note at-r'>even</div>
 		</div>
-		<div class='link link-l'>
-			<div class='item'></div>
-			<div class='note'>conjugate antisymmetric</div>
+		<div class='link at-l'>
+			<div class='note at-b'>conjugate antisymmetric</div>
 		</div>
-		<div class='link link-r'>
-			<div class='item'></div>
-			<div class='note'>conjugate symmetric</div>
+		<div class='link at-r'>
+			<div class='note at-t'>conjugate symmetric</div>
 		</div>
-		<div class='link link-br'>
-			<div class='item'></div>
-			<div class='note'>real</div>
+		<div class='link at-tl'>
+			<div class='note at-l'>imaginary</div>
+		</div>
+		<div class='link at-br'>
+			<div class='note at-r'>real</div>
 		</div>
 	</div></td>
 	<td class='freq'><div class='cell'>
@@ -141,7 +137,7 @@
 	<td class='time'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$x[-n]$$</div>
-			<div class='note'>reversal</div>
+			<div class='note at-b'>time reversal</div>
 		</div>
 	</div></td>
 	<td class='time'><div class='cell'>
@@ -154,13 +150,13 @@
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$X(e^{-j\omega})$$</div>
-			<div class='note'>reversal</div>
+			<div class='note at-b'>frequency reversal</div>
 		</div>
 	</div></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$X^*(e^{j\omega})$$</div>
-			<div class='note'>conjugation</div>
+			<div class='note at-b'>conjugation</div>
 		</div>
 	</div></td>
 </tr></tbody>
@@ -171,7 +167,7 @@
 	<td class='time'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$x[n+n_0]$$</div>
-			<div class='note'>shifting</div>
+			<div class='note at-t'>time shifting</div>
 		</div>
 	</div></td>
 	<td class='time'></td>
@@ -180,7 +176,7 @@
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$e^{j\omega n_0}X(e^{j\omega})$$</div>
-			<div class='note'>modulation</div>
+			<div class='note at-t'>modulation</div>
 		</div>
 	</div></td>
 	<td class='freq'></td>
@@ -188,7 +184,7 @@
 	<td class='time'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$e^{-j\omega_0 n}x[n]$$</div>
-			<div class='note'>modulation</div>
+			<div class='note at-b'>modulation</div>
 		</div>
 	</div></td>
 	<td class='time'><div class='cell'>
@@ -199,14 +195,14 @@
 	<td class='time'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$e^{j\omega_0 n}x[n]$$</div>
-			<div class='note'>modulation</div>
+			<div class='note at-b'>modulation</div>
 		</div>
 	</div></td>
 	<td class='both'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$X(e^{j(\omega+\omega_0)})$$</div>
-			<div class='note'>shifting</div>
+			<div class='note at-b'>frequency shifting</div>
 		</div>
 	</div></td>
 	<td class='freq'><div class='cell'>
@@ -217,7 +213,7 @@
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$X(e^{j(\omega-\omega_0)})$$</div>
-			<div class='note'>shifting</div>
+			<div class='note at-b'>frequency shifting</div>
 		</div>
 	</div></td>
 </tr><tr>
@@ -225,7 +221,7 @@
 	<td class='time'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$x[n-n_0]$$</div>
-			<div class='note'>shifting</div>
+			<div class='note at-b'>time shifting</div>
 		</div>
 	</div></td>
 	<td class='time'></td>
@@ -234,7 +230,7 @@
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$e^{-j\omega n_0}X(e^{j\omega})$$</div>
-			<div class='note'>modulation</div>
+			<div class='note at-b'>modulation</div>
 		</div>
 	</div></td>
 	<td class='freq'></td>
