@@ -5,6 +5,7 @@
 @note-font-size: .8em;
 @cell-spacing: 2em; // need to fiddle with MathJax styles if it's lower than 2em
 @formula-highlight-background: #EDB;
+@link-highlight-background: #CF8;
 
 sup a {
 	text-decoration: none;
@@ -160,13 +161,26 @@ sup a:hover {
 			bottom: -@cell-spacing/2;
 			right: -@cell-spacing;
 		}
-		&:hover {
-			background: #CF8;
-		}
 		&::before {
 			display: block;
 			content: "⋮";
 			color: #888;
+		}
+		.note {
+			background: @link-highlight-background;
+			min-height: 100%;
+			top: 0;
+			right: 100%;
+			text-align: right;
+			align-items: center;
+			line-height: normal;
+			padding-left: .2em;
+		}
+		&:hover {
+			background: @link-highlight-background;
+			.note {
+				display: flex;
+			}
 		}
 		&:hover::before {
 			content: "║";
@@ -175,22 +189,6 @@ sup a:hover {
 	}
 
 	/*
-	.formula .note {
-		bottom: 0;
-		text-align: center;
-		left: 0; margin-left: auto;
-		right: 0; margin-right: auto;
-	}
-	tbody tr:first-child + tr .formula .note {
-		top: 0;
-	}
-	.formula:hover .note,
-	.formula.active .note {
-		display: block;
-	}
-	.link .note {
-		background: #CF8;
-	}
 	td.time .link-t .note,
 	td.time .link-b .note {
 		top: 0;
