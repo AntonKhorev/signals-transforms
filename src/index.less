@@ -93,8 +93,10 @@ sup a:hover {
 	}
 	.formula {
 		margin: -@cell-spacing/2; // vertically negates MathJax-imposed margins
-		overflow: hidden; // disable margin collapse
-		padding: 0 .5em; // extra horizontal padding required for links not to overlap with formulas
+		position: relative;
+		.item {
+			padding: 1px .5em; // extra horizontal padding required for links not to overlap with formulas
+		}
 		.note {
 			top: 100%;
 			left: 0;
