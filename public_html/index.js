@@ -43,8 +43,8 @@ $(function(){
 			wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
 			timeDefinition:'x[n] = \\frac 1 N \\sum_{k=0}^{N-1} X[k] W_N^{-kn}',
 			freqDefinition:'X[k] = \\sum_{n=0}^{N-1} x[n] W_N^{kn}',
-			timeDefinitionNote:'function \\(x[n]\\) of discrete variable \\(n\\)<br /> with support \\([0;N-1]\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
-			freqDefinitionNote:'function \\(X[k]\\) of discrete variable \\(k\\)<br /> with support \\([0;N-1]\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
+			timeDefinitionNote:'function \\(x[n]\\) of discrete variable \\(n\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
+			freqDefinitionNote:'function \\(X[k]\\) of discrete variable \\(k\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
 			conjinvTimeFormula:function(neg,inv,conj){
 				return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
 			},
