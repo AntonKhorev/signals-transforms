@@ -58,9 +58,6 @@ sup a:hover {
 			background: #EEC;
 		}
 	}
-	tbody {
-		border-top: solid 1px #888;
-	}
 	col {
 		width: @timefreq-col-width;
 	}
@@ -70,15 +67,28 @@ sup a:hover {
 	td {
 		padding: @cell-spacing/2;
 	}
-	tbody tr:first-child + tr td {
-		padding-top: 0;
-	}
-	tbody tr:first-child th {
-		text-align: left;
-		visibility: hidden;
-	}
-	tbody tr:last-child td {
-		padding-bottom: 1.5em;
+	tbody {
+		border-top: solid 1px #888;
+		tr:first-child + tr td {
+			padding-top: 0;
+		}
+		tr:first-child th {
+			visibility: hidden;
+		}
+		tr:last-child td {
+			padding-bottom: 1.5em;
+		}
+		&.hidden {
+			tr:first-child {
+				visibility: visible;
+			}
+			tr:first-child th {
+				visibility: visible;
+			}
+			tr {
+				visibility: collapse;
+			}
+		}
 	}
 	.cell {
 		position: relative;

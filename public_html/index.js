@@ -143,6 +143,13 @@ $(function(){
 			});
 		});
 		tableElm.find('tbody').each(function(){
+			var tbodyElm=$(this);
+			tbodyElm.find('tr:first-child th').click(function(){
+				tbodyElm.removeClass('hidden');
+			});
+			$("<span class='hide' role='button'>hide</span>").click(function(){
+				tbodyElm.addClass('hidden');
+			}).appendTo(tbodyElm.find('td.both').eq(0));
 			var timeLinkElms=tableElm.find('td.time .link');
 			var freqLinkElms=tableElm.find('td.freq .link');
 			timeLinkElms.each(function(i){
