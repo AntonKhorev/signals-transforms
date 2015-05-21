@@ -138,6 +138,35 @@ $(function(){
 				});
 			});
 		});
+		tableElm.find('tbody').each(function(){
+			var timeLinkElms=tableElm.find('td.time .link');
+			var freqLinkElms=tableElm.find('td.freq .link');
+			timeLinkElms.each(function(i){
+				var timeLinkElm=$(this);
+				var freqLinkElm=freqLinkElms.eq(i);
+                                var correctedOneLine=false;
+				timeLinkElm.add(freqLinkElm).hover(function(){
+					timeLinkElm.addClass('active');
+					freqLinkElm.addClass('active');
+					function correctOneLine() {
+						var elm=$(this);
+						if (!elm.hasClass('at-l') && !elm.hasClass('at-r')) return;
+						elm.wrapInner("<div />");
+						if (elm.children('div').height()<=parseFloat(elm.css('line-height'))) {
+							elm.addClass('one-line');
+						}
+					}
+					if (!correctedOneLine) {
+						timeLinkElm.find('.note').each(correctOneLine);
+						freqLinkElm.find('.note').each(correctOneLine);
+						correctedOneLine=true;
+					}
+				},function(){
+					timeLinkElm.removeClass('active');
+					freqLinkElm.removeClass('active');
+				});
+			});
+		});
 		// $$\overset{\mathcal F}{\rightarrow}$$
 	});
 });

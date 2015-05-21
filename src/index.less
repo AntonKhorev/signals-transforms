@@ -220,16 +220,16 @@ sup a:hover {
 				margin-top: -25%;
 			}
 		}
-		&:hover {
+		&:hover, &.active {
 			background: @link-highlight-background;
 			.note {
 				//display: flex;
 				display: block;
 			}
-		}
-		&:hover::before {
-			content: "║";
-			color: #000;
+			&::before {
+				content: "║";
+				color: #000;
+			}
 		}
 	}
 	.line {
