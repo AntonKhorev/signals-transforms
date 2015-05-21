@@ -142,17 +142,22 @@ $(function(){
 			var timeLinkElms=tableElm.find('td.time .link');
 			var freqLinkElms=tableElm.find('td.freq .link');
 			timeLinkElms.each(function(i){
-				var timeLinkElm=$(this);
+				var timeLinkElm=timeLinkElms.eq(i);
 				var freqLinkElm=freqLinkElms.eq(i);
                                 var correctedOneLine=false;
 				timeLinkElm.add(freqLinkElm).hover(function(){
+					// FIXME it runs three times, maybe because of weird ::before use
 					timeLinkElm.addClass('active');
 					freqLinkElm.addClass('active');
 					function correctOneLine() {
 						var elm=$(this);
 						if (!elm.hasClass('at-l') && !elm.hasClass('at-r')) return;
-						elm.wrapInner("<div />");
-						if (elm.children('div').height()<=parseFloat(elm.css('line-height'))) {
+						var t=$("<span></span>").prependTo(elm);
+						var h1=elm.children('span').height();
+						t.remove();
+						elm.wrapInner("<span />");
+						var h2=elm.children('span').height();
+						if (h1>=h2) {
 							elm.addClass('one-line');
 						}
 					}
