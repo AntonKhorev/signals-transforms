@@ -1,0 +1,271 @@
+sup a {
+  text-decoration: none;
+}
+sup a:hover {
+  text-decoration: underline;
+}
+[role="button"] {
+  cursor: pointer;
+}
+.signal-transform-properties {
+  border-collapse: collapse;
+  margin: auto;
+}
+.signal-transform-properties caption {
+  position: relative;
+  border-radius: .5em;
+  border: 1px solid #888;
+}
+.signal-transform-properties .signal-transform-dropdown {
+  display: block;
+}
+.signal-transform-properties .signal-transform-dropdown::after {
+  display: block;
+  position: absolute;
+  width: 2em;
+  height: 100%;
+  vertical-align: bottom;
+  top: 0;
+  right: 0;
+  content: "▼";
+  color: rgba(106, 122, 212, 0.3);
+}
+.signal-transform-properties .signal-transform-dropdown:hover::after {
+  color: #6a7ad4;
+}
+.signal-transform-properties .signal-transform-select {
+  position: absolute;
+  z-index: 2;
+  border-radius: .5em;
+  border: 1px solid #444;
+  background: #FFF;
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.signal-transform-properties .signal-transform-select li {
+  border-radius: .5em;
+}
+.signal-transform-properties .signal-transform-select li:hover {
+  background: #EEC;
+}
+.signal-transform-properties tbody {
+  border-top: solid 1px #888;
+}
+.signal-transform-properties col {
+  width: 15%;
+}
+.signal-transform-properties colgroup.both col {
+  width: 10%;
+}
+.signal-transform-properties td {
+  padding: 1em;
+}
+.signal-transform-properties tbody tr:first-child + tr td {
+  padding-top: 0;
+}
+.signal-transform-properties tbody tr:first-child th {
+  text-align: left;
+  visibility: hidden;
+}
+.signal-transform-properties tbody tr:last-child td {
+  padding-bottom: 1.5em;
+}
+.signal-transform-properties .cell {
+  position: relative;
+}
+.signal-transform-properties .note {
+  display: none;
+  position: absolute;
+  font-size: 0.8em;
+  font-family: sans-serif;
+  color: #444;
+}
+.signal-transform-properties .formula {
+  margin: -1em;
+  position: relative;
+}
+.signal-transform-properties .formula .item {
+  padding: 1px .5em;
+}
+.signal-transform-properties .formula .note {
+  top: 100%;
+  margin-top: -1.25em;
+  left: 0;
+  text-align: center;
+  min-width: 100%;
+  background: #eeddbb;
+}
+.signal-transform-properties .formula .note.at-t {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: -1.25em;
+}
+.signal-transform-properties .formula:hover,
+.signal-transform-properties .formula.active {
+  background: #eeddbb;
+}
+.signal-transform-properties .formula:hover .note,
+.signal-transform-properties .formula.active .note {
+  display: block;
+}
+.signal-transform-properties .signal-transform-properties-definition .formula {
+  z-index: 1;
+}
+.signal-transform-properties .link {
+  position: absolute;
+  z-index: 1;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+}
+.signal-transform-properties .link.at-t,
+.signal-transform-properties .link.at-b {
+  left: 50%;
+  margin-left: -1em;
+}
+.signal-transform-properties .link.at-t {
+  top: -1em;
+}
+.signal-transform-properties .link.at-b {
+  bottom: -1em;
+}
+.signal-transform-properties .link.at-l,
+.signal-transform-properties .link.at-r {
+  top: 50%;
+  margin-top: -1em;
+}
+.signal-transform-properties .link.at-l::before,
+.signal-transform-properties .link.at-r::before {
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.signal-transform-properties .link.at-l {
+  left: -2em;
+}
+.signal-transform-properties .link.at-r {
+  right: -2em;
+}
+.signal-transform-properties .link.at-tl::before,
+.signal-transform-properties .link.at-br::before {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.signal-transform-properties .link.at-tl {
+  top: -1em;
+  left: -2em;
+}
+.signal-transform-properties .link.at-br {
+  bottom: -1em;
+  right: -2em;
+}
+.signal-transform-properties .link::before {
+  display: block;
+  content: "⋮";
+  color: #888;
+}
+.signal-transform-properties .link .note {
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  text-align: center;
+  min-width: 100%;
+  background: #ccff88;
+  line-height: normal;
+}
+.signal-transform-properties .link .note.at-t {
+  top: auto;
+  bottom: 100%;
+}
+.signal-transform-properties .link .note.at-l,
+.signal-transform-properties .link .note.at-r {
+  top: 0;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  min-width: 0;
+  min-height: 100%;
+}
+.signal-transform-properties .link .note.at-l.one-line,
+.signal-transform-properties .link .note.at-r.one-line {
+  line-height: 2.5em;
+  white-space: nowrap;
+}
+.signal-transform-properties .link .note.at-l {
+  left: auto;
+  right: 100%;
+  padding-left: .5em;
+  text-align: right;
+}
+.signal-transform-properties .link .note.at-r {
+  left: 100%;
+  padding-right: .5em;
+  text-align: left;
+}
+.signal-transform-properties .link.at-t .note.at-l,
+.signal-transform-properties .link.at-b .note.at-l {
+  margin-right: -20%;
+}
+.signal-transform-properties .link.at-t .note.at-r,
+.signal-transform-properties .link.at-b .note.at-r {
+  margin-left: -20%;
+}
+.signal-transform-properties .link.at-l .note.at-t,
+.signal-transform-properties .link.at-r .note.at-t {
+  margin-bottom: -25%;
+}
+.signal-transform-properties .link.at-l .note.at-b,
+.signal-transform-properties .link.at-r .note.at-b {
+  margin-top: -25%;
+}
+.signal-transform-properties .link:hover,
+.signal-transform-properties .link.active {
+  background: #ccff88;
+}
+.signal-transform-properties .link:hover .note,
+.signal-transform-properties .link.active .note {
+  display: block;
+}
+.signal-transform-properties .link:hover::before,
+.signal-transform-properties .link.active::before {
+  content: "║";
+  color: #000;
+}
+.signal-transform-properties .line {
+  position: absolute;
+  background: #eeddbb;
+  color: #eeddbb;
+  z-index: -1;
+  height: 4px;
+  vertical-align: middle;
+}
+.signal-transform-properties .line .arrowhead {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #eeddbb;
+  height: 4px;
+  width: 20px;
+  -webkit-transform-origin: right;
+      -ms-transform-origin: right;
+          transform-origin: right;
+}
+.signal-transform-properties .line .arrowhead.top {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.signal-transform-properties .line .arrowhead.bottom {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
