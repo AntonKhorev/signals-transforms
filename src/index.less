@@ -66,6 +66,9 @@ sup a:hover {
 	}
 	td {
 		padding: @cell-spacing/2;
+		&.both {
+			vertical-align: top;
+		}
 	}
 	tbody {
 		border-top: solid 1px #888;
@@ -92,6 +95,16 @@ sup a:hover {
 	}
 	.cell {
 		position: relative;
+	}
+	.hide {
+		color: #444;
+		&:hover {
+			color: #000;
+		}
+		position: absolute;
+		top: -1.5em;
+		width: 100%;
+		text-align: center;
 	}
 	.note {
 		display: none;
