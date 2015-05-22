@@ -164,10 +164,10 @@ $(function(){
 				tbodyElm.removeClass('hidden');
 				//ev.stopPropagation();
 			});
-			$("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
+			$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
 				tbodyElm.addClass('hidden');
 				//ev.stopPropagation();
-			}).appendTo(tbodyElm.find('td.both .cell').eq(0));
+			})).appendTo(tbodyElm.find('td.both').eq(0));
 			var timeLinkElms=tableElm.find('td.time .link');
 			var freqLinkElms=tableElm.find('td.freq .link');
 			timeLinkElms.each(function(i){
