@@ -145,7 +145,7 @@ $(function(){
                 tableElm.find('tr').each(function(){
 			$(this).find('td.time .formula').each(function(i){
 				var timeFormulaElm=$(this);
-				var freqFormulaElm=timeFormulaElm.parents('tr').find('td.freq .formula').eq(i); // TODO probably requires 'parents'
+				var freqFormulaElm=timeFormulaElm.parents('tr').find('td.freq .formula').eq(i);
 				timeFormulaElm.add(freqFormulaElm).hover(function(){
 					timeFormulaElm.addClass('active');
 					freqFormulaElm.addClass('active');
@@ -174,14 +174,13 @@ $(function(){
 				tbodyElm.addClass('hidden');
 				//ev.stopPropagation();
 			})).appendTo(tbodyElm.find('td.both').eq(0));
-			var timeLinkElms=tableElm.find('td.time .link');
-			var freqLinkElms=tableElm.find('td.freq .link');
+			var timeLinkElms=tbodyElm.find('td.time .link');
+			var freqLinkElms=tbodyElm.find('td.freq .link');
 			timeLinkElms.each(function(i){
 				var timeLinkElm=timeLinkElms.eq(i);
 				var freqLinkElm=freqLinkElms.eq(i);
                                 var correctedOneLine=false;
 				timeLinkElm.add(freqLinkElm).hover(function(){
-					// FIXME it runs three times, maybe because of weird ::before use
 					timeLinkElm.addClass('active');
 					freqLinkElm.addClass('active');
 					// single-line vs multiple-line note detection
