@@ -18,7 +18,11 @@ $(function(){
 			},
 			modshiftFreqFormula:function(mod,shift){
 				return (mod?'e^{'+(mod<0?'-':'')+'j\\omega t_0}':'')+'X(j'+(shift?'(\\omega'+(shift<0?'-':'+')+'\\omega_0)':'\\omega')+')';
-			}
+			},
+			intdiffFormulas:[
+				'x(t)'       ,'\\frac{d}{dt} x(t)',
+				'X(j\\omega)','j\\omega X(j\\omega)'
+			]
 		},{
 			name:'Discrete-time Fourier transform (DTFT)',
 			wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
@@ -37,7 +41,11 @@ $(function(){
 			},
 			modshiftFreqFormula:function(mod,shift){
 				return (mod?'e^{'+(mod<0?'-':'')+'j\\omega n_0}':'')+'X(e^{j'+(shift?'(\\omega'+(shift<0?'-':'+')+'\\omega_0)':'\\omega')+'})';
-			}
+			},
+			intdiffFormulas:[
+				'x[n]'           ,'x[n]-x[n-1]',
+				'X(e^{j\\omega})','(1-e^{-j\\omega}) X(e^{j\\omega})'
+			]
 		},{
 			name:'Discrete Fourier transform (DFT)',
 			wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
@@ -56,7 +64,11 @@ $(function(){
 			},
 			modshiftFreqFormula:function(mod,shift){
 				return (mod?'W_N^{'+(mod>0?'-':'')+'k n_0}':'')+'X[k'+(shift?(shift<0?'-':'+')+'k_0':'')+']';
-			}
+			},
+			intdiffFormulas:[
+				'x[n]','x[n]-x[n-1]',
+				'X[k]','(1-W_N^k) X[k]'
+			]
 		}
 	];
 	var conjinvTimePatterns=[
@@ -109,6 +121,10 @@ $(function(){
 							});
 							tableElm.find('.signal-transform-properties-modshift td.freq .formula .item').text(function(i){
 								return '$$'+transform.modshiftFreqFormula.apply(null,modshiftFreqPatterns[i])+'$$';
+							});
+							// simpler code without pretending that we're making a CAS
+							tableElm.find('.signal-transform-properties-intdiff td .formula .item').text(function(i){
+								return '$$'+transform.intdiffFormulas[i]+'$$';
 							});
 							MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 						})
