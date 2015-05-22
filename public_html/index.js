@@ -142,6 +142,7 @@ $(function(){
 				transformSelectElm=null;
 			}
 		});
+		var lineElm=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
                 tableElm.find('tr').each(function(){
 			$(this).find('td.time .formula').each(function(i){
 				var timeFormulaElm=$(this);
@@ -153,13 +154,13 @@ $(function(){
 					var fOffset=freqFormulaElm.offset();
 					var tWidth=timeFormulaElm.width();
 					var tHeight=timeFormulaElm.height();
-					var line=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>")
-						.appendTo(timeFormulaElm)
+					lineElm.appendTo(timeFormulaElm)
 						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
 						.width(fOffset.left-tOffset.left-tWidth)
 					;
 				},function(){
-					timeFormulaElm.removeClass('active').find('.line').remove();
+					lineElm.detach();
+					timeFormulaElm.removeClass('active');
 					freqFormulaElm.removeClass('active');
 				});
 			});
