@@ -21,7 +21,9 @@ $(function(){
 			},
 			intdiffFormulas:[
 				'x(t)'       ,'\\frac{d}{dt} x(t)',
-				'X(j\\omega)','j\\omega X(j\\omega)'
+				'X(j\\omega)','j\\omega X(j\\omega)',
+				'-j t x(t)',
+				'\\frac{d}{d\\omega} X(j\\omega)'
 			]
 		},{
 			name:'Discrete-time Fourier transform (DTFT)',
@@ -44,7 +46,9 @@ $(function(){
 			},
 			intdiffFormulas:[
 				'x[n]'           ,'x[n]-x[n-1]',
-				'X(e^{j\\omega})','(1-e^{-j\\omega}) X(e^{j\\omega})'
+				'X(e^{j\\omega})','(1-e^{-j\\omega}) X(e^{j\\omega})',
+				'-j n x[n]',
+				'\\frac{d}{d\\omega} X(e^{j\\omega})'
 			]
 		},{
 			name:'Discrete Fourier transform (DFT)',
@@ -67,7 +71,9 @@ $(function(){
 			},
 			intdiffFormulas:[
 				'x[n]','x[n]-x[n-1]',
-				'X[k]','(1-W_N^k) X[k]'
+				'X[k]','(1-W_N^k) X[k]',
+				'(1-W_N^{-n}) x[n]',
+				'X[n]-X[n-1]'
 			]
 		}
 	];
