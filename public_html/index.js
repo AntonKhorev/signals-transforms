@@ -166,14 +166,15 @@ $(function(){
 		});
 		tableElm.find('tbody').each(function(){
 			var tbodyElm=$(this);
+			var preventTextSelectionOnDoubleClick=function(ev){
+				ev.preventDefault();
+			};
 			tbodyElm.find('tr:first-child th').click(function(ev){
 				tbodyElm.removeClass('hidden');
-				//ev.stopPropagation();
-			});
+			}).mousedown(preventTextSelectionOnDoubleClick);
 			$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
 				tbodyElm.addClass('hidden');
-				//ev.stopPropagation();
-			})).appendTo(tbodyElm.find('td.both').eq(0));
+			}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyElm.find('td.both').eq(0));
 			var timeLinkElms=tbodyElm.find('td.time .link');
 			var freqLinkElms=tbodyElm.find('td.freq .link');
 			timeLinkElms.each(function(i){
