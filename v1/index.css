@@ -52,9 +52,6 @@ sup a:hover {
 .signal-transform-properties .signal-transform-select li:hover {
   background: #EEC;
 }
-.signal-transform-properties tbody {
-  border-top: solid 1px #888;
-}
 .signal-transform-properties col {
   width: 15%;
 }
@@ -64,18 +61,60 @@ sup a:hover {
 .signal-transform-properties td {
   padding: 1em;
 }
+.signal-transform-properties td.both {
+  vertical-align: top;
+}
+.signal-transform-properties th {
+  height: 1.5em;
+  line-height: 1.5em;
+  padding: 0;
+}
+.signal-transform-properties tbody {
+  border-top: solid 1px #888;
+}
 .signal-transform-properties tbody tr:first-child + tr td {
-  padding-top: 0;
+  padding-top: 1.5em;
 }
 .signal-transform-properties tbody tr:first-child th {
-  text-align: left;
-  visibility: hidden;
+  display: none;
 }
 .signal-transform-properties tbody tr:last-child td {
   padding-bottom: 1.5em;
 }
+.signal-transform-properties tbody.hidden tr:first-child {
+  visibility: visible;
+}
+.signal-transform-properties tbody.hidden tr:first-child th {
+  display: table-cell;
+  border-bottom: solid 1px #888;
+}
+.signal-transform-properties tbody.hidden tr {
+  visibility: collapse;
+}
+.signal-transform-properties tbody.hidden tr td {
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.signal-transform-properties tbody.hidden tr td * {
+  height: 0;
+}
+.signal-transform-properties tbody:last-child tr:first-child th {
+  border-bottom: 0;
+}
 .signal-transform-properties .cell {
   position: relative;
+}
+.signal-transform-properties .hide {
+  color: #444;
+  position: absolute;
+  top: -1.5em;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+.signal-transform-properties .hide:hover {
+  color: #000;
 }
 .signal-transform-properties .note {
   display: none;

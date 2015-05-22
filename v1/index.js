@@ -143,6 +143,15 @@ $(function(){
 			});
 		});
 		tableElm.find('tbody').each(function(){
+			var tbodyElm=$(this);
+			tbodyElm.find('tr:first-child th').click(function(ev){
+				tbodyElm.removeClass('hidden');
+				//ev.stopPropagation();
+			});
+			$("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
+				tbodyElm.addClass('hidden');
+				//ev.stopPropagation();
+			}).appendTo(tbodyElm.find('td.both .cell').eq(0));
 			var timeLinkElms=tableElm.find('td.time .link');
 			var freqLinkElms=tableElm.find('td.freq .link');
 			timeLinkElms.each(function(i){
@@ -153,11 +162,12 @@ $(function(){
 					// FIXME it runs three times, maybe because of weird ::before use
 					timeLinkElm.addClass('active');
 					freqLinkElm.addClass('active');
+					// single-line vs multiple-line note detection
 					function correctOneLine() {
 						var elm=$(this);
 						if (!elm.hasClass('at-l') && !elm.hasClass('at-r')) return;
-						var t=$("<span></span>").prependTo(elm);
-						var h1=elm.children('span').height();
+						var t=$("<span style='visibility:hidden'>|</span>").prependTo(elm); // span height will be 0 on chrome unless non-whitespace character is inserted
+						var h1=t.height();
 						t.remove();
 						elm.wrapInner("<span />");
 						var h2=elm.children('span').height();
