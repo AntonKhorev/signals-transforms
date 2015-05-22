@@ -90,6 +90,7 @@ sup a:hover {
 			}
 			tr:first-child th {
 				visibility: visible;
+				border-bottom: solid 1px #888; // border hack for chrome
 			}
 			tr {
 				visibility: collapse;
@@ -103,6 +104,9 @@ sup a:hover {
 					}
 				}
 			}
+		}
+		&:last-child tr:first-child th {
+			border-bottom: 0; // border hack for chrome continued
 		}
 	}
 	.cell {
