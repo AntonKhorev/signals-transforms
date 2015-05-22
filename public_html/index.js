@@ -114,8 +114,8 @@ $(function(){
 							transformDropdownElm.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 							tableElm.find('.signal-transform-properties-definition td.time .formula .item').text('$$'+transform.timeDefinition+'$$');
 							tableElm.find('.signal-transform-properties-definition td.freq .formula .item').text('$$'+transform.freqDefinition+'$$');
-							tableElm.find('.signal-transform-properties-definition td.time .formula .note').html(transform.timeDefinitionNote);
-							tableElm.find('.signal-transform-properties-definition td.freq .formula .note').html(transform.freqDefinitionNote);
+							tableElm.find('.signal-transform-properties-definition td.time .formula .note.at-b').html(transform.timeDefinitionNote);
+							tableElm.find('.signal-transform-properties-definition td.freq .formula .note.at-b').html(transform.freqDefinitionNote);
 							tableElm.find('.signal-transform-properties-conjinv td.time .formula .item').text(function(i){
 								return '$$'+transform.conjinvTimeFormula.apply(null,conjinvTimePatterns[i])+'$$';
 							});
