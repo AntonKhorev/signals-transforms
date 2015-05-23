@@ -144,22 +144,83 @@ $(function(){
 		var tableNode=$(this);
 		var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
+		function writeTransform(transform){
+			sections.forEach(function(section){
+				// TODO check here if transform.sections contain key
+				function preventTextSelectionOnDoubleClick(ev){
+					ev.preventDefault();
+				};
+				var tbodyNode=$("<tbody />");
+				tbodyNode.append(
+					$("<tr />").append(
+						$("<th colspan='7' role='button'>"+section.name+"</th>").click(function(ev){
+							tbodyNode.removeClass('hidden');
+						}).mousedown(preventTextSelectionOnDoubleClick)
+					)
+				);
+				section.cells.forEach(function(row){
+					var trNode=$("<tr />");
+					function makeDomainCells(domain){
+						for (var i=0;i<nDomainCols;i++) {
+							var tdNode=$("<td class='"+domain+"' />");
+							if (row.charAt(i*2)=='+') {
+								tdNode.append("<div class='cell'><div class='formula' /></div>");
+							}
+							trNode.append(tdNode);
+						}
+					};
+					makeDomainCells('time');
+					trNode.append("<td class='both' />");
+					makeDomainCells('freq');
+					tbodyNode.append(trNode);
+				});
+				tableNode.append(tbodyNode);
+				$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
+					tbodyNode.addClass('hidden');
+				}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
+				var transformSection=transform.sections[section.id](transform.timeFn,transform.freqFn);
+				var timeFormulaNodes=tbodyNode.find('td.time .formula');
+				var freqFormulaNodes=tbodyNode.find('td.freq .formula');
+				timeFormulaNodes.each(function(i){
+					var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.time[i]+"$$</div>");
+					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.freq[i]+"$$</div>");
+					timeFormulaNode.add(freqFormulaNode).hover(function(){
+						timeFormulaNode.addClass('active');
+						freqFormulaNode.addClass('active');
+						var tOffset=timeFormulaNode.offset();
+						var fOffset=freqFormulaNode.offset();
+						var tWidth =timeFormulaNode.width();
+						var tHeight=timeFormulaNode.height();
+						lineNode.appendTo(timeFormulaNode)
+							.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
+							.width(fOffset.left-tOffset.left-tWidth)
+						;
+					},function(){
+						lineNode.detach();
+						timeFormulaNode.removeClass('active');
+						freqFormulaNode.removeClass('active');
+					});
+				});
+			});
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+		};
+
 		// transform selection dropdown
-		/*
-		var transformElm=tableElm.find('caption');
-		var transformSelectElm=null;
-		transformElm.wrapInner("<span class='signal-transform-dropdown' role='button'>");
-		var transformDropdownElm=transformElm.find('.signal-transform-dropdown');
-		transformDropdownElm.click(function(){
-			if (transformSelectElm===null) {
-				transformSelectElm=$("<ul class='signal-transform-select' />");
+		var captionNode=tableNode.find('caption');
+		var transformSelectNode=null;
+		captionNode.wrapInner("<span class='signal-transform-dropdown' role='button'>");
+		var transformDropdownNode=captionNode.find('.signal-transform-dropdown');
+		transformDropdownNode.click(function(){
+			if (transformSelectNode===null) {
+				transformSelectNode=$("<ul class='signal-transform-select' />");
 				transforms.forEach(function(transform){
-					transformSelectElm.append(
+					transformSelectNode.append(
 						$("<li role='button'>"+transform.name+"</li>").click(function(){
-							transformSelectElm.remove();
-							transformSelectElm=null;
-							transformDropdownElm.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
+							transformSelectNode.remove();
+							transformSelectNode=null;
+							transformDropdownNode.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 							// rewrite formulas
+							/*
 							tableElm.find('.signal-transform-properties-definition td.time .formula .item').text('$$'+transform.timeDefinition+'$$');
 							tableElm.find('.signal-transform-properties-definition td.freq .formula .item').text('$$'+transform.freqDefinition+'$$');
 							tableElm.find('.signal-transform-properties-definition td.time .formula .note.at-b').html(transform.timeDefinitionNote);
@@ -176,77 +237,20 @@ $(function(){
 							tableElm.find('.signal-transform-properties-modshift td.freq .formula .item').text(function(i){
 								return '$$'+transform.modshiftFreqFormula.apply(null,modshiftFreqPatterns[i])+'$$';
 							});
+							*/
+							tableNode.find('tbody').remove();
+							writeTransform(transform);
 						})
 					);
 				});
-				transformElm.append(transformSelectElm);
+				captionNode.append(transformSelectNode);
 			} else {
-				transformSelectElm.remove();
-				transformSelectElm=null;
+				transformSelectNode.remove();
+				transformSelectNode=null;
 			}
 		});
-		*/
 
-		// table sections
-		var transform=transforms[iDefaultTransform];
-		sections.forEach(function(section){
-			// TODO check here if transform.sections contain key
-			function preventTextSelectionOnDoubleClick(ev){
-				ev.preventDefault();
-			};
-			var tbodyNode=$("<tbody />");
-			tbodyNode.append(
-				$("<tr />").append(
-					$("<th colspan='7' role='button'>"+section.name+"</th>").click(function(ev){
-						tbodyNode.removeClass('hidden');
-					}).mousedown(preventTextSelectionOnDoubleClick)
-				)
-			);
-			section.cells.forEach(function(row){
-				var trNode=$("<tr />");
-				function makeDomainCells(domain){
-					for (var i=0;i<nDomainCols;i++) {
-						var tdNode=$("<td class='"+domain+"' />");
-						if (row.charAt(i*2)=='+') {
-							tdNode.append("<div class='cell'><div class='formula' /></div>");
-						}
-						trNode.append(tdNode);
-					}
-				};
-				makeDomainCells('time');
-				trNode.append("<td class='both' />");
-				makeDomainCells('freq');
-				tbodyNode.append(trNode);
-			});
-			tableNode.append(tbodyNode);
-			$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
-				tbodyNode.addClass('hidden');
-			}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
-			var transformSection=transform.sections[section.id](transform.timeFn,transform.freqFn);
-			var timeFormulaNodes=tbodyNode.find('td.time .formula');
-			var freqFormulaNodes=tbodyNode.find('td.freq .formula');
-			timeFormulaNodes.each(function(i){
-				var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.time[i]+"$$</div>");
-				var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.freq[i]+"$$</div>");
-				timeFormulaNode.add(freqFormulaNode).hover(function(){
-					timeFormulaNode.addClass('active');
-					freqFormulaNode.addClass('active');
-					var tOffset=timeFormulaNode.offset();
-					var fOffset=freqFormulaNode.offset();
-					var tWidth =timeFormulaNode.width();
-					var tHeight=timeFormulaNode.height();
-					lineNode.appendTo(timeFormulaNode)
-						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
-						.width(fOffset.left-tOffset.left-tWidth)
-					;
-				},function(){
-					lineNode.detach();
-					timeFormulaNode.removeClass('active');
-					freqFormulaNode.removeClass('active');
-				});
-			});
-		});
-		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+		writeTransform(transforms[iDefaultTransform]);
 
 		// interactive elements of the table
 		/*
