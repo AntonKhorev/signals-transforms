@@ -13,6 +13,14 @@ $(function(){
 	var nDomainCols=3;
 	var iDefaultTransform=1;
 	var sections=[{
+		id:'modshift',
+		name:'Modulation and time/frequency shifting',
+		cells:[
+			'.|+|.',
+			'+|+|+',
+			'.|+|.',
+		]
+	},{
 		id:'intdiff',
 		name:'Integration and differentiation',
 		cells:[
@@ -33,12 +41,6 @@ $(function(){
 		conjinvFreqFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'X'+(conj?'^*':'')+'('+(inv?'-':'')+'j\\omega)';
 		},
-		modshiftTimeFormula:function(mod,shift){
-			return (mod?'e^{'+(mod<0?'-':'')+'j\\omega_0 t}':'')+'x(t'+(shift?(shift<0?'-':'+')+'t_0':'')+')';
-		},
-		modshiftFreqFormula:function(mod,shift){
-			return (mod?'e^{'+(mod<0?'-':'')+'j\\omega t_0}':'')+'X(j'+(shift?'(\\omega'+(shift<0?'-':'+')+'\\omega_0)':'\\omega')+')';
-		},
 		timeFn:function(options,argument){
 			var oa=parseOptionsAndArgument(options,argument,'t');
 			return 'x'+oa.conj+'('+oa.rev+oa.arg+')';
@@ -48,6 +50,10 @@ $(function(){
 			return 'X'+oa.conj+'('+oa.rev+'j'+oa.open+oa.arg+oa.close+')';
 		},
 		sections:{
+			modshift:function(x,X){return{
+				time:[x('(','t+t_0'),'e^{-j\\omega_0 t}'+x(),x(),'e^{j\\omega_0 t}'+x(),x('(','t-t_0')],
+				freq:['e^{j\\omega t_0}'+X(),X('(','\\omega+\\omega_0'),X(),X('(','\\omega-\\omega_0'),'e^{-j\\omega t_0}'+X()]
+			}},
 			intdiff:function(x,X){return{
 				time:[x(),'\\frac{\\mathrm{d}}{\\mathrm{d}t} '+x(),'-j t '+x()],
 				freq:[X(),'j\\omega '+X(),'\\frac{\\mathrm{d}}{\\mathrm{d}\\omega} '+X()]
@@ -66,12 +72,6 @@ $(function(){
 		conjinvFreqFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'X'+(conj?'^*':'')+'(e^{'+(inv?'-':'')+'j\\omega})';
 		},
-		modshiftTimeFormula:function(mod,shift){
-			return (mod?'e^{'+(mod<0?'-':'')+'j\\omega_0 n}':'')+'x[n'+(shift?(shift<0?'-':'+')+'n_0':'')+']';
-		},
-		modshiftFreqFormula:function(mod,shift){
-			return (mod?'e^{'+(mod<0?'-':'')+'j\\omega n_0}':'')+'X(e^{j'+(shift?'(\\omega'+(shift<0?'-':'+')+'\\omega_0)':'\\omega')+'})';
-		},
 		timeFn:function(options,argument){
 			var oa=parseOptionsAndArgument(options,argument,'n');
 			return 'x'+oa.conj+'['+oa.rev+oa.arg+']';
@@ -81,6 +81,10 @@ $(function(){
 			return 'X'+oa.conj+'(e^{'+oa.rev+'j'+oa.open+oa.arg+oa.close+'})';
 		},
 		sections:{
+			modshift:function(x,X){return{
+				time:[x('(','n+n_0'),'e^{-j\\omega_0 n}'+x(),x(),'e^{j\\omega_0 n}'+x(),x('(','n+n_0')],
+				freq:['e^{j\\omega n_0}'+X(),X('(','\\omega+\\omega_0'),X(),X('(','\\omega-\\omega_0'),'e^{-j\\omega n_0}'+X()]
+			}},
 			intdiff:function(x,X){return{
 				time:[x(),x()+'-'+x('(','n-1'),'-j n '+x()],
 				freq:[X(),'(1-e^{-j\\omega}) '+X(),'\\frac{\\mathrm{d}}{\\mathrm{d}\\omega} '+X()]
@@ -99,12 +103,6 @@ $(function(){
 		conjinvFreqFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'X'+(conj?'^*':'')+'['+(inv?'-':'')+'k]';
 		},
-		modshiftTimeFormula:function(mod,shift){
-			return (mod?'W_N^{'+(mod>0?'-':'')+'k_0 n}':'')+'x[n'+(shift?(shift<0?'-':'+')+'n_0':'')+']';
-		},
-		modshiftFreqFormula:function(mod,shift){
-			return (mod?'W_N^{'+(mod>0?'-':'')+'k n_0}':'')+'X[k'+(shift?(shift<0?'-':'+')+'k_0':'')+']';
-		},
 		timeFn:function(options,argument){
 			var oa=parseOptionsAndArgument(options,argument,'n');
 			return 'x'+oa.conj+'['+oa.rev+oa.arg+']';
@@ -114,6 +112,10 @@ $(function(){
 			return 'X'+oa.conj+'['+oa.rev+oa.arg+']';
 		},
 		sections:{
+			modshift:function(x,X){return{
+				time:[x('(','n+n_0'),'W_N^{k_0 n}'+x(),x(),'W_N^{-k_0 n}'+x(),x('(','n+n_0')],
+				freq:['W_N^{-k n_0}'+X(),X('(','k+k_0'),X(),X('(','k-k_0'),'W_N^{k n_0}'+X()]
+			}},
 			intdiff:function(x,X){return{
 				time:[x(),x()+'-'+x('(','n-1'),'(1-W_N^{-n}) '+x()],
 				freq:[X(),'(1-W_N^k) '+X(),X()+'-'+X('(','n-1')]
@@ -129,16 +131,6 @@ $(function(){
 		[1,0,1],[1,1,0],
 		[1,1,1],[0,0,0],[0,1,1],
 		        [0,1,0],[0,0,1]
-	];
-	var modshiftTimePatterns=[
-		        [ 0,+1],
-		[-1, 0],[ 0, 0],[+1, 0],
-		        [ 0,-1]
-	];
-	var modshiftFreqPatterns=[
-		        [+1, 0],
-		[ 0,+1],[ 0, 0],[ 0,-1],
-		        [-1, 0]
 	];
 	$('.signal-transform-properties').each(function(){
 		var tableNode=$(this);
@@ -230,12 +222,6 @@ $(function(){
 							});
 							tableElm.find('.signal-transform-properties-conjinv td.freq .formula .item').text(function(i){
 								return '$$'+transform.conjinvFreqFormula.apply(null,conjinvFreqPatterns[i])+'$$';
-							});
-							tableElm.find('.signal-transform-properties-modshift td.time .formula .item').text(function(i){
-								return '$$'+transform.modshiftTimeFormula.apply(null,modshiftTimePatterns[i])+'$$';
-							});
-							tableElm.find('.signal-transform-properties-modshift td.freq .formula .item').text(function(i){
-								return '$$'+transform.modshiftFreqFormula.apply(null,modshiftFreqPatterns[i])+'$$';
 							});
 							*/
 							tableNode.find('tbody').remove();
