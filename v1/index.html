@@ -13,7 +13,9 @@
 <colgroup class='time'><col /><col /><col /></colgroup>
 <colgroup class='both'><col /></colgroup>
 <colgroup class='freq'><col /><col /><col /></colgroup>
-<thead><tr>
+<thead><tr class='some-browsers-ignore-col-elements'>
+	<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr><tr>
 	<th colspan='3' class='time'>Time domain</th>
 	<th class='both'></th>
 	<th colspan='3' class='freq'>Frequency domain</th>
@@ -24,13 +26,15 @@
 	<td colspan='3' class='time'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$x[n] = \frac{1}{2\pi} \int \limits_{\langle 2\pi \rangle} X(e^{j\omega}) e^{j\omega n} \, \mathrm{d}\omega$$</div>
+			<div class='note at-t'>synthesis formula</div>
 			<div class='note at-b'>function \(x[n]\) of discrete variable \(n\)</div>
 		</div>
 	</div></td>
-	<td class='both'><div class='cell'></div></td>
+	<td class='both'></td>
 	<td colspan='3' class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$X(e^{j\omega}) = \sum_{n=-\infty}^{+\infty} x[n] e^{-j\omega n}$$</div>
+			<div class='note at-t'>analysis formula</div>
 			<div class='note at-b'>periodic function \(X(e^{j\omega})\) of continuous variable \(\omega\)<br /> with period \(2\pi\)</div>
 		</div>
 	</div></td>
@@ -49,7 +53,7 @@
 		</div>
 	</div></td>
 	<td class='time'></td>
-	<td class='both'><div class='cell'></div></td>
+	<td class='both'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
 			<div class='item'>$$-X^*(e^{j\omega})$$</div>
@@ -171,7 +175,7 @@
 		</div>
 	</div></td>
 	<td class='time'></td>
-	<td class='both'><div class='cell'></div></td>
+	<td class='both'></td>
 	<td class='freq'></td>
 	<td class='freq'><div class='cell'>
 		<div class='formula'>
@@ -231,6 +235,49 @@
 		<div class='formula'>
 			<div class='item'>$$e^{-j\omega n_0}X(e^{j\omega})$$</div>
 			<div class='note'>modulation</div>
+		</div>
+	</div></td>
+	<td class='freq'></td>
+</tr></tbody>
+<tbody class='signal-transform-properties-intdiff'><tr>
+	<th colspan='7' role='button'>Integration and differentiation</th>
+</tr><tr>
+	<td class='time'></td>
+	<td class='time'><div class='cell'>
+		<div class='formula'>
+			<div class='item'>$$x[n]$$</div>
+		</div>
+	</div></td>
+	<td class='time'><div class='cell'>
+		<div class='formula'>
+			<div class='item'>$$x[n]-x[n-1]$$</div>
+		</div>
+	</div></td>
+	<td class='both'></td>
+	<td class='freq'></td>
+	<td class='freq'><div class='cell'>
+		<div class='formula'>
+			<div class='item'>$$X(e^{j\omega})$$</div>
+		</div>
+	</div></td>
+	<td class='freq'><div class='cell'>
+		<div class='formula'>
+			<div class='item'>$$(1-e^{-j\omega}) X(e^{j\omega})$$</div>
+		</div>
+	</div></td>
+</tr><tr>
+	<td class='time'></td>
+	<td class='time'><div class='cell'>
+		<div class='formula'>
+			<div class='item'>$$-j n x[n]$$</div>
+		</div>
+	</div></td>
+	<td class='time'></td>
+	<td class='both'></td>
+	<td class='freq'></td>
+	<td class='freq'><div class='cell'>
+		<div class='formula'>
+			<div class='item'>$$\frac{\mathrm{d}}{\mathrm{d}\omega} X(e^{j\omega})$$</div>
 		</div>
 	</div></td>
 	<td class='freq'></td>

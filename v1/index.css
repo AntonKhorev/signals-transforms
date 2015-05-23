@@ -10,11 +10,16 @@ sup a:hover {
 .signal-transform-properties {
   border-collapse: collapse;
   margin: auto;
+  min-width: 30em;
 }
 .signal-transform-properties caption {
   position: relative;
   border-radius: .5em;
   border: 1px solid #888;
+  height: 1.5em;
+  padding: 0;
+  font-weight: bold;
+  white-space: nowrap;
 }
 .signal-transform-properties .signal-transform-dropdown {
   display: block;
@@ -23,7 +28,8 @@ sup a:hover {
   display: block;
   position: absolute;
   width: 2em;
-  height: 100%;
+  height: 1.5em;
+  line-height: 1.5em;
   vertical-align: bottom;
   top: 0;
   right: 0;
@@ -45,6 +51,7 @@ sup a:hover {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  font-weight: normal;
 }
 .signal-transform-properties .signal-transform-select li {
   border-radius: .5em;
@@ -54,6 +61,10 @@ sup a:hover {
 }
 .signal-transform-properties col {
   width: 15%;
+}
+.signal-transform-properties tr.some-browsers-ignore-col-elements td {
+  padding: 0;
+  height: 0;
 }
 .signal-transform-properties colgroup.both col {
   width: 10%;
@@ -81,23 +92,12 @@ sup a:hover {
 .signal-transform-properties tbody tr:last-child td {
   padding-bottom: 1.5em;
 }
-.signal-transform-properties tbody.hidden tr:first-child {
-  visibility: visible;
-}
 .signal-transform-properties tbody.hidden tr:first-child th {
   display: table-cell;
   border-bottom: solid 1px #888;
 }
-.signal-transform-properties tbody.hidden tr {
-  visibility: collapse;
-}
 .signal-transform-properties tbody.hidden tr td {
-  height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.signal-transform-properties tbody.hidden tr td * {
-  height: 0;
+  display: none;
 }
 .signal-transform-properties tbody:last-child tr:first-child th {
   border-bottom: 0;
