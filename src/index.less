@@ -80,39 +80,19 @@ sup a:hover {
 		tr:first-child + tr td {
 			padding-top: 1.5em;
 		}
-		tr:first-child {
-			//visibility: collapse; // unsafe (*) in chrome and partly in ie
-			th {
-				display: none; // shouldn't cause table reflows (**) b/c formula cells constrain width more
-			}
+		tr:first-child th {
+			display: none;
 		}
 		tr:last-child td {
 			padding-bottom: 1.5em;
 		}
 		&.hidden {
-			tr:first-child {
-				visibility: visible; // have to use it here despite (*) b/c of (**) - need hacks (***) below
-			}
 			tr:first-child th {
-				//visibility: visible;
 				display: table-cell;
 				border-bottom: solid 1px #888; // border hack for chrome
 			}
-			tr {
-				visibility: collapse;
-				td {
-					// extra hacks (***) for chrome
-					height: 0;
-					padding-top: 0;
-					padding-bottom: 0;
-					* {
-						height: 0;
-					}
-				}
-				&:first-child + tr td {
-					// extra hacks (***) for chrome
-					padding-top: 0;
-				}
+			tr td {
+				display: none;
 			}
 		}
 		&:last-child tr:first-child th {
