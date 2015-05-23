@@ -142,6 +142,7 @@ $(function(){
 	];
 	$('.signal-transform-properties').each(function(){
 		var tableNode=$(this);
+		var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
 		// transform selection dropdown
 		/*
@@ -222,37 +223,33 @@ $(function(){
 				tbodyNode.addClass('hidden');
 			}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
 			var transformSection=transform.sections[section.id](transform.timeFn,transform.freqFn);
-			tbodyNode.find('td.time .formula').each(function(i){
-				$(this).append("<div class='item'>$$"+transformSection.time[i]+"$$</div>");
+			var timeFormulaNodes=tbodyNode.find('td.time .formula');
+			var freqFormulaNodes=tbodyNode.find('td.freq .formula');
+			timeFormulaNodes.each(function(i){
+				var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.time[i]+"$$</div>");
+				var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.freq[i]+"$$</div>");
+				timeFormulaNode.add(freqFormulaNode).hover(function(){
+					timeFormulaNode.addClass('active');
+					freqFormulaNode.addClass('active');
+					var tOffset=timeFormulaNode.offset();
+					var fOffset=freqFormulaNode.offset();
+					var tWidth =timeFormulaNode.width();
+					var tHeight=timeFormulaNode.height();
+					lineNode.appendTo(timeFormulaNode)
+						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
+						.width(fOffset.left-tOffset.left-tWidth)
+					;
+				},function(){
+					lineNode.detach();
+					timeFormulaNode.removeClass('active');
+					freqFormulaNode.removeClass('active');
+				});
 			});
 		});
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 
 		// interactive elements of the table
 		/*
-		var lineElm=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
-                tableElm.find('tr').each(function(){
-			$(this).find('td.time .formula').each(function(i){
-				var timeFormulaElm=$(this);
-				var freqFormulaElm=timeFormulaElm.parents('tr').find('td.freq .formula').eq(i);
-				timeFormulaElm.add(freqFormulaElm).hover(function(){
-					timeFormulaElm.addClass('active');
-					freqFormulaElm.addClass('active');
-					var tOffset=timeFormulaElm.offset();
-					var fOffset=freqFormulaElm.offset();
-					var tWidth=timeFormulaElm.width();
-					var tHeight=timeFormulaElm.height();
-					lineElm.appendTo(timeFormulaElm)
-						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
-						.width(fOffset.left-tOffset.left-tWidth)
-					;
-				},function(){
-					lineElm.detach();
-					timeFormulaElm.removeClass('active');
-					freqFormulaElm.removeClass('active');
-				});
-			});
-		});
 		tableElm.find('tbody').each(function(){
 			// TODO reimplement
 			var timeLinkElms=tbodyElm.find('td.time .link');
