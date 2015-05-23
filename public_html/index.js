@@ -20,10 +20,10 @@ $(function(){
 				return (mod?'e^{'+(mod<0?'-':'')+'j\\omega t_0}':'')+'X(j'+(shift?'(\\omega'+(shift<0?'-':'+')+'\\omega_0)':'\\omega')+')';
 			},
 			intdiffFormulas:[
-				'x(t)'       ,'\\frac{d}{dt} x(t)',
+				'x(t)'       ,'\\frac{\\mathrm{d}}{\\mathrm{d}t} x(t)',
 				'X(j\\omega)','j\\omega X(j\\omega)',
 				'-j t x(t)',
-				'\\frac{d}{d\\omega} X(j\\omega)'
+				'\\frac{\\mathrm{d}}{\\mathrm{d}\\omega} X(j\\omega)'
 			]
 		},{
 			name:'Discrete-time Fourier transform (DTFT)',
@@ -48,7 +48,7 @@ $(function(){
 				'x[n]'           ,'x[n]-x[n-1]',
 				'X(e^{j\\omega})','(1-e^{-j\\omega}) X(e^{j\\omega})',
 				'-j n x[n]',
-				'\\frac{d}{d\\omega} X(e^{j\\omega})'
+				'\\frac{\\mathrm{d}}{\\mathrm{d}\\omega} X(e^{j\\omega})'
 			]
 		},{
 			name:'Discrete Fourier transform (DFT)',
