@@ -68,6 +68,10 @@ sup a:hover {
 	col {
 		width: @timefreq-col-width;
 	}
+	tr.some-browsers-ignore-col-elements td { // row of empty <td>s for internet explorer
+		padding: 0;
+		height: 0;
+	}
 	colgroup.both col {
 		width: 100% - @timefreq-col-width * @n-timefreq-cols;
 	}
