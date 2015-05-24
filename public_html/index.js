@@ -24,12 +24,32 @@ $(function(){
 			{formula:{notes:{t:'analysis formula'}}},
 		]
 	},{
+		id:'conjinv',
+		name:'Complex conjugation and time reversal',
+		cells:[
+			'+|+|.',
+			'+|+|+',
+			'.|+|+'
+		],
+		time:[
+			{},{},{},{},
+			{formula:{notes:{t:'conjugation'}}},
+			{formula:{notes:{b:'time reversal'}}},
+			{formula:{notes:{b:'conjugation and time reversal'}}}
+		],
+		freq:[
+			{},{},{},{},
+			{formula:{notes:{t:'conjugation and frequency reversal'}}},
+			{formula:{notes:{b:'frequency reversal'}}},
+			{formula:{notes:{b:'conjugation'}}}
+		]
+	},{
 		id:'modshift',
 		name:'Modulation and time/frequency shifting',
 		cells:[
 			'.|+|.',
 			'+|+|+',
-			'.|+|.',
+			'.|+|.'
 		],
 		time:[
 			{formula:{notes:{b:'time shifting'}}},
@@ -56,12 +76,6 @@ $(function(){
 	var transforms=[{
 		name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 		wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
-		conjinvTimeFormula:function(neg,inv,conj){
-			return (neg?'-':'')+'x'+(conj?'^*':'')+'('+(inv?'-':'')+'t)';
-		},
-		conjinvFreqFormula:function(neg,inv,conj){
-			return (neg?'-':'')+'X'+(conj?'^*':'')+'('+(inv?'-':'')+'j\\omega)';
-		},
 		timeVar:'t',
 		freqVar:'\\omega',
 		timeFn:function(arg,opts){
@@ -85,6 +99,26 @@ $(function(){
 						item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'} \\,\\mathrm{d}'+t,
 						notes:{b:'function \\('+X(T)+'\\) of continuous variable \\('+T+'\\)'}
 					}}
+				]
+			}},
+			conjinv:function(x,X,t,T){return{
+				time:[
+					{formula:{item:'-'+x('-'+t,'*')}},
+					{formula:{item:'-'+x('-'+t)}},
+					{formula:{item:'-'+x(t,'*')}},
+					{formula:{item:x(t)}},
+					{formula:{item:x(t,'*')}},
+					{formula:{item:x('-'+t)}},
+					{formula:{item:x('-'+t,'*')}}
+				],
+				freq:[
+					{formula:{item:'-'+X(T,'*')}},
+					{formula:{item:'-'+X('-'+T)}},
+					{formula:{item:'-'+X('-'+T,'*')}},
+					{formula:{item:X(T)}},
+					{formula:{item:X('-'+T,'*')}},
+					{formula:{item:X('-'+T)}},
+					{formula:{item:X(T,'*')}}
 				]
 			}},
 			modshift:function(x,X,t,T){return{
@@ -119,12 +153,6 @@ $(function(){
 	},{
 		name:'Discrete-time Fourier transform (DTFT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
-		conjinvTimeFormula:function(neg,inv,conj){
-			return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
-		},
-		conjinvFreqFormula:function(neg,inv,conj){
-			return (neg?'-':'')+'X'+(conj?'^*':'')+'(e^{'+(inv?'-':'')+'j\\omega})';
-		},
 		timeVar:'n',
 		freqVar:'\\omega',
 		timeFn:function(arg,opts){
@@ -182,12 +210,6 @@ $(function(){
 	},{
 		name:'Discrete Fourier transform (DFT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
-		conjinvTimeFormula:function(neg,inv,conj){
-			return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
-		},
-		conjinvFreqFormula:function(neg,inv,conj){
-			return (neg?'-':'')+'X'+(conj?'^*':'')+'['+(inv?'-':'')+'k]';
-		},
 		timeVar:'n',
 		freqVar:'k',
 		timeFn:function(arg,opts){
@@ -243,16 +265,6 @@ $(function(){
 			}}
 		}
 	}];
-	var conjinvTimePatterns=[
-		[1,1,1],[1,1,0],
-		[1,0,1],[0,0,0],[0,0,1],
-		        [0,1,0],[0,1,1]
-	];
-	var conjinvFreqPatterns=[
-		[1,0,1],[1,1,0],
-		[1,1,1],[0,0,0],[0,1,1],
-		        [0,1,0],[0,0,1]
-	];
 	$('.signal-transform-properties').each(function(){
 		var tableNode=$(this);
 		var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
@@ -357,15 +369,6 @@ $(function(){
 							transformSelectNode.remove();
 							transformSelectNode=null;
 							transformDropdownNode.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
-							// rewrite formulas
-							/*
-							tableElm.find('.signal-transform-properties-conjinv td.time .formula .item').text(function(i){
-								return '$$'+transform.conjinvTimeFormula.apply(null,conjinvTimePatterns[i])+'$$';
-							});
-							tableElm.find('.signal-transform-properties-conjinv td.freq .formula .item').text(function(i){
-								return '$$'+transform.conjinvFreqFormula.apply(null,conjinvFreqPatterns[i])+'$$';
-							});
-							*/
 							tableNode.find('tbody').remove();
 							writeTransform(transform);
 						})
