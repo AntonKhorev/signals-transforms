@@ -19,7 +19,9 @@ $(function(){
 			'.|+|.',
 			'+|+|+',
 			'.|+|.',
-		]
+		],
+		timeNotes:['time shifting','modulation',null,'modulation','time shifting'],
+		freqNotes:['modulation','frequency shifting',null,'frequency shifting','modulation']
 	},{
 		id:'intdiff',
 		name:'Integration and differentiation',
@@ -175,7 +177,13 @@ $(function(){
 				var freqFormulaNodes=tbodyNode.find('td.freq .formula');
 				timeFormulaNodes.each(function(i){
 					var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.time[i]+"$$</div>");
+					if ('timeNotes' in section && section.timeNotes[i]!==null) {
+						timeFormulaNode.append("<div class='note'>"+section.timeNotes[i]+"</div>");
+					}
 					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.freq[i]+"$$</div>");
+					if ('freqNotes' in section && section.freqNotes[i]!==null) {
+						freqFormulaNode.append("<div class='note'>"+section.freqNotes[i]+"</div>");
+					}
 					timeFormulaNode.add(freqFormulaNode).hover(function(){
 						timeFormulaNode.addClass('active');
 						freqFormulaNode.addClass('active');
