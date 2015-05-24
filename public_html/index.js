@@ -1,13 +1,36 @@
 $(function(){
 	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
-		var needBrackets = (argument.indexOf('+')>=0) || (argument.indexOf('-')>=0);
-		return {
-			conj:	options.indexOf('*')>=0?'^*':'',
-			rev:	options.indexOf('-')>=0?'-':'',
-			open:	needBrackets?'(':'',
-			close:	needBrackets?')':'',
-		};
+		var startsWithMinus = argument.charAt(0)=='-';
+		if (startsWithMinus) {
+			var argWithoutMinus=argument.substr(1);
+		} else {
+			var argWithoutMinus=argument;
+		}
+		function needsBrackets(arg){
+			if (arg.indexOf('+')<0 && (arg.indexOf('-')<0)) {
+				return false; // will be wrong for expressions like a*(b+c)
+			}
+			if (arg.charAt(0)=='(' && arg.charAt(arg.length-1)==')' && arg.substr(1).indexOf('(')<0) {
+				return false; // will be wrong for expressions like (a*b)*(c*d)
+			}
+			return true;
+		}
+		var o={}
+		o.fnConj = options.indexOf('*')>=0?'^*':'';
+		if (needsBrackets(argWithoutMinus)) {
+			o.argSign='';
+			o.argRest='('+argument+')';
+		} else {
+			if (startsWithMinus) {
+				o.argSign='-';
+				o.argRest=argWithoutMinus;
+			} else {
+				o.argSign='';
+				o.argRest=argument;
+			}
+		}
+		return o;
 	};
 	var nDomainCols=3;
 	var iDefaultTransform=1;
@@ -80,11 +103,11 @@ $(function(){
 		freqVar:'\\omega',
 		timeFn:function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return 'x'+o.conj+'('+o.rev+arg+')';
+			return 'x'+o.fnConj+'('+arg+')';
 		},
 		freqFn:function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return 'X'+o.conj+'('+o.rev+'j'+o.open+arg+o.close+')';
+			return 'X'+o.fnConj+'('+o.argSign+'j'+o.argRest+')';
 		},
 		sections:{
 			definitions:function(x,X,t,T){return{
@@ -157,11 +180,11 @@ $(function(){
 		freqVar:'\\omega',
 		timeFn:function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return 'x'+o.conj+'['+o.rev+arg+']';
+			return 'x'+o.fnConj+'['+arg+']';
 		},
 		freqFn:function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return 'X'+o.conj+'(e^{'+o.rev+'j'+o.open+arg+o.close+'})';
+			return 'X'+o.fnConj+'(e^{'+o.argSign+'j'+o.argRest+'})';
 		},
 		sections:{
 			definitions:function(x,X,t,T){return{
@@ -214,11 +237,11 @@ $(function(){
 		freqVar:'k',
 		timeFn:function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return 'x'+o.conj+'['+o.rev+arg+']';
+			return 'x'+o.fnConj+'['+arg+']';
 		},
 		freqFn:function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return 'X'+o.conj+'['+o.rev+arg+']';
+			return 'X'+o.fnConj+'['+arg+']';
 		},
 		sections:{
 			definitions:function(x,X,t,T){return{
