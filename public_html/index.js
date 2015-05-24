@@ -12,6 +12,15 @@ $(function(){
 	var nDomainCols=3;
 	var iDefaultTransform=1;
 	var sections=[{
+		id:'definitions',
+		name:'Definitions',
+		cells:[
+			//'+ + +'
+			'+ . .'
+		],
+		timeNotes:['synthesis formula'],
+		freqNotes:['analysis formula']
+	},{
 		id:'modshift',
 		name:'Modulation and time/frequency shifting',
 		cells:[
@@ -32,8 +41,6 @@ $(function(){
 	var transforms=[{
 		name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 		wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
-		timeDefinition:'x(t) = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} X(j\\omega) e^{j\\omega t} \\,\\mathrm{d}\\omega',
-		freqDefinition:'X(j\\omega) = \\int\\limits_{-\\infty}^{+\\infty} x(t) e^{-j\\omega t} \\,\\mathrm{d}t',
 		timeDefinitionNote:'function \\(x(t)\\) of continuous variable \\(t\\)',
 		freqDefinitionNote:'function \\(X(j\\omega)\\) of continuous variable \\(\\omega\\)',
 		conjinvTimeFormula:function(neg,inv,conj){
@@ -53,6 +60,10 @@ $(function(){
 			return 'X'+o.conj+'('+o.rev+'j'+o.open+arg+o.close+')';
 		},
 		sections:{
+			definitions:function(x,X,t,T){return{
+				time:[x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T],
+				freq:[X(T)+' = \\int\\limits_{-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'} \\,\\mathrm{d}'+t]
+			}},
 			modshift:function(x,X,t,T){return{
 				time:[x(t+'+'+t+'_0'),'e^{-j'+T+'_0 '+t+'}'+x(t),x(t),'e^{j'+T+'_0 '+t+'}'+x(t),x(t+'-'+t+'_0')],
 				freq:['e^{j'+T+' '+t+'_0}'+X(T),X(''+T+'+'+T+'_0'),X(T),X(''+T+'-'+T+'_0'),'e^{-j'+T+' '+t+'_0}'+X(T)]
@@ -65,8 +76,6 @@ $(function(){
 	},{
 		name:'Discrete-time Fourier transform (DTFT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
-		timeDefinition:'x[n] = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} X(e^{j\\omega}) e^{j\\omega n} \\,\\mathrm{d}\\omega',
-		freqDefinition:'X(e^{j\\omega}) = \\sum_{n=-\\infty}^{+\\infty} x[n] e^{-j\\omega n}',
 		timeDefinitionNote:'function \\(x[n]\\) of discrete variable \\(n\\)',
 		freqDefinitionNote:'periodic function \\(X(e^{j\\omega})\\) of continuous variable \\(\\omega\\)<br /> with period \\(2\\pi\\)',
 		conjinvTimeFormula:function(neg,inv,conj){
@@ -86,6 +95,10 @@ $(function(){
 			return 'X'+o.conj+'(e^{'+o.rev+'j'+o.open+arg+o.close+'})';
 		},
 		sections:{
+			definitions:function(x,X,t,T){return{
+				time:[x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T],
+				freq:[X(T)+' = \\sum_{'+t+'=-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'}']
+			}},
 			modshift:function(x,X,t,T){return{
 				time:[x(t+'+'+t+'_0'),'e^{-j'+T+'_0 '+t+'}'+x(t),x(t),'e^{j'+T+'_0 '+t+'}'+x(t),x(t+'-'+t+'_0')],
 				freq:['e^{j'+T+' '+t+'_0}'+X(T),X(''+T+'+'+T+'_0'),X(T),X(''+T+'-'+T+'_0'),'e^{-j'+T+' '+t+'_0}'+X(T)]
@@ -98,8 +111,6 @@ $(function(){
 	},{
 		name:'Discrete Fourier transform (DFT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
-		timeDefinition:'x[n] = \\frac 1 N \\sum_{k=0}^{N-1} X[k] W_N^{-kn}',
-		freqDefinition:'X[k] = \\sum_{n=0}^{N-1} x[n] W_N^{kn}',
 		timeDefinitionNote:'function \\(x[n]\\) of discrete variable \\(n\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
 		freqDefinitionNote:'function \\(X[k]\\) of discrete variable \\(k\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
 		conjinvTimeFormula:function(neg,inv,conj){
@@ -119,6 +130,10 @@ $(function(){
 			return 'X'+o.conj+'['+o.rev+arg+']';
 		},
 		sections:{
+			definitions:function(x,X,t,T){return{
+				time:[x(t)+' = \\frac 1 N \\sum_{'+T+'=0}^{N-1} '+X(T)+' W_N^{-'+T+' '+t+'}'],
+				freq:[X(T)+' = \\sum_{'+t+'=0}^{N-1} '+x(t)+' W_N^{'+T+' '+t+'}']
+			}},
 			modshift:function(x,X,t,T){return{
 				time:[x(t+'+'+t+'_0'),'W_N^{'+T+'_0 n}'+x(t),x(t),'W_N^{-'+T+'_0 n}'+x(t),x(t+'-'+t+'_0')],
 				freq:['W_N^{-'+T+' '+t+'_0}'+X(T),X(T+'+'+T+'_0'),X(T),X(T+'-'+T+'_0'),'W_N^{'+T+' '+t+'_0}'+X(T)]
