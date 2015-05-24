@@ -15,8 +15,7 @@ $(function(){
 		id:'definitions',
 		name:'Definitions',
 		cells:[
-			//'+ + +'
-			'+ . .'
+			'+ + +'
 		],
 		timeNotes:['synthesis formula'],
 		freqNotes:['analysis formula']
@@ -175,12 +174,24 @@ $(function(){
 				section.cells.forEach(function(row){
 					var trNode=$("<tr />");
 					function makeDomainCells(domain){
-						for (var i=0;i<nDomainCols;i++) {
-							var tdNode=$("<td class='"+domain+"' />");
-							if (row.charAt(i*2)=='+') {
-								tdNode.append("<div class='cell'><div class='formula' /></div>");
+						var colspan=0;
+						var isFormula=false;
+						for (var i=0;i<=row.length;i++) {
+							switch (i<row.length ? row.charAt(i) : '|') {
+							case '+':
+								isFormula=true;
+							case '.':
+								colspan++;
+								break;
+							case '|':
+								var tdNode=$("<td class='"+domain+"' colspan='"+colspan+"' />");
+								if (isFormula) {
+									tdNode.append("<div class='cell'><div class='formula' /></div>");
+								}
+								trNode.append(tdNode);
+								colspan=0;
+								isFormula=false;
 							}
-							trNode.append(tdNode);
 						}
 					};
 					makeDomainCells('time');
