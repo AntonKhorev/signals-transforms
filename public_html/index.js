@@ -1,3 +1,4 @@
+// TODO replace a.forEach(function(v){...}) with $.each(a,function(_,v){...})
 $(function(){
 	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
@@ -34,68 +35,70 @@ $(function(){
 	};
 	var nDomainCols=3;
 	var iDefaultTransform=1;
-	var sections=[{
-		id:'definitions',
-		name:'Definitions',
-		cells:[
-			'+ + +'
-		],
-		time:[
-			{formula:{notes:{t:'synthesis formula'}}}
-		],
-		freq:[
-			{formula:{notes:{t:'analysis formula'}}},
-		]
-	},{
-		id:'conjrev',
-		name:'Complex conjugation and time reversal',
-		cells:[
-			'+|+|.',
-			'+|+|+',
-			'.|+|+'
-		],
-		time:[
-			{},{},{},{},
-			{formula:{notes:{t:'conjugation'}}},
-			{formula:{notes:{b:'time reversal'}}},
-			{formula:{notes:{b:'conjugation and time reversal'}}}
-		],
-		freq:[
-			{},{},{},{},
-			{formula:{notes:{t:'conjugation and frequency reversal'}}},
-			{formula:{notes:{b:'frequency reversal'}}},
-			{formula:{notes:{b:'conjugation'}}}
-		]
-	},{
-		id:'modshift',
-		name:'Modulation and time/frequency shifting',
-		cells:[
-			'.|+|.',
-			'+|+|+',
-			'.|+|.'
-		],
-		time:[
-			{formula:{notes:{b:'time shifting'}}},
-			{formula:{notes:{b:'modulation'}}},
-			{},
-			{formula:{notes:{b:'modulation'}}},
-			{formula:{notes:{b:'time shifting'}}}
-		],
-		freq:[
-			{formula:{notes:{b:'modulation'}}},
-			{formula:{notes:{b:'frequency shifting'}}},
-			{},
-			{formula:{notes:{b:'frequency shifting'}}},
-			{formula:{notes:{b:'modulation'}}}
-		],
-	},{
-		id:'intdiff',
-		name:'Integration and differentiation',
-		cells:[
-			'.|+|+',
-			'.|+|.'
-		]
-	}];
+	var sectionIds=['definitions','conjrev','modshift','intdiff']; // sections ordering
+	var sections={
+		definitions:function(x,X,t,T){return{
+			name:'Definitions',
+			cells:[
+				'+ + +'
+			],
+			time:[
+				{formula:{notes:{t:'synthesis formula'}}}
+			],
+			freq:[
+				{formula:{notes:{t:'analysis formula'}}},
+			]
+		}},
+		conjrev:function(x,X,t,T){return{
+			name:'Complex conjugation and time reversal',
+			cells:[
+				'+|+|.',
+				'+|+|+',
+				'.|+|+'
+			],
+			time:[
+				{},{},{},{},
+				{formula:{notes:{t:'conjugation'}}},
+				{formula:{notes:{b:'time reversal'}}},
+				{formula:{notes:{b:'conjugation and time reversal'}}}
+			],
+			freq:[
+				{},{},{},{},
+				{formula:{notes:{t:'conjugation and frequency reversal'}}},
+				{formula:{notes:{b:'frequency reversal'}}},
+				{formula:{notes:{b:'conjugation'}}}
+			]
+		}},
+		modshift:function(x,X,t,T){return{
+			name:'Modulation and time/frequency shifting',
+			cells:[
+				'.|+|.',
+				'+|+|+',
+				'.|+|.'
+			],
+			time:[
+				{formula:{notes:{b:'time shifting'}}},
+				{formula:{notes:{b:'modulation'}}},
+				{},
+				{formula:{notes:{b:'modulation'}}},
+				{formula:{notes:{b:'time shifting'}}}
+			],
+			freq:[
+				{formula:{notes:{b:'modulation'}}},
+				{formula:{notes:{b:'frequency shifting'}}},
+				{},
+				{formula:{notes:{b:'frequency shifting'}}},
+				{formula:{notes:{b:'modulation'}}}
+			],
+		}},
+		intdiff:function(x,X,t,T){return{
+			name:'Integration and differentiation',
+			cells:[
+				'.|+|+',
+				'.|+|.'
+			]
+		}}
+	};
 	var transforms=[{
 		name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 		wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
@@ -293,9 +296,10 @@ $(function(){
 		var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
 		function writeTransform(transform){
-			sections.forEach(function(sectionCommon){
-				if (!(sectionCommon.id in transform.sections)) return;
-				sectionSpecific=transform.sections[sectionCommon.id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
+			$.each(sectionIds,function(_,id){
+				if (!(id in transform.sections)) return;
+				var sectionCommon=sections[id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
+				var sectionSpecific=transform.sections[id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
 				section=$.extend(true,{},sectionCommon,sectionSpecific);
 
 				// make section title and cells
