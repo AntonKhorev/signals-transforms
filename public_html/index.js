@@ -17,8 +17,12 @@ $(function(){
 		cells:[
 			'+ + +'
 		],
-		timeNotes:['synthesis formula'],
-		freqNotes:['analysis formula']
+		time:[
+			{formula:{notes:{t:'synthesis formula'}}}
+		],
+		freq:[
+			{formula:{notes:{t:'analysis formula'}}},
+		]
 	},{
 		id:'modshift',
 		name:'Modulation and time/frequency shifting',
@@ -27,8 +31,20 @@ $(function(){
 			'+|+|+',
 			'.|+|.',
 		],
-		timeNotes:['time shifting','modulation',null,'modulation','time shifting'],
-		freqNotes:['modulation','frequency shifting',null,'frequency shifting','modulation']
+		time:[
+			{formula:{notes:{b:'time shifting'}}},
+			{formula:{notes:{b:'modulation'}}},
+			{},
+			{formula:{notes:{b:'modulation'}}},
+			{formula:{notes:{b:'time shifting'}}}
+		],
+		freq:[
+			{formula:{notes:{b:'modulation'}}},
+			{formula:{notes:{b:'frequency shifting'}}},
+			{},
+			{formula:{notes:{b:'frequency shifting'}}},
+			{formula:{notes:{b:'modulation'}}}
+		],
 	},{
 		id:'intdiff',
 		name:'Integration and differentiation',
@@ -40,8 +56,6 @@ $(function(){
 	var transforms=[{
 		name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 		wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
-		timeDefinitionNote:'function \\(x(t)\\) of continuous variable \\(t\\)',
-		freqDefinitionNote:'function \\(X(j\\omega)\\) of continuous variable \\(\\omega\\)',
 		conjinvTimeFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'x'+(conj?'^*':'')+'('+(inv?'-':'')+'t)';
 		},
@@ -60,23 +74,51 @@ $(function(){
 		},
 		sections:{
 			definitions:function(x,X,t,T){return{
-				time:[x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T],
-				freq:[X(T)+' = \\int\\limits_{-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'} \\,\\mathrm{d}'+t]
+				time:[
+					{formula:{
+						item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						notes:{b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'} \\,\\mathrm{d}'+t,
+						notes:{b:'function \\('+X(T)+'\\) of continuous variable \\('+T+'\\)'}
+					}}
+				]
 			}},
 			modshift:function(x,X,t,T){return{
-				time:[x(t+'+'+t+'_0'),'e^{-j'+T+'_0 '+t+'}'+x(t),x(t),'e^{j'+T+'_0 '+t+'}'+x(t),x(t+'-'+t+'_0')],
-				freq:['e^{j'+T+' '+t+'_0}'+X(T),X(''+T+'+'+T+'_0'),X(T),X(''+T+'-'+T+'_0'),'e^{-j'+T+' '+t+'_0}'+X(T)]
+				time:[
+					{formula:{item:x(t+'+'+t+'_0')}},
+					{formula:{item:'e^{-j'+T+'_0 '+t+'}'+x(t)}},
+					{formula:{item:x(t)}},
+					{formula:{item:'e^{j'+T+'_0 '+t+'}'+x(t)}},
+					{formula:{item:x(t+'-'+t+'_0')}}
+				],
+				freq:[
+					{formula:{item:'e^{j'+T+' '+t+'_0}'+X(T)}},
+					{formula:{item:X(''+T+'+'+T+'_0')}},
+					{formula:{item:X(T)}},
+					{formula:{item:X(''+T+'-'+T+'_0')}},
+					{formula:{item:'e^{-j'+T+' '+t+'_0}'+X(T)}}
+				]
 			}},
 			intdiff:function(x,X,t,T){return{
-				time:[x(t),'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t),'-j '+t+' '+x(t)],
-				freq:[X(T),'j'+T+' '+X(T),'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)]
+				time:[
+					{formula:{item:x(t)}},
+					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
+					{formula:{item:'-j '+t+' '+x(t)}}
+				],
+				freq:[
+					{formula:{item:X(T)}},
+					{formula:{item:'j'+T+' '+X(T)}},
+					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)}}
+				]
 			}}
 		}
 	},{
 		name:'Discrete-time Fourier transform (DTFT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
-		timeDefinitionNote:'function \\(x[n]\\) of discrete variable \\(n\\)',
-		freqDefinitionNote:'periodic function \\(X(e^{j\\omega})\\) of continuous variable \\(\\omega\\)<br /> with period \\(2\\pi\\)',
 		conjinvTimeFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
 		},
@@ -95,23 +137,51 @@ $(function(){
 		},
 		sections:{
 			definitions:function(x,X,t,T){return{
-				time:[x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T],
-				freq:[X(T)+' = \\sum_{'+t+'=-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'}']
+				time:[
+					{formula:{
+						item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						notes:{b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)'}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:X(T)+' = \\sum_{'+t+'=-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'}',
+						notes:{b:'periodic function \\('+X(T)+'\\) of continuous variable \\('+T+'\\)<br /> with period \\(2\\pi\\)'}
+					}}
+				]
 			}},
 			modshift:function(x,X,t,T){return{
-				time:[x(t+'+'+t+'_0'),'e^{-j'+T+'_0 '+t+'}'+x(t),x(t),'e^{j'+T+'_0 '+t+'}'+x(t),x(t+'-'+t+'_0')],
-				freq:['e^{j'+T+' '+t+'_0}'+X(T),X(''+T+'+'+T+'_0'),X(T),X(''+T+'-'+T+'_0'),'e^{-j'+T+' '+t+'_0}'+X(T)]
+				time:[
+					{formula:{item:x(t+'+'+t+'_0')}},
+					{formula:{item:'e^{-j'+T+'_0 '+t+'}'+x(t)}},
+					{formula:{item:x(t)}},
+					{formula:{item:'e^{j'+T+'_0 '+t+'}'+x(t)}},
+					{formula:{item:x(t+'-'+t+'_0')}}
+				],
+				freq:[
+					{formula:{item:'e^{j'+T+' '+t+'_0}'+X(T)}},
+					{formula:{item:X(''+T+'+'+T+'_0')}},
+					{formula:{item:X(T)}},
+					{formula:{item:X(''+T+'-'+T+'_0')}},
+					{formula:{item:'e^{-j'+T+' '+t+'_0}'+X(T)}}
+				]
 			}},
 			intdiff:function(x,X,t,T){return{
-				time:[x(t),x(t)+'-'+x(t+'-1'),'-j '+t+' '+x(t)],
-				freq:[X(T),'(1-e^{-j'+T+'}) '+X(T),'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)]
+				time:[
+					{formula:{item:x(t)}},
+					{formula:{item:x(t)+'-'+x(t+'-1')}},
+					{formula:{item:'-j '+t+' '+x(t)}}
+				],
+				freq:[
+					{formula:{item:X(T)}},
+					{formula:{item:'(1-e^{-j'+T+'}) '+X(T)}},
+					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)}}
+				]
 			}}
 		}
 	},{
 		name:'Discrete Fourier transform (DFT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
-		timeDefinitionNote:'function \\(x[n]\\) of discrete variable \\(n\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
-		freqDefinitionNote:'function \\(X[k]\\) of discrete variable \\(k\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)',
 		conjinvTimeFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'x'+(conj?'^*':'')+'['+(inv?'-':'')+'n]';
 		},
@@ -130,16 +200,46 @@ $(function(){
 		},
 		sections:{
 			definitions:function(x,X,t,T){return{
-				time:[x(t)+' = \\frac 1 N \\sum_{'+T+'=0}^{N-1} '+X(T)+' W_N^{-'+T+' '+t+'}'],
-				freq:[X(T)+' = \\sum_{'+t+'=0}^{N-1} '+x(t)+' W_N^{'+T+' '+t+'}']
+				time:[
+					{formula:{
+						item:x(t)+' = \\frac 1 N \\sum_{'+T+'=0}^{N-1} '+X(T)+' W_N^{-'+T+' '+t+'}',
+						notes:{b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)'}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:X(T)+' = \\sum_{'+t+'=0}^{N-1} '+x(t)+' W_N^{'+T+' '+t+'}',
+						notes:{b:'function \\('+X(T)+'\\) of discrete variable \\('+T+'\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)'}
+					}}
+				]
 			}},
 			modshift:function(x,X,t,T){return{
-				time:[x(t+'+'+t+'_0'),'W_N^{'+T+'_0 n}'+x(t),x(t),'W_N^{-'+T+'_0 n}'+x(t),x(t+'-'+t+'_0')],
-				freq:['W_N^{-'+T+' '+t+'_0}'+X(T),X(T+'+'+T+'_0'),X(T),X(T+'-'+T+'_0'),'W_N^{'+T+' '+t+'_0}'+X(T)]
+				time:[
+					{formula:{item:x(t+'+'+t+'_0')}},
+					{formula:{item:'W_N^{'+T+'_0 n}'+x(t)}},
+					{formula:{item:x(t)}},
+					{formula:{item:'W_N^{-'+T+'_0 n}'+x(t)}},
+					{formula:{item:x(t+'-'+t+'_0')}}
+				],
+				freq:[
+					{formula:{item:'W_N^{-'+T+' '+t+'_0}'+X(T)}},
+					{formula:{item:X(T+'+'+T+'_0')}},
+					{formula:{item:X(T)}},
+					{formula:{item:X(T+'-'+T+'_0')}},
+					{formula:{item:'W_N^{'+T+' '+t+'_0}'+X(T)}}
+				]
 			}},
 			intdiff:function(x,X,t,T){return{
-				time:[x(t),x(t)+'-'+x(t+'-1'),'(1-W_N^{-'+t+'}) '+x(t)],
-				freq:[X(T),'(1-W_N^'+T+') '+X(T),X(T)+'-'+X(T+'-1')]
+				time:[
+					{formula:{item:x(t)}},
+					{formula:{item:x(t)+'-'+x(t+'-1')}},
+					{formula:{item:'(1-W_N^{-'+t+'}) '+x(t)}}
+				],
+				freq:[
+					{formula:{item:X(T)}},
+					{formula:{item:'(1-W_N^'+T+') '+X(T)}},
+					{formula:{item:X(T)+'-'+X(T+'-1')}}
+				]
 			}}
 		}
 	}];
@@ -158,8 +258,12 @@ $(function(){
 		var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
 		function writeTransform(transform){
-			sections.forEach(function(section){
-				// TODO check here if transform.sections contain key
+			sections.forEach(function(sectionCommon){
+				if (!(sectionCommon.id in transform.sections)) return;
+				sectionSpecific=transform.sections[sectionCommon.id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
+				section=$.extend(true,{},sectionCommon,sectionSpecific);
+
+				// make section title and cells
 				function preventTextSelectionOnDoubleClick(ev){
 					ev.preventDefault();
 				};
@@ -203,18 +307,21 @@ $(function(){
 				$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
 					tbodyNode.addClass('hidden');
 				}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
-				var transformSection=transform.sections[section.id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
+
+				// put in formulas and notes
 				var timeFormulaNodes=tbodyNode.find('td.time .formula');
 				var freqFormulaNodes=tbodyNode.find('td.freq .formula');
 				timeFormulaNodes.each(function(i){
-					var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.time[i]+"$$</div>");
-					if ('timeNotes' in section && section.timeNotes[i]!==null) {
-						timeFormulaNode.append("<div class='note'>"+section.timeNotes[i]+"</div>");
-					}
-					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+transformSection.freq[i]+"$$</div>");
-					if ('freqNotes' in section && section.freqNotes[i]!==null) {
-						freqFormulaNode.append("<div class='note'>"+section.freqNotes[i]+"</div>");
-					}
+					var time=section.time[i];
+					var freq=section.freq[i];
+					var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+time.formula.item+"$$</div>");
+					if ('notes' in time.formula) $.each(time.formula.notes,function(dir,note){
+						timeFormulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
+					});
+					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+freq.formula.item+"$$</div>");
+					if ('notes' in freq.formula) $.each(freq.formula.notes,function(dir,note){
+						freqFormulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
+					});
 					timeFormulaNode.add(freqFormulaNode).hover(function(){
 						timeFormulaNode.addClass('active');
 						freqFormulaNode.addClass('active');
@@ -252,10 +359,6 @@ $(function(){
 							transformDropdownNode.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 							// rewrite formulas
 							/*
-							tableElm.find('.signal-transform-properties-definition td.time .formula .item').text('$$'+transform.timeDefinition+'$$');
-							tableElm.find('.signal-transform-properties-definition td.freq .formula .item').text('$$'+transform.freqDefinition+'$$');
-							tableElm.find('.signal-transform-properties-definition td.time .formula .note.at-b').html(transform.timeDefinitionNote);
-							tableElm.find('.signal-transform-properties-definition td.freq .formula .note.at-b').html(transform.freqDefinitionNote);
 							tableElm.find('.signal-transform-properties-conjinv td.time .formula .item').text(function(i){
 								return '$$'+transform.conjinvTimeFormula.apply(null,conjinvTimePatterns[i])+'$$';
 							});
