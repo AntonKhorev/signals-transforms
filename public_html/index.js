@@ -24,7 +24,7 @@ $(function(){
 			{formula:{notes:{t:'analysis formula'}}},
 		]
 	},{
-		id:'conjinv',
+		id:'conjrev',
 		name:'Complex conjugation and time reversal',
 		cells:[
 			'+|+|.',
@@ -101,7 +101,7 @@ $(function(){
 					}}
 				]
 			}},
-			conjinv:function(x,X,t,T){return{
+			conjrev:function(x,X,t,T){return{
 				time:[
 					{formula:{item:'-'+x('-'+t,'*')}},
 					{formula:{item:'-'+x('-'+t)}},
