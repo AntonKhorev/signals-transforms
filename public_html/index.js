@@ -1,13 +1,12 @@
 $(function(){
-	function parseOptionsAndArgument(options,argument,defaultArgument){
+	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
-		if (typeof(argument)==='undefined') argument=defaultArgument;
+		var needBrackets = (argument.indexOf('+')>=0) || (argument.indexOf('-')>=0);
 		return {
 			conj:	options.indexOf('*')>=0?'^*':'',
 			rev:	options.indexOf('-')>=0?'-':'',
-			open:	options.indexOf('(')>=0?'(':'',
-			close:	options.indexOf('(')>=0?')':'',
-			arg:	argument
+			open:	needBrackets?'(':'',
+			close:	needBrackets?')':'',
 		};
 	};
 	var nDomainCols=3;
@@ -43,22 +42,24 @@ $(function(){
 		conjinvFreqFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'X'+(conj?'^*':'')+'('+(inv?'-':'')+'j\\omega)';
 		},
-		timeFn:function(options,argument){
-			var oa=parseOptionsAndArgument(options,argument,'t');
-			return 'x'+oa.conj+'('+oa.rev+oa.arg+')';
+		timeVar:'t',
+		freqVar:'\\omega',
+		timeFn:function(arg,opts){
+			var o=parseFunctionOptions(arg,opts);
+			return 'x'+o.conj+'('+o.rev+arg+')';
 		},
-		freqFn:function(options,argument){
-			var oa=parseOptionsAndArgument(options,argument,'\\omega');
-			return 'X'+oa.conj+'('+oa.rev+'j'+oa.open+oa.arg+oa.close+')';
+		freqFn:function(arg,opts){
+			var o=parseFunctionOptions(arg,opts);
+			return 'X'+o.conj+'('+o.rev+'j'+o.open+arg+o.close+')';
 		},
 		sections:{
-			modshift:function(x,X){return{
-				time:[x('(','t+t_0'),'e^{-j\\omega_0 t}'+x(),x(),'e^{j\\omega_0 t}'+x(),x('(','t-t_0')],
-				freq:['e^{j\\omega t_0}'+X(),X('(','\\omega+\\omega_0'),X(),X('(','\\omega-\\omega_0'),'e^{-j\\omega t_0}'+X()]
+			modshift:function(x,X,t,T){return{
+				time:[x(t+'+'+t+'_0'),'e^{-j'+T+'_0 '+t+'}'+x(t),x(t),'e^{j'+T+'_0 '+t+'}'+x(t),x(t+'-'+t+'_0')],
+				freq:['e^{j'+T+' '+t+'_0}'+X(T),X(''+T+'+'+T+'_0'),X(T),X(''+T+'-'+T+'_0'),'e^{-j'+T+' '+t+'_0}'+X(T)]
 			}},
-			intdiff:function(x,X){return{
-				time:[x(),'\\frac{\\mathrm{d}}{\\mathrm{d}t} '+x(),'-j t '+x()],
-				freq:[X(),'j\\omega '+X(),'\\frac{\\mathrm{d}}{\\mathrm{d}\\omega} '+X()]
+			intdiff:function(x,X,t,T){return{
+				time:[x(t),'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t),'-j '+t+' '+x(t)],
+				freq:[X(T),'j'+T+' '+X(T),'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)]
 			}}
 		}
 	},{
@@ -74,22 +75,24 @@ $(function(){
 		conjinvFreqFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'X'+(conj?'^*':'')+'(e^{'+(inv?'-':'')+'j\\omega})';
 		},
-		timeFn:function(options,argument){
-			var oa=parseOptionsAndArgument(options,argument,'n');
-			return 'x'+oa.conj+'['+oa.rev+oa.arg+']';
+		timeVar:'n',
+		freqVar:'\\omega',
+		timeFn:function(arg,opts){
+			var o=parseFunctionOptions(arg,opts);
+			return 'x'+o.conj+'['+o.rev+arg+']';
 		},
-		freqFn:function(options,argument){
-			var oa=parseOptionsAndArgument(options,argument,'\\omega');
-			return 'X'+oa.conj+'(e^{'+oa.rev+'j'+oa.open+oa.arg+oa.close+'})';
+		freqFn:function(arg,opts){
+			var o=parseFunctionOptions(arg,opts);
+			return 'X'+o.conj+'(e^{'+o.rev+'j'+o.open+arg+o.close+'})';
 		},
 		sections:{
-			modshift:function(x,X){return{
-				time:[x('(','n+n_0'),'e^{-j\\omega_0 n}'+x(),x(),'e^{j\\omega_0 n}'+x(),x('(','n+n_0')],
-				freq:['e^{j\\omega n_0}'+X(),X('(','\\omega+\\omega_0'),X(),X('(','\\omega-\\omega_0'),'e^{-j\\omega n_0}'+X()]
+			modshift:function(x,X,t,T){return{
+				time:[x(t+'+'+t+'_0'),'e^{-j'+T+'_0 '+t+'}'+x(t),x(t),'e^{j'+T+'_0 '+t+'}'+x(t),x(t+'-'+t+'_0')],
+				freq:['e^{j'+T+' '+t+'_0}'+X(T),X(''+T+'+'+T+'_0'),X(T),X(''+T+'-'+T+'_0'),'e^{-j'+T+' '+t+'_0}'+X(T)]
 			}},
-			intdiff:function(x,X){return{
-				time:[x(),x()+'-'+x('(','n-1'),'-j n '+x()],
-				freq:[X(),'(1-e^{-j\\omega}) '+X(),'\\frac{\\mathrm{d}}{\\mathrm{d}\\omega} '+X()]
+			intdiff:function(x,X,t,T){return{
+				time:[x(t),x(t)+'-'+x(t+'-1'),'-j '+t+' '+x(t)],
+				freq:[X(T),'(1-e^{-j'+T+'}) '+X(T),'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)]
 			}}
 		}
 	},{
@@ -105,22 +108,24 @@ $(function(){
 		conjinvFreqFormula:function(neg,inv,conj){
 			return (neg?'-':'')+'X'+(conj?'^*':'')+'['+(inv?'-':'')+'k]';
 		},
-		timeFn:function(options,argument){
-			var oa=parseOptionsAndArgument(options,argument,'n');
-			return 'x'+oa.conj+'['+oa.rev+oa.arg+']';
+		timeVar:'n',
+		freqVar:'k',
+		timeFn:function(arg,opts){
+			var o=parseFunctionOptions(arg,opts);
+			return 'x'+o.conj+'['+o.rev+arg+']';
 		},
-		freqFn:function(options,argument){
-			var oa=parseOptionsAndArgument(options,argument,'k');
-			return 'X'+oa.conj+'['+oa.rev+oa.arg+']';
+		freqFn:function(arg,opts){
+			var o=parseFunctionOptions(arg,opts);
+			return 'X'+o.conj+'['+o.rev+arg+']';
 		},
 		sections:{
-			modshift:function(x,X){return{
-				time:[x('(','n+n_0'),'W_N^{k_0 n}'+x(),x(),'W_N^{-k_0 n}'+x(),x('(','n+n_0')],
-				freq:['W_N^{-k n_0}'+X(),X('(','k+k_0'),X(),X('(','k-k_0'),'W_N^{k n_0}'+X()]
+			modshift:function(x,X,t,T){return{
+				time:[x(t+'+'+t+'_0'),'W_N^{'+T+'_0 n}'+x(t),x(t),'W_N^{-'+T+'_0 n}'+x(t),x(t+'-'+t+'_0')],
+				freq:['W_N^{-'+T+' '+t+'_0}'+X(T),X(T+'+'+T+'_0'),X(T),X(T+'-'+T+'_0'),'W_N^{'+T+' '+t+'_0}'+X(T)]
 			}},
-			intdiff:function(x,X){return{
-				time:[x(),x()+'-'+x('(','n-1'),'(1-W_N^{-n}) '+x()],
-				freq:[X(),'(1-W_N^k) '+X(),X()+'-'+X('(','n-1')]
+			intdiff:function(x,X,t,T){return{
+				time:[x(t),x(t)+'-'+x(t+'-1'),'(1-W_N^{-'+t+'}) '+x(t)],
+				freq:[X(T),'(1-W_N^'+T+') '+X(T),X(T)+'-'+X(T+'-1')]
 			}}
 		}
 	}];
@@ -172,7 +177,7 @@ $(function(){
 				$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
 					tbodyNode.addClass('hidden');
 				}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
-				var transformSection=transform.sections[section.id](transform.timeFn,transform.freqFn);
+				var transformSection=transform.sections[section.id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
 				var timeFormulaNodes=tbodyNode.find('td.time .formula');
 				var freqFormulaNodes=tbodyNode.find('td.freq .formula');
 				timeFormulaNodes.each(function(i){
