@@ -418,6 +418,21 @@ $(function(){
 							if ('notes' in relation) $.each(relation.notes,function(dir,note){
 								relationNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
 							});
+							relationNode.one('mouseenter',function(){
+								// single-line vs multiple-line note detection
+								$(this).find('.note').each(function(){
+									var node=$(this);
+									if (!node.hasClass('at-l') && !node.hasClass('at-r')) return;
+									var t=$("<span style='visibility:hidden'>|</span>").prependTo(node); // span height will be 0 on chrome unless non-whitespace character is inserted
+									var h1=t.height();
+									t.remove();
+									node.wrapInner("<span />");
+									var h2=node.children('span').height();
+									if (h1>=h2) {
+										node.addClass('one-line');
+									}
+								});
+							});
 						});
 					};
 					var timeFormulaNode=timeFormulaNodes.eq(i);
@@ -482,28 +497,9 @@ $(function(){
 			timeRelationElms.each(function(i){
 				var timeRelationElm=timeRelationElms.eq(i);
 				var freqRelationElm=freqRelationElms.eq(i);
-                                var correctedOneLine=false;
 				timeRelationElm.add(freqRelationElm).hover(function(){
 					timeRelationElm.addClass('active');
 					freqRelationElm.addClass('active');
-					// single-line vs multiple-line note detection
-					function correctOneLine() {
-						var elm=$(this);
-						if (!elm.hasClass('at-l') && !elm.hasClass('at-r')) return;
-						var t=$("<span style='visibility:hidden'>|</span>").prependTo(elm); // span height will be 0 on chrome unless non-whitespace character is inserted
-						var h1=t.height();
-						t.remove();
-						elm.wrapInner("<span />");
-						var h2=elm.children('span').height();
-						if (h1>=h2) {
-							elm.addClass('one-line');
-						}
-					}
-					if (!correctedOneLine) {
-						timeRelationElm.find('.note').each(correctOneLine);
-						freqRelationElm.find('.note').each(correctOneLine);
-						correctedOneLine=true;
-					}
 				},function(){
 					timeRelationElm.removeClass('active');
 					freqRelationElm.removeClass('active');
