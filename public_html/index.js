@@ -404,26 +404,26 @@ $(function(){
 					tbodyNode.addClass('hidden');
 				}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
 
-				// put in formulas and notes
+				// put in formulas, relations and notes
 				var timeFormulaNodes=tbodyNode.find('td.time .formula');
 				var freqFormulaNodes=tbodyNode.find('td.freq .formula');
 				timeFormulaNodes.each(function(i){
-					var time=section.time[i];
-					var freq=section.freq[i];
-					var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+time.formula.item+"$$</div>");
-					if ('notes' in time.formula) $.each(time.formula.notes,function(dir,note){
-						timeFormulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
-					});
-					if ('relations' in time) $.each(time.relations,function(dir,relation){
-						var relationNode=$("<div class='relation at-"+dir+"' />").insertAfter(timeFormulaNode);
-						if ('notes' in relation) $.each(relation.notes,function(dir,note){
-							relationNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
+					function insertStuff(formulaNode,data){
+						formulaNode.append("<div class='item'>$$"+data.formula.item+"$$</div>");
+						if ('notes' in data.formula) $.each(data.formula.notes,function(dir,note){
+							formulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
 						});
-					});
-					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+freq.formula.item+"$$</div>");
-					if ('notes' in freq.formula) $.each(freq.formula.notes,function(dir,note){
-						freqFormulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
-					});
+						if ('relations' in data) $.each(data.relations,function(dir,relation){
+							var relationNode=$("<div class='relation at-"+dir+"' />").insertAfter(formulaNode);
+							if ('notes' in relation) $.each(relation.notes,function(dir,note){
+								relationNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
+							});
+						});
+					};
+					var timeFormulaNode=timeFormulaNodes.eq(i);
+					var freqFormulaNode=freqFormulaNodes.eq(i);
+					insertStuff(timeFormulaNode,section.time[i]);
+					insertStuff(freqFormulaNode,section.freq[i]);
 					timeFormulaNode.add(freqFormulaNode).hover(function(){
 						timeFormulaNode.addClass('active');
 						freqFormulaNode.addClass('active');
