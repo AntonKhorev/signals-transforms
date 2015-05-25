@@ -1,4 +1,4 @@
-$.fn.signalsTransformsTable=function(){
+(function($){$.fn.signalsTransformsTable=function(){
 	// data, settings and helper functions
 	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
@@ -543,4 +543,4 @@ $.fn.signalsTransformsTable=function(){
 
 		// $$\overset{\mathcal F}{\rightarrow}$$
 	});
-};
+};}(jQuery));
