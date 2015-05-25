@@ -3,7 +3,7 @@
 @note-font-size: .8em;
 @cell-spacing: 2em; // need to fiddle with MathJax styles if it's lower than 2em
 @formula-highlight-background: #EDB;
-@link-highlight-background: #CF8;
+@relation-highlight-background: #CF8;
 
 sup a {
 	text-decoration: none;
@@ -136,7 +136,7 @@ sup a:hover {
 		margin: -@cell-spacing/2; // vertically negates MathJax-imposed margins
 		position: relative;
 		.item {
-			padding: 1px .5em; // extra horizontal padding required for links not to overlap with formulas
+			padding: 1px .5em; // extra horizontal padding required for relations not to overlap with formulas
 		}
 		.note {
 				top: 100%;
@@ -158,7 +158,7 @@ sup a:hover {
 			}
 		}
 	}
-	.link {
+	.relation {
 		position: absolute;
 		z-index: 1;
 		width: @cell-spacing;
@@ -239,7 +239,7 @@ sup a:hover {
 				padding-right: .5em;
 				text-align: left;
 			}
-			background: @link-highlight-background;
+			background: @relation-highlight-background;
 			//justify-content: center;
 			//align-items: center;
 			line-height: normal;
@@ -261,7 +261,7 @@ sup a:hover {
 			}
 		}
 		&:hover, &.active {
-			background: @link-highlight-background;
+			background: @relation-highlight-background;
 			.note {
 				//display: flex;
 				display: block;

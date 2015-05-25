@@ -72,7 +72,7 @@ $(function(){
 					formula:{
 						item:x(t)
 					},
-					links:{
+					relations:{
 						t:{notes:{r:'odd'}},
 						b:{notes:{l:'even'}},
 						l:{notes:{b:'imaginary'}},
@@ -114,7 +114,7 @@ $(function(){
 					formula:{
 						item:X(T)
 					},
-					links:{
+					relations:{
 						t:{notes:{r:'odd'}},
 						b:{notes:{l:'even'}},
 						l:{notes:{b:'conjugate antisymmetric'}},
@@ -414,10 +414,10 @@ $(function(){
 					if ('notes' in time.formula) $.each(time.formula.notes,function(dir,note){
 						timeFormulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
 					});
-					if ('links' in time) $.each(time.links,function(dir,link){ // TODO rename link to relation
-						var linkNode=$("<div class='link at-"+dir+"' />").insertAfter(timeFormulaNode);
-						if ('notes' in link) $.each(link.notes,function(dir,note){
-							linkNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
+					if ('relations' in time) $.each(time.relations,function(dir,relation){
+						var relationNode=$("<div class='relation at-"+dir+"' />").insertAfter(timeFormulaNode);
+						if ('notes' in relation) $.each(relation.notes,function(dir,note){
+							relationNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
 						});
 					});
 					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+freq.formula.item+"$$</div>");
@@ -477,15 +477,15 @@ $(function(){
 		/*
 		tableElm.find('tbody').each(function(){
 			// TODO reimplement
-			var timeLinkElms=tbodyElm.find('td.time .link');
-			var freqLinkElms=tbodyElm.find('td.freq .link');
-			timeLinkElms.each(function(i){
-				var timeLinkElm=timeLinkElms.eq(i);
-				var freqLinkElm=freqLinkElms.eq(i);
+			var timeRelationElms=tbodyElm.find('td.time .relation');
+			var freqRelationElms=tbodyElm.find('td.freq .relation');
+			timeRelationElms.each(function(i){
+				var timeRelationElm=timeRelationElms.eq(i);
+				var freqRelationElm=freqRelationElms.eq(i);
                                 var correctedOneLine=false;
-				timeLinkElm.add(freqLinkElm).hover(function(){
-					timeLinkElm.addClass('active');
-					freqLinkElm.addClass('active');
+				timeRelationElm.add(freqRelationElm).hover(function(){
+					timeRelationElm.addClass('active');
+					freqRelationElm.addClass('active');
 					// single-line vs multiple-line note detection
 					function correctOneLine() {
 						var elm=$(this);
@@ -500,13 +500,13 @@ $(function(){
 						}
 					}
 					if (!correctedOneLine) {
-						timeLinkElm.find('.note').each(correctOneLine);
-						freqLinkElm.find('.note').each(correctOneLine);
+						timeRelationElm.find('.note').each(correctOneLine);
+						freqRelationElm.find('.note').each(correctOneLine);
 						correctedOneLine=true;
 					}
 				},function(){
-					timeLinkElm.removeClass('active');
-					freqLinkElm.removeClass('active');
+					timeRelationElm.removeClass('active');
+					freqRelationElm.removeClass('active');
 				});
 			});
 		});
