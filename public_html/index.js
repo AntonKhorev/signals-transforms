@@ -518,6 +518,20 @@ $(function(){
 			}
 		});
 
+		// table header section
+		tableNode.append(
+			"<colgroup class='time'><col /><col /><col /></colgroup>"+
+			"<colgroup class='both'><col /></colgroup>"+
+			"<colgroup class='freq'><col /><col /><col /></colgroup>"+
+			"<thead><tr class='some-browsers-ignore-col-elements'>"+
+				"<td></td><td></td><td></td><td></td><td></td><td></td><td></td>"+
+			"</tr><tr>"+
+				"<th colspan='3' class='time'>Time domain</th>"+
+				"<th class='both'></th>"+
+				"<th colspan='3' class='freq'>Frequency domain</th>"+
+			"</tr></thead>"
+		);
+
 		// transform tabular data
 		writeTransform(transforms[iDefaultTransform]);
 
