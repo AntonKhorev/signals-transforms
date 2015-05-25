@@ -415,7 +415,10 @@ $(function(){
 						timeFormulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
 					});
 					if ('links' in time) $.each(time.links,function(dir,link){ // TODO rename link to relation
-						timeFormulaNode.after("<div class='link at-"+dir+"' />");
+						var linkNode=$("<div class='link at-"+dir+"' />").insertAfter(timeFormulaNode);
+						if ('notes' in link) $.each(link.notes,function(dir,note){
+							linkNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
+						});
 					});
 					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+freq.formula.item+"$$</div>");
 					if ('notes' in freq.formula) $.each(freq.formula.notes,function(dir,note){
