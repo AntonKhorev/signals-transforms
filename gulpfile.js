@@ -3,6 +3,7 @@ var sourcemaps=require('gulp-sourcemaps');
 var less=require('gulp-less');
 var autoprefixer=require('gulp-autoprefixer');
 var concat=require('gulp-concat');
+var minifyCss=require('gulp-minify-css');
 
 var cssSrc='src/signals-transforms-table.less';
 var jsSrc=[
@@ -19,6 +20,7 @@ gulp.task('css',function(){
 		.pipe(sourcemaps.init())
 		.pipe(less())
 		.pipe(autoprefixer())
+		.pipe(minifyCss({compatibility:'ie7'}))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('public_html'));
 });
