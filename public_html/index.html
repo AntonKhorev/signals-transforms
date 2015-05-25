@@ -2,13 +2,18 @@
 <html>
 <head>
 <meta charset='utf-8' />
+<title>Fourier transform properties table demo</title>
 <link rel='stylesheet' href='index.css' />
 <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 <script src='index.js'></script>
 </head>
 <body>
-<table class='signal-transform-properties'>
-</table>
+<div id='put-table-here'>
+Some text that will be replaced by the table.
+</div>
+<script>
+	$('#put-table-here').signalsTransformsTable();
+</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-$(function(){
+$.fn.signalsTransformsTable=function(){
 	// data, settings and helper functions
 	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
@@ -351,13 +351,15 @@ $(function(){
 	}];
 
 	// html generation
-	$('.signal-transform-properties').each(function(){
+	return this.each(function(){
+		// section hidden/shown status for this table
 		var isSectionHidden={};
 		$.each(sections,function(id,_){
 			isSectionHidden[id]=false;
 		});
 
-		var tableNode=$(this);
+		var containerNode=$(this).empty();
+		var tableNode=$("<table class='signal-transform-properties' />").appendTo(containerNode);
 		var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
 		function writeTransform(transform){
@@ -541,4 +543,4 @@ $(function(){
 
 		// $$\overset{\mathcal F}{\rightarrow}$$
 	});
-});
+};
