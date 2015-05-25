@@ -57,16 +57,44 @@ $(function(){
 				'.|+|+'
 			],
 			time:[
-				{},{},{},{},
-				{formula:{notes:{t:'conjugation'}}},
-				{formula:{notes:{b:'time reversal'}}},
-				{formula:{notes:{b:'conjugation and time reversal'}}}
+				{formula:{
+					item:'-'+x('-'+t,'*')
+				}},{formula:{
+					item:'-'+x('-'+t)
+				}},{formula:{
+					item:'-'+x(t,'*')
+				}},{formula:{
+					item:x(t)
+				}},{formula:{
+					item:x(t,'*'),
+					notes:{t:'conjugation'}
+				}},{formula:{
+					item:x('-'+t),
+					notes:{b:'time reversal'}
+				}},{formula:{
+					item:x('-'+t,'*'),
+					notes:{b:'conjugation and time reversal'}
+				}}
 			],
 			freq:[
-				{},{},{},{},
-				{formula:{notes:{t:'conjugation and frequency reversal'}}},
-				{formula:{notes:{b:'frequency reversal'}}},
-				{formula:{notes:{b:'conjugation'}}}
+				{formula:{
+					item:'-'+X(T,'*')
+				}},{formula:{
+					item:'-'+X('-'+T)
+				}},{formula:{
+					item:'-'+X('-'+T,'*')
+				}},{formula:{
+					item:X(T)
+				}},{formula:{
+					item:X('-'+T,'*'),
+					notes:{t:'conjugation and frequency reversal'}
+				}},{formula:{
+					item:X('-'+T),
+					notes:{b:'frequency reversal'}
+				}},{formula:{
+					item:X(T,'*'),
+					notes:{b:'conjugation'}
+				}}
 			]
 		}},
 		modshift:function(x,X,t,T){return{
@@ -128,24 +156,6 @@ $(function(){
 				]
 			}},
 			conjrev:function(x,X,t,T){return{
-				time:[
-					{formula:{item:'-'+x('-'+t,'*')}},
-					{formula:{item:'-'+x('-'+t)}},
-					{formula:{item:'-'+x(t,'*')}},
-					{formula:{item:x(t)}},
-					{formula:{item:x(t,'*')}},
-					{formula:{item:x('-'+t)}},
-					{formula:{item:x('-'+t,'*')}}
-				],
-				freq:[
-					{formula:{item:'-'+X(T,'*')}},
-					{formula:{item:'-'+X('-'+T)}},
-					{formula:{item:'-'+X('-'+T,'*')}},
-					{formula:{item:X(T)}},
-					{formula:{item:X('-'+T,'*')}},
-					{formula:{item:X('-'+T)}},
-					{formula:{item:X(T,'*')}}
-				]
 			}},
 			modshift:function(x,X,t,T){return{
 				time:[
@@ -204,6 +214,8 @@ $(function(){
 					}}
 				]
 			}},
+			conjrev:function(x,X,t,T){return{
+			}},
 			modshift:function(x,X,t,T){return{
 				time:[
 					{formula:{item:x(t+'+'+t+'_0')}},
@@ -260,6 +272,8 @@ $(function(){
 						notes:{b:'function \\('+X(T)+'\\) of discrete variable \\('+T+'\\)<br /> with support \\([0;N-1]\\);<br /> variable is interpreted modulo \\(N\\);<br /> \\(W_N = e^{-j \\frac{2\\pi}{N}}\\)'}
 					}}
 				]
+			}},
+			conjrev:function(x,X,t,T){return{
 			}},
 			modshift:function(x,X,t,T){return{
 				time:[
