@@ -1,4 +1,3 @@
-// TODO replace a.forEach(function(v){...}) with $.each(a,function(_,v){...})
 $(function(){
 	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
@@ -328,7 +327,7 @@ $(function(){
 						}).mousedown(preventTextSelectionOnDoubleClick)
 					)
 				);
-				section.cells.forEach(function(row){
+				$.each(section.cells,function(_,row){
 					var trNode=$("<tr />");
 					function makeDomainCells(domain){
 						var colspan=0;
@@ -404,7 +403,7 @@ $(function(){
 		transformDropdownNode.click(function(){
 			if (transformSelectNode===null) {
 				transformSelectNode=$("<ul class='signal-transform-select' />");
-				transforms.forEach(function(transform){
+				$.each(transforms,function(_,transform){
 					transformSelectNode.append(
 						$("<li role='button'>"+transform.name+"</li>").click(function(){
 							transformSelectNode.remove();
