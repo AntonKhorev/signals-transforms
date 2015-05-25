@@ -492,11 +492,15 @@ $(function(){
 			MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 		};
 
-		// transform selection dropdown
-		var captionNode=tableNode.find('caption');
+		// table caption with transform selection dropdown
 		var transformSelectNode=null;
-		captionNode.wrapInner("<span class='signal-transform-dropdown' role='button'>");
-		var transformDropdownNode=captionNode.find('.signal-transform-dropdown');
+		var captionNode=$('<caption />').appendTo(tableNode);
+		var transformDropdownNode=$(
+			"<span class='signal-transform-dropdown' role='button'>"+
+			transforms[iDefaultTransform].name+
+			"<sup><a href='"+transforms[iDefaultTransform].wikipedia+"'>[W]</a></sup>"+
+			"</span>"
+		).appendTo(captionNode);
 		transformDropdownNode.click(function(){
 			if (transformSelectNode===null) {
 				transformSelectNode=$("<ul class='signal-transform-select' />");
