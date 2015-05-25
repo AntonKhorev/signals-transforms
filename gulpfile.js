@@ -1,4 +1,5 @@
 var gulp=require('gulp');
+var sourcemaps=require('gulp-sourcemaps');
 var less=require('gulp-less');
 var autoprefixer=require('gulp-autoprefixer');
 var concat=require('gulp-concat');
@@ -15,8 +16,10 @@ var jsSrc=[
 
 gulp.task('css',function(){
 	gulp.src(cssSrc)
+		.pipe(sourcemaps.init())
 		.pipe(less())
 		.pipe(autoprefixer())
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('public_html'));
 });
 
