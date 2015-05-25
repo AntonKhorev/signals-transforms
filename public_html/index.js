@@ -1,4 +1,5 @@
 $(function(){
+	// data, settings and helper functions
 	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
 		var startsWithMinus = argument.charAt(0)=='-';
@@ -348,7 +349,14 @@ $(function(){
 			}}
 		}
 	}];
+
+	// html generation
 	$('.signal-transform-properties').each(function(){
+		var isSectionHidden={};
+		$.each(sections,function(id,_){
+			isSectionHidden[id]=false;
+		});
+
 		var tableNode=$(this);
 		var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
@@ -364,9 +372,13 @@ $(function(){
 					ev.preventDefault();
 				};
 				var tbodyNode=$("<tbody />");
+				if (isSectionHidden[id]) {
+					tbodyNode.addClass('hidden');
+				}
 				tbodyNode.append(
 					$("<tr />").append(
 						$("<th colspan='7' role='button'>"+section.name+"</th>").click(function(ev){
+							isSectionHidden[id]=false;
 							tbodyNode.removeClass('hidden');
 						}).mousedown(preventTextSelectionOnDoubleClick)
 					)
@@ -402,6 +414,7 @@ $(function(){
 				tableNode.append(tbodyNode);
 				$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
 					tbodyNode.addClass('hidden');
+					isSectionHidden[id]=true;
 				}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
 
 				// put in formulas, relations and notes
