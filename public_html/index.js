@@ -56,44 +56,88 @@ $(function(){
 				'.|+|+'
 			],
 			time:[
-				{formula:{
-					item:'-'+x('-'+t,'*')
-				}},{formula:{
-					item:'-'+x('-'+t)
-				}},{formula:{
-					item:'-'+x(t,'*')
-				}},{formula:{
-					item:x(t)
-				}},{formula:{
-					item:x(t,'*'),
-					notes:{t:'conjugation'}
-				}},{formula:{
-					item:x('-'+t),
-					notes:{b:'time reversal'}
-				}},{formula:{
-					item:x('-'+t,'*'),
-					notes:{b:'conjugation and time reversal'}
-				}}
+				{
+					formula:{
+						item:'-'+x('-'+t,'*')
+					}
+				},{
+					formula:{
+						item:'-'+x('-'+t)
+					}
+				},{
+					formula:{
+						item:'-'+x(t,'*')
+					}
+				},{
+					formula:{
+						item:x(t)
+					},
+					links:{
+						t:{notes:{r:'odd'}},
+						b:{notes:{l:'even'}},
+						l:{notes:{b:'imaginary'}},
+						r:{notes:{t:'real'}},
+						tl:{notes:{l:'conjugate antisymmetric'}},
+						br:{notes:{r:'conjugate symmetric'}}
+					}
+				},{
+					formula:{
+						item:x(t,'*'),
+						notes:{t:'conjugation'}
+					}
+				},{
+					formula:{
+						item:x('-'+t),
+						notes:{b:'time reversal'}
+					}
+				},{
+					formula:{
+						item:x('-'+t,'*'),
+						notes:{b:'conjugation and time reversal'}
+					}
+				}
 			],
 			freq:[
-				{formula:{
-					item:'-'+X(T,'*')
-				}},{formula:{
-					item:'-'+X('-'+T)
-				}},{formula:{
-					item:'-'+X('-'+T,'*')
-				}},{formula:{
-					item:X(T)
-				}},{formula:{
-					item:X('-'+T,'*'),
-					notes:{t:'conjugation and frequency reversal'}
-				}},{formula:{
-					item:X('-'+T),
-					notes:{b:'frequency reversal'}
-				}},{formula:{
-					item:X(T,'*'),
-					notes:{b:'conjugation'}
-				}}
+				{
+					formula:{
+						item:'-'+X(T,'*')
+					}
+				},{
+					formula:{
+						item:'-'+X('-'+T)
+					}
+				},{
+					formula:{
+						item:'-'+X('-'+T,'*')
+					}
+				},{
+					formula:{
+						item:X(T)
+					},
+					links:{
+						t:{notes:{r:'odd'}},
+						b:{notes:{l:'even'}},
+						l:{notes:{b:'conjugate antisymmetric'}},
+						r:{notes:{t:'conjugate symmetric'}},
+						tl:{notes:{l:'imaginary'}},
+						br:{notes:{r:'real'}},
+					}
+				},{
+					formula:{
+						item:X('-'+T,'*'),
+						notes:{t:'conjugation and frequency reversal'}
+					}
+				},{
+					formula:{
+						item:X('-'+T),
+						notes:{b:'frequency reversal'}
+					}
+				},{
+					formula:{
+						item:X(T,'*'),
+						notes:{b:'conjugation'}
+					}
+				}
 			]
 		}},
 		modshift:function(x,X,t,T){return{
@@ -369,6 +413,9 @@ $(function(){
 					var timeFormulaNode=timeFormulaNodes.eq(i).append("<div class='item'>$$"+time.formula.item+"$$</div>");
 					if ('notes' in time.formula) $.each(time.formula.notes,function(dir,note){
 						timeFormulaNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
+					});
+					if ('links' in time) $.each(time.links,function(dir,link){ // TODO rename link to relation
+						timeFormulaNode.after("<div class='link at-"+dir+"' />");
 					});
 					var freqFormulaNode=freqFormulaNodes.eq(i).append("<div class='item'>$$"+freq.formula.item+"$$</div>");
 					if ('notes' in freq.formula) $.each(freq.formula.notes,function(dir,note){
