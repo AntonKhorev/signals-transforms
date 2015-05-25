@@ -452,6 +452,8 @@ $(function(){
 					var freqFormulaNode=freqFormulaNodes.eq(i);
 					insertStuff(timeFormulaNode,section.time[i]);
 					insertStuff(freqFormulaNode,section.freq[i]);
+
+					// formula pairs
 					timeFormulaNode.add(freqFormulaNode).hover(function(){
 						timeFormulaNode.addClass('active');
 						freqFormulaNode.addClass('active');
@@ -467,6 +469,19 @@ $(function(){
 						lineNode.detach();
 						timeFormulaNode.removeClass('active');
 						freqFormulaNode.removeClass('active');
+					});
+
+					// relation pairs
+					$.each(['t','b','l','r','tl','tr','bl','br'],function(_,dir){
+						var timeRelationNode=timeFormulaNode.siblings('.relation.at-'+dir);
+						var freqRelationNode=freqFormulaNode.siblings('.relation.at-'+dir);
+						timeRelationNode.add(freqRelationNode).hover(function(){
+							timeRelationNode.addClass('active');
+							freqRelationNode.addClass('active');
+						},function(){
+							timeRelationNode.removeClass('active');
+							freqRelationNode.removeClass('active');
+						});
 					});
 				});
 			});
@@ -499,27 +514,9 @@ $(function(){
 			}
 		});
 
+		// transform tabular data
 		writeTransform(transforms[iDefaultTransform]);
 
-		// interactive elements of the table
-		/*
-		tableElm.find('tbody').each(function(){
-			// TODO reimplement
-			var timeRelationElms=tbodyElm.find('td.time .relation');
-			var freqRelationElms=tbodyElm.find('td.freq .relation');
-			timeRelationElms.each(function(i){
-				var timeRelationElm=timeRelationElms.eq(i);
-				var freqRelationElm=freqRelationElms.eq(i);
-				timeRelationElm.add(freqRelationElm).hover(function(){
-					timeRelationElm.addClass('active');
-					freqRelationElm.addClass('active');
-				},function(){
-					timeRelationElm.removeClass('active');
-					freqRelationElm.removeClass('active');
-				});
-			});
-		});
-		*/
 		// $$\overset{\mathcal F}{\rightarrow}$$
 	});
 });
