@@ -431,7 +431,11 @@ $(function(){
 							if ('notes' in relation) $.each(relation.notes,function(dir,note){
 								relationNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
 							});
-							relationNode.one('mouseenter',function(){
+							relationNode.on('item:highlight',function(){
+								$(this).addClass('active');
+							}).on('item:unhighlight',function(){
+								$(this).removeClass('active');
+							}).one('item:highlight',function(){
 								// single-line vs multiple-line note detection
 								$(this).find('.note').each(function(){
 									var node=$(this);
@@ -476,11 +480,11 @@ $(function(){
 						var timeRelationNode=timeFormulaNode.siblings('.relation.at-'+dir);
 						var freqRelationNode=freqFormulaNode.siblings('.relation.at-'+dir);
 						timeRelationNode.add(freqRelationNode).hover(function(){
-							timeRelationNode.addClass('active');
-							freqRelationNode.addClass('active');
+							timeRelationNode.trigger('item:highlight');
+							freqRelationNode.trigger('item:highlight');
 						},function(){
-							timeRelationNode.removeClass('active');
-							freqRelationNode.removeClass('active');
+							timeRelationNode.trigger('item:unhighlight');
+							freqRelationNode.trigger('item:unhighlight');
 						});
 					});
 				});
