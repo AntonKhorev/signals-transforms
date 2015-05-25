@@ -49,7 +49,7 @@ $(function(){
 			]
 		}},
 		conjrev:function(x,X,t,T){return{
-			name:'Complex conjugation and time reversal',
+			name:'Complex conjugation and time/frequency reversal',
 			cells:[
 				'+|+|.',
 				'+|+|+',
