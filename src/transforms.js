@@ -121,11 +121,11 @@ var transforms=[{
 			],
 			time:[
 				{formula:{item:x(t)}},
-				{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
+				{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}}
 			],
 			freq:[
 				{formula:{item:X(T)}},
-				{formula:{item:'j'+T+' \\omega_0 '+X(T)}},
+				{formula:{item:'j'+T+' \\omega_0 '+X(T)}}
 			]
 		}}
 	}
@@ -214,6 +214,36 @@ var transforms=[{
 			]
 		}},
 		conjrev:function(){return{
+		}},
+		modshift:function(t,T,x,X){return{
+			time:[
+				{formula:{item:x(t+'+'+t+'_0')}},
+				{formula:{item:'e^{-j'+T+'_0 \\omega_0 '+t+'}'+x(t)}},
+				{formula:{item:x(t)}},
+				{formula:{item:'e^{j'+T+'_0 \\omega_0 '+t+'}'+x(t)}},
+				{formula:{item:x(t+'-'+t+'_0')}}
+			],
+			freq:[
+				{formula:{item:'e^{j'+T+'\\omega_0 '+t+'_0}'+X(T)}},
+				{formula:{item:X(''+T+'+'+T+'_0')}},
+				{formula:{item:X(T)}},
+				{formula:{item:X(''+T+'-'+T+'_0')}},
+				{formula:{item:'e^{-j'+T+'\\omega_0 '+t+'_0}'+X(T)}}
+			]
+		}},
+		intdiff:function(t,T,x,X){return{
+			cells:[
+				'.|+|+',
+				'.|.|.'
+			],
+			time:[
+				{formula:{item:x(t)}},
+				{formula:{item:x(t)+'-'+x(t+'-1')}}
+			],
+			freq:[
+				{formula:{item:X(T)}},
+				{formula:{item:'(1-e^{-j'+T+'\\omega_0}) '+X(T)}}
+			]
 		}}
 	}
 },{
