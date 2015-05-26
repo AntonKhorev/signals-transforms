@@ -33,4 +33,4 @@ function parseFunctionOptions(argument,options){
 };
 
 var nDomainCols=3;
-var iDefaultTransform=1;
+var iDefaultTransform=2;

@@ -70,6 +70,35 @@ var transforms=[{
 		}}
 	}
 },{
+	name:'Continuous-time Fourier series (CTFS)',
+	wikipedia:'http://en.wikipedia.org/wiki/Fourier_series',
+	timeVar:'t',
+	freqVar:'k',
+	timeFn:function(arg,opts){
+		var o=parseFunctionOptions(arg,opts);
+		return 'x'+o.fnConj+'('+arg+')';
+	},
+	freqFn:function(arg,opts){
+		var o=parseFunctionOptions(arg,opts);
+		return 'a'+o.fnConj+'_{'+arg+'}';
+	},
+	sections:{
+		definitions:function(x,X,t,T){return{
+			time:[
+				{formula:{
+					item:x(t)+' = \\sum_{'+T+'=-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' \\omega_0 '+t+'}',
+					notes:{}
+				}}
+			],
+			freq:[
+				{formula:{
+					item:X(T)+' = \\frac{1}{T} \\int\\limits_{\\langle T \\rangle} '+x(t)+' e^{-j'+T+' \\omega_0 '+t+'} \\,\\mathrm{d}'+t,
+					notes:{}
+				}}
+			]
+		}}
+	}
+},{
 	name:'Discrete-time Fourier transform (DTFT)',
 	wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
 	timeVar:'n',
