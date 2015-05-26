@@ -156,6 +156,18 @@ var transforms=[{
 				}}
 			]
 		}},
+		duality:function(x,X,t,T){return{
+			time:[
+				{formula:{item:'\\frac{1}{N} '+X('-'+t)}},
+				{formula:{item:x(t)}},
+				{formula:{item:X(t)}}
+			],
+			freq:[
+				{formula:{item:x(T)}},
+				{formula:{item:X(T)}},
+				{formula:{item:'N '+x('-'+T)}}
+			]
+		}},
 		conjrev:function(x,X,t,T){return{
 		}},
 		modshift:function(x,X,t,T){return{
