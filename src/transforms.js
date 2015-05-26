@@ -183,6 +183,12 @@ var transforms=[{
 		}}
 	}
 },{
+	name:'Discrete-time Fourier series (DTFS)',
+	timeFnTemplate:['x[n]','y[n]'],
+	freqFnTemplate:['a_k','b_k'],
+	sections:{
+	}
+},{
 	name:'Discrete Fourier transform (DFT)',
 	wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
 	timeFnTemplate:['x[n]','y[n]'],

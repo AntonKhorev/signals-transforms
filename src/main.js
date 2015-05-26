@@ -156,11 +156,15 @@ return this.each(function(){
 	var transformSelectNode=null;
 	var captionNode=$('<caption />').appendTo(tableNode);
 	var transformDropdownNode=$(
-		"<span class='signal-transform-dropdown' role='button'>"+
-		transforms[iDefaultTransform].name+
-		"<sup><a href='"+transforms[iDefaultTransform].wikipedia+"'>[W]</a></sup>"+
-		"</span>"
+		"<span class='signal-transform-dropdown' role='button' />"
 	).appendTo(captionNode);
+	function writeTransformDropdownNodeHtml(transform){
+	        transformDropdownNode.text(transform.name);
+		if ('wikipedia' in transform) {
+			transformDropdownNode.append("<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
+		}
+	};
+	writeTransformDropdownNodeHtml(transforms[iDefaultTransform]);
 	transformDropdownNode.click(function(){
 		if (transformSelectNode===null) {
 			transformSelectNode=$("<ul class='signal-transform-select' />");
@@ -169,7 +173,7 @@ return this.each(function(){
 					$("<li role='button'>"+transform.name+"</li>").click(function(){
 						transformSelectNode.remove();
 						transformSelectNode=null;
-						transformDropdownNode.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
+						writeTransformDropdownNodeHtml(transform);
 						tableNode.find('tbody').remove();
 						writeTransform(transform);
 					}).mousedown(preventTextSelectionOnDoubleClick)
