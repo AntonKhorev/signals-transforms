@@ -87,13 +87,13 @@ var transforms=[{
 			time:[
 				{formula:{
 					item:x(t)+' = \\sum_{'+T+'=-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' \\omega_0 '+t+'}',
-					notes:{}
+					notes:{b:'periodic function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)<br /> with period \\(T\\)<br /> \\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 				}}
 			],
 			freq:[
 				{formula:{
 					item:X(T)+' = \\frac{1}{T} \\int\\limits_{\\langle T \\rangle} '+x(t)+' e^{-j'+T+' \\omega_0 '+t+'} \\,\\mathrm{d}'+t,
-					notes:{}
+					notes:{b:'function \\('+X(T)+'\\) of discrete variable \\('+T+'\\)<br /> \\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 				}}
 			]
 		}},
