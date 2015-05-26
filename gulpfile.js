@@ -1,4 +1,5 @@
 var gulp=require('gulp');
+var plumber=require('gulp-plumber');
 var sourcemaps=require('gulp-sourcemaps');
 var less=require('gulp-less');
 var autoprefixer=require('gulp-autoprefixer');
@@ -18,6 +19,7 @@ var jsSrc=[
 
 gulp.task('css',function(){
 	gulp.src(cssSrc)
+		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(less())
 		.pipe(autoprefixer())
@@ -28,6 +30,7 @@ gulp.task('css',function(){
 
 gulp.task('js',function(){
 	gulp.src(jsSrc)
+		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(concat('signals-transforms-table.js'))
 		.pipe(uglify())
