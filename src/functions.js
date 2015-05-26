@@ -40,7 +40,10 @@ function generateFunctionAndArgumentFromString(s){
 			return s;
 		}
 	}
-	var m=s.match(/([a-zA-Z]+)([(])([a-zA-Z]+)([)])/);
+	var m=s.match(/([a-zA-Z]+)(\(|\[)([a-zA-Z]+)(\)|\])/);
+	if (!m) {
+		throw 'invalid function template';
+	}
 	var x=letter(m[1]);
 	var t=letter(m[3]);
 	return [
