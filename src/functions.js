@@ -33,12 +33,21 @@ function parseFunctionOptions(argument,options){
 };
 
 function generateFunctionAndArgumentFromString(s){
+	function letter(s){
+		if (s.length>1) {
+			return '\\'+s;
+		} else {
+			return s;
+		}
+	}
 	var m=s.match(/([a-zA-Z]+)([(])([a-zA-Z]+)([)])/);
+	var x=letter(m[1]);
+	var t=letter(m[3]);
 	return [
 		function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return m[1]+o.fnConj+m[2]+arg+m[4];
+			return x+o.fnConj+m[2]+arg+m[4];
 		},
-		m[3]
+		t
 	];
 };

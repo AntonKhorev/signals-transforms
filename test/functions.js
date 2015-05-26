@@ -13,4 +13,9 @@ assert.equal(r[1],'f');
 assert.equal(r[0]('#'),'X(#)');
 assert.equal(r[0]('#','*'),'X^*(#)');
 
+var r=generateFunctionAndArgumentFromString('X(omega)');
+assert.equal(r[1],'\\omega');
+assert.equal(r[0]('#'),'X(#)');
+assert.equal(r[0]('#','*'),'X^*(#)');
+
 console.log('tests ok');
