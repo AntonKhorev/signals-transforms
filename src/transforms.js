@@ -26,6 +26,18 @@ var transforms=[{
 				}}
 			]
 		}},
+		duality:function(x,X,t,T){return{
+			time:[
+				{formula:{item:'\\frac{1}{2\\pi} '+X('-'+t)}},
+				{formula:{item:x(t)}},
+				{formula:{item:X(t)}}
+			],
+			freq:[
+				{formula:{item:x(T)}},
+				{formula:{item:X(T)}},
+				{formula:{item:'2\\pi '+x('-'+T)}}
+			]
+		}},
 		conjrev:function(x,X,t,T){return{
 		}},
 		modshift:function(x,X,t,T){return{

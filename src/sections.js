@@ -1,4 +1,4 @@
-var sectionIds=['definitions','conjrev','modshift','intdiff']; // sections ordering
+var sectionIds=['definitions','duality','conjrev','modshift','intdiff']; // sections ordering
 var sections={
 	definitions:function(x,X,t,T){return{
 		name:'Definitions',
@@ -10,6 +10,12 @@ var sections={
 		],
 		freq:[
 			{formula:{notes:{t:'analysis formula'}}},
+		]
+	}},
+	duality:function(x,X,t,T){return{
+		name:'Duality',
+		cells:[
+			'+|+|+'
 		]
 	}},
 	conjrev:function(x,X,t,T){return{
