@@ -33,11 +33,12 @@ function parseFunctionOptions(argument,options){
 };
 
 function generateFunctionAndArgumentFromString(s){
+	var m=s.match(/([a-zA-Z]+)([(])([a-zA-Z]+)([)])/);
 	return [
 		function(arg,opts){
 			var o=parseFunctionOptions(arg,opts);
-			return 'x'+o.fnConj+'('+arg+')';
+			return m[1]+o.fnConj+m[2]+arg+m[4];
 		},
-		't'
+		m[3]
 	];
 };
