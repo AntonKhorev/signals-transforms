@@ -1,6 +1,8 @@
 {
   "name": "signals-transforms",
   "private": true,
+  "description": "Fourier transform properties table",
+  "license": "ISC",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.3.0",
@@ -10,5 +12,22 @@
     "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntonKhorev/signals-transforms.git"
+  },
+  "keywords": [
+    "fourier",
+    "transform",
+    "dft"
+  ],
+  "author": "Anton Khorev",
+  "bugs": {
+    "url": "https://github.com/AntonKhorev/signals-transforms/issues"
+  },
+  "homepage": "https://github.com/AntonKhorev/signals-transforms"
 }
