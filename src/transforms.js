@@ -187,6 +187,34 @@ var transforms=[{
 	timeFnTemplate:['x[n]','y[n]'],
 	freqFnTemplate:['a_k','b_k'],
 	sections:{
+		definitions:function(t,T,x,X){return{
+			time:[
+				{formula:{
+					item:x(t)+' = \\sum_{'+T+'=\\langle N \\rangle} '+X(T)+' e^{j'+T+' \\omega_0 '+t+'}',
+					notes:{b:'periodic function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)<br /> with period \\(N\\);<br /> \\(\\omega_0=\\frac{2\\pi}{N}\\)'}
+				}}
+			],
+			freq:[
+				{formula:{
+					item:X(T)+' = \\sum_{'+t+'=\\langle N \\rangle} '+x(t)+' e^{-j'+T+' \\omega_0 '+t+'}',
+					notes:{b:'periodic function \\('+X(T)+'\\) of discrete variable \\('+T+'\\)<br /> with period \\(N\\);<br /> \\(\\omega_0=\\frac{2\\pi}{N}\\)'}
+				}}
+			]
+		}},
+		linearity:function(t,T,x,X,y,Y){return{
+			time:[
+				{formula:{item:x(t)}},
+				{formula:{item:y(t)}},
+				{formula:{item:'A'+x(t)+'+B'+y(t)}}
+			],
+			freq:[
+				{formula:{item:X(T)}},
+				{formula:{item:Y(T)}},
+				{formula:{item:'A'+X(T)+'+B'+Y(T)}}
+			]
+		}},
+		conjrev:function(){return{
+		}}
 	}
 },{
 	name:'Discrete Fourier transform (DFT)',
