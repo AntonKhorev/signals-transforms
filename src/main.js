@@ -5,6 +5,10 @@ return this.each(function(){
 		isSectionHidden[id]=false;
 	});
 
+	function preventTextSelectionOnDoubleClick(ev){
+		ev.preventDefault();
+	};
+
 	var containerNode=$(this).empty();
 	var tableNode=$("<table class='signal-transform-properties' />").appendTo(containerNode);
 	var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
@@ -17,9 +21,6 @@ return this.each(function(){
 			section=$.extend(true,{},sectionCommon,sectionSpecific);
 
 			// make section title and cells
-			function preventTextSelectionOnDoubleClick(ev){
-				ev.preventDefault();
-			};
 			var tbodyNode=$("<tbody />");
 			if (isSectionHidden[id]) {
 				tbodyNode.addClass('hidden');
@@ -161,7 +162,7 @@ return this.each(function(){
 						transformDropdownNode.html(transform.name+"<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 						tableNode.find('tbody').remove();
 						writeTransform(transform);
-					})
+					}).mousedown(preventTextSelectionOnDoubleClick)
 				);
 			});
 			captionNode.append(transformSelectNode);
@@ -169,7 +170,7 @@ return this.each(function(){
 			transformSelectNode.remove();
 			transformSelectNode=null;
 		}
-	});
+	}).mousedown(preventTextSelectionOnDoubleClick);
 
 	// table header section
 	tableNode.append(
