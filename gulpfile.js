@@ -3,6 +3,7 @@ var sourcemaps=require('gulp-sourcemaps');
 var less=require('gulp-less');
 var autoprefixer=require('gulp-autoprefixer');
 var concat=require('gulp-concat');
+var uglify=require('gulp-uglify');
 var minifyCss=require('gulp-minify-css');
 
 var cssSrc='src/signals-transforms-table.less';
@@ -27,7 +28,10 @@ gulp.task('css',function(){
 
 gulp.task('js',function(){
 	gulp.src(jsSrc)
+		.pipe(sourcemaps.init())
 		.pipe(concat('signals-transforms-table.js'))
+		.pipe(uglify())
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('public_html'));
 });
 
