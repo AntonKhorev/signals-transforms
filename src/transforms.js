@@ -19,6 +19,8 @@ var transforms=[{
 				}}
 			]
 		}},
+		linearity:function(){return{
+		}},
 		duality:function(t,T,x,X){return{
 			time:[
 				{formula:{item:'\\frac{1}{2\\pi} '+X('-'+t)}},
@@ -31,7 +33,7 @@ var transforms=[{
 				{formula:{item:'2\\pi '+x('-'+T)}}
 			]
 		}},
-		conjrev:function(t,T,x,X){return{
+		conjrev:function(){return{
 		}},
 		modshift:function(t,T,x,X){return{
 			time:[
@@ -82,7 +84,9 @@ var transforms=[{
 				}}
 			]
 		}},
-		conjrev:function(t,T,x,X){return{
+		linearity:function(){return{
+		}},
+		conjrev:function(){return{
 		}},
 		modshift:function(t,T,x,X){return{
 			time:[
@@ -135,7 +139,9 @@ var transforms=[{
 				}}
 			]
 		}},
-		conjrev:function(t,T,x,X){return{
+		linearity:function(){return{
+		}},
+		conjrev:function(){return{
 		}},
 		modshift:function(t,T,x,X){return{
 			time:[
@@ -186,6 +192,8 @@ var transforms=[{
 				}}
 			]
 		}},
+		linearity:function(){return{
+		}},
 		duality:function(t,T,x,X){return{
 			time:[
 				{formula:{item:'\\frac{1}{N} '+X('-'+t)}},
@@ -198,7 +206,7 @@ var transforms=[{
 				{formula:{item:'N '+x('-'+T)}}
 			]
 		}},
-		conjrev:function(t,T,x,X){return{
+		conjrev:function(){return{
 		}},
 		modshift:function(t,T,x,X){return{
 			time:[

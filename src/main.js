@@ -20,10 +20,14 @@ return this.each(function(){
 		var r=generateFnAndVarFromTemplate(transform.freqFnTemplate[0]);
 		var freqFn=r[0];
 		var freqVar=r[1];
+		var r=generateFnAndVarFromTemplate(transform.timeFnTemplate[1]);
+		var timeFn1=r[0];
+		var r=generateFnAndVarFromTemplate(transform.freqFnTemplate[1]);
+		var freqFn1=r[0];
 		$.each(sectionIds,function(_,id){
 			if (!(id in transform.sections)) return;
-			var sectionCommon=sections[id](timeVar,freqVar,timeFn,freqFn);
-			var sectionSpecific=transform.sections[id](timeVar,freqVar,timeFn,freqFn);
+			var sectionCommon=sections[id](timeVar,freqVar,timeFn,freqFn,timeFn1,freqFn1);
+			var sectionSpecific=transform.sections[id](timeVar,freqVar,timeFn,freqFn,timeFn1,freqFn1);
 			section=$.extend(true,{},sectionCommon,sectionSpecific);
 
 			// make section title and cells

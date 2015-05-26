@@ -1,4 +1,11 @@
-var sectionIds=['definitions','duality','conjrev','modshift','intdiff']; // sections ordering
+var sectionIds=[ // sections ordering
+	'definitions',
+	'linearity',
+	'duality',
+	'conjrev',
+	'modshift',
+	'intdiff'
+];
 var sections={
 	definitions:function(t,T,x,X){return{
 		name:'Definitions',
@@ -10,6 +17,23 @@ var sections={
 		],
 		freq:[
 			{formula:{notes:{t:'analysis formula'}}},
+		]
+	}},
+	linearity:function(t,T,x,X,y,Y){return{
+		name:'Linearity',
+		cells:[
+			'+|.|+',
+			'+ + +'
+		],
+		time:[
+			{formula:{item:x(t)}},
+			{formula:{item:y(t)}},
+			{formula:{item:'a'+x(t)+'+b'+y(t)}}
+		],
+		freq:[
+			{formula:{item:X(T)}},
+			{formula:{item:Y(T)}},
+			{formula:{item:'a'+X(T)+'+b'+Y(T)}}
 		]
 	}},
 	duality:function(t,T,x,X){return{
