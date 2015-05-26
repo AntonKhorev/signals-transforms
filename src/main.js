@@ -82,9 +82,9 @@ return this.each(function(){
 							relationNode.append("<div class='note at-"+dir+"'>"+note+"</div>");
 						});
 						relationNode.on('item:highlight',function(){
-							$(this).addClass('active');
+							$(this).addClass('is-highlighted');
 						}).on('item:unhighlight',function(){
-							$(this).removeClass('active');
+							$(this).removeClass('is-highlighted');
 						}).one('item:highlight',function(){
 							// single-line vs multiple-line note detection
 							$(this).find('.note').each(function(){
@@ -109,8 +109,8 @@ return this.each(function(){
 
 				// formula pairs
 				timeFormulaNode.add(freqFormulaNode).hover(function(){
-					timeFormulaNode.addClass('active');
-					freqFormulaNode.addClass('active');
+					timeFormulaNode.addClass('is-highlighted');
+					freqFormulaNode.addClass('is-highlighted');
 					var tOffset=timeFormulaNode.offset();
 					var fOffset=freqFormulaNode.offset();
 					var tWidth =timeFormulaNode.width();
@@ -121,8 +121,8 @@ return this.each(function(){
 					;
 				},function(){
 					lineNode.detach();
-					timeFormulaNode.removeClass('active');
-					freqFormulaNode.removeClass('active');
+					timeFormulaNode.removeClass('is-highlighted');
+					freqFormulaNode.removeClass('is-highlighted');
 				});
 
 				// relation pairs
