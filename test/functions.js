@@ -27,4 +27,9 @@ assert.equal(r[1],'n');
 assert.equal(r[0]('#'),'x[#]');
 assert.equal(r[0]('#','*'),'x^*[#]');
 
+var r=generateFunctionAndArgumentFromString('a_k');
+assert.equal(r[1],'k');
+assert.equal(r[0]('#'),'a_{#}');
+assert.equal(r[0]('#','*'),'a^*_{#}');
+
 console.log('tests ok');

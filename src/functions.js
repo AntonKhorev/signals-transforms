@@ -41,16 +41,28 @@ function generateFunctionAndArgumentFromString(s){
 		}
 	}
 	var m=s.match(/([a-zA-Z]+)(\(|\[)([a-zA-Z]+)(\)|\])/);
-	if (!m) {
-		throw 'invalid function template';
+	if (m) {
+		var x=letter(m[1]);
+		var t=letter(m[3]);
+		return [
+			function(arg,opts){
+				var o=parseFunctionOptions(arg,opts);
+				return x+o.fnConj+m[2]+arg+m[4];
+			},
+			t
+		];
 	}
-	var x=letter(m[1]);
-	var t=letter(m[3]);
-	return [
-		function(arg,opts){
-			var o=parseFunctionOptions(arg,opts);
-			return x+o.fnConj+m[2]+arg+m[4];
-		},
-		t
-	];
+	var m=s.match(/([a-zA-Z]+)_([a-zA-Z]+)/);
+	if (m) {
+		var x=letter(m[1]);
+		var t=letter(m[2]);
+		return [
+			function(arg,opts){
+				var o=parseFunctionOptions(arg,opts);
+				return x+o.fnConj+'_{'+arg+'}';
+			},
+			t
+		];
+	}
+	throw 'invalid function template';
 };
