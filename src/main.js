@@ -14,10 +14,16 @@ return this.each(function(){
 	var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
 	function writeTransform(transform){
+		var r=generateFnAndVarFromTemplate(transform.timeFnTemplate);
+		var timeFn=r[0];
+		var timeVar=r[1];
+		var r=generateFnAndVarFromTemplate(transform.freqFnTemplate);
+		var freqFn=r[0];
+		var freqVar=r[1];
 		$.each(sectionIds,function(_,id){
 			if (!(id in transform.sections)) return;
-			var sectionCommon=sections[id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
-			var sectionSpecific=transform.sections[id](transform.timeFn,transform.freqFn,transform.timeVar,transform.freqVar);
+			var sectionCommon=sections[id](timeFn,freqFn,timeVar,freqVar);
+			var sectionSpecific=transform.sections[id](timeFn,freqFn,timeVar,freqVar);
 			section=$.extend(true,{},sectionCommon,sectionSpecific);
 
 			// make section title and cells

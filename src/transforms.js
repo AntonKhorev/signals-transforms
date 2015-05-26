@@ -2,16 +2,8 @@ var iDefaultTransform=2;
 var transforms=[{
 	name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
-	timeVar:'t',
-	freqVar:'\\omega',
-	timeFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'x'+o.fnConj+'('+arg+')';
-	},
-	freqFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'X'+o.fnConj+'('+o.argSign+'j'+o.argRest+')';
-	},
+	timeFnTemplate:'x(t)',
+	freqFnTemplate:'X(j*omega)',
 	sections:{
 		definitions:function(x,X,t,T){return{
 			time:[
@@ -73,16 +65,8 @@ var transforms=[{
 },{
 	name:'Continuous-time Fourier series (CTFS)',
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_series',
-	timeVar:'t',
-	freqVar:'k',
-	timeFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'x'+o.fnConj+'('+arg+')';
-	},
-	freqFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'a'+o.fnConj+'_{'+arg+'}';
-	},
+	timeFnTemplate:'x(t)',
+	freqFnTemplate:'a_k',
 	sections:{
 		definitions:function(x,X,t,T){return{
 			time:[
@@ -134,16 +118,8 @@ var transforms=[{
 },{
 	name:'Discrete-time Fourier transform (DTFT)',
 	wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
-	timeVar:'n',
-	freqVar:'\\omega',
-	timeFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'x'+o.fnConj+'['+arg+']';
-	},
-	freqFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'X'+o.fnConj+'(e^{'+o.argSign+'j'+o.argRest+'})';
-	},
+	timeFnTemplate:'x[n]',
+	freqFnTemplate:'X(e^(j*omega))',
 	sections:{
 		definitions:function(x,X,t,T){return{
 			time:[
@@ -193,16 +169,8 @@ var transforms=[{
 },{
 	name:'Discrete Fourier transform (DFT)',
 	wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
-	timeVar:'n',
-	freqVar:'k',
-	timeFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'x'+o.fnConj+'['+arg+']';
-	},
-	freqFn:function(arg,opts){
-		var o=parseFunctionOptions(arg,opts);
-		return 'X'+o.fnConj+'['+arg+']';
-	},
+	timeFnTemplate:'x[n]',
+	freqFnTemplate:'X[k]',
 	sections:{
 		definitions:function(x,X,t,T){return{
 			time:[

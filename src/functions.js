@@ -32,7 +32,7 @@ function parseFunctionOptions(argument,options){
 	return o;
 };
 
-function generateFunctionAndArgumentFromString(s){
+function generateFnAndVarFromTemplate(s){
 	function letter(s){
 		if (s.length>1) {
 			return '\\'+s;
