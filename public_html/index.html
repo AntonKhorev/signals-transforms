@@ -7,13 +7,22 @@
 <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 <script src='signals-transforms-table.js'></script>
+<style>
+nav {
+	padding: .5em;
+	margin: .5em;
+	background: #CCC;
+	color: #222;
+}
+</style>
 </head>
 <body>
+<nav>Fourier transform properties table demo | <a href='https://github.com/AntonKhorev/signals-transforms'>source code</a></nav>
 <div id='put-table-here'>
 Some text that will be replaced by the table.
 </div>
 <script>
-	$('#put-table-here').signalsTransformsTable();
+$('#put-table-here').signalsTransformsTable();
 </script>
 </body>
 </html>
