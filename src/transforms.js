@@ -98,6 +98,22 @@ var transforms=[{
 			]
 		}},
 		conjrev:function(x,X,t,T){return{
+		}},
+		modshift:function(x,X,t,T){return{
+			time:[
+				{formula:{item:x(t+'+'+t+'_0')}},
+				{formula:{item:'e^{-j'+T+'_0 \\omega_0 '+t+'}'+x(t)}},
+				{formula:{item:x(t)}},
+				{formula:{item:'e^{j'+T+'_0 \\omega_0 '+t+'}'+x(t)}},
+				{formula:{item:x(t+'-'+t+'_0')}}
+			],
+			freq:[
+				{formula:{item:'e^{j'+T+'\\omega_0 '+t+'_0}'+X(T)}},
+				{formula:{item:X(''+T+'+'+T+'_0')}},
+				{formula:{item:X(T)}},
+				{formula:{item:X(''+T+'-'+T+'_0')}},
+				{formula:{item:'e^{-j'+T+'\\omega_0 '+t+'_0}'+X(T)}}
+			]
 		}}
 	}
 },{
