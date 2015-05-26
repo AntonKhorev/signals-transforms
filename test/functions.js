@@ -32,4 +32,10 @@ assert.equal(r[1],'k');
 assert.equal(r[0]('#'),'a_{#}');
 assert.equal(r[0]('#','*'),'a^*_{#}');
 
+var r=generateFunctionAndArgumentFromString('X(i*omega)');
+assert.equal(r[1],'\\omega');
+assert.equal(r[0]('#'),'X(j#)');
+assert.equal(r[0]('-#'),'X(-j#)');
+assert.equal(r[0]('#','*'),'X^*(j#)');
+
 console.log('tests ok');
