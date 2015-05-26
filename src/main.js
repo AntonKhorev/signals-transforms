@@ -10,7 +10,7 @@ return this.each(function(){
 	};
 
 	var containerNode=$(this).empty();
-	var tableNode=$("<table class='signal-transform-properties' />").appendTo(containerNode);
+	var tableNode=$("<table class='signals-transforms-table' />").appendTo(containerNode);
 	var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
 	function writeTransform(transform){
