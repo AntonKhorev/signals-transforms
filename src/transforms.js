@@ -84,7 +84,17 @@ var transforms=[{
 				}}
 			]
 		}},
-		linearity:function(){return{
+		linearity:function(t,T,x,X,y,Y){return{
+			time:[
+				{formula:{item:x(t)}},
+				{formula:{item:y(t)}},
+				{formula:{item:'A'+x(t)+'+B'+y(t)}}
+			],
+			freq:[
+				{formula:{item:X(T)}},
+				{formula:{item:Y(T)}},
+				{formula:{item:'A'+X(T)+'+B'+Y(T)}}
+			]
 		}},
 		conjrev:function(){return{
 		}},
