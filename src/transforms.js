@@ -311,4 +311,25 @@ var transforms=[{
 			]
 		}}
 	}
+},{
+	name:'Bilateral Laplace transform',
+	wikipedia:'http://en.wikipedia.org/wiki/Two-sided_Laplace_transform',
+	timeFnTemplate:['x(t)','y(t)'],
+	freqFnTemplate:['X(s)','Y(s)'],
+	sections:{
+		definitions:function(t,T,x,X){return{
+			time:[
+				{formula:{
+					item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega} '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
+					notes:{b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'}
+				}}
+			],
+			freq:[
+				{formula:{
+					item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty} '+x(t)+' e^{-'+T+' '+t+'} \\,\\mathrm{d}'+t,
+					notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
+				}}
+			]
+		}},
+	}
 }];
