@@ -1,3 +1,4 @@
+var iDefaultTransform=2;
 var transforms=[{
 	name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',

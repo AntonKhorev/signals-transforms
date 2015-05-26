@@ -10,7 +10,7 @@ var minifyCss=require('gulp-minify-css');
 var cssSrc='src/signals-transforms-table.less';
 var jsSrc=[
 	'src/intro.js',
-	'src/helpers.js',
+	'src/functions.js',
 	'src/sections.js',
 	'src/transforms.js',
 	'src/main.js',

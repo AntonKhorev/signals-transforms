@@ -32,5 +32,12 @@ function parseFunctionOptions(argument,options){
 	return o;
 };
 
-var nDomainCols=3;
-var iDefaultTransform=2;
+function generateFunctionAndArgumentFromString(s){
+	return [
+		function(arg,opts){
+			var o=parseFunctionOptions(arg,opts);
+			return 'x'+o.fnConj+'('+arg+')';
+		},
+		't'
+	];
+};
