@@ -114,6 +114,20 @@ var transforms=[{
 				{formula:{item:X(''+T+'-'+T+'_0')}},
 				{formula:{item:'e^{-j'+T+'\\omega_0 '+t+'_0}'+X(T)}}
 			]
+		}},
+		intdiff:function(x,X,t,T){return{
+			cells:[
+				'.|+|+',
+				'.|.|.'
+			],
+			time:[
+				{formula:{item:x(t)}},
+				{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
+			],
+			freq:[
+				{formula:{item:X(T)}},
+				{formula:{item:'j'+T+' \\omega_0 '+X(T)}},
+			]
 		}}
 	}
 },{
