@@ -2,10 +2,10 @@ var iDefaultTransform=2;
 var transforms=[{
 	name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
-	timeFnTemplate:'x(t)',
-	freqFnTemplate:'X(j*omega)',
+	timeFnTemplate:['x(t)','y(t)'],
+	freqFnTemplate:['X(j*omega)','Y(j*omega)'],
 	sections:{
-		definitions:function(x,X,t,T){return{
+		definitions:function(t,T,x,X){return{
 			time:[
 				{formula:{
 					item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
@@ -19,7 +19,7 @@ var transforms=[{
 				}}
 			]
 		}},
-		duality:function(x,X,t,T){return{
+		duality:function(t,T,x,X){return{
 			time:[
 				{formula:{item:'\\frac{1}{2\\pi} '+X('-'+t)}},
 				{formula:{item:x(t)}},
@@ -31,9 +31,9 @@ var transforms=[{
 				{formula:{item:'2\\pi '+x('-'+T)}}
 			]
 		}},
-		conjrev:function(x,X,t,T){return{
+		conjrev:function(t,T,x,X){return{
 		}},
-		modshift:function(x,X,t,T){return{
+		modshift:function(t,T,x,X){return{
 			time:[
 				{formula:{item:x(t+'+'+t+'_0')}},
 				{formula:{item:'e^{-j'+T+'_0 '+t+'}'+x(t)}},
@@ -49,7 +49,7 @@ var transforms=[{
 				{formula:{item:'e^{-j'+T+' '+t+'_0}'+X(T)}}
 			]
 		}},
-		intdiff:function(x,X,t,T){return{
+		intdiff:function(t,T,x,X){return{
 			time:[
 				{formula:{item:x(t)}},
 				{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
@@ -65,10 +65,10 @@ var transforms=[{
 },{
 	name:'Continuous-time Fourier series (CTFS)',
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_series',
-	timeFnTemplate:'x(t)',
-	freqFnTemplate:'a_k',
+	timeFnTemplate:['x(t)','y(t)'],
+	freqFnTemplate:['a_k','b_k'],
 	sections:{
-		definitions:function(x,X,t,T){return{
+		definitions:function(t,T,x,X){return{
 			time:[
 				{formula:{
 					item:x(t)+' = \\sum_{'+T+'=-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' \\omega_0 '+t+'}',
@@ -82,9 +82,9 @@ var transforms=[{
 				}}
 			]
 		}},
-		conjrev:function(x,X,t,T){return{
+		conjrev:function(t,T,x,X){return{
 		}},
-		modshift:function(x,X,t,T){return{
+		modshift:function(t,T,x,X){return{
 			time:[
 				{formula:{item:x(t+'+'+t+'_0')}},
 				{formula:{item:'e^{-j'+T+'_0 \\omega_0 '+t+'}'+x(t)}},
@@ -100,7 +100,7 @@ var transforms=[{
 				{formula:{item:'e^{-j'+T+'\\omega_0 '+t+'_0}'+X(T)}}
 			]
 		}},
-		intdiff:function(x,X,t,T){return{
+		intdiff:function(t,T,x,X){return{
 			cells:[
 				'.|+|+',
 				'.|.|.'
@@ -118,10 +118,10 @@ var transforms=[{
 },{
 	name:'Discrete-time Fourier transform (DTFT)',
 	wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
-	timeFnTemplate:'x[n]',
-	freqFnTemplate:'X(e^(j*omega))',
+	timeFnTemplate:['x[n]','y[n]'],
+	freqFnTemplate:['X(e^(j*omega))','Y(e^(j*omega))'],
 	sections:{
-		definitions:function(x,X,t,T){return{
+		definitions:function(t,T,x,X){return{
 			time:[
 				{formula:{
 					item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
@@ -135,9 +135,9 @@ var transforms=[{
 				}}
 			]
 		}},
-		conjrev:function(x,X,t,T){return{
+		conjrev:function(t,T,x,X){return{
 		}},
-		modshift:function(x,X,t,T){return{
+		modshift:function(t,T,x,X){return{
 			time:[
 				{formula:{item:x(t+'+'+t+'_0')}},
 				{formula:{item:'e^{-j'+T+'_0 '+t+'}'+x(t)}},
@@ -153,7 +153,7 @@ var transforms=[{
 				{formula:{item:'e^{-j'+T+' '+t+'_0}'+X(T)}}
 			]
 		}},
-		intdiff:function(x,X,t,T){return{
+		intdiff:function(t,T,x,X){return{
 			time:[
 				{formula:{item:x(t)}},
 				{formula:{item:x(t)+'-'+x(t+'-1')}},
@@ -169,10 +169,10 @@ var transforms=[{
 },{
 	name:'Discrete Fourier transform (DFT)',
 	wikipedia:'http://en.wikipedia.org/wiki/Discrete_Fourier_transform',
-	timeFnTemplate:'x[n]',
-	freqFnTemplate:'X[k]',
+	timeFnTemplate:['x[n]','y[n]'],
+	freqFnTemplate:['X[k]','Y[k]'],
 	sections:{
-		definitions:function(x,X,t,T){return{
+		definitions:function(t,T,x,X){return{
 			time:[
 				{formula:{
 					item:x(t)+' = \\frac 1 N \\sum_{'+T+'=0}^{N-1} '+X(T)+' W_N^{-'+T+' '+t+'}',
@@ -186,7 +186,7 @@ var transforms=[{
 				}}
 			]
 		}},
-		duality:function(x,X,t,T){return{
+		duality:function(t,T,x,X){return{
 			time:[
 				{formula:{item:'\\frac{1}{N} '+X('-'+t)}},
 				{formula:{item:x(t)}},
@@ -198,9 +198,9 @@ var transforms=[{
 				{formula:{item:'N '+x('-'+T)}}
 			]
 		}},
-		conjrev:function(x,X,t,T){return{
+		conjrev:function(t,T,x,X){return{
 		}},
-		modshift:function(x,X,t,T){return{
+		modshift:function(t,T,x,X){return{
 			time:[
 				{formula:{item:x(t+'+'+t+'_0')}},
 				{formula:{item:'W_N^{'+T+'_0 n}'+x(t)}},
@@ -216,7 +216,7 @@ var transforms=[{
 				{formula:{item:'W_N^{'+T+' '+t+'_0}'+X(T)}}
 			]
 		}},
-		intdiff:function(x,X,t,T){return{
+		intdiff:function(t,T,x,X){return{
 			time:[
 				{formula:{item:x(t)}},
 				{formula:{item:x(t)+'-'+x(t+'-1')}},

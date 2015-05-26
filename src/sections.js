@@ -1,6 +1,6 @@
 var sectionIds=['definitions','duality','conjrev','modshift','intdiff']; // sections ordering
 var sections={
-	definitions:function(x,X,t,T){return{
+	definitions:function(t,T,x,X){return{
 		name:'Definitions',
 		cells:[
 			'+ + +'
@@ -12,13 +12,13 @@ var sections={
 			{formula:{notes:{t:'analysis formula'}}},
 		]
 	}},
-	duality:function(x,X,t,T){return{
+	duality:function(t,T,x,X){return{
 		name:'Duality',
 		cells:[
 			'+|+|+'
 		]
 	}},
-	conjrev:function(x,X,t,T){return{
+	conjrev:function(t,T,x,X){return{
 		name:'Complex conjugation and time/frequency reversal',
 		cells:[
 			'+|+|.',
@@ -110,7 +110,7 @@ var sections={
 			}
 		]
 	}},
-	modshift:function(x,X,t,T){return{
+	modshift:function(t,T,x,X){return{
 		name:'Modulation and time/frequency shifting',
 		cells:[
 			'.|+|.',
@@ -132,7 +132,7 @@ var sections={
 			{formula:{notes:{b:'modulation'}}}
 		],
 	}},
-	intdiff:function(x,X,t,T){return{
+	intdiff:function(t,T,x,X){return{
 		name:'Integration and differentiation',
 		cells:[
 			'.|+|+',
