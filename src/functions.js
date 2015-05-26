@@ -64,6 +64,18 @@ function generateFunctionAndArgumentFromString(s){
 			t
 		];
 	}
+	var m=s.match(/([a-zA-Z]+)(\(|\[)e\^\([ij]\*([a-zA-Z]+)\)(\)|\])/);
+	if (m) {
+		var x=letter(m[1]);
+		var t=letter(m[3]);
+		return [
+			function(arg,opts){
+				var o=parseFunctionOptions(arg,opts);
+				return x+o.fnConj+'(e^{'+o.argSign+'j'+o.argRest+'})';
+			},
+			t
+		];
+	}
 	var m=s.match(/([a-zA-Z]+)_([a-zA-Z]+)/);
 	if (m) {
 		var x=letter(m[1]);

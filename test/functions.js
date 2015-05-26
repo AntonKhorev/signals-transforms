@@ -38,4 +38,10 @@ assert.equal(r[0]('#'),'X(j#)');
 assert.equal(r[0]('-#'),'X(-j#)');
 assert.equal(r[0]('#','*'),'X^*(j#)');
 
+var r=generateFunctionAndArgumentFromString('X(e^(i*phi))');
+assert.equal(r[1],'\\phi');
+assert.equal(r[0]('#'),'X(e^{j#})');
+assert.equal(r[0]('-#'),'X(e^{-j#})');
+assert.equal(r[0]('#','*'),'X^*(e^{j#})');
+
 console.log('tests ok');
