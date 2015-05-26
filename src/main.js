@@ -1,8 +1,8 @@
 return this.each(function(){
-	// section hidden/shown status for this table
-	var isSectionHidden={};
+	// section collapsed/shown status for this table
+	var isSectionCollapsed={};
 	$.each(sections,function(id,_){
-		isSectionHidden[id]=false;
+		isSectionCollapsed[id]=false;
 	});
 
 	function preventTextSelectionOnDoubleClick(ev){
@@ -22,14 +22,14 @@ return this.each(function(){
 
 			// make section title and cells
 			var tbodyNode=$("<tbody />");
-			if (isSectionHidden[id]) {
-				tbodyNode.addClass('hidden');
+			if (isSectionCollapsed[id]) {
+				tbodyNode.addClass('is-collapsed');
 			}
 			tbodyNode.append(
 				$("<tr />").append(
 					$("<th colspan='7' role='button'>"+section.name+"</th>").click(function(ev){
-						isSectionHidden[id]=false;
-						tbodyNode.removeClass('hidden');
+						isSectionCollapsed[id]=false;
+						tbodyNode.removeClass('is-collapsed');
 					}).mousedown(preventTextSelectionOnDoubleClick)
 				)
 			);
@@ -62,9 +62,9 @@ return this.each(function(){
 				tbodyNode.append(trNode);
 			});
 			tableNode.append(tbodyNode);
-			$("<div class='cell' />").append($("<div class='hide' role='button' title='hide section'>• • •</div>").click(function(ev){
-				tbodyNode.addClass('hidden');
-				isSectionHidden[id]=true;
+			$("<div class='cell' />").append($("<div class='collapse' role='button' title='collapse section'>• • •</div>").click(function(ev){
+				tbodyNode.addClass('is-collapsed');
+				isSectionCollapsed[id]=true;
 			}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
 
 			// put in formulas, relations and notes
