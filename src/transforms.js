@@ -28,14 +28,14 @@ var transforms=[{
 		}},
 		duality:function(t,T,x,X){return{
 			time:[
-				{formula:{item:'\\frac{1}{2\\pi} '+X('-'+t)}},
 				{formula:{item:x(t)}},
+				{formula:{item:'\\frac{1}{2\\pi} '+X('-'+t)}},
 				{formula:{item:X(t)}}
 			],
 			freq:[
 				{formula:{item:x(T)}},
-				{formula:{item:X(T)}},
-				{formula:{item:'2\\pi '+x('-'+T)}}
+				{formula:{item:'2\\pi '+x('-'+T)}},
+				{formula:{item:X(T)}}
 			]
 		}},
 		conjrev:function(){return{
@@ -92,13 +92,13 @@ var transforms=[{
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
 				{formula:{item:x(t)}},
-				{formula:{item:y(t)}},
-				{formula:{item:'A'+x(t)+'+B'+y(t)}}
+				{formula:{item:'A'+x(t)+'+B'+y(t)}},
+				{formula:{item:y(t)}}
 			],
 			freq:[
 				{formula:{item:X(T)}},
-				{formula:{item:Y(T)}},
-				{formula:{item:'A'+X(T)+'+B'+Y(T)}}
+				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
+				{formula:{item:Y(T)}}
 			]
 		}},
 		conjrev:function(){return{
@@ -121,8 +121,8 @@ var transforms=[{
 		}},
 		intdiff:function(t,T,x,X){return{
 			cells:[
-				'.|+|+',
-				'.|.|.'
+				'. .|+ +|+ +',
+				'. .|. .|. .'
 			],
 			time:[
 				{formula:{item:x(t)}},
@@ -209,13 +209,13 @@ var transforms=[{
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
 				{formula:{item:x(t)}},
-				{formula:{item:y(t)}},
-				{formula:{item:'A'+x(t)+'+B'+y(t)}}
+				{formula:{item:'A'+x(t)+'+B'+y(t)}},
+				{formula:{item:y(t)}}
 			],
 			freq:[
 				{formula:{item:X(T)}},
-				{formula:{item:Y(T)}},
-				{formula:{item:'A'+X(T)+'+B'+Y(T)}}
+				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
+				{formula:{item:Y(T)}}
 			]
 		}},
 		conjrev:function(){return{
@@ -238,8 +238,8 @@ var transforms=[{
 		}},
 		intdiff:function(t,T,x,X){return{
 			cells:[
-				'.|+|+',
-				'.|.|.'
+				'. .|+ +|+ +',
+				'. .|. .|. .'
 			],
 			time:[
 				{formula:{item:x(t)}},
@@ -343,8 +343,8 @@ var transforms=[{
 		linearity:function(){return{
 			freq:[
 				{formula:{notes:{b:RoC+' = \\(R_X\\)'}}},
-				{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}},
 				{formula:{notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'}}},
+				{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}}
 			]
 		}},
 		conjrev:function(t,T,x,X){return{ // http://www.engr.sjsu.edu/kghadiri/EE112/Lecture_Notes/EE_112_Lecture%2010-The%20Laplace%20Transform.pdf

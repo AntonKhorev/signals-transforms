@@ -10,7 +10,7 @@ var sections={
 	definitions:function(t,T,x,X){return{
 		name:'Definitions',
 		cells:[
-			'+ + +'
+			'+ + + + + +'
 		],
 		time:[
 			{formula:{notes:{t:'synthesis formula'}}}
@@ -22,32 +22,32 @@ var sections={
 	linearity:function(t,T,x,X,y,Y){return{
 		name:'Linearity',
 		cells:[
-			'+|.|+',
-			'+ + +'
+			//'+|+ + + +|+'
+			'+ +|+ +|+ +'
 		],
 		time:[
 			{formula:{item:x(t)}},
-			{formula:{item:y(t)}},
-			{formula:{item:'a'+x(t)+'+b'+y(t)}}
+			{formula:{item:'a'+x(t)+'+b'+y(t)}},
+			{formula:{item:y(t)}}
 		],
 		freq:[
 			{formula:{item:X(T)}},
-			{formula:{item:Y(T)}},
-			{formula:{item:'a'+X(T)+'+b'+Y(T)}}
+			{formula:{item:'a'+X(T)+'+b'+Y(T)}},
+			{formula:{item:Y(T)}}
 		]
 	}},
 	duality:function(t,T,x,X){return{
 		name:'Duality',
 		cells:[
-			'+|+|+'
+			'+ +|+ +|+ +'
 		]
 	}},
 	conjrev:function(t,T,x,X){return{
 		name:'Complex conjugation and time/frequency reversal',
 		cells:[
-			'+|+|.',
-			'+|+|+',
-			'.|+|+'
+			'+ +|+ +|. .',
+			'+ +|+ +|+ +',
+			'. .|+ +|+ +'
 		],
 		time:[
 			{
@@ -137,9 +137,9 @@ var sections={
 	modshift:function(t,T,x,X){return{
 		name:'Modulation and time/frequency shifting',
 		cells:[
-			'.|+|.',
-			'+|+|+',
-			'.|+|.'
+			'. .|+ +|. .',
+			'+ +|+ +|+ +',
+			'. .|+ +|. .'
 		],
 		time:[
 			{formula:{notes:{b:'time shifting'}}},
@@ -159,8 +159,8 @@ var sections={
 	intdiff:function(t,T,x,X){return{
 		name:'Integration and differentiation',
 		cells:[
-			'.|+|+',
-			'.|+|.'
+			'. .|+ +|+ +',
+			'. .|+ +|. .'
 		]
 	}}
 };

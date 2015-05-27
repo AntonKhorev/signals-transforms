@@ -1,4 +1,6 @@
 return this.each(function(){
+	var nDomainCols=6;
+
 	// section collapsed/shown status for this table
 	var isSectionCollapsed={};
 	$.each(sections,function(id,_){
@@ -20,11 +22,11 @@ return this.each(function(){
 		var transform=$.extend(true,{},transformCommon,transformSpecific);
 		tableNode.append(
 			"<thead><tr class='some-browsers-ignore-col-elements'>"+
-				"<td></td><td></td><td></td><td></td><td></td><td></td><td></td>"+
+				Array(nDomainCols*2+2).join("<td />")+
 			"</tr><tr>"+
-				"<th colspan='3' class='time'>"+transform.timeDomainName+"</th>"+
+				"<th colspan='"+nDomainCols+"' class='time'>"+transform.timeDomainName+"</th>"+
 				"<th class='both'></th>"+
-				"<th colspan='3' class='freq'>"+transform.freqDomainName+"</th>"+
+				"<th colspan='"+nDomainCols+"' class='freq'>"+transform.freqDomainName+"</th>"+
 			"</tr></thead>"
 		);
 
@@ -51,7 +53,7 @@ return this.each(function(){
 			}
 			tbodyNode.append(
 				$("<tr />").append(
-					$("<th colspan='7' role='button'>"+section.name+"</th>").click(function(ev){
+					$("<th colspan='"+(nDomainCols*2+1)+"' role='button'>"+section.name+"</th>").click(function(ev){
 						isSectionCollapsed[id]=false;
 						tbodyNode.removeClass('is-collapsed');
 					}).mousedown(preventTextSelectionOnDoubleClick)
@@ -221,9 +223,9 @@ return this.each(function(){
 
 	// table header section
 	tableNode.append(
-		"<colgroup class='time'><col /><col /><col /></colgroup>"+
+		"<colgroup class='time'>"+Array(nDomainCols+1).join("<col />")+"</colgroup>"+
 		"<colgroup class='both'><col /></colgroup>"+
-		"<colgroup class='freq'><col /><col /><col /></colgroup>"
+		"<colgroup class='freq'>"+Array(nDomainCols+1).join("<col />")+"</colgroup>"
 	);
 
 	// transform tabular data
