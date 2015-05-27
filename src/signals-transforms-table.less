@@ -203,7 +203,6 @@
 	}
 	.relation {
 		position: absolute;
-		z-index: 1;
 		width: @cell-spacing;
 		height: @cell-spacing;
 		line-height: @cell-spacing;
@@ -245,6 +244,8 @@
 			right: -@cell-spacing;
 		}
 		&::before {
+			position: relative;
+			z-index: 1;
 			display: block;
 			content: "⋮";
 			color: #888;
