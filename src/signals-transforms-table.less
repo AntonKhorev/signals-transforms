@@ -136,6 +136,39 @@
 		color: @note-color;
 		z-index: 1;
 	}
+	.arrow {
+		position: absolute;
+		z-index: -1;
+		height: 4px;
+		vertical-align: middle;
+		.arrowhead {
+			display: block;
+			position: absolute;
+			top: 0;
+			height: 4px;
+			width: 20px;
+			&.at-tl {
+				left: 0;
+				transform-origin: left;
+				transform: rotate(-45deg);
+			}
+			&.at-bl {
+				left: 0;
+				transform-origin: left;
+				transform: rotate(45deg);
+			}
+			&.at-tr {
+				right: 0;
+				transform-origin: right;
+				transform: rotate(45deg);
+			}
+			&.at-br {
+				right: 0;
+				transform-origin: right;
+				transform: rotate(-45deg);
+			}
+		}
+	}
 	.formula {
 		margin: -@cell-spacing/2; // vertically negates MathJax-imposed margins
 		position: relative;
@@ -154,6 +187,12 @@
 			text-align: center;
 			min-width: 100%;
 			background: @formula-highlight-background;
+		}
+		.arrow {
+			background: @formula-highlight-background;
+			.arrowhead {
+				background: @formula-highlight-background;
+			}
 		}
 		&:hover, &.is-highlighted {
 			background: @formula-highlight-background;
@@ -264,6 +303,12 @@
 				margin-top: -25%;
 			}
 		}
+		.arrow {
+			background: @relation-highlight-background;
+			.arrowhead {
+				background: @relation-highlight-background;
+			}
+		}
 		&:hover, &.is-highlighted {
 			background: @relation-highlight-background;
 			.note {
@@ -273,42 +318,6 @@
 			&::before {
 				content: "║";
 				color: #000;
-			}
-		}
-	}
-	.arrow {
-		position: absolute;
-		background: @formula-highlight-background;
-		color: @formula-highlight-background;
-		z-index: -1;
-		height: 4px;
-		vertical-align: middle;
-		.arrowhead {
-			display: block;
-			position: absolute;
-			top: 0;
-			background: @formula-highlight-background;
-			height: 4px;
-			width: 20px;
-			&.at-tl {
-				left: 0;
-				transform-origin: left;
-				transform: rotate(-45deg);
-			}
-			&.at-bl {
-				left: 0;
-				transform-origin: left;
-				transform: rotate(45deg);
-			}
-			&.at-tr {
-				right: 0;
-				transform-origin: right;
-				transform: rotate(45deg);
-			}
-			&.at-br {
-				right: 0;
-				transform-origin: right;
-				transform: rotate(-45deg);
 			}
 		}
 	}
