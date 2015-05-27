@@ -346,19 +346,23 @@ var transforms=[{
 			freq:[
 				{
 					formula:{
-						item:'-'+X('-'+T+'^*','*')
+						item:'-'+X('-'+T+'^*','*'),
+						notes:{t:RoC+' = \\(-R\\)'}
 					}
 				},{
 					formula:{
-						item:'-'+X('-'+T)
+						item:'-'+X('-'+T),
+						notes:{t:RoC+' = \\(-R\\)'}
 					}
 				},{
 					formula:{
-						item:'-'+X(T+'^*','*')
+						item:'-'+X(T+'^*','*'),
+						notes:{b:RoC+' = \\(R\\)'}
 					}
 				},{
 					formula:{
-						item:X(T)
+						item:X(T),
+						notes:{b:RoC+' = \\(R\\)'}
 					},
 					relations:{
 						t:{notes:{r:'odd'}},
@@ -371,17 +375,17 @@ var transforms=[{
 				},{
 					formula:{
 						item:X(T+'^*','*'),
-						notes:{t:null}
+						notes:{t:RoC+' = \\(R\\)'}
 					}
 				},{
 					formula:{
 						item:X('-'+T),
-						notes:{b:null}
+						notes:{b:RoC+' = \\(-R\\)'}
 					}
 				},{
 					formula:{
 						item:X('-'+T+'^*','*'),
-						notes:{b:null}
+						notes:{b:RoC+' = \\(-R\\)'}
 					}
 				}
 			]
