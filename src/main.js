@@ -11,7 +11,10 @@ return this.each(function(){
 
 	var containerNode=$(this).empty();
 	var tableNode=$("<table class='signals-transforms-table' />").appendTo(containerNode);
-	var arrowNode=$("<div class='arrow'><div class='arrowhead at-tr' /><div class='arrowhead at-br' /></div>");
+	var arrowNode=$("<div class='arrow'>"+
+		"<div class='arrowhead at-tl' /><div class='arrowhead at-bl' />"+
+		"<div class='arrowhead at-tr' /><div class='arrowhead at-br' />"+
+	"</div>");
 
 	function writeTransform(transformSpecific){
 		var transform=$.extend(true,{},transformCommon,transformSpecific);
