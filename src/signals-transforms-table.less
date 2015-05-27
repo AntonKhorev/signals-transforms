@@ -4,6 +4,7 @@
 @cell-spacing: 2em; // need to fiddle with MathJax styles if it's lower than 2em
 @formula-highlight-background: #EDB;
 @relation-highlight-background: #CF8;
+@note-color: #444;
 
 .signals-transforms-table {
 	sup a {
@@ -14,6 +15,9 @@
 	}
 	[role="button"] {
 		cursor: pointer;
+	}
+	abbr {
+		border-bottom: dotted 1px @note-color;
 	}
 	border-collapse: collapse;
 	margin: auto;
@@ -129,7 +133,7 @@
 		position: absolute;
 		font-size: @note-font-size;
 		font-family: sans-serif;
-		color: #444;
+		color: @note-color;
 		z-index: 1;
 	}
 	.formula {

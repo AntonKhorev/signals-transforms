@@ -321,7 +321,10 @@ var transforms=[{
 			time:[
 				{formula:{
 					item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega} '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
-					notes:{b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'}
+					notes:{
+						t:"synthesis formula;<br /> the contour path of integration is in the <abbr title='region of convergence'>RoC</abbr> of \\("+X(T)+"\\)",
+						b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'
+					}
 				}}
 			],
 			freq:[
