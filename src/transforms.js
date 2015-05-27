@@ -334,5 +334,51 @@ var transforms=[{
 				}}
 			]
 		}},
+		linearity:function(){return{
+		}},
+		conjrev:function(t,T,x,X){return{ // http://www.engr.sjsu.edu/kghadiri/EE112/Lecture_Notes/EE_112_Lecture%2010-The%20Laplace%20Transform.pdf
+			freq:[
+				{
+					formula:{
+						item:'-'+X('-'+T+'^*','*')
+					}
+				},{
+					formula:{
+						item:'-'+X('-'+T)
+					}
+				},{
+					formula:{
+						item:'-'+X(T+'^*','*')
+					}
+				},{
+					formula:{
+						item:X(T)
+					},
+					relations:{
+						t:{notes:{r:'odd'}},
+						b:{notes:{l:'even'}},
+						l:{notes:{b:null}},
+						r:{notes:{t:null}},
+						tl:{notes:{l:null}},
+						br:{notes:{r:null}},
+					}
+				},{
+					formula:{
+						item:X(T+'^*','*'),
+						notes:{t:null}
+					}
+				},{
+					formula:{
+						item:X('-'+T),
+						notes:{b:null}
+					}
+				},{
+					formula:{
+						item:X('-'+T+'^*','*'),
+						notes:{b:null}
+					}
+				}
+			]
+		}}
 	}
 }];
