@@ -1,4 +1,5 @@
 var iDefaultTransform=2;
+var RoC="<abbr title='region of convergence'>RoC</abbr>";
 var transforms=[{
 	name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
@@ -322,7 +323,7 @@ var transforms=[{
 				{formula:{
 					item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega} '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
 					notes:{
-						t:"synthesis formula;<br /> the contour path of integration is in the <abbr title='region of convergence'>RoC</abbr> of \\("+X(T)+"\\)",
+						t:'synthesis formula;<br /> the contour path of integration is in the '+RoC+' of \\('+X(T)+'\\)',
 						b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'
 					}
 				}}
@@ -335,6 +336,11 @@ var transforms=[{
 			]
 		}},
 		linearity:function(){return{
+			freq:[
+				{formula:{notes:{b:RoC+' = \\(R_X\\)'}}},
+				{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}},
+				{formula:{notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'}}},
+			]
 		}},
 		conjrev:function(t,T,x,X){return{ // http://www.engr.sjsu.edu/kghadiri/EE112/Lecture_Notes/EE_112_Lecture%2010-The%20Laplace%20Transform.pdf
 			freq:[
