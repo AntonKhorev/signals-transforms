@@ -11,7 +11,7 @@ return this.each(function(){
 
 	var containerNode=$(this).empty();
 	var tableNode=$("<table class='signals-transforms-table' />").appendTo(containerNode);
-	var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
+	var arrowNode=$("<div class='arrow'><div class='arrowhead at-tr' /><div class='arrowhead at-br' /></div>");
 
 	function writeTransform(transformSpecific){
 		var transform=$.extend(true,{},transformCommon,transformSpecific);
@@ -139,12 +139,12 @@ return this.each(function(){
 					var fOffset=freqFormulaNode.offset();
 					var tWidth =timeFormulaNode.width();
 					var tHeight=timeFormulaNode.height();
-					lineNode.appendTo(timeFormulaNode)
+					arrowNode.appendTo(timeFormulaNode)
 						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
 						.width(fOffset.left-tOffset.left-tWidth)
 					;
 				},function(){
-					lineNode.detach();
+					arrowNode.detach();
 					timeFormulaNode.removeClass('is-highlighted');
 					freqFormulaNode.removeClass('is-highlighted');
 				});
