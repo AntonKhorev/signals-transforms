@@ -13,7 +13,18 @@ return this.each(function(){
 	var tableNode=$("<table class='signals-transforms-table' />").appendTo(containerNode);
 	var lineNode=$("<div class='line'><div class='arrowhead top' /><div class='arrowhead bottom' /></div>");
 
-	function writeTransform(transform){
+	function writeTransform(transformSpecific){
+		var transform=$.extend(true,{},transformCommon,transformSpecific);
+		tableNode.append(
+			"<thead><tr class='some-browsers-ignore-col-elements'>"+
+				"<td></td><td></td><td></td><td></td><td></td><td></td><td></td>"+
+			"</tr><tr>"+
+				"<th colspan='3' class='time'>"+transform.timeDomainName+"</th>"+
+				"<th class='both'></th>"+
+				"<th colspan='3' class='freq'>"+transform.freqDomainName+"</th>"+
+			"</tr></thead>"
+		);
+
 		var r=generateFnAndVarFromTemplate(transform.timeFnTemplate[0]);
 		var timeFn=r[0];
 		var timeVar=r[1];
@@ -177,7 +188,7 @@ return this.each(function(){
 						transformSelectNode.remove();
 						transformSelectNode=null;
 						writeTransformDropdownNodeHtml(transform);
-						tableNode.find('tbody').remove();
+						tableNode.find('thead,tbody').remove();
 						writeTransform(transform);
 					}).mousedown(preventTextSelectionOnDoubleClick)
 				);
@@ -193,14 +204,7 @@ return this.each(function(){
 	tableNode.append(
 		"<colgroup class='time'><col /><col /><col /></colgroup>"+
 		"<colgroup class='both'><col /></colgroup>"+
-		"<colgroup class='freq'><col /><col /><col /></colgroup>"+
-		"<thead><tr class='some-browsers-ignore-col-elements'>"+
-			"<td></td><td></td><td></td><td></td><td></td><td></td><td></td>"+
-		"</tr><tr>"+
-			"<th colspan='3' class='time'>Time domain</th>"+
-			"<th class='both'></th>"+
-			"<th colspan='3' class='freq'>Frequency domain</th>"+
-		"</tr></thead>"
+		"<colgroup class='freq'><col /><col /><col /></colgroup>"
 	);
 
 	// transform tabular data

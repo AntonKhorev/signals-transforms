@@ -1,5 +1,9 @@
 var iDefaultTransform=2;
 var RoC="<abbr title='region of convergence'>RoC</abbr>";
+var transformCommon={
+	timeDomainName:'Time domain',
+	freqDomainName:'Frequency domain'
+};
 var transforms=[{
 	name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
@@ -317,6 +321,7 @@ var transforms=[{
 	wikipedia:'http://en.wikipedia.org/wiki/Two-sided_Laplace_transform',
 	timeFnTemplate:['x(t)','y(t)'],
 	freqFnTemplate:['X(s)','Y(s)'],
+	freqDomainName:'s-domain',
 	sections:{
 		definitions:function(t,T,x,X){return{
 			time:[
