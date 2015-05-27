@@ -136,21 +136,23 @@ return this.each(function(){
 
 				function placeArrow(timeNode,freqNode,gap){
 					if (typeof(gap)==='undefined') gap=0;
-					var tOffset=timeNode.offset();
-					var fOffset=freqNode.offset();
-					var tWidth =timeNode.width();
+					var tTop   =timeNode.offset().top;
+					var tLeft  =timeNode.offset().left;
+					var fLeft  =freqNode.offset().left;
+					var tWidth =timeNode.outerWidth();
 					var tHeight=timeNode.height();
-					var tLabelWidth=0;
 					timeNode.find('.note.at-r').eq(0).each(function(){
-						tLabelWidth=$(this).width();
+						tLeft=$(this).offset().left;
+						tWidth=$(this).outerWidth();
 					});
-					var fLabelWidth=0;
 					freqNode.find('.note.at-l').eq(0).each(function(){
-						fLabelWidth=$(this).width();
+						fLeft=$(this).offset().left;
 					});
 					arrowNode.appendTo(timeNode)
-						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth+tLabelWidth+gap})
-						.width(fOffset.left-tOffset.left-tWidth-tLabelWidth-fLabelWidth-2*gap);
+						.offset({
+							top:tTop+tHeight/2-2,
+							left:tLeft+tWidth+gap
+						}).width(fLeft-tLeft-tWidth-2*gap);
 				}
 
 				// formula pairs
