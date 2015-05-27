@@ -140,9 +140,17 @@ return this.each(function(){
 					var fOffset=freqNode.offset();
 					var tWidth =timeNode.width();
 					var tHeight=timeNode.height();
+					var tLabelWidth=0;
+					timeNode.find('.note.at-r').eq(0).each(function(){
+						tLabelWidth=$(this).width();
+					});
+					var fLabelWidth=0;
+					freqNode.find('.note.at-l').eq(0).each(function(){
+						fLabelWidth=$(this).width();
+					});
 					arrowNode.appendTo(timeNode)
-						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth+gap})
-						.width(fOffset.left-tOffset.left-tWidth-2*gap);
+						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth+tLabelWidth+gap})
+						.width(fOffset.left-tOffset.left-tWidth-tLabelWidth-fLabelWidth-2*gap);
 				}
 
 				// formula pairs
