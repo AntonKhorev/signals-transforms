@@ -337,8 +337,8 @@ var transforms=[{
 		}},
 		linearity:function(){return{
 			freq:[
-				{formula:{notes:{b:RoC+' = \\(R_X\\)'}}},
-				{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}},
+				{formula:{notes:{b:RoC+' = \\(R_X\\)'}}},
+				{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}},
 				{formula:{notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'}}},
 			]
 		}},
@@ -347,22 +347,22 @@ var transforms=[{
 				{
 					formula:{
 						item:'-'+X('-'+T+'^*','*'),
-						notes:{t:RoC+' = \\(-R\\)'}
+						notes:{t:RoC+' = \\(-R\\)'}
 					}
 				},{
 					formula:{
 						item:'-'+X('-'+T),
-						notes:{t:RoC+' = \\(-R\\)'}
+						notes:{t:RoC+' = \\(-R\\)'}
 					}
 				},{
 					formula:{
 						item:'-'+X(T+'^*','*'),
-						notes:{b:RoC+' = \\(R\\)'}
+						notes:{b:RoC+' = \\(R\\)'}
 					}
 				},{
 					formula:{
 						item:X(T),
-						notes:{b:RoC+' = \\(R\\)'}
+						notes:{b:RoC+' = \\(R\\)'}
 					},
 					relations:{
 						t:{notes:{r:'odd'}},
@@ -375,19 +375,50 @@ var transforms=[{
 				},{
 					formula:{
 						item:X(T+'^*','*'),
-						notes:{t:RoC+' = \\(R\\)'}
+						notes:{t:RoC+' = \\(R\\)'}
 					}
 				},{
 					formula:{
 						item:X('-'+T),
-						notes:{b:RoC+' = \\(-R\\)'}
+						notes:{b:RoC+' = \\(-R\\)'}
 					}
 				},{
 					formula:{
 						item:X('-'+T+'^*','*'),
-						notes:{b:RoC+' = \\(-R\\)'}
+						notes:{b:RoC+' = \\(-R\\)'}
 					}
 				}
+			]
+		}},
+		modshift:function(t,T,x,X){return{
+			time:[
+				{formula:{item:x(t+'+'+t+'_0')}},
+				{formula:{item:'e^{-'+T+'_0 '+t+'}'+x(t)}},
+				{formula:{item:x(t)}},
+				{formula:{item:'e^{'+T+'_0 '+t+'}'+x(t)}},
+				{formula:{item:x(t+'-'+t+'_0')}}
+			],
+			freq:[
+				{formula:{
+					item:'e^{'+T+' '+t+'_0}'+X(T),
+					notes:{b:RoC+' = \\(R\\)'}
+				}},
+				{formula:{
+					item:X(''+T+'+'+T+'_0'),
+					notes:{b:RoC+' = \\(R-\\Re('+T+'_0)\\)'}
+				}},
+				{formula:{
+					item:X(T),
+					notes:{b:RoC+' = \\(R\\)'}
+				}},
+				{formula:{
+					item:X(''+T+'-'+T+'_0'),
+					notes:{b:RoC+' = \\(R+\\Re('+T+'_0)\\)'}
+				}},
+				{formula:{
+					item:'e^{-'+T+' '+t+'_0}'+X(T),
+					notes:{b:RoC+' = \\(R\\)'}
+				}}
 			]
 		}}
 	}
