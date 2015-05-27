@@ -304,9 +304,18 @@
 			}
 		}
 		.arrow {
-			background: @relation-highlight-background;
+			border-top: solid 2px @relation-highlight-background;
+			border-bottom: solid 2px @relation-highlight-background;
 			.arrowhead {
+				top: 1px;
+				height: 2px;
 				background: @relation-highlight-background;
+				&.at-tl, &.at-bl {
+					left: -3px;
+				}
+				&.at-tr, &.at-br {
+					right: -3px;
+				}
 			}
 		}
 		&:hover, &.is-highlighted {

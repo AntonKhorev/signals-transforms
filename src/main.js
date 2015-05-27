@@ -134,14 +134,15 @@ return this.each(function(){
 				insertStuff(timeFormulaNode,section.time[i]);
 				insertStuff(freqFormulaNode,section.freq[i]);
 
-				function placeArrow(timeNode,freqNode){
+				function placeArrow(timeNode,freqNode,gap){
+					if (typeof(gap)==='undefined') gap=0;
 					var tOffset=timeNode.offset();
 					var fOffset=freqNode.offset();
 					var tWidth =timeNode.width();
 					var tHeight=timeNode.height();
 					arrowNode.appendTo(timeNode)
-						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth})
-						.width(fOffset.left-tOffset.left-tWidth);
+						.offset({top:tOffset.top+tHeight/2-2,left:tOffset.left+tWidth+gap})
+						.width(fOffset.left-tOffset.left-tWidth-2*gap);
 				}
 
 				// formula pairs
@@ -162,7 +163,7 @@ return this.each(function(){
 					timeRelationNode.add(freqRelationNode).hover(function(){
 						timeRelationNode.trigger('item:highlight');
 						freqRelationNode.trigger('item:highlight');
-						placeArrow(timeRelationNode,freqRelationNode);
+						placeArrow(timeRelationNode,freqRelationNode,4);
 					},function(){
 						arrowNode.detach();
 						timeRelationNode.trigger('item:unhighlight');
