@@ -136,8 +136,8 @@ return this.each(function(){
 				insertStuff(timeFormulaNode,section.time[i]);
 				insertStuff(freqFormulaNode,section.freq[i]);
 
-				function placeArrow(timeNode,freqNode,gap){
-					if (typeof(gap)==='undefined') gap=0;
+				function placeArrow(timeNode,freqNode,vShift,hGap){
+					if (typeof(hGap)==='undefined') hGap=0;
 					var tTop   =timeNode.offset().top;
 					var tLeft  =timeNode.offset().left;
 					var fLeft  =freqNode.offset().left;
@@ -152,16 +152,16 @@ return this.each(function(){
 					});
 					arrowNode.appendTo(timeNode)
 						.offset({
-							top:tTop+tHeight/2-2,
-							left:tLeft+tWidth+gap
-						}).width(fLeft-tLeft-tWidth-2*gap);
+							top:tTop+tHeight/2-vShift,
+							left:tLeft+tWidth+hGap
+						}).width(fLeft-tLeft-tWidth-2*hGap);
 				}
 
 				// formula pairs
 				timeFormulaNode.add(freqFormulaNode).hover(function(){
 					timeFormulaNode.addClass('is-highlighted');
 					freqFormulaNode.addClass('is-highlighted');
-					placeArrow(timeFormulaNode,freqFormulaNode);
+					placeArrow(timeFormulaNode,freqFormulaNode,2);
 				},function(){
 					arrowNode.detach();
 					timeFormulaNode.removeClass('is-highlighted');
@@ -175,7 +175,7 @@ return this.each(function(){
 					timeRelationNode.add(freqRelationNode).hover(function(){
 						timeRelationNode.trigger('item:highlight');
 						freqRelationNode.trigger('item:highlight');
-						placeArrow(timeRelationNode,freqRelationNode,4);
+						placeArrow(timeRelationNode,freqRelationNode,4,4);
 					},function(){
 						arrowNode.detach();
 						timeRelationNode.trigger('item:unhighlight');
