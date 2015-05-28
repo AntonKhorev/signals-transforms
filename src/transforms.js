@@ -133,8 +133,8 @@ var transforms=[{
 		}},
 		intdiff:function(t,T,x,X){return{
 			cells:[
-				'. .|+ +|+ +',
-				'. .|. .|. .'
+				'.|+|+',
+				'.|.|.'
 			],
 			time:[
 				{formula:{item:x(t)}},
@@ -262,8 +262,8 @@ var transforms=[{
 		}},
 		intdiff:function(t,T,x,X){return{
 			cells:[
-				'. .|+ +|+ +',
-				'. .|. .|. .'
+				'.|+|+',
+				'.|.|.'
 			],
 			time:[
 				{formula:{item:x(t)}},

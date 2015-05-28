@@ -1,5 +1,5 @@
 return this.each(function(){
-	var nDomainCols=6;
+	var nDomainCols=3;
 
 	// section collapsed/shown status for this table
 	var isSectionCollapsed={};
