@@ -27,13 +27,19 @@ var transforms=[{
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
 				{},{},{},
-				{formula:{item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau'}},
+				{formula:{
+					item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau',
+					notes:{b:'linear convolution'}
+				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
 				{},{},{},
 				{formula:{item:X(T)+' \\cdot '+Y(T)}},
-				{formula:{item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta'}}
+				{formula:{
+					item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta',
+					notes:{b:'linear convolution'}
+				}}
 			]
 		}},
 		duality:function(t,T,x,X){return{
@@ -103,14 +109,20 @@ var transforms=[{
 			time:[
 				{},{},
 				{formula:{item:'A'+x(t)+'+B'+y(t)}},
-				{formula:{item:'\\int\\limits_{\\langle T \\rangle}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau'}},
+				{formula:{
+					item:'\\int\\limits_{\\langle T \\rangle}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau',
+					notes:{b:'periodic convolution'}
+				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
 				{},{},
 				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
 				{formula:{item:'T \\, '+X(T)+' \\cdot '+Y(T)}},
-				{formula:{item:'\\sum_{l=-\\infty}^{+\\infty} '+X('l')+Y(T+'-l')}}
+				{formula:{
+					item:'\\sum_{l=-\\infty}^{+\\infty} '+X('l')+Y(T+'-l'),
+					notes:{b:'linear convolution'}
+				}}
 			]
 		}},
 		conjrev:function(){return{
@@ -169,13 +181,19 @@ var transforms=[{
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
 				{},{},{},
-				{formula:{item:x(t)+'*'+y(t)+' = \\sum_{m=-\\infty}^{+\\infty} '+x('m')+y(t+'-m')}},
+				{formula:{
+					item:x(t)+'*'+y(t)+' = \\sum_{m=-\\infty}^{+\\infty} '+x('m')+y(t+'-m'),
+					notes:{b:'linear convolution'}
+				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
 				{},{},{},
 				{formula:{item:X(T)+' \\cdot '+Y(T)}},
-				{formula:{item:'\\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta'}}
+				{formula:{
+					item:'\\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta',
+					notes:{b:'periodic convolution'}
+				}}
 			]
 		}},
 		conjrev:function(){return{
@@ -232,14 +250,20 @@ var transforms=[{
 			time:[
 				{},{},
 				{formula:{item:'A'+x(t)+'+B'+y(t)}},
-				{formula:{item:'\\sum_{m=\\langle N \\rangle} '+x('m')+y(t+'-m')}},
+				{formula:{
+					item:'\\sum_{m=\\langle N \\rangle} '+x('m')+y(t+'-m'),
+					notes:{b:'periodic convolution'}
+				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
 				{},{},
 				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
 				{formula:{item:'N \\, '+X(T)+' \\cdot '+Y(T)}},
-				{formula:{item:'\\sum_{l=\\langle N \\rangle} '+X('l')+Y(T+'-l')}}
+				{formula:{
+					item:'\\sum_{l=\\langle N \\rangle} '+X('l')+Y(T+'-l'),
+					notes:{b:'periodic convolution'}
+				}}
 			]
 		}},
 		conjrev:function(){return{
@@ -298,13 +322,19 @@ var transforms=[{
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
 				{},{},{},
-				{formula:{item:'\\sum_{m=0}^{N-1} '+x('m')+y(t+'-m')}},
+				{formula:{
+					item:'\\sum_{m=0}^{N-1} '+x('m')+y(t+'-m'),
+					notes:{b:'circular convolution'}
+				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
 				{},{},{},
 				{formula:{item:X(T)+' \\cdot '+Y(T)}},
-				{formula:{item:'\\frac{1}{N} \\sum_{l=0}^{N-1} '+X('l')+Y(T+'-l')}}
+				{formula:{
+					item:'\\frac{1}{N} \\sum_{l=0}^{N-1} '+X('l')+Y(T+'-l'),
+					notes:{b:'circular convolution'}
+				}}
 			]
 		}},
 		duality:function(t,T,x,X){return{
@@ -377,7 +407,10 @@ var transforms=[{
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
 				{},{},{},
-				{formula:{item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau'}},
+				{formula:{
+					item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau',
+					notes:{b:'linear convolution'}
+				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
