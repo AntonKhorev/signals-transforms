@@ -20,21 +20,36 @@ var sections={
 		]
 	}},
 	linearity:function(t,T,x,X,y,Y){return{
-		name:'Linearity',
+		name:'Linearity, convolution and multiplication',
 		cells:[
-			//'+|+ + + +|+'
-			'+ +|+ +|+ +'
+			// '+|+ + + +|+' // can't have it - ff and ie make table too wide
+
+			// '+ +|+ +|+ +' // can't have it - ff and ie make table too wide ()
+
+			'+ + +|+ + +',
+			'+ + + + + +',
+			'+ + + + + +',
+			'+ + + + + +',
 		],
 		time:[
+			// {formula:{item:x(t)}},
+			// {formula:{item:'a'+x(t)+'+b'+y(t)}},
+			// {formula:{item:y(t)}}
+
 			{formula:{item:x(t)}},
-			{formula:{item:'a'+x(t)+'+b'+y(t)}},
-			{formula:{item:y(t)}}
+			{formula:{item:y(t)}},
+			{formula:{item:'a'+x(t)+'+b'+y(t)}}
 		],
 		freq:[
+			// {formula:{item:X(T)}},
+			// {formula:{item:'a'+X(T)+'+b'+Y(T)}},
+			// {formula:{item:Y(T)}}
+
 			{formula:{item:X(T)}},
-			{formula:{item:'a'+X(T)+'+b'+Y(T)}},
-			{formula:{item:Y(T)}}
+			{formula:{item:Y(T)}},
+			{formula:{item:'a'+X(T)+'+b'+Y(T)}}
 		]
+		// see this before adding correlation: http://mathworld.wolfram.com/Cross-Correlation.html
 	}},
 	duality:function(t,T,x,X){return{
 		name:'Duality',

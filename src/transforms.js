@@ -13,29 +13,39 @@ var transforms=[{
 		definitions:function(t,T,x,X){return{
 			time:[
 				{formula:{
-					item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
+					item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
 					notes:{b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'}
 				}}
 			],
 			freq:[
 				{formula:{
-					item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty} '+x(t)+' e^{-j'+T+' '+t+'} \\,\\mathrm{d}'+t,
+					item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t)+' e^{-j'+T+' '+t+'} \\,\\mathrm{d}'+t,
 					notes:{b:'function \\('+X(T)+'\\) of continuous variable \\('+T+'\\)'}
 				}}
 			]
 		}},
-		linearity:function(){return{
+		linearity:function(t,T,x,X,y,Y){return{
+			time:[
+				{},{},{},
+				{formula:{item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau'}},
+				{formula:{item:x(t)+' \\cdot '+y(t)}}
+			],
+			freq:[
+				{},{},{},
+				{formula:{item:X(T)+' \\cdot '+Y(T)}},
+				{formula:{item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta'}}
+			]
 		}},
 		duality:function(t,T,x,X){return{
 			time:[
-				{formula:{item:x(t)}},
 				{formula:{item:'\\frac{1}{2\\pi} '+X('-'+t)}},
+				{formula:{item:x(t)}},
 				{formula:{item:X(t)}}
 			],
 			freq:[
 				{formula:{item:x(T)}},
-				{formula:{item:'2\\pi '+x('-'+T)}},
-				{formula:{item:X(T)}}
+				{formula:{item:X(T)}},
+				{formula:{item:'2\\pi '+x('-'+T)}}
 			]
 		}},
 		conjrev:function(){return{
@@ -84,21 +94,23 @@ var transforms=[{
 			],
 			freq:[
 				{formula:{
-					item:X(T)+' = \\frac{1}{T} \\int\\limits_{\\langle T \\rangle} '+x(t)+' e^{-j'+T+' \\omega_0 '+t+'} \\,\\mathrm{d}'+t,
+					item:X(T)+' = \\frac{1}{T} \\int\\limits_{\\langle T \\rangle}\\! '+x(t)+' e^{-j'+T+' \\omega_0 '+t+'} \\,\\mathrm{d}'+t,
 					notes:{b:'function \\('+X(T)+'\\) of discrete variable \\('+T+'\\);<br /> \\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 				}}
 			]
 		}},
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
-				{formula:{item:x(t)}},
+				{},{},
 				{formula:{item:'A'+x(t)+'+B'+y(t)}},
-				{formula:{item:y(t)}}
+				{formula:{item:'\\int\\limits_{\\langle T \\rangle}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau'}},
+				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
-				{formula:{item:X(T)}},
+				{},{},
 				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
-				{formula:{item:Y(T)}}
+				{formula:{item:'T \\, '+X(T)+' \\cdot '+Y(T)}},
+				{formula:{item:'\\sum_{l=-\\infty}^{+\\infty} '+X('l')+Y(T+'-l')}}
 			]
 		}},
 		conjrev:function(){return{
@@ -143,7 +155,7 @@ var transforms=[{
 		definitions:function(t,T,x,X){return{
 			time:[
 				{formula:{
-					item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle} '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
+					item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
 					notes:{b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)'}
 				}}
 			],
@@ -154,7 +166,17 @@ var transforms=[{
 				}}
 			]
 		}},
-		linearity:function(){return{
+		linearity:function(t,T,x,X,y,Y){return{
+			time:[
+				{},{},{},
+				{formula:{item:x(t)+'*'+y(t)+' = \\sum_{m=-\\infty}^{+\\infty} '+x('m')+y(t+'-m')}},
+				{formula:{item:x(t)+' \\cdot '+y(t)}}
+			],
+			freq:[
+				{},{},{},
+				{formula:{item:X(T)+' \\cdot '+Y(T)}},
+				{formula:{item:'\\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta'}}
+			]
 		}},
 		conjrev:function(){return{
 		}},
@@ -208,14 +230,16 @@ var transforms=[{
 		}},
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
-				{formula:{item:x(t)}},
+				{},{},
 				{formula:{item:'A'+x(t)+'+B'+y(t)}},
-				{formula:{item:y(t)}}
+				{formula:{item:'\\sum_{m=\\langle N \\rangle} '+x('m')+y(t+'-m')}},
+				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
-				{formula:{item:X(T)}},
+				{},{},
 				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
-				{formula:{item:Y(T)}}
+				{formula:{item:'N \\, '+X(T)+' \\cdot '+Y(T)}},
+				{formula:{item:'\\sum_{l=\\langle N \\rangle} '+X('l')+Y(T+'-l')}}
 			]
 		}},
 		conjrev:function(){return{
@@ -271,7 +295,17 @@ var transforms=[{
 				}}
 			]
 		}},
-		linearity:function(){return{
+		linearity:function(t,T,x,X,y,Y){return{
+			time:[
+				{},{},{},
+				{formula:{item:'\\sum_{m=0}^{N-1} '+x('m')+y(t+'-m')}},
+				{formula:{item:x(t)+' \\cdot '+y(t)}}
+			],
+			freq:[
+				{},{},{},
+				{formula:{item:X(T)+' \\cdot '+Y(T)}},
+				{formula:{item:'\\frac{1}{N} \\sum_{l=0}^{N-1} '+X('l')+Y(T+'-l')}}
+			]
 		}},
 		duality:function(t,T,x,X){return{
 			time:[
@@ -326,7 +360,7 @@ var transforms=[{
 		definitions:function(t,T,x,X){return{
 			time:[
 				{formula:{
-					item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega} '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
+					item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
 					notes:{
 						t:'synthesis formula;<br /> the contour path of integration is in the '+RoC+' of \\('+X(T)+'\\)',
 						b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'
@@ -335,16 +369,29 @@ var transforms=[{
 			],
 			freq:[
 				{formula:{
-					item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty} '+x(t)+' e^{-'+T+' '+t+'} \\,\\mathrm{d}'+t,
+					item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t)+' e^{-'+T+' '+t+'} \\,\\mathrm{d}'+t,
 					notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
 				}}
 			]
 		}},
-		linearity:function(){return{
+		linearity:function(t,T,x,X,y,Y){return{
+			time:[
+				{},{},{},
+				{formula:{item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau'}},
+				{formula:{item:x(t)+' \\cdot '+y(t)}}
+			],
 			freq:[
 				{formula:{notes:{b:RoC+' = \\(R_X\\)'}}},
+				{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}},
 				{formula:{notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'}}},
-				{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}}
+				{formula:{
+					item:X(T)+' \\cdot '+Y(T),
+					notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'}
+				}},
+				{formula:{
+					item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T),
+					notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'} // [Mrinal Mandal, Amir Asif, Continuous and Discrete Time Signals and Systems, isbn 9780521854559, p. 283]
+				}}
 			]
 		}},
 		conjrev:function(t,T,x,X){return{ // http://www.engr.sjsu.edu/kghadiri/EE112/Lecture_Notes/EE_112_Lecture%2010-The%20Laplace%20Transform.pdf
