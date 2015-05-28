@@ -5,6 +5,7 @@
 @formula-highlight-background: #EDB;
 @relation-highlight-background: #CF8;
 @note-color: #444;
+@line-color: #888;
 
 .signals-transforms-table {
 	sup a {
@@ -25,7 +26,7 @@
 	caption {
 		position: relative;
 		border-radius: .5em;
-		border: 1px solid #888;
+		border: 1px solid @line-color;
 		height: 1.5em;
 		padding: 0;
 		font-weight: bold;
@@ -53,7 +54,7 @@
 		position: absolute;
 		z-index: 2;
 		border-radius: .5em;
-		border: 1px solid #444;
+		border: 1px solid @line-color;
 		background: #FFF;
 		color: #000;
 		box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -90,8 +91,11 @@
 		line-height: 1.5em;
 		padding: 0;
 	}
+	thead {
+		border-bottom: solid 1px @line-color; // for printing
+	}
 	tbody {
-		border-top: solid 1px #888;
+		border-top: solid 1px @line-color;
 		tr:first-child + tr td {
 			padding-top: 1.5em;
 		}
@@ -104,7 +108,7 @@
 		&.is-collapsed {
 			tr:first-child th {
 				display: table-cell;
-				border-bottom: solid 1px #888; // border hack for chrome
+				border-bottom: solid 1px @line-color; // border hack for chrome
 			}
 			tr td {
 				display: none;
