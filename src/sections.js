@@ -20,8 +20,8 @@ var sections={
 		]
 	}},
 	linearity:function(t,T,x,X,y,Y,ctx){
-		var a=ctx.texLetter(['a','A','alpha']);
-		var b=ctx.texLetter(['b','B','beta']);
+		var a=ctx.letter(['a','A','alpha']);
+		var b=ctx.letter(['b','B','beta']);
 	return{
 		name:'Linearity, convolution and multiplication',
 		cells:[
