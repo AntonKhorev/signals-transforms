@@ -90,3 +90,25 @@ function generateFnAndVarFromTemplate(s){
 	}
 	throw 'invalid function template';
 };
+
+function FormulaContext(timeFnTemplate,freqFnTemplate){
+	var r=generateFnAndVarFromTemplate(timeFnTemplate[0]);
+	var x=r[0];
+	var t=r[1];
+	var r=generateFnAndVarFromTemplate(freqFnTemplate[0]);
+	var X=r[0];
+	var T=r[1];
+	var r=generateFnAndVarFromTemplate(timeFnTemplate[1]);
+	var y=r[0];
+	var r=generateFnAndVarFromTemplate(freqFnTemplate[1]);
+	var Y=r[0];
+
+	var ctx={}
+	ctx.texLetter=function(letters){
+		return letters[0]; // TODO
+	}
+	ctx.callSection=function(sectionFn){
+		return sectionFn(t,T,x,X,y,Y,ctx);
+	};
+	return ctx;
+}

@@ -30,20 +30,11 @@ return this.each(function(){
 			"</tr></thead>"
 		);
 
-		var r=generateFnAndVarFromTemplate(transform.timeFnTemplate[0]);
-		var timeFn=r[0];
-		var timeVar=r[1];
-		var r=generateFnAndVarFromTemplate(transform.freqFnTemplate[0]);
-		var freqFn=r[0];
-		var freqVar=r[1];
-		var r=generateFnAndVarFromTemplate(transform.timeFnTemplate[1]);
-		var timeFn1=r[0];
-		var r=generateFnAndVarFromTemplate(transform.freqFnTemplate[1]);
-		var freqFn1=r[0];
+		var ctx=FormulaContext(transform.timeFnTemplate,transform.freqFnTemplate);
 		$.each(sectionIds,function(_,id){
 			if (!(id in transform.sections)) return;
-			var sectionCommon=sections[id](timeVar,freqVar,timeFn,freqFn,timeFn1,freqFn1);
-			var sectionSpecific=transform.sections[id](timeVar,freqVar,timeFn,freqFn,timeFn1,freqFn1);
+			var sectionCommon=ctx.callSection(sections[id]);
+			var sectionSpecific=ctx.callSection(transform.sections[id]);
 			section=$.extend(true,{},sectionCommon,sectionSpecific);
 
 			// make section title and cells

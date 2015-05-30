@@ -107,8 +107,7 @@ var transforms=[{
 		}},
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
-				{},{},
-				{formula:{item:'A'+x(t)+'+B'+y(t)}},
+				{},{},{},
 				{formula:{
 					item:'\\int\\limits_{\\langle T \\rangle}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau',
 					notes:{b:'periodic convolution'}
@@ -116,8 +115,7 @@ var transforms=[{
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
-				{},{},
-				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
+				{},{},{},
 				{formula:{item:'T \\, '+X(T)+' \\cdot '+Y(T)}},
 				{formula:{
 					item:'\\sum_{l=-\\infty}^{+\\infty} '+X('l')+Y(T+'-l'),
@@ -248,8 +246,7 @@ var transforms=[{
 		}},
 		linearity:function(t,T,x,X,y,Y){return{
 			time:[
-				{},{},
-				{formula:{item:'A'+x(t)+'+B'+y(t)}},
+				{},{},{},
 				{formula:{
 					item:'\\sum_{m=\\langle N \\rangle} '+x('m')+y(t+'-m'),
 					notes:{b:'periodic convolution'}
@@ -257,8 +254,7 @@ var transforms=[{
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],
 			freq:[
-				{},{},
-				{formula:{item:'A'+X(T)+'+B'+Y(T)}},
+				{},{},{},
 				{formula:{item:'N \\, '+X(T)+' \\cdot '+Y(T)}},
 				{formula:{
 					item:'\\sum_{l=\\langle N \\rangle} '+X('l')+Y(T+'-l'),
