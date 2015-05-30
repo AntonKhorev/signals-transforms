@@ -1,4 +1,12 @@
 function FormulaContext(timeFnTemplate,freqFnTemplate){
+	function texLetter(s){
+		if (s.length>1) {
+			return '\\'+s;
+		} else {
+			return s;
+		}
+	}
+
 	function parseFunctionOptions(argument,options){
 		if (typeof(options)==='undefined') options='';
 		var startsWithMinus = argument.charAt(0)=='-';
@@ -34,13 +42,6 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 	};
 
 	function parseTemplate(s){
-		function texLetter(s){
-			if (s.length>1) {
-				return '\\'+s;
-			} else {
-				return s;
-			}
-		}
 		var m=s.match(/([a-zA-Z]+)(\(|\[)([a-zA-Z]+)(\)|\])/);
 		if (m) {
 			var x=texLetter(m[1]);
@@ -104,7 +105,13 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 	var r=parseTemplate(freqFnTemplate[1]);
 	var Y=r[0]; ctx.letters.Y=r[2];
 	ctx.letter=function(letters){
-		return '{'+letters[0]+'}'; // TODO
+		outer: for (var i=0;i<letters.length;i++) {
+			for (var k in ctx.letters) {
+				if (letters[i]==ctx.letters[k]) continue outer;
+			}
+			return '{'+texLetter(letters[i])+'}';
+		}
+		return '\\tilde{'+texLetter(letters[0])+'}';
 	}
 	ctx.callSection=function(sectionFn){
 		return sectionFn(t,T,x,X,y,Y,ctx);
