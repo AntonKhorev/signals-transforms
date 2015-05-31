@@ -25,7 +25,7 @@ gulp.task('css',function(){
 		.pipe(autoprefixer())
 		.pipe(minifyCss({compatibility:'ie7'}))
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('public_html'));
+		.pipe(gulp.dest('public_html/lib'));
 });
 
 gulp.task('js',function(){
@@ -35,7 +35,7 @@ gulp.task('js',function(){
 		.pipe(concat('signals-transforms-table.js'))
 		.pipe(uglify())
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('public_html'));
+		.pipe(gulp.dest('public_html/lib'));
 });
 
 gulp.task('watch',function(){

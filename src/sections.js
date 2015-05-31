@@ -1,4 +1,4 @@
-var sectionIds=[ // sections ordering
+var includedSections=[ // default sections ordering
 	'definitions',
 	'linearity',
 	'duality',

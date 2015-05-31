@@ -31,7 +31,7 @@ return this.each(function(){
 		);
 
 		var ctx=FormulaContext(transform.timeFnTemplate,transform.freqFnTemplate);
-		$.each(sectionIds,function(_,id){
+		$.each(includedSections,function(_,id){
 			if (!(id in transform.sections)) return;
 			var sectionCommon=ctx.callSection(sections[id]);
 			var sectionSpecific=ctx.callSection(transform.sections[id]);
@@ -190,11 +190,12 @@ return this.each(function(){
 			transformDropdownNode.append("<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 		}
 	};
-	writeTransformDropdownNodeHtml(transforms[iDefaultTransform]);
+	writeTransformDropdownNodeHtml(transforms[selectedTransform]);
 	transformDropdownNode.click(function(){
 		if (transformSelectNode===null) {
 			transformSelectNode=$("<ul class='signal-transform-select' />");
-			$.each(transforms,function(_,transform){
+			$.each(includedTransforms,function(_,id){
+				var transform=transforms[id];
 				transformSelectNode.append(
 					$("<li role='button'>"+transform.name+"</li>").click(function(){
 						transformSelectNode.remove();
@@ -220,7 +221,7 @@ return this.each(function(){
 	);
 
 	// transform tabular data
-	writeTransform(transforms[iDefaultTransform]);
+	writeTransform(transforms[selectedTransform]);
 
 	// $$\overset{\mathcal F}{\rightarrow}$$
 });

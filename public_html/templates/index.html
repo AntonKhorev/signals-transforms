@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Fourier/Laplace transform properties table - function templates demo</title>
+<link rel='stylesheet' href='../lib/signals-transforms-table.css' />
+<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
+<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='../lib/signals-transforms-table.js'></script>
+<style>
+nav {
+	padding: .5em;
+	margin: .5em 0;
+	background: #CCC;
+	color: #222;
+}
+@media print {
+	nav {
+		display: none;
+	}
+}
+</style>
+</head>
+<body>
+<nav>Fourier/Laplace transform properties table demos || <a href='../v1/'>no customization</a> | <strong>function templates</strong> | <a href='https://github.com/AntonKhorev/signals-transforms'>source code</a></nav>
+<select id='customize-table-transform'>
+<option>CTFT</option>
+<option>CTFS</option>
+<option>DTFT</option>
+<option>DTFS</option>
+<option>DFT</option>
+<option>Laplace2</option>
+</select>
+<button type='button' id='customize-table-generate'>Generate table</button>
+<div id='put-table-here'>
+Some text that will be replaced by the table.
+</div>
+<script>
+$('#customize-table-generate').click(function(){
+	$('#put-table-here').signalsTransformsTable({includedTransforms:[
+		$('#customize-table-transform').val()
+	]});
+});
+</script>
+</body>
+</html>

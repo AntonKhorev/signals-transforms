@@ -1,1 +1,1 @@
-(function($){$.fn.signalsTransformsTable=function(){
+(function($){$.fn.signalsTransformsTable=function(options){
