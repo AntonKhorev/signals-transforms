@@ -116,5 +116,11 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 	ctx.callSection=function(sectionFn){
 		return sectionFn(t,T,x,X,y,Y,ctx);
 	};
+
+	// TODO decide (not) to put those under ctx.letters
+	ctx.a=ctx.letter(['a','A','alpha']); // factor 1
+	ctx.b=ctx.letter(['b','B','beta']); // factor 2
+	// TODO continuous time/freq options OR just base it off the domain var letter
+	//ctx.t1=ctx.letter(['t','tau','u']); // continuous time var w/o index
 	return ctx;
 }

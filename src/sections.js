@@ -23,10 +23,7 @@ var sections={
 			{formula:{notes:{t:'analysis formula'}}},
 		]
 	}},
-	linearity:function(t,T,x,X,y,Y,ctx){
-		var a=ctx.letter(['a','A','alpha']);
-		var b=ctx.letter(['b','B','beta']);
-	return{
+	linearity:function(t,T,x,X,y,Y,ctx){return{
 		name:'Linearity, convolution and multiplication',
 		cells:[
 			'+|.|+',
@@ -37,12 +34,12 @@ var sections={
 		time:[
 			{formula:{item:x(t)}},
 			{formula:{item:y(t)}},
-			{formula:{item:a+x(t)+'+'+b+y(t)}}
+			{formula:{item:ctx.a+x(t)+'+'+ctx.b+y(t)}}
 		],
 		freq:[
 			{formula:{item:X(T)}},
 			{formula:{item:Y(T)}},
-			{formula:{item:a+X(T)+'+'+b+Y(T)}}
+			{formula:{item:ctx.a+X(T)+'+'+ctx.b+Y(T)}}
 		]
 		// see this before adding correlation: http://mathworld.wolfram.com/Cross-Correlation.html
 	}},

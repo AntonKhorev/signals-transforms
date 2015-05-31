@@ -21,6 +21,10 @@ if (!(selectedTransform in includedTransforms)) {
 var transformCommon={
 	timeDomainName:'Time domain',
 	freqDomainName:'Frequency domain'
+	// TODO options for:
+	// omega_0 in series
+	// W_N in DFT (N is a period)
+	// T and N periods
 };
 var RoC="<abbr title='region of convergence'>RoC</abbr>";
 var transforms={
@@ -44,11 +48,14 @@ var transforms={
 					}}
 				]
 			}},
-			linearity:function(t,T,x,X,y,Y){return{
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['t','tau','u']);
+				var T1=ctx.letter(['omega','theta','xi']);
+			return{
 				time:[
 					{},{},{},
 					{formula:{
-						item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau',
+						item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
 						notes:{b:'linear convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -57,7 +64,7 @@ var transforms={
 					{},{},{},
 					{formula:{item:X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta',
+						item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X(T1)+Y(T+'-'+T1)+'\\,\\mathrm{d}'+T1,
 						notes:{b:'linear convolution'}
 					}}
 				]
@@ -126,11 +133,14 @@ var transforms={
 					}}
 				]
 			}},
-			linearity:function(t,T,x,X,y,Y){return{
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['t','tau','u']);
+				var T1=ctx.letter(['k','l']);
+			return{
 				time:[
 					{},{},{},
 					{formula:{
-						item:'\\int\\limits_{\\langle T \\rangle}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau',
+						item:'\\int\\limits_{\\langle T \\rangle}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
 						notes:{b:'periodic convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -139,7 +149,7 @@ var transforms={
 					{},{},{},
 					{formula:{item:'T \\, '+X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\sum_{l=-\\infty}^{+\\infty} '+X('l')+Y(T+'-l'),
+						item:'\\sum_{'+T1+'=-\\infty}^{+\\infty} '+X(T1)+Y(T+'-'+T1),
 						notes:{b:'linear convolution'}
 					}}
 				]
@@ -198,11 +208,14 @@ var transforms={
 					}}
 				]
 			}},
-			linearity:function(t,T,x,X,y,Y){return{
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+				var T1=ctx.letter(['omega','theta','xi']);
+			return{
 				time:[
 					{},{},{},
 					{formula:{
-						item:x(t)+'*'+y(t)+' = \\sum_{m=-\\infty}^{+\\infty} '+x('m')+y(t+'-m'),
+						item:x(t)+'*'+y(t)+' = \\sum_{'+t1+'=-\\infty}^{+\\infty} '+x(t1)+y(t+'-'+t1),
 						notes:{b:'linear convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -211,7 +224,7 @@ var transforms={
 					{},{},{},
 					{formula:{item:X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X('\\theta')+Y(T+'-\\theta')+'\\,\\mathrm{d}\\theta',
+						item:'\\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X(T1)+Y(T+'-'+T1)+'\\,\\mathrm{d}'+T1,
 						notes:{b:'periodic convolution'}
 					}}
 				]
@@ -267,11 +280,14 @@ var transforms={
 					}}
 				]
 			}},
-			linearity:function(t,T,x,X,y,Y){return{
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+				var T1=ctx.letter(['k','l']);
+			return{
 				time:[
 					{},{},{},
 					{formula:{
-						item:'\\sum_{m=\\langle N \\rangle} '+x('m')+y(t+'-m'),
+						item:'\\sum_{'+t1+'=\\langle N \\rangle} '+x(t1)+y(t+'-'+t1),
 						notes:{b:'periodic convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -280,7 +296,7 @@ var transforms={
 					{},{},{},
 					{formula:{item:'N \\, '+X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\sum_{l=\\langle N \\rangle} '+X('l')+Y(T+'-l'),
+						item:'\\sum_{'+T1+'=\\langle N \\rangle} '+X(T1)+Y(T+'-'+T1),
 						notes:{b:'periodic convolution'}
 					}}
 				]
@@ -339,11 +355,14 @@ var transforms={
 					}}
 				]
 			}},
-			linearity:function(t,T,x,X,y,Y){return{
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+				var T1=ctx.letter(['k','l']);
+			return{
 				time:[
 					{},{},{},
 					{formula:{
-						item:'\\sum_{m=0}^{N-1} '+x('m')+y(t+'-m'),
+						item:'\\sum_{'+t1+'=0}^{N-1} '+x(t1)+y(t+'-'+t1),
 						notes:{b:'circular convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -352,7 +371,7 @@ var transforms={
 					{},{},{},
 					{formula:{item:X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\frac{1}{N} \\sum_{l=0}^{N-1} '+X('l')+Y(T+'-l'),
+						item:'\\frac{1}{N} \\sum_{'+T1+'=0}^{N-1} '+X(T1)+Y(T+'-'+T1),
 						notes:{b:'circular convolution'}
 					}}
 				]
@@ -425,26 +444,28 @@ var transforms={
 					}}
 				]
 			}},
-			linearity:function(t,T,x,X,y,Y){return{
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['t','tau','u']);
+			return{
 				time:[
 					{},{},{},
 					{formula:{
-						item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x('\\tau')+y(t+'-\\tau')+'\\,\\mathrm{d}\\tau',
+						item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
 						notes:{b:'linear convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
 				],
 				freq:[
-					{formula:{notes:{b:RoC+' = \\(R_X\\)'}}},
-					{formula:{notes:{b:RoC+' = \\(R_Y\\)'}}},
-					{formula:{notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'}}},
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.X+'\\)'}}},
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}}},
 					{formula:{
 						item:X(T)+' \\cdot '+Y(T),
-						notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'}
+						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}},
 					{formula:{
 						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T),
-						notes:{b:RoC+' includes \\(R_X \\cap R_Y\\)'} // [Mrinal Mandal, Amir Asif, Continuous and Discrete Time Signals and Systems, isbn 9780521854559, p. 283]
+						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'} // [Mrinal Mandal, Amir Asif, Continuous and Discrete Time Signals and Systems, isbn 9780521854559, p. 283]
 					}}
 				]
 			}},
