@@ -11,6 +11,9 @@ if ('includedTransforms' in options) {
 }
 
 var selectedTransform='DTFT';
+if ('selectedTransform' in options) {
+	selectedTransform=options.selectedTransform;
+}
 if (!(selectedTransform in includedTransforms)) {
 	selectedTransform=includedTransforms[0];
 }
@@ -548,3 +551,6 @@ var transforms={
 		}
 	}
 };
+if ('transforms' in options) {
+	$.extend(true,transforms,options.transforms);
+}

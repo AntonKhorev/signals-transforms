@@ -19,11 +19,14 @@ nav {
 		display: none;
 	}
 }
+label {
+	display: block;
+}
 </style>
 </head>
 <body>
 <nav>Fourier/Laplace transform properties table demos || <a href='../v1/'>no customization</a> | <strong>function templates</strong> | <a href='https://github.com/AntonKhorev/signals-transforms'>source code</a></nav>
-<select id='customize-table-transform'>
+<label>transform: <select id='customize-table-transform'>
 <option>CTFT</option>
 <option>CTFS</option>
 <option>DTFT</option>
@@ -31,15 +34,26 @@ nav {
 <option>DFT</option>
 <option>Laplace2</option>
 </select>
+</label>
+<label>time function 1:<input type='text' id='customize-table-x' value='x(t)' /></label>
+<label>time function 2:<input type='text' id='customize-table-y' value='y(t)' /></label>
+<label>frequency function 1:<input type='text' id='customize-table-X' value='X(omega)' /></label>
+<label>frequency function 2:<input type='text' id='customize-table-Y' value='Y(omega)' /></label>
 <button type='button' id='customize-table-generate'>Generate table</button>
 <div id='put-table-here'>
 Some text that will be replaced by the table.
 </div>
 <script>
 $('#customize-table-generate').click(function(){
-	$('#put-table-here').signalsTransformsTable({includedTransforms:[
-		$('#customize-table-transform').val()
-	]});
+	var transformId=$('#customize-table-transform').val();
+	var options={};
+	options.includedTransforms=[transformId];
+	options.transforms={};
+	options.transforms[transformId]={
+		timeFnTemplate:[$('#customize-table-x').val(),$('#customize-table-y').val()],
+		freqFnTemplate:[$('#customize-table-X').val(),$('#customize-table-Y').val()]
+	};
+	$('#put-table-here').signalsTransformsTable(options);
 });
 </script>
 </body>

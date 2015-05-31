@@ -6,6 +6,10 @@ var includedSections=[ // default sections ordering
 	'modshift',
 	'intdiff'
 ];
+if ('includedSections' in options) {
+	includedSections=options.includedSections;
+}
+
 var sections={
 	definitions:function(t,T,x,X){return{
 		name:'Definitions',
@@ -170,3 +174,6 @@ var sections={
 		]
 	}}
 };
+if ('sections' in options) {
+	$.extend(true,sections,options.sections);
+}
