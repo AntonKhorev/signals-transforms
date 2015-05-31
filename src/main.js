@@ -179,39 +179,43 @@ return this.each(function(){
 	};
 
 	// table caption with transform selection dropdown
-	var transformSelectNode=null;
 	var captionNode=$('<caption />').appendTo(tableNode);
-	var transformDropdownNode=$(
-		"<span class='signal-transform-dropdown' role='button' />"
-	).appendTo(captionNode);
-	function writeTransformDropdownNodeHtml(transform){
-	        transformDropdownNode.text(transform.name);
+	function writeTransformCaption(node,transform){
+	        node.text(transform.name);
 		if ('wikipedia' in transform) {
-			transformDropdownNode.append("<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
+			node.append("<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
 		}
 	};
-	writeTransformDropdownNodeHtml(transforms[selectedTransform]);
-	transformDropdownNode.click(function(){
-		if (transformSelectNode===null) {
-			transformSelectNode=$("<ul class='signal-transform-select' />");
-			$.each(includedTransforms,function(_,id){
-				var transform=transforms[id];
-				transformSelectNode.append(
-					$("<li role='button'>"+transform.name+"</li>").click(function(){
-						transformSelectNode.remove();
-						transformSelectNode=null;
-						writeTransformDropdownNodeHtml(transform);
-						tableNode.find('thead,tbody').remove();
-						writeTransform(transform);
-					}).mousedown(preventTextSelectionOnDoubleClick)
-				);
-			});
-			captionNode.append(transformSelectNode);
-		} else {
-			transformSelectNode.remove();
-			transformSelectNode=null;
-		}
-	}).mousedown(preventTextSelectionOnDoubleClick);
+	if (includedTransforms.length>1) {
+		var transformSelectNode=null;
+		var transformDropdownNode=$(
+			"<span class='signal-transform-dropdown' role='button' />"
+		).appendTo(captionNode);
+		writeTransformCaption(transformDropdownNode,transforms[selectedTransform]);
+		transformDropdownNode.click(function(){
+			if (transformSelectNode===null) {
+				transformSelectNode=$("<ul class='signal-transform-select' />");
+				$.each(includedTransforms,function(_,id){
+					var transform=transforms[id];
+					transformSelectNode.append(
+						$("<li role='button'>"+transform.name+"</li>").click(function(){
+							transformSelectNode.remove();
+							transformSelectNode=null;
+							writeTransformCaption(transformDropdownNode,transform);
+							tableNode.find('thead,tbody').remove();
+							writeTransform(transform);
+						}).mousedown(preventTextSelectionOnDoubleClick)
+					);
+				});
+				captionNode.append(transformSelectNode);
+			} else {
+				transformSelectNode.remove();
+				transformSelectNode=null;
+			}
+		}).mousedown(preventTextSelectionOnDoubleClick);
+	} else {
+		writeTransformCaption(captionNode,transforms[selectedTransform]);
+	}
 
 	// table header section
 	tableNode.append(
