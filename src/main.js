@@ -1,3 +1,40 @@
+$.fn.signalsTransformsTable=function(options){ // plugin main fn
+
+if (typeof(options)==='undefined') options={};
+
+var includedSections=$.fn.signalsTransformsTable.includedSections;
+if ('includedSections' in options) {
+	includedSections=options.includedSections;
+}
+
+var sections=$.fn.signalsTransformsTable.sections;
+if ('sections' in options) {
+	sections=$.extend(true,{},sections,options.sections);
+}
+
+var includedTransforms=$.fn.signalsTransformsTable.includedTransforms;
+if ('includedTransforms' in options) {
+	includedTransforms=options.includedTransforms;
+}
+
+var selectedTransform=$.fn.signalsTransformsTable.selectedTransform;
+if ('selectedTransform' in options) {
+	selectedTransform=options.selectedTransform;
+}
+if (!(selectedTransform in includedTransforms)) {
+	selectedTransform=includedTransforms[0];
+}
+
+var transformCommon=$.fn.signalsTransformsTable.transformCommon;
+if ('transformCommon' in options) {
+	transformCommon=$.extend(true,{},transformCommon,options.transformCommon);
+}
+
+var transforms=$.fn.signalsTransformsTable.transforms;
+if ('transforms' in options) {
+	transforms=$.extend(true,{},transforms,options.transforms);
+}
+
 return this.each(function(){
 	var nDomainCols=3;
 
@@ -229,3 +266,5 @@ return this.each(function(){
 
 	// $$\overset{\mathcal F}{\rightarrow}$$
 });
+
+}; // plugin main fn

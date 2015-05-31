@@ -1,4 +1,4 @@
-var includedSections=[ // default sections ordering
+$.fn.signalsTransformsTable.includedSections=[
 	'definitions',
 	'linearity',
 	'duality',
@@ -6,11 +6,8 @@ var includedSections=[ // default sections ordering
 	'modshift',
 	'intdiff'
 ];
-if ('includedSections' in options) {
-	includedSections=options.includedSections;
-}
 
-var sections={
+$.fn.signalsTransformsTable.sections={
 	definitions:function(t,T,x,X){return{
 		name:'Definitions',
 		cells:[
@@ -171,6 +168,3 @@ var sections={
 		]
 	}}
 };
-if ('sections' in options) {
-	$.extend(true,sections,options.sections);
-}

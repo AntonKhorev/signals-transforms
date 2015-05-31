@@ -1,4 +1,4 @@
-var includedTransforms=[
+$.fn.signalsTransformsTable.includedTransforms=[
 	'CTFT',
 	'CTFS',
 	'DTFT',
@@ -6,19 +6,10 @@ var includedTransforms=[
 	'DFT',
 	'Laplace2'
 ];
-if ('includedTransforms' in options) {
-	includedTransforms=options.includedTransforms;
-}
 
-var selectedTransform='DTFT';
-if ('selectedTransform' in options) {
-	selectedTransform=options.selectedTransform;
-}
-if (!(selectedTransform in includedTransforms)) {
-	selectedTransform=includedTransforms[0];
-}
+$.fn.signalsTransformsTable.selectedTransform='DTFT';
 
-var transformCommon={
+$.fn.signalsTransformsTable.transformCommon={
 	timeDomainName:'Time domain',
 	freqDomainName:'Frequency domain'
 	// TODO options for:
@@ -26,8 +17,9 @@ var transformCommon={
 	// W_N in DFT (N is a period)
 	// T and N periods
 };
+
 var RoC="<abbr title='region of convergence'>RoC</abbr>";
-var transforms={
+$.fn.signalsTransformsTable.transforms={
 	CTFT:{
 		name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
 		wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
@@ -572,6 +564,3 @@ var transforms={
 		}
 	}
 };
-if ('transforms' in options) {
-	$.extend(true,transforms,options.transforms);
-}
