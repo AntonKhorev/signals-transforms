@@ -54,26 +54,30 @@
 		&.is-open::after {
 			content: "▲";
 		}
-	}
-	.signal-transform-select {
-		position: absolute;
-		z-index: 2;
-		border-radius: .5em;
-		border: 1px solid @line-color;
-		background: #FFF;
-		color: #000;
-		box-shadow: 0 0 10px rgba(0,0,0,0.5);
-		width: 100%;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		li {
+		ul {
+			display: none;
+		}
+		&.is-open ul {
+			display: block;
+			position: absolute;
+			z-index: 2;
 			border-radius: .5em;
+			border: 1px solid @line-color;
+			background: #FFF;
+			color: #000;
+			box-shadow: 0 0 10px rgba(0,0,0,0.5);
+			width: 100%;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			li {
+				border-radius: .5em;
+			}
+			li:hover {
+				background: #EEC;
+			}
+			font-weight: normal;
 		}
-		li:hover {
-			background: #EEC;
-		}
-		font-weight: normal;
 	}
 	col {
 		width: @timefreq-col-width;

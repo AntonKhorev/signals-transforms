@@ -217,45 +217,31 @@ return this.each(function(){
 
 	// table caption with transform selection dropdown
 	var captionNode=$('<caption />').appendTo(tableNode);
-	function writeTransformCaption(node,transform){
-	        node.text(transform.name);
+	function writeTransformCaption(transform){
+	        captionNode.text(transform.name);
 		if ('wikipedia' in transform) {
-			node.append("<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
+			captionNode.append("<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
+		}
+		if (includedTransforms.length>1) {
+			captionNode.wrapInner("<div class='signal-transform-dropdown' role='button' />");
+			var transformDropdownNode=captionNode.children().eq(0);
+			var transformSelectNode=$("<ul class='signal-transform-select' />");
+			$.each(includedTransforms,function(_,id){
+				var transform=transforms[id];
+				transformSelectNode.append(
+					$("<li role='button'>"+transform.name+"</li>").click(function(){
+						writeTransformCaption(transform);
+						tableNode.find('thead,tbody').remove();
+						writeTransform(transform);
+					}).mousedown(preventTextSelectionOnDoubleClick)
+				);
+			});
+			transformDropdownNode.append(transformSelectNode).click(function(){
+				transformDropdownNode.toggleClass('is-open');
+			}).mousedown(preventTextSelectionOnDoubleClick);
 		}
 	};
-	if (includedTransforms.length>1) {
-		var transformSelectNode=null;
-		var transformDropdownNode=$(
-			"<div class='signal-transform-dropdown' role='button' />"
-		).appendTo(captionNode);
-		writeTransformCaption(transformDropdownNode,transforms[selectedTransform]);
-		transformDropdownNode.click(function(){
-			if (transformSelectNode===null) {
-				transformSelectNode=$("<ul class='signal-transform-select' />");
-				$.each(includedTransforms,function(_,id){
-					var transform=transforms[id];
-					transformSelectNode.append(
-						$("<li role='button'>"+transform.name+"</li>").click(function(){
-							transformDropdownNode.removeClass('is-open');
-							transformSelectNode.remove();
-							transformSelectNode=null;
-							writeTransformCaption(transformDropdownNode,transform);
-							tableNode.find('thead,tbody').remove();
-							writeTransform(transform);
-						}).mousedown(preventTextSelectionOnDoubleClick)
-					);
-				});
-				captionNode.append(transformSelectNode);
-				transformDropdownNode.addClass('is-open');
-			} else {
-				transformDropdownNode.removeClass('is-open');
-				transformSelectNode.remove();
-				transformSelectNode=null;
-			}
-		}).mousedown(preventTextSelectionOnDoubleClick);
-	} else {
-		writeTransformCaption(captionNode,transforms[selectedTransform]);
-	}
+	writeTransformCaption(transforms[selectedTransform]);
 
 	// table header section
 	tableNode.append(
