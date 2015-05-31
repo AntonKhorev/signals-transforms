@@ -27,23 +27,28 @@ label {
 <body>
 <nav>Fourier/Laplace transform properties table demos || <a href='../v1/'>no customization</a> | <strong>function templates</strong> | <a href='https://github.com/AntonKhorev/signals-transforms'>source code</a></nav>
 <label>transform: <select id='customize-table-transform'>
-<option>CTFT</option>
-<option>CTFS</option>
-<option>DTFT</option>
-<option>DTFS</option>
-<option>DFT</option>
-<option>Laplace2</option>
 </select>
 </label>
-<label>time function 1:<input type='text' id='customize-table-x' value='x(t)' /></label>
-<label>time function 2:<input type='text' id='customize-table-y' value='y(t)' /></label>
-<label>frequency function 1:<input type='text' id='customize-table-X' value='X(omega)' /></label>
-<label>frequency function 2:<input type='text' id='customize-table-Y' value='Y(omega)' /></label>
+<label>time function 1:<input type='text' id='customize-table-x' /></label>
+<label>time function 2:<input type='text' id='customize-table-y' /></label>
+<label>frequency function 1:<input type='text' id='customize-table-X' /></label>
+<label>frequency function 2:<input type='text' id='customize-table-Y' /></label>
 <button type='button' id='customize-table-generate'>Generate table</button>
 <div id='put-table-here'>
 Some text that will be replaced by the table.
 </div>
 <script>
+$.each($.fn.signalsTransformsTable.includedTransforms,function(i,transformId){
+	$('#customize-table-transform').append("<option>"+transformId+"</option>");
+});
+$('#customize-table-transform').change(function(){
+	var transformId=$('#customize-table-transform').val();
+	var transform=$.fn.signalsTransformsTable.transforms[transformId];
+	$('#customize-table-x').val(transform.timeFnTemplate[0]);
+	$('#customize-table-y').val(transform.timeFnTemplate[1]);
+	$('#customize-table-X').val(transform.freqFnTemplate[0]);
+	$('#customize-table-Y').val(transform.freqFnTemplate[1]);
+}).change();
 $('#customize-table-generate').click(function(){
 	var transformId=$('#customize-table-transform').val();
 	var options={};
