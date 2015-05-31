@@ -7,6 +7,23 @@
 @note-color: #444;
 @line-color: #888;
 
+.triangle-expand() {
+	display: block;
+	position: absolute;
+	width: 2em;
+	height: 1.5em;
+	top: 0;
+	right: 0;
+	content: "▼";
+	color: rgba(106,122,212,0.3);
+}
+.triangle-hover() {
+	color: rgba(106,122,212,1);
+}
+.triangle-collapse() {
+	content: "▲";
+}
+
 .signals-transforms-table {
 	sup a {
 		text-decoration: none;
@@ -38,21 +55,13 @@
 	}
 	.signal-transform-dropdown {
 		&::after {
-			display: block;
-			position: absolute;
-			width: 2em;
-			height: 1.5em;
-			vertical-align: bottom;
-			top: 0;
-			right: 0;
-			content: "▼";
-			color: rgba(106,122,212,0.3);
+			.triangle-expand();
 		}
 		&:hover::after {
-			color: rgba(106,122,212,1);
+			.triangle-hover();
 		}
 		&.is-open::after {
-			content: "▲";
+			.triangle-collapse();
 		}
 		ul {
 			display: none;
@@ -118,6 +127,13 @@
 			tr:first-child th {
 				display: table-cell;
 				border-bottom: solid 1px @line-color; // border hack for chrome
+				.cell::after {
+					.triangle-expand();
+					padding-right: 1px; // to line up with caption triangle
+				}
+				&:hover .cell::after {
+					.triangle-hover();
+				}
 			}
 			tr td {
 				display: none;

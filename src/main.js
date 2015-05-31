@@ -81,7 +81,7 @@ return this.each(function(){
 			}
 			tbodyNode.append(
 				$("<tr />").append(
-					$("<th colspan='"+(nDomainCols*2+1)+"' role='button'>"+section.name+"</th>").click(function(ev){
+					$("<th colspan='"+(nDomainCols*2+1)+"' role='button'><div class='cell'>"+section.name+"</div></th>").click(function(ev){
 						isSectionCollapsed[id]=false;
 						tbodyNode.removeClass('is-collapsed');
 					}).mousedown(preventTextSelectionOnDoubleClick)
