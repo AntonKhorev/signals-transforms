@@ -61,7 +61,7 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 			return [
 				function(arg,opts){
 					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}('+o.argSign+'j'+o.argRest+')';
+					return '{'+x+o.fnConj+'}'+m[2]+o.argSign+'j'+o.argRest+m[4];
 				},
 				'{'+t+'}',m[1],m[3]
 			];
@@ -73,7 +73,7 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 			return [
 				function(arg,opts){
 					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}(e^{'+o.argSign+'j'+o.argRest+'})';
+					return '{'+x+o.fnConj+'}'+m[2]+'e^{'+o.argSign+'j'+o.argRest+'}'+m[4];
 				},
 				'{'+t+'}',m[1],m[3]
 			];

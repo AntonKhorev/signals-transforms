@@ -80,6 +80,26 @@ testCallSection(
 	}
 );
 
+testCallSection(
+	FormulaContext(['x(t)','y(t)'],['X[i*omega]','Y[i*omega]']),
+	function(t,T,x,X){
+		assert.equal(T,'{\\omega}');
+		assert.equal(X('#'),'{X}[j#]');
+		assert.equal(X('-#'),'{X}[-j#]');
+		assert.equal(X('#','*'),'{X^*}[j#]');
+	}
+);
+
+testCallSection(
+	FormulaContext(['x[n]','y[n]'],['X[e^(i*phi)]','Y[e^(i*phi)]']),
+	function(t,T,x,X){
+		assert.equal(T,'{\\phi}');
+		assert.equal(X('#'),'{X}[e^{j#}]');
+		assert.equal(X('-#'),'{X}[e^{-j#}]');
+		assert.equal(X('#','*'),'{X^*}[e^{j#}]');
+	}
+);
+
 var ctx=FormulaContext(['x(t)','y(t)'],['X(j*omega)','Y(j*omega)']);
 assert.equal(ctx.letter(['a','A','alpha']),'{a}');
 
