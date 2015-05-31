@@ -226,7 +226,7 @@ return this.each(function(){
 	if (includedTransforms.length>1) {
 		var transformSelectNode=null;
 		var transformDropdownNode=$(
-			"<span class='signal-transform-dropdown' role='button' />"
+			"<div class='signal-transform-dropdown' role='button' />"
 		).appendTo(captionNode);
 		writeTransformCaption(transformDropdownNode,transforms[selectedTransform]);
 		transformDropdownNode.click(function(){
@@ -236,6 +236,7 @@ return this.each(function(){
 					var transform=transforms[id];
 					transformSelectNode.append(
 						$("<li role='button'>"+transform.name+"</li>").click(function(){
+							transformDropdownNode.removeClass('is-open');
 							transformSelectNode.remove();
 							transformSelectNode=null;
 							writeTransformCaption(transformDropdownNode,transform);
@@ -245,7 +246,9 @@ return this.each(function(){
 					);
 				});
 				captionNode.append(transformSelectNode);
+				transformDropdownNode.addClass('is-open');
 			} else {
+				transformDropdownNode.removeClass('is-open');
 				transformSelectNode.remove();
 				transformSelectNode=null;
 			}

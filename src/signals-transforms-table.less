@@ -37,7 +37,6 @@
 		}
 	}
 	.signal-transform-dropdown {
-		display: block;
 		&::after {
 			display: block;
 			position: absolute;
@@ -51,6 +50,9 @@
 		}
 		&:hover::after {
 			color: rgba(106,122,212,1);
+		}
+		&.is-open::after {
+			content: "▲";
 		}
 	}
 	.signal-transform-select {
