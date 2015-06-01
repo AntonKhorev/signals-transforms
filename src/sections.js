@@ -1,3 +1,4 @@
+$.fn.signalsTransformsTable.allSections=
 $.fn.signalsTransformsTable.includedSections=[
 	'definitions',
 	'linearity',

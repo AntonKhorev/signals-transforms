@@ -38,7 +38,7 @@ label {
 Some text that will be replaced by the table.
 </div>
 <script>
-$.each($.fn.signalsTransformsTable.includedTransforms,function(i,transformId){
+$.each($.fn.signalsTransformsTable.allTransforms,function(i,transformId){
 	$('#customize-table-transform').append("<option>"+transformId+"</option>");
 });
 $('#customize-table-transform').change(function(){

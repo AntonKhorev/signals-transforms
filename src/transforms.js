@@ -1,3 +1,4 @@
+$.fn.signalsTransformsTable.allTransforms=
 $.fn.signalsTransformsTable.includedTransforms=[
 	'CTFT',
 	'CTFS',
