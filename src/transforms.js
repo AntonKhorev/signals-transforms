@@ -5,6 +5,7 @@ $.fn.signalsTransformsTable.includedTransforms=[
 	'DTFT',
 	'DTFS',
 	'DFT',
+	'Laplace1',
 	'Laplace2',
 	'Z2'
 ];
@@ -20,6 +21,7 @@ $.fn.signalsTransformsTable.transformCommon={
 	// T and N periods
 };
 
+// TODO synthesis formula equality caveats for CTFT and Laplace (esp. Unilateral)
 var RoC="<abbr title='region of convergence'>RoC</abbr>";
 $.fn.signalsTransformsTable.transforms={
 	CTFT:{
@@ -426,6 +428,166 @@ $.fn.signalsTransformsTable.transforms={
 			}}
 		}
 	},
+	Laplace1:{
+		name:'Unilateral Laplace transform',
+		wikipedia:'http://en.wikipedia.org/wiki/Laplace_transform',
+		timeFnTemplate:['x(t)','y(t)'],
+		freqFnTemplate:['X(s)','Y(s)'],
+		freqDomainName:'S-domain',
+		sections:{
+			definitions:function(t,T,x,X){return{
+				time:[
+					{formula:{
+						// but we can't restore stuff before 0
+						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						notes:{
+							t:'synthesis formula;<br /> the contour path of integration is in the '+RoC+' of \\('+X(T)+'\\)',
+							b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\);<br />\\('+x(t)+'=0\\) for \\('+t+'&lt;0\\) usually assumed'
+						}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:X(T)+' = \\int\\limits_{0^-}^{+\\infty}\\! '+x(t)+' e^{-'+T+' '+t+'} \\,\\mathrm{d}'+t,
+						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
+					}}
+				]
+			}},
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['t','tau','u']);
+			return{
+				time:[
+					{},{},{},
+					{formula:{
+						// item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
+						item:x(t)+'*'+y(t)+' = \\int\\limits_0^{'+t+'}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1, // TODO what about limits? is it 0- .. t+ ?
+						notes:{
+							// t:'\\('+x(t)+'='+y(t)+'=0\\) required for \\('+t+'&lt;0\\)',
+							// b:'linear convolution'
+						}
+					}},
+					{formula:{item:x(t)+' \\cdot '+y(t)}}
+				],
+				freq:[
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.X+'\\)'}}},
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{
+						item:X(T)+' \\cdot '+Y(T),
+						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
+					}},
+					{formula:{
+						// see [The Handbook of Formulas and Tables for Signal Processing. Ed. Alexander D. Poularikas] for the definition of complex convolution
+						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T),
+						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'} // [Mrinal Mandal, Amir Asif, Continuous and Discrete Time Signals and Systems, isbn 9780521854559, p. 283]
+					}}
+				]
+			}},
+			conjrev:function(t,T,x,X){return{
+				cells:[
+					'.|.|.', // TODO real row deletion
+					'+|+|+',
+					'.|.|.'
+				],
+				time:[
+					{
+						formula:{
+							item:'-'+x(t,'*')
+						}
+					},{
+						formula:{
+							item:x(t)
+						},
+						relations:{
+							l:{notes:{t:'imaginary'}},
+							r:{notes:{t:'real'}}
+						}
+					},{
+						formula:{
+							item:x(t,'*'),
+							notes:{b:'conjugation'}
+						}
+					}
+				],
+				freq:[
+					{
+						formula:{
+							item:'-'+X(T+'^*','*'),
+							notes:{b:RoC+' = \\(R\\)'}
+						}
+					},{
+						formula:{
+							item:X(T),
+							notes:{b:RoC+' = \\(R\\)'}
+						}
+					},{
+						formula:{
+							item:X(T+'^*','*'),
+							notes:{b:RoC+' = \\(R\\)'}
+						}
+					}
+				]
+			}},
+			modshift:function(t,T,x,X){return{
+				time:[
+					{formula:{
+						item:x(t+'+'+t+'_0'),
+						notes:{t:'\\('+x(t+'+'+t+'_0')+'=0\\) for \\('+t+'&lt;0\\) required'}
+					}},
+					{formula:{item:'e^{-'+T+'_0 '+t+'}'+x(t)}},
+					{formula:{item:x(t)}},
+					{formula:{item:'e^{'+T+'_0 '+t+'}'+x(t)}},
+					{formula:{
+						item:x(t+'-'+t+'_0'),
+						notes:{t:'\\('+x(t+'-'+t+'_0')+'=0\\) for \\('+t+'&lt;0\\) required'}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:'e^{'+T+' '+t+'_0}'+X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:X(''+T+'+'+T+'_0'),
+						notes:{b:RoC+' = \\(R-\\Re('+T+'_0)\\)'}
+					}},
+					{formula:{
+						item:X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:X(''+T+'-'+T+'_0'),
+						notes:{b:RoC+' = \\(R+\\Re('+T+'_0)\\)'}
+					}},
+					{formula:{
+						item:'e^{-'+T+' '+t+'_0}'+X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}}
+				]
+			}},
+			intdiff:function(t,T,x,X){return{
+				time:[
+					{formula:{item:x(t)}},
+					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
+					{formula:{item:'-'+t+' '+x(t)}}
+				],
+				freq:[
+					{formula:{
+						item:X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:T+X(T)+'-'+x('0^-'),
+						notes:{b:RoC+' includes \\(R\\)'}
+					}},
+					{formula:{
+						item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}}
+				]
+			}}
+		}
+	},
 	Laplace2:{
 		name:'Bilateral Laplace transform',
 		wikipedia:'http://en.wikipedia.org/wiki/Two-sided_Laplace_transform',
@@ -738,6 +900,7 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				]
 				// also true: -(n-1)x[n-1] <-> (d/dz) X(z), RoC includes R\{0}
+				//	problem: changes RoC, while their version doesn't
 			}}
 		}
 	}
