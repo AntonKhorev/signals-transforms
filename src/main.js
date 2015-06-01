@@ -21,7 +21,7 @@ var selectedTransform=$.fn.signalsTransformsTable.selectedTransform;
 if ('selectedTransform' in options) {
 	selectedTransform=options.selectedTransform;
 }
-if (!(selectedTransform in includedTransforms)) {
+if (includedTransforms.indexOf(selectedTransform)<0) {
 	selectedTransform=includedTransforms[0];
 }
 
