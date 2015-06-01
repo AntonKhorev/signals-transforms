@@ -24,3 +24,7 @@ Some customization of the notation and selected transforms is possible although 
 
 [demo-v1]:http://antonkhorev.github.io/signals-transforms/v1/
 [demo-templates]:http://antonkhorev.github.io/signals-transforms/templates/
+
+## Additional references
+
+1. Mrinal Mandal, Amir Asif. *Continuous and Discrete Time Signals and Systems*
