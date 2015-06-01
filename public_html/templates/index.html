@@ -14,26 +14,42 @@ nav {
 	background: #CCC;
 	color: #222;
 }
-@media print {
-	nav {
-		display: none;
-	}
+form {
+	margin: 1em 0;
 }
 label {
 	display: block;
+}
+@media print {
+	nav, form {
+		display: none;
+	}
 }
 </style>
 </head>
 <body>
 <nav>Fourier/Laplace transform properties table demos || <a href='../v1/'>no customization</a> | <strong>function templates</strong> | <a href='https://github.com/AntonKhorev/signals-transforms'>source code</a></nav>
-<label>transform: <select id='customize-table-transform'>
-</select>
-</label>
+<form>
+<p>Function syntax is one of:</p>
+<ul>
+<li><code>letter open letter close</code></li>
+<li><code>letter open 'j*' letter close</code></li>
+<li><code>letter open 'e^(j*' letter ')' close</code></li>
+<li><code>letter '_' open? letter close?</code></li>
+</ul>
+<p>with:</p>
+<dl>
+<dt><code>letter</code></dt><dd>Latin letter ('a', 'b',..., 'A', 'B',...) or Greek letter ('alpha', 'beta',..., 'Alpha', 'Beta',...)</dd>
+<dt><code>open</code></dt><dd>one of: '(', '[', '{', '&lt;'</dd>
+<dt><code>close</code></dt><dd>one of: ')', ']', '}', '&gt;'</dd>
+</dl>
+<label>transform: <select id='customize-table-transform'></select></label>
 <label>time function 1:<input type='text' id='customize-table-x' /></label>
 <label>time function 2:<input type='text' id='customize-table-y' /></label>
 <label>frequency function 1:<input type='text' id='customize-table-X' /></label>
 <label>frequency function 2:<input type='text' id='customize-table-Y' /></label>
 <button type='button' id='customize-table-generate'>Generate table</button>
+</form>
 <div id='put-table-here'>
 Some text that will be replaced by the table.
 </div>
