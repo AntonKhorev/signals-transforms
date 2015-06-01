@@ -5,7 +5,8 @@ $.fn.signalsTransformsTable.includedTransforms=[
 	'DTFT',
 	'DTFS',
 	'DFT',
-	'Laplace2'
+	'Laplace2',
+	'Z2'
 ];
 
 $.fn.signalsTransformsTable.selectedTransform='DTFT';
@@ -243,7 +244,10 @@ $.fn.signalsTransformsTable.transforms={
 			intdiff:function(t,T,x,X){return{
 				time:[
 					{formula:{item:x(t)}},
-					{formula:{item:x(t)+'-'+x(t+'-1')}},
+					{formula:{
+						item:x(t)+'-'+x(t+'-1'),
+						notes:{b:'first difference'}
+					}},
 					{formula:{item:'-j '+t+' '+x(t)}}
 				],
 				freq:[
@@ -319,7 +323,10 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				time:[
 					{formula:{item:x(t)}},
-					{formula:{item:x(t)+'-'+x(t+'-1')}}
+					{formula:{
+						item:x(t)+'-'+x(t+'-1'),
+						notes:{b:'first difference'}
+					}}
 				],
 				freq:[
 					{formula:{item:X(T)}},
@@ -402,13 +409,19 @@ $.fn.signalsTransformsTable.transforms={
 			intdiff:function(t,T,x,X){return{
 				time:[
 					{formula:{item:x(t)}},
-					{formula:{item:x(t)+'-'+x(t+'-1')}},
+					{formula:{
+						item:x(t)+'-'+x(t+'-1'),
+						notes:{b:'first difference'}
+					}},
 					{formula:{item:'(1-W_N^{-'+t+'}) '+x(t)}}
 				],
 				freq:[
 					{formula:{item:X(T)}},
 					{formula:{item:'(1-W_N^'+T+') '+X(T)}},
-					{formula:{item:X(T)+'-'+X(T+'-1')}}
+					{formula:{
+						item:X(T)+'-'+X(T+'-1'),
+						notes:{b:'first difference'}
+					}}
 				]
 			}}
 		}
@@ -418,7 +431,7 @@ $.fn.signalsTransformsTable.transforms={
 		wikipedia:'http://en.wikipedia.org/wiki/Two-sided_Laplace_transform',
 		timeFnTemplate:['x(t)','y(t)'],
 		freqFnTemplate:['X(s)','Y(s)'],
-		freqDomainName:'s-domain',
+		freqDomainName:'S-domain',
 		sections:{
 			definitions:function(t,T,x,X){return{
 				time:[
@@ -561,6 +574,170 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:RoC+' = \\(R\\)'}
 					}}
 				]
+			}}
+		}
+	},
+	Z2:{
+		name:'Bilateral Z-transform',
+		wikipedia:'http://en.wikipedia.org/wiki/Z-transform',
+		timeFnTemplate:['x[n]','y[n]'],
+		freqFnTemplate:['X(z)','Y(z)'],
+		freqDomainName:'Z-domain',
+		sections:{
+			definitions:function(t,T,x,X){return{
+				time:[
+					{formula:{
+						item:x(t)+' = \\frac{1}{2\\pi j} \\oint_C'+X(T)+'z^{'+t+'-1} \\,\\mathrm{d}'+T,
+						notes:{
+							t:'synthesis formula;<br /> C is a counterclockwise closed path encircling the origin and entirely in the '+RoC+' of \\('+X(T)+'\\)',
+							b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)'
+						}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:X(T)+' = \\sum_{'+t+'=-\\infty}^{+\\infty} '+x(t)+'z^{-'+t+'}',
+						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
+					}}
+				]
+			}},
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+			return{
+				cells:[
+					'+|.|+',
+					'+ + +',
+					'+ + +',
+					'. . .', // time multiplication is different - skip it
+				],
+				time:[
+					{},{},{},
+					{formula:{
+						item:x(t)+'*'+y(t)+' = \\sum_{'+t1+'=-\\infty}^{+\\infty} '+x(t1)+y(t+'-'+t1),
+						notes:{b:'linear convolution'}
+					}}
+				],
+				freq:[
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.X+'\\)'}}},
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{
+						item:X(T)+' \\cdot '+Y(T),
+						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
+					}}
+				]
+			}},
+			conjrev:function(t,T,x,X){return{
+				freq:[
+					{
+						formula:{
+							item:'-'+X('\\frac 1 {'+T+'^*}','*'),
+							notes:{t:RoC+' = \\(\\frac 1 R\\)'}
+						}
+					},{
+						formula:{
+							item:'-'+X('\\frac 1 '+T),
+							notes:{t:RoC+' = \\(\\frac 1 R\\)'}
+						}
+					},{
+						formula:{
+							item:'-'+X(T+'^*','*'),
+							notes:{b:RoC+' = \\(R\\)'}
+						}
+					},{
+						formula:{
+							item:X(T),
+							notes:{b:RoC+' = \\(R\\)'}
+						},
+						relations:{
+							t:{notes:{r:null}},
+							b:{notes:{l:null}},
+							l:{notes:{b:null}},
+							r:{notes:{t:null}},
+							tl:{notes:{l:null}},
+							br:{notes:{r:null}},
+						}
+					},{
+						formula:{
+							item:X(T+'^*','*'),
+							notes:{t:RoC+' = \\(R\\)'}
+						}
+					},{
+						formula:{
+							item:X('\\frac 1 '+T),
+							notes:{b:RoC+' = \\(\\frac 1 R\\)'}
+						}
+					},{
+						formula:{
+							item:X('\\frac 1 {'+T+'^*}','*'),
+							notes:{b:RoC+' = \\(\\frac 1 R\\)'}
+						}
+					}
+				]
+			}},
+			modshift:function(t,T,x,X,y,Y,ctx){
+				var T1=ctx.letter(['omega','theta','xi']);
+			return{
+				time:[
+					{formula:{item:x(t+'+'+t+'_0')}},
+					{formula:{item:'e^{-j'+T1+'_0 '+t+'}'+x(t)}},
+					{formula:{item:x(t)}},
+					{formula:{item:'e^{j'+T1+'_0 '+t+'}'+x(t)}},
+					{formula:{item:x(t+'-'+t+'_0')}}
+				],
+				freq:[
+					{formula:{
+						item:'z^{'+t+'_0}'+X(T),
+						notes:{b:
+							'if \\('+t+'_0 &gt; 0\\), '+RoC+' includes \\(R \\setminus \\{\\infty\\} \\);<br />'+
+							'if \\('+t+'_0 &lt; 0\\), '+RoC+' includes \\(R \\setminus \\{0\\} \\)'
+						}
+					}},
+					{formula:{
+						item:X('e^{j'+T1+'_0}z'),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:X('e^{-j'+T1+'_0}z'),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:'z^{-'+t+'_0}'+X(T),
+						notes:{b:
+							'if \\('+t+'_0 &gt; 0\\), '+RoC+' includes \\(R \\setminus \\{0\\} \\);<br />'+
+							'if \\('+t+'_0 &lt; 0\\), '+RoC+' includes \\(R \\setminus \\{\\infty\\} \\)'
+						}
+					}}
+				]
+			}},
+			intdiff:function(t,T,x,X){return{
+				time:[
+					{formula:{item:x(t)}},
+					{formula:{
+						item:x(t)+'-'+x(t+'-1'),
+						notes:{b:'first difference'}
+					}},
+					{formula:{item:t+x(t)}}
+				],
+				freq:[
+					{formula:{
+						item:X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:'(1-'+T+'^{-1})'+X(T),
+						notes:{b:RoC+' includes \\(R \\setminus \\{0\\} \\)'}
+					}},
+					{formula:{
+						item:'-'+T+' \\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}}
+				]
+				// also true: -(n-1)x[n-1] <-> (d/dz) X(z), RoC includes R\{0}
 			}}
 		}
 	}
