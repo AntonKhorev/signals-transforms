@@ -44,14 +44,18 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 	function parseTemplate(s){
 		var reLetter='([a-zA-Z]+)';
 		var reOpen='([\\[({<])';
+		var reOpen0=reOpen.slice(0,-1)+'?)';
 		var reClose='([\\])}>])';
+		var reClose0=reClose.slice(0,-1)+'?)';
 		var texOpen={
+			'':'',
 			'[':'[',
 			'(':'(',
 			'{':'\\{',
 			'<':'\\langle '
 		};
 		var texClose={
+			'':'',
 			']':']',
 			')':')',
 			'}':'\\}',
@@ -93,16 +97,16 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 				'{'+t+'}',m[1],m[3]
 			];
 		}
-		var m=s.match(reLetter+'_'+reLetter);
+		var m=s.match(reLetter+'_'+reOpen0+reLetter+reClose0);
 		if (m) {
 			var x=texLetter(m[1]);
-			var t=texLetter(m[2]);
+			var t=texLetter(m[3]);
 			return [
 				function(arg,opts){
 					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}_{'+arg+'}';
+					return '{'+x+o.fnConj+'}_{'+texOpen[m[2]]+arg+texClose[m[4]]+'}';
 				},
-				'{'+t+'}',m[1],m[2]
+				'{'+t+'}',m[1],m[3]
 			];
 		}
 		throw 'invalid function template';
