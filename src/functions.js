@@ -42,43 +42,58 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 	};
 
 	function parseTemplate(s){
-		var m=s.match(/([a-zA-Z]+)(\(|\[)([a-zA-Z]+)(\)|\])/);
+		var reLetter='([a-zA-Z]+)';
+		var reOpen='([\\[({<])';
+		var reClose='([\\])}>])';
+		var texOpen={
+			'[':'[',
+			'(':'(',
+			'{':'\\{',
+			'<':'\\langle '
+		};
+		var texClose={
+			']':']',
+			')':')',
+			'}':'\\}',
+			'>':' \\rangle'
+		};
+		var m=s.match(reLetter+reOpen+reLetter+reClose);
 		if (m) {
 			var x=texLetter(m[1]);
 			var t=texLetter(m[3]);
 			return [
 				function(arg,opts){
 					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}'+m[2]+arg+m[4];
+					return '{'+x+o.fnConj+'}'+texOpen[m[2]]+arg+texClose[m[4]];
 				},
 				'{'+t+'}',m[1],m[3]
 			];
 		}
-		var m=s.match(/([a-zA-Z]+)(\(|\[)[ij]\*([a-zA-Z]+)(\)|\])/);
+		var m=s.match(reLetter+reOpen+'[ij]\\*'+reLetter+reClose);
 		if (m) {
 			var x=texLetter(m[1]);
 			var t=texLetter(m[3]);
 			return [
 				function(arg,opts){
 					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}'+m[2]+o.argSign+'j'+o.argRest+m[4];
+					return '{'+x+o.fnConj+'}'+texOpen[m[2]]+o.argSign+'j'+o.argRest+texClose[m[4]];
 				},
 				'{'+t+'}',m[1],m[3]
 			];
 		}
-		var m=s.match(/([a-zA-Z]+)(\(|\[)e\^\([ij]\*([a-zA-Z]+)\)(\)|\])/);
+		var m=s.match(reLetter+reOpen+'e\\^\\([ij]\\*'+reLetter+'\\)'+reClose);
 		if (m) {
 			var x=texLetter(m[1]);
 			var t=texLetter(m[3]);
 			return [
 				function(arg,opts){
 					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}'+m[2]+'e^{'+o.argSign+'j'+o.argRest+'}'+m[4];
+					return '{'+x+o.fnConj+'}'+texOpen[m[2]]+'e^{'+o.argSign+'j'+o.argRest+'}'+texClose[m[4]];
 				},
 				'{'+t+'}',m[1],m[3]
 			];
 		}
-		var m=s.match(/([a-zA-Z]+)_([a-zA-Z]+)/);
+		var m=s.match(reLetter+'_'+reLetter);
 		if (m) {
 			var x=texLetter(m[1]);
 			var t=texLetter(m[2]);

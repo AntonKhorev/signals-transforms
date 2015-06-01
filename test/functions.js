@@ -100,6 +100,24 @@ testCallSection(
 	}
 );
 
+testCallSection(
+	FormulaContext(['x{t}','y{t}'],['X(f)','Y(f)']),
+	function(t,T,x,X){
+		assert.equal(t,'{t}');
+		assert.equal(x('#'),'{x}\\{#\\}');
+		assert.equal(x('#','*'),'{x^*}\\{#\\}');
+	}
+);
+
+testCallSection(
+	FormulaContext(['x<t>','y<t>'],['X(f)','Y(f)']),
+	function(t,T,x,X){
+		assert.equal(t,'{t}');
+		assert.equal(x('#'),'{x}\\langle # \\rangle');
+		assert.equal(x('#','*'),'{x^*}\\langle # \\rangle');
+	}
+);
+
 var ctx=FormulaContext(['x(t)','y(t)'],['X(j*omega)','Y(j*omega)']);
 assert.equal(ctx.letter(['a','A','alpha']),'{a}');
 
