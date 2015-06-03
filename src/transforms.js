@@ -948,6 +948,35 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:RoC+' = \\(R\\)'}
 					}}
 				]
+			}},
+			intdiff:function(t,T,x,X){return{
+				time:[
+					{formula:{item:x(t)}},
+					{formula:{
+						item:x(t)+'-'+x(t+'-1'),
+						notes:{b:'first difference'}
+					}},
+					{formula:{
+						item:t+x(t),
+						notes:{b:'multiplication by a ramp'}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:'(1-'+T+'^{-1})'+X(T)+'-'+x('-1'),
+						notes:{b:RoC+' includes \\(R \\setminus \\{0\\} \\)'}
+					}},
+					{formula:{
+						item:'-'+T+' \\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}}
+				]
+				// also true: -(n-1)x[n-1] <-> (d/dz) X(z), RoC includes R\{0}
+				//	problem: changes RoC, while their version doesn't
 			}}
 		}
 	},
