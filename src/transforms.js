@@ -528,6 +528,10 @@ $.fn.signalsTransformsTable.transforms={
 						formula:{
 							item:X(T),
 							notes:{b:RoC+' = \\(R\\)'}
+						},
+						relations:{
+							l:{},
+							r:{}
 						}
 					},{
 						formula:{
