@@ -7,6 +7,7 @@ $.fn.signalsTransformsTable.includedTransforms=[
 	'DFT',
 	'Laplace1',
 	'Laplace2',
+	'Z1',
 	'Z2'
 ];
 
@@ -739,6 +740,32 @@ $.fn.signalsTransformsTable.transforms={
 			}}
 		}
 	},
+	Z1:{
+		name:'Unilateral Z-transform',
+		wikipedia:'http://en.wikipedia.org/wiki/Z-transform#Unilateral_Z-transform',
+		timeFnTemplate:['x[n]','y[n]'],
+		freqFnTemplate:['X(z)','Y(z)'],
+		freqDomainName:'Z-domain',
+		sections:{
+			definitions:function(t,T,x,X){return{
+				time:[
+					{formula:{
+						item:x(t)+' = \\frac{1}{2\\pi j} \\oint_C'+X(T)+'z^{'+t+'-1} \\,\\mathrm{d}'+T,
+						notes:{
+							t:'synthesis formula;<br /> C is a counterclockwise closed path encircling the origin and entirely in the '+RoC+' of \\('+X(T)+'\\)',
+							b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)'
+						}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:X(T)+' = \\sum_{'+t+'=0}^{+\\infty} '+x(t)+'z^{-'+t+'}',
+						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
+					}}
+				]
+			}}
+		}
+	},
 	Z2:{
 		name:'Bilateral Z-transform',
 		wikipedia:'http://en.wikipedia.org/wiki/Z-transform',
@@ -840,14 +867,48 @@ $.fn.signalsTransformsTable.transforms={
 			modshift:function(t,T,x,X,y,Y,ctx){
 				var T1=ctx.letter(['omega','theta','xi']);
 			return{
+				cells:[
+					'+|+|.',
+					'+|+|+',
+					'.|+|+'
+				],
 				time:[
-					{formula:{item:x(t+'+'+t+'_0')}},
-					{formula:{item:'e^{-j'+T1+'_0 '+t+'}'+x(t)}},
-					{formula:{item:x(t)}},
-					{formula:{item:'e^{j'+T1+'_0 '+t+'}'+x(t)}},
-					{formula:{item:x(t+'-'+t+'_0')}}
+					{formula:{
+						item:T+'_0^{-'+t+'}'+x(t),
+						notes:{b:null,t:null}
+					}},
+					{formula:{
+						item:x(t+'+'+t+'_0'),
+						notes:{b:null,t:'time shifting'}
+					}},
+					{formula:{
+						item:'e^{-j'+T1+'_0 '+t+'}'+x(t),
+						notes:{b:null,t:'modulation'}
+					}},
+					{formula:{
+						item:x(t),
+						notes:{b:null,t:null}
+					}},
+					{formula:{
+						item:'e^{j'+T1+'_0 '+t+'}'+x(t),
+						notes:{b:null,t:'modulation'}
+					}},
+					{formula:{
+						item:x(t+'-'+t+'_0'),
+						notes:{b:null,t:'time shifting'}
+					}},
+					{formula:{
+						item:T+'_0^'+t+x(t),
+						notes:{b:null,t:null}
+					}}
 				],
 				freq:[
+					{formula:{
+						item:X(T+'_0'+T),
+						notes:{
+							t:'z-domain scaling',
+							b:RoC+' = \\(|'+T+'_0^{-1}|R\\)'}
+					}},
 					{formula:{
 						item:'z^{'+t+'_0}'+X(T),
 						notes:{b:
@@ -872,6 +933,13 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:
 							'if \\('+t+'_0 &gt; 0\\), '+RoC+' includes \\(R \\setminus \\{0\\} \\);<br />'+
 							'if \\('+t+'_0 &lt; 0\\), '+RoC+' includes \\(R \\setminus \\{\\infty\\} \\)'
+						}
+					}},
+					{formula:{
+						item:X(T+'_0^{-1}'+T),
+						notes:{
+							t:'z-domain scaling',
+							b:RoC+' = \\(|'+T+'_0|R\\)'
 						}
 					}}
 				]
