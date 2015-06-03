@@ -430,7 +430,7 @@ $.fn.signalsTransformsTable.transforms={
 		}
 	},
 	Laplace1:{
-		name:'Unilateral Laplace transform',
+		name:'Unilateral Laplace transform (ULT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Laplace_transform',
 		timeFnTemplate:['x(t)','y(t)'],
 		freqFnTemplate:['X(s)','Y(s)'],
@@ -456,6 +456,7 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			linearity:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['t','tau','u']);
+				var T1=ctx.letter(['s','lambda']);
 			return{
 				time:[
 					{},{},{},
@@ -477,10 +478,13 @@ $.fn.signalsTransformsTable.transforms={
 						item:X(T)+' \\cdot '+Y(T),
 						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}},
-					{formula:{
-						// see [The Handbook of Formulas and Tables for Signal Processing. Ed. Alexander D. Poularikas] for the definition of complex convolution
-						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T),
-						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'} // [Mrinal Mandal, Amir Asif, Continuous and Discrete Time Signals and Systems, isbn 9780521854559, p. 283]
+					// see [The Handbook of Formulas and Tables for Signal Processing. Ed. Alexander D. Poularikas] for the definition of complex convolution
+					{formula:{ // [Wai-Kai Chen, section 3.3.5]
+						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{\\sigma-j\\infty}^{\\sigma+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
+						notes:{
+							t:'s-domain convolution',
+							b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]
+						}
 					}}
 				]
 			}},
@@ -590,7 +594,7 @@ $.fn.signalsTransformsTable.transforms={
 		}
 	},
 	Laplace2:{
-		name:'Bilateral Laplace transform',
+		name:'Bilateral Laplace transform (BLT)',
 		wikipedia:'http://en.wikipedia.org/wiki/Two-sided_Laplace_transform',
 		timeFnTemplate:['x(t)','y(t)'],
 		freqFnTemplate:['X(s)','Y(s)'],
@@ -615,6 +619,7 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			linearity:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['t','tau','u']);
+				var T1=ctx.letter(['s','lambda']);
 			return{
 				time:[
 					{},{},{},
@@ -632,9 +637,12 @@ $.fn.signalsTransformsTable.transforms={
 						item:X(T)+' \\cdot '+Y(T),
 						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}},
-					{formula:{
-						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T),
-						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'} // [Mrinal Mandal, Amir Asif, Continuous and Discrete Time Signals and Systems, isbn 9780521854559, p. 283]
+					{formula:{ // [Wai-Kai Chen, section 3.3.5]
+						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{\\sigma-j\\infty}^{\\sigma+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
+						notes:{
+							t:'s-domain convolution',
+							b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]
+						}
 					}}
 				]
 			}},
