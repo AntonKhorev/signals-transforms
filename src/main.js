@@ -240,7 +240,9 @@ return this.each(function(){
 			});
 			transformDropdownNode.append(transformSelectNode).click(function(){
 				transformDropdownNode.toggleClass('is-open');
-			}).mousedown(preventTextSelectionOnDoubleClick);
+			}).mousedown(preventTextSelectionOnDoubleClick).find('a').click(function(ev){
+				ev.stopPropagation();
+			});
 		}
 	};
 	writeTransformCaption(transforms[selectedTransform]);
