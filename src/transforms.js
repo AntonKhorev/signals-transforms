@@ -874,40 +874,38 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				time:[
 					{formula:{
-						item:T+'_0^{-'+t+'}'+x(t),
-						notes:{b:null,t:null}
+						item:'e^{-j'+T1+'_0 '+t+'}'+x(t),
+						notes:{b:null,t:'modulation'}
 					}},
 					{formula:{
 						item:x(t+'+'+t+'_0'),
 						notes:{b:null,t:'time shifting'}
 					}},
 					{formula:{
-						item:'e^{-j'+T1+'_0 '+t+'}'+x(t),
-						notes:{b:null,t:'modulation'}
+						item:T+'_0^{-'+t+'}'+x(t),
+						notes:{b:null,t:null}
 					}},
 					{formula:{
 						item:x(t),
 						notes:{b:null,t:null}
 					}},
 					{formula:{
-						item:'e^{j'+T1+'_0 '+t+'}'+x(t),
-						notes:{b:null,t:'modulation'}
+						item:T+'_0^'+t+x(t),
+						notes:{b:null,t:null}
 					}},
 					{formula:{
 						item:x(t+'-'+t+'_0'),
 						notes:{b:null,t:'time shifting'}
 					}},
 					{formula:{
-						item:T+'_0^'+t+x(t),
-						notes:{b:null,t:null}
-					}}
+						item:'e^{j'+T1+'_0 '+t+'}'+x(t),
+						notes:{b:null,t:'modulation'}
+					}},
 				],
 				freq:[
 					{formula:{
-						item:X(T+'_0'+T),
-						notes:{
-							t:'z-domain scaling',
-							b:RoC+' = \\(|'+T+'_0^{-1}|R\\)'}
+						item:X('e^{j'+T1+'_0}'+T),
+						notes:{b:RoC+' = \\(R\\)'}
 					}},
 					{formula:{
 						item:'z^{'+t+'_0}'+X(T),
@@ -917,16 +915,22 @@ $.fn.signalsTransformsTable.transforms={
 						}
 					}},
 					{formula:{
-						item:X('e^{j'+T1+'_0}'+T),
-						notes:{b:RoC+' = \\(R\\)'}
+						item:X(T+'_0'+T),
+						notes:{
+							t:'z-domain scaling',
+							b:RoC+' = \\(|'+T+'_0^{-1}|R\\)'
+						}
 					}},
 					{formula:{
 						item:X(T),
 						notes:{b:RoC+' = \\(R\\)'}
 					}},
 					{formula:{
-						item:X('e^{-j'+T1+'_0}'+T),
-						notes:{b:RoC+' = \\(R\\)'}
+						item:X(T+'_0^{-1}'+T),
+						notes:{
+							t:'z-domain scaling',
+							b:RoC+' = \\(|'+T+'_0|R\\)'
+						}
 					}},
 					{formula:{
 						item:'z^{-'+t+'_0}'+X(T),
@@ -936,11 +940,8 @@ $.fn.signalsTransformsTable.transforms={
 						}
 					}},
 					{formula:{
-						item:X(T+'_0^{-1}'+T),
-						notes:{
-							t:'z-domain scaling',
-							b:RoC+' = \\(|'+T+'_0|R\\)'
-						}
+						item:X('e^{-j'+T1+'_0}'+T),
+						notes:{b:RoC+' = \\(R\\)'}
 					}}
 				]
 			}},
