@@ -753,7 +753,7 @@ $.fn.signalsTransformsTable.transforms={
 						item:x(t)+' = \\frac{1}{2\\pi j} \\oint_C'+X(T)+'z^{'+t+'-1} \\,\\mathrm{d}'+T,
 						notes:{
 							t:'synthesis formula;<br /> C is a counterclockwise closed path encircling the origin and entirely in the '+RoC+' of \\('+X(T)+'\\)',
-							b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)'
+							b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\);<br />\\('+x(t)+'=0\\) for \\('+t+'&lt;0\\) usually assumed'
 						}
 					}}
 				],
@@ -761,6 +761,31 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{
 						item:X(T)+' = \\sum_{'+t+'=0}^{+\\infty} '+x(t)+'z^{-'+t+'}',
 						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
+					}}
+				]
+			}},
+			linearity:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+			return{
+				cells:[
+					'+|.|+',
+					'+ + +',
+					'+ + +',
+					'. . .', // time multiplication is different - skip it
+				],
+				time:[
+					{},{},{},
+					{formula:{
+						item:x(t)+'*'+y(t)+' = \\sum_{'+t1+'=0}^{'+t+'} '+x(t1)+y(t+'-'+t1) // [Poularikas], slightly modified
+					}}
+				],
+				freq:[
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.X+'\\)'}}},
+					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{
+						item:X(T)+' \\cdot '+Y(T),
+						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}}
 				]
 			}}

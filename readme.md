@@ -28,3 +28,4 @@ Some customization of the notation and selected transforms is possible although 
 ## Additional references
 
 1. Mrinal Mandal, Amir Asif. *Continuous and Discrete Time Signals and Systems*
+2. Alexander D. Poularikas. *Transforms and Applications Primer for Engineers with Examples and MATLAB®*
