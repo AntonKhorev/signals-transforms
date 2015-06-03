@@ -817,27 +817,38 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			linearity:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['n','m']);
+				var T1=ctx.letter(['z','lambda']);
 			return{
-				cells:[
-					'+|.|+',
-					'+ + +',
-					'+ + +',
-					'. . .', // time multiplication is different - skip it
-				],
 				time:[
 					{},{},{},
 					{formula:{
 						item:x(t)+'*'+y(t)+' = \\sum_{'+t1+'=-\\infty}^{+\\infty} '+x(t1)+y(t+'-'+t1),
 						notes:{b:'linear convolution'}
-					}}
+					}},
+					{formula:{item:x(t)+' \\cdot '+y(t)}}
 				],
 				freq:[
-					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.X+'\\)'}}},
-					{formula:{notes:{b:RoC+' = \\(R_'+ctx.letters.Y+'\\)'}}},
+					{formula:{notes:{b:
+						RoC+' = \\(R_'+ctx.letters.X+'\\)<br />'+
+						RoC+': \\(R_{'+ctx.letters.X+'-} &lt; |'+T+'| &lt; R_{'+ctx.letters.X+'+}\\)'
+					}}},
+					{formula:{notes:{
+						b:RoC+' = \\(R_'+ctx.letters.Y+'\\)<br />'+
+						RoC+': \\(R_{'+ctx.letters.Y+'-} &lt; |'+T+'| &lt; R_{'+ctx.letters.Y+'+}\\)'
+					}}},
 					{formula:{notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}}},
 					{formula:{
 						item:X(T)+' \\cdot '+Y(T),
 						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
+					}},
+					{formula:{ // [Wai-Kai Chen, section 5.4.3]
+						item:'\\frac{1}{2\\pi j} \\oint_C '+X(T1)+Y('\\frac{'+T+'}{'+T1+'}')+T1+'^{-1} \\,\\mathrm{d}'+T1,
+						notes:{
+							t:'z-domain convolution',
+							b:
+								RoC+': \\(R_{'+ctx.letters.X+'-}R_{'+ctx.letters.Y+'-} &lt; |'+T+'| &lt; R_{'+ctx.letters.X+'+}R_{'+ctx.letters.Y+'+}\\);<br />'+
+								'C is a counterclockwise closed path in the intersection of the '+RoC+'s of \\('+X(T1)+'\\) and \\('+Y('\\frac{'+T+'}{'+T1+'}')+'\\)'
+						}
 					}}
 				]
 			}},
@@ -977,7 +988,10 @@ $.fn.signalsTransformsTable.transforms={
 						item:x(t)+'-'+x(t+'-1'),
 						notes:{b:'first difference'}
 					}},
-					{formula:{item:t+x(t)}}
+					{formula:{
+						item:t+x(t),
+						notes:{b:'multiplication by a ramp'}
+					}}
 				],
 				freq:[
 					{formula:{
