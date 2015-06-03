@@ -766,7 +766,7 @@ $.fn.signalsTransformsTable.transforms={
 			definitions:function(t,T,x,X){return{
 				time:[
 					{formula:{
-						item:x(t)+' = \\frac{1}{2\\pi j} \\oint_C'+X(T)+'z^{'+t+'-1} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi j} \\oint_C'+X(T)+T+'^{'+t+'-1} \\,\\mathrm{d}'+T,
 						notes:{
 							t:'synthesis formula;<br /> C is a counterclockwise closed path encircling the origin and entirely in the '+RoC+' of \\('+X(T)+'\\)',
 							b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\);<br />\\('+x(t)+'=0\\) for \\('+t+'&lt;0\\) usually assumed'
@@ -775,7 +775,7 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				freq:[
 					{formula:{
-						item:X(T)+' = \\sum_{'+t+'=0}^{+\\infty} '+x(t)+'z^{-'+t+'}',
+						item:X(T)+' = \\sum_{'+t+'=0}^{+\\infty} '+x(t)+T+'^{-'+t+'}',
 						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
 					}}
 				]
@@ -828,7 +828,7 @@ $.fn.signalsTransformsTable.transforms={
 			definitions:function(t,T,x,X){return{
 				time:[
 					{formula:{
-						item:x(t)+' = \\frac{1}{2\\pi j} \\oint_C'+X(T)+'z^{'+t+'-1} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi j} \\oint_C'+X(T)+T+'^{'+t+'-1} \\,\\mathrm{d}'+T,
 						notes:{
 							t:'synthesis formula;<br /> C is a counterclockwise closed path encircling the origin and entirely in the '+RoC+' of \\('+X(T)+'\\)',
 							b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)'
@@ -837,7 +837,7 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				freq:[
 					{formula:{
-						item:X(T)+' = \\sum_{'+t+'=-\\infty}^{+\\infty} '+x(t)+'z^{-'+t+'}',
+						item:X(T)+' = \\sum_{'+t+'=-\\infty}^{+\\infty} '+x(t)+T+'^{-'+t+'}',
 						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
 					}}
 				]
