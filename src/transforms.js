@@ -917,7 +917,7 @@ $.fn.signalsTransformsTable.transforms={
 						}
 					}},
 					{formula:{
-						item:X('e^{j'+T1+'_0}z'),
+						item:X('e^{j'+T1+'_0}'+T),
 						notes:{b:RoC+' = \\(R\\)'}
 					}},
 					{formula:{
@@ -925,7 +925,7 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:RoC+' = \\(R\\)'}
 					}},
 					{formula:{
-						item:X('e^{-j'+T1+'_0}z'),
+						item:X('e^{-j'+T1+'_0}'+T),
 						notes:{b:RoC+' = \\(R\\)'}
 					}},
 					{formula:{
