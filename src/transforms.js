@@ -868,6 +868,86 @@ $.fn.signalsTransformsTable.transforms={
 						}
 					}
 				]
+			}},
+			modshift:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+				var T1=ctx.letter(['omega','theta','xi']);
+			return{
+				cells:[
+					'+|+ +',
+					'+|+|+',
+					'+ +|+'
+				],
+				time:[
+					{formula:{
+						item:'e^{-j'+T1+'_0 '+t+'}'+x(t),
+						notes:{b:null,t:'modulation'}
+					}},
+					{formula:{
+						item:x(t+'+'+t+'_0'),
+						notes:{b:'\\('+t+'_0 &gt; 0\\)',t:'time advance'}
+					}},
+					{formula:{
+						item:T+'_0^{-'+t+'}'+x(t),
+						notes:{b:null,t:null}
+					}},
+					{formula:{
+						item:x(t),
+						notes:{b:null,t:null}
+					}},
+					{formula:{
+						item:T+'_0^'+t+x(t),
+						notes:{b:null,t:null}
+					}},
+					{formula:{
+						item:x(t+'-'+t+'_0'),
+						notes:{b:'\\('+t+'_0 &gt; 0\\)',t:'time delay'}
+					}},
+					{formula:{
+						item:'e^{j'+T1+'_0 '+t+'}'+x(t),
+						notes:{b:null,t:'modulation'}
+					}},
+				],
+				freq:[
+					{formula:{
+						item:X('e^{j'+T1+'_0}'+T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{ // [Mandal]
+						item:'z^{'+t+'_0}'+X(T)+'-'+T+'^{'+t+'_0} \\sum_{'+t1+'=0}^{'+t+'_0-1}'+T+'^{-'+t1+'}'+x(t1),
+						notes:{b:
+							RoC+' includes \\(R \\setminus \\{\\infty\\} \\)' // TODO re-check RoC
+						}
+					}},
+					{formula:{
+						item:X(T+'_0'+T),
+						notes:{
+							t:'z-domain scaling',
+							b:RoC+' = \\(|'+T+'_0^{-1}|R\\)'
+						}
+					}},
+					{formula:{
+						item:X(T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}},
+					{formula:{
+						item:X(T+'_0^{-1}'+T),
+						notes:{
+							t:'z-domain scaling',
+							b:RoC+' = \\(|'+T+'_0|R\\)'
+						}
+					}},
+					{formula:{
+						item:'z^{-'+t+'_0}'+X(T)+'+'+T+'^{-'+t+'_0} \\sum_{'+t1+'=1}^{'+t+'_0}'+T+'^'+t1+x('-'+t1),
+						notes:{b:
+							RoC+' includes \\(R \\setminus \\{0\\} \\)'
+						}
+					}},
+					{formula:{
+						item:X('e^{-j'+T1+'_0}'+T),
+						notes:{b:RoC+' = \\(R\\)'}
+					}}
+				]
 			}}
 		}
 	},
