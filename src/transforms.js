@@ -436,11 +436,14 @@ $.fn.signalsTransformsTable.transforms={
 		freqFnTemplate:['X(s)','Y(s)'],
 		freqDomainName:'S-domain',
 		sections:{
-			definitions:function(t,T,x,X){return{
+			definitions:function(t,T,x,X,y,Y,ctx){
+				var TR=ctx.letter(['sigma','varsigma']);
+				var TI=ctx.letter(['omega','theta','xi']);
+			return{
 				time:[
 					{formula:{
 						// but we can't restore stuff before 0
-						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{'+TI+'\\to\\infty} \\int\\limits_{'+TR+'-j'+TI+'}^{'+TR+'+j'+TI+'}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
 						notes:{
 							t:'synthesis formula;<br /> the contour path of integration is in the '+RoC+' of \\('+X(T)+'\\)',
 							b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\);<br />\\('+x(t)+'=0\\) for \\('+t+'&lt;0\\) usually assumed'
@@ -457,6 +460,7 @@ $.fn.signalsTransformsTable.transforms={
 			linearity:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['t','tau','u']);
 				var T1=ctx.letter(['s','lambda']);
+				var TR=ctx.letter(['sigma','varsigma']);
 			return{
 				time:[
 					{},{},{},
@@ -480,7 +484,7 @@ $.fn.signalsTransformsTable.transforms={
 					}},
 					// see [The Handbook of Formulas and Tables for Signal Processing. Ed. Alexander D. Poularikas] for the definition of complex convolution
 					{formula:{ // [Wai-Kai Chen, section 3.3.5]
-						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{\\sigma-j\\infty}^{\\sigma+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{'+TR+'-j\\infty}^{'+TR+'+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
 						notes:{
 							t:'s-domain convolution',
 							b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]
@@ -600,10 +604,13 @@ $.fn.signalsTransformsTable.transforms={
 		freqFnTemplate:['X(s)','Y(s)'],
 		freqDomainName:'S-domain',
 		sections:{
-			definitions:function(t,T,x,X){return{
+			definitions:function(t,T,x,X,y,Y,ctx){
+				var TR=ctx.letter(['sigma','varsigma']);
+				var TI=ctx.letter(['omega','theta','xi']);
+			return{
 				time:[
 					{formula:{
-						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{\\omega\\to\\infty} \\int\\limits_{\\sigma-j\\omega}^{\\sigma+j\\omega}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{'+TI+'\\to\\infty} \\int\\limits_{'+TR+'-j'+TI+'}^{'+TR+'+j'+TI+'}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
 						notes:{
 							t:'synthesis formula;<br /> the contour path of integration is in the '+RoC+' of \\('+X(T)+'\\)',
 							b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'
@@ -620,6 +627,7 @@ $.fn.signalsTransformsTable.transforms={
 			linearity:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['t','tau','u']);
 				var T1=ctx.letter(['s','lambda']);
+				var TR=ctx.letter(['sigma','varsigma']);
 			return{
 				time:[
 					{},{},{},
@@ -638,7 +646,7 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}},
 					{formula:{ // [Wai-Kai Chen, section 3.3.5]
-						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{\\sigma-j\\infty}^{\\sigma+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{'+TR+'-j\\infty}^{'+TR+'+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
 						notes:{
 							t:'s-domain convolution',
 							b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]
