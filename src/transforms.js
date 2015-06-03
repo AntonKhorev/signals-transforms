@@ -806,7 +806,7 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}},
 					{formula:{ // [Wai-Kai Chen, section 5.4.3]
-						item:'\\frac{1}{2\\pi j} \\oint_C '+X(T1)+Y('\\frac{'+T+'}{'+T1+'}')+T1+'^{-1} \\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi j} \\oint_C '+X(T1)+Y('\\tfrac{'+T+'}{'+T1+'}')+T1+'^{-1} \\,\\mathrm{d}'+T1,
 						notes:{
 							t:'z-domain convolution',
 							b:
@@ -869,7 +869,7 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}},
 					{formula:{ // [Wai-Kai Chen, section 5.4.3]
-						item:'\\frac{1}{2\\pi j} \\oint_C '+X(T1)+Y('\\frac{'+T+'}{'+T1+'}')+T1+'^{-1} \\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi j} \\oint_C '+X(T1)+Y('\\tfrac{'+T+'}{'+T1+'}')+T1+'^{-1} \\,\\mathrm{d}'+T1,
 						notes:{
 							t:'z-domain convolution',
 							b:
@@ -883,12 +883,12 @@ $.fn.signalsTransformsTable.transforms={
 				freq:[
 					{
 						formula:{
-							item:'-'+X('\\frac 1 {'+T+'^*}','*'),
+							item:'-'+X('\\tfrac 1 {'+T+'^*}','*'),
 							notes:{t:RoC+' = \\(\\frac 1 R\\)'}
 						}
 					},{
 						formula:{
-							item:'-'+X('\\frac 1 '+T),
+							item:'-'+X('\\tfrac 1 '+T),
 							notes:{t:RoC+' = \\(\\frac 1 R\\)'}
 						}
 					},{
@@ -916,12 +916,12 @@ $.fn.signalsTransformsTable.transforms={
 						}
 					},{
 						formula:{
-							item:X('\\frac 1 '+T),
+							item:X('\\tfrac 1 '+T),
 							notes:{b:RoC+' = \\(\\frac 1 R\\)'}
 						}
 					},{
 						formula:{
-							item:X('\\frac 1 {'+T+'^*}','*'),
+							item:X('\\tfrac 1 {'+T+'^*}','*'),
 							notes:{b:RoC+' = \\(\\frac 1 R\\)'}
 						}
 					}
