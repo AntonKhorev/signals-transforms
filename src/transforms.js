@@ -819,6 +819,55 @@ $.fn.signalsTransformsTable.transforms={
 						}
 					}}
 				]
+			}},
+			conjrev:function(t,T,x,X){return{
+				cells:[
+					'.|.|.', // TODO real row deletion
+					'+|+|+',
+					'.|.|.'
+				],
+				time:[
+					{
+						formula:{
+							item:'-'+x(t,'*')
+						}
+					},{
+						formula:{
+							item:x(t)
+						},
+						relations:{
+							l:{notes:{t:'imaginary'}},
+							r:{notes:{t:'real'}}
+						}
+					},{
+						formula:{
+							item:x(t,'*'),
+							notes:{b:'conjugation'}
+						}
+					}
+				],
+				freq:[
+					{
+						formula:{
+							item:'-'+X(T+'^*','*'),
+							notes:{b:RoC+' = \\(R\\)'}
+						}
+					},{
+						formula:{
+							item:X(T),
+							notes:{b:RoC+' = \\(R\\)'}
+						},
+						relations:{
+							l:{},
+							r:{}
+						}
+					},{
+						formula:{
+							item:X(T+'^*','*'),
+							notes:{b:RoC+' = \\(R\\)'}
+						}
+					}
+				]
 			}}
 		}
 	},
