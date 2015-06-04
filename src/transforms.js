@@ -257,21 +257,26 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'e^{-j'+T+' '+t+'_0}'+X(T)}}
 				]
 			}},
-			intdiff:function(t,T,x,X){return{
+			intdiff:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+				var Ti=ctx.letter(['k','l']);
+			return{
 				time:[
-					{formula:{item:'?'}},
+					{formula:{item:'\\sum_{'+t1+'=-\\infty}^'+t+x(t1)}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
 						notes:{b:'first difference'}
 					}},
-					{formula:{item:'-j '+t+' '+x(t)}}
+					{formula:{item:'-j'+t+x(t)}}
 				],
 				freq:[
-					{formula:{item:'?'}},
+					{formula:{
+						item:'\\frac{1}{1-e^{-j'+T+'}}'+X(T)+'+\\pi'+X('0')+' \\sum_{'+Ti+'=-\\infty}^{+\\infty} \\delta('+T+'-2\\pi'+Ti+')'
+					}},
 					{formula:{item:X(T)}},
-					{formula:{item:'(1-e^{-j'+T+'}) '+X(T)}},
-					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)}}
+					{formula:{item:'(1-e^{-j'+T+'})'+X(T)}},
+					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'}'+X(T)}}
 				]
 			}}
 		}
@@ -334,9 +339,11 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'e^{-j'+T+'\\omega_0 '+t+'_0}'+X(T)}}
 				]
 			}},
-			intdiff:function(t,T,x,X){return{
+			intdiff:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+			return{
 				time:[
-					{formula:{item:'?'}},
+					{formula:{item:'\\sum_{'+t1+'=-\\infty}^'+t+x(t1)}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -345,7 +352,10 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'(1-e^{j\\omega_0'+t+'})'+x(t)}}
 				],
 				freq:[
-					{formula:{item:'?'}},
+					{formula:{
+						item:'\\frac{1}{1-e^{-j'+T+'\\omega_0}}'+X(T),
+						notes:{b:'only if \\('+X('0')+'=0\\)'}
+					}},
 					{formula:{item:X(T)}},
 					{formula:{item:'(1-e^{-j'+T+'\\omega_0}) '+X(T)}},
 					{formula:{
