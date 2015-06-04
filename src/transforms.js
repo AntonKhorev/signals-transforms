@@ -121,7 +121,7 @@ $.fn.signalsTransformsTable.transforms={
 		timeFnTemplate:['x(t)','y(t)'],
 		freqFnTemplate:['a_k','b_k'],
 		sections:{
-			definitions:function(t,T,x,X){return{
+			definitions:function(t,T,x,X,y,Y,ctx){return{
 				time:[
 					{formula:{
 						item:x(t)+' = \\sum_{'+T+'=-\\infty}^{+\\infty} '+X(T)+' e^{j'+T+' \\omega_0 '+t+'}',
@@ -130,7 +130,7 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				freq:[
 					{formula:{
-						item:X(T)+' = \\frac{1}{T} \\int\\limits_{\\langle T \\rangle}\\! '+x(t)+' e^{-j'+T+' \\omega_0 '+t+'} \\,\\mathrm{d}'+t,
+						item:X(T)+' = \\frac{1}{T} '+ctx.int(x(t)+'e^{-j'+T+'\\omega_0'+t+'}',t,'\\langle T \\rangle'),
 						notes:{b:'function \\('+X(T)+'\\) of discrete variable \\('+T+'\\);<br /> \\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 					}}
 				]
@@ -142,7 +142,7 @@ $.fn.signalsTransformsTable.transforms={
 				time:[
 					{},{},{},
 					{formula:{
-						item:'\\int\\limits_{\\langle T \\rangle}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
+						item:ctx.int(x(t1)+y(t+'-'+t1),t1,'\\langle T \\rangle'),
 						notes:{b:'periodic convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -204,10 +204,10 @@ $.fn.signalsTransformsTable.transforms={
 		timeFnTemplate:['x[n]','y[n]'],
 		freqFnTemplate:['X(e^(j*omega))','Y(e^(j*omega))'],
 		sections:{
-			definitions:function(t,T,x,X){return{
+			definitions:function(t,T,x,X,y,Y,ctx){return{
 				time:[
 					{formula:{
-						item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi} '+ctx.int(X(T)+'e^{j'+T+t+'}',T,'\\langle 2\\pi \\rangle'),
 						notes:{b:'function \\('+x(t)+'\\) of discrete variable \\('+t+'\\)'}
 					}}
 				],
@@ -234,7 +234,7 @@ $.fn.signalsTransformsTable.transforms={
 					{},{},{},
 					{formula:{item:X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\frac{1}{2\\pi} \\int\\limits_{\\langle 2\\pi \\rangle}\\! '+X(T1)+Y(T+'-'+T1)+'\\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,'\\langle 2\\pi \\rangle'),
 						notes:{b:'periodic convolution'}
 					}}
 				]
@@ -463,7 +463,7 @@ $.fn.signalsTransformsTable.transforms={
 				time:[
 					{formula:{
 						// but we can't restore stuff before 0
-						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{'+TI+'\\to\\infty} \\int\\limits_{'+TR+'-j'+TI+'}^{'+TR+'+j'+TI+'}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{'+TI+'\\to\\infty} '+ctx.int(X(T)+'e^{'+T+t+'}',T,TR+'-j'+TI,TR+'+j'+TI),
 						notes:{
 							t:'synthesis formula;<br /> the contour path of integration is in the '+RoC+' of \\('+X(T)+'\\)',
 							b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\);<br />\\('+x(t)+'=0\\) for \\('+t+'&lt;0\\) usually assumed'
@@ -472,7 +472,7 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				freq:[
 					{formula:{
-						item:X(T)+' = \\int\\limits_{0^-}^{+\\infty}\\! '+x(t)+' e^{-'+T+' '+t+'} \\,\\mathrm{d}'+t,
+						item:X(T)+' = '+ctx.int(x(t)+'e^{-'+T+t+'}',t,'0^-','+\\infty'),
 						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
 					}}
 				]
@@ -485,8 +485,8 @@ $.fn.signalsTransformsTable.transforms={
 				time:[
 					{},{},{},
 					{formula:{
-						// item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
-						item:x(t)+'*'+y(t)+' = \\int\\limits_0^{'+t+'}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1, // TODO what about limits? is it 0- .. t+ ?
+						// sometimes limits are -inf..+inf, but then causality of x(t) and y(t) is required
+						item:x(t)+'*'+y(t)+' = '+ctx.int(x(t1)+y(t+'-'+t1),t1,'0',t), // TODO what about limits? is it 0- .. t+ ?
 						notes:{
 							// t:'\\('+x(t)+'='+y(t)+'=0\\) required for \\('+t+'&lt;0\\)',
 							// b:'linear convolution'
@@ -504,7 +504,7 @@ $.fn.signalsTransformsTable.transforms={
 					}},
 					// see [The Handbook of Formulas and Tables for Signal Processing. Ed. Alexander D. Poularikas] for the definition of complex convolution
 					{formula:{ // [Wai-Kai Chen, section 3.3.5]
-						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{'+TR+'-j\\infty}^{'+TR+'+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,TR+'-j\\infty',TR+'+j\\infty'),
 						notes:{
 							t:'s-domain convolution',
 							b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]
@@ -636,7 +636,7 @@ $.fn.signalsTransformsTable.transforms={
 			return{
 				time:[
 					{formula:{
-						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{'+TI+'\\to\\infty} \\int\\limits_{'+TR+'-j'+TI+'}^{'+TR+'+j'+TI+'}\\! '+X(T)+' e^{'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi j} \\lim_{'+TI+'\\to\\infty} '+ctx.int(X(T)+'e^{'+T+t+'}',T,TR+'-j'+TI,TR+'+j'+TI),
 						notes:{
 							t:'synthesis formula;<br /> the contour path of integration is in the '+RoC+' of \\('+X(T)+'\\)',
 							b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'
@@ -645,7 +645,7 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				freq:[
 					{formula:{
-						item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t)+' e^{-'+T+' '+t+'} \\,\\mathrm{d}'+t,
+						item:X(T)+' = '+ctx.int(x(t)+'e^{-'+T+t+'}',t,'-\\infty','+\\infty'),
 						notes:{b:'function \\('+X(T)+'\\) of complex variable \\('+T+'\\)'}
 					}}
 				]
@@ -658,7 +658,7 @@ $.fn.signalsTransformsTable.transforms={
 				time:[
 					{},{},{},
 					{formula:{
-						item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
+						item:x(t)+'*'+y(t)+' = '+ctx.int(x(t1)+y(t+'-'+t1),t1,'-\\infty','+\\infty'),
 						notes:{b:'linear convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -672,7 +672,7 @@ $.fn.signalsTransformsTable.transforms={
 						notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 					}},
 					{formula:{ // [Wai-Kai Chen, section 3.3.5]
-						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} \\int\\limits_{'+TR+'-j\\infty}^{'+TR+'+j\\infty}\\! '+X(T1)+Y(T+'-'+T1)+' \\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,TR+'-j\\infty',TR+'+j\\infty'),
 						notes:{
 							t:'s-domain convolution',
 							b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]

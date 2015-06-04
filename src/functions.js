@@ -136,7 +136,10 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 		return sectionFn(t,T,x,X,y,Y,ctx);
 	};
 	ctx.int=function(fx,x,x0,x1){
-		return '\\int\\limits_{'+x0+'}^{'+x1+'}\\!'+fx+'\\,\\mathrm{d}'+x;
+		r='\\int\\limits_{'+x0+'}';
+		if (typeof(x1)!=='undefined') r+='^{'+x1+'}';
+		r+='\\!'+fx+'\\,\\mathrm{d}'+x;
+		return r;
 	};
 
 	// TODO decide (not) to put those under ctx.letters
