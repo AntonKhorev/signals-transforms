@@ -393,7 +393,7 @@ $.fn.signalsTransformsTable.transforms={
 				time:[
 					{},{},{},
 					{formula:{
-						item:'\\sum_{'+t1+'=0}^{N-1} '+x(t1)+y(t+'-'+t1),
+						item:x(t)+'\\circledast'+y(t)+' = \\sum_{'+t1+'=0}^{N-1} '+x(t1)+y(t+'-'+t1),
 						notes:{b:'circular convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -402,7 +402,7 @@ $.fn.signalsTransformsTable.transforms={
 					{},{},{},
 					{formula:{item:X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\frac{1}{N} \\sum_{'+T1+'=0}^{N-1} '+X(T1)+Y(T+'-'+T1),
+						item:'\\frac{1}{N} '+X(T)+'\\circledast'+Y(t)+' = \\frac{1}{N} \\sum_{'+T1+'=0}^{N-1} '+X(T1)+Y(T+'-'+T1),
 						notes:{b:'circular convolution'}
 					}}
 				]
