@@ -32,16 +32,16 @@ $.fn.signalsTransformsTable.transforms={
 		timeFnTemplate:['x(t)','y(t)'],
 		freqFnTemplate:['X(j*omega)','Y(j*omega)'],
 		sections:{
-			definitions:function(t,T,x,X){return{
+			definitions:function(t,T,x,X,y,Y,ctx){return{
 				time:[
 					{formula:{
-						item:x(t)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X(T)+' e^{j'+T+' '+t+'} \\,\\mathrm{d}'+T,
+						item:x(t)+' = \\frac{1}{2\\pi} '+ctx.int(X(T)+'e^{j'+T+t+'}',T,'-\\infty','+\\infty'),
 						notes:{b:'function \\('+x(t)+'\\) of continuous variable \\('+t+'\\)'}
 					}}
 				],
 				freq:[
 					{formula:{
-						item:X(T)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t)+' e^{-j'+T+' '+t+'} \\,\\mathrm{d}'+t,
+						item:X(T)+' = '+ctx.int(x(t)+'e^{-j'+T+t+'}',t,'-\\infty','+\\infty'),
 						notes:{b:'function \\('+X(T)+'\\) of continuous variable \\('+T+'\\)'}
 					}}
 				]
@@ -53,7 +53,7 @@ $.fn.signalsTransformsTable.transforms={
 				time:[
 					{},{},{},
 					{formula:{
-						item:x(t)+'*'+y(t)+' = \\int\\limits_{-\\infty}^{+\\infty}\\! '+x(t1)+y(t+'-'+t1)+'\\,\\mathrm{d}'+t1,
+						item:x(t)+'*'+y(t)+' = '+ctx.int(x(t1)+y(t+'-'+t1),t1,'-\\infty','+\\infty'),
 						notes:{b:'linear convolution'}
 					}},
 					{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -62,7 +62,7 @@ $.fn.signalsTransformsTable.transforms={
 					{},{},{},
 					{formula:{item:X(T)+' \\cdot '+Y(T)}},
 					{formula:{
-						item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} \\int\\limits_{-\\infty}^{+\\infty}\\! '+X(T1)+Y(T+'-'+T1)+'\\,\\mathrm{d}'+T1,
+						item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,'-\\infty','+\\infty'),
 						notes:{b:'linear convolution'}
 					}}
 				]
