@@ -174,15 +174,20 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'e^{-j'+T+'\\omega_0 '+t+'_0}'+X(T)}}
 				]
 			}},
-			intdiff:function(t,T,x,X){return{
+			intdiff:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['t','tau','u']);
+			return{
 				time:[
-					{formula:{item:'?'}},
+					{formula:{item:ctx.int(x(t1),t1,'-\\infty',t)}},
 					{formula:{item:x(t)}},
 					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
 					{formula:{item:'(1-e^{j\\omega_0'+t+'})'+x(t)}}
 				],
 				freq:[
-					{formula:{item:'?'}},
+					{formula:{
+						item:'\\frac{1}{j'+T+'\\omega_0}'+X(T),
+						notes:{b:'only if \\('+X('0')+'=0\\)'}
+					}},
 					{formula:{item:X(T)}},
 					{formula:{item:'j'+T+' \\omega_0 '+X(T)}},
 					{formula:{
