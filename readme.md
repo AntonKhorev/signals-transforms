@@ -9,6 +9,7 @@ The notation mostly matches these books:
 
 1. Alan V. Oppenheim, Alan S. Willsky with S. Hamid Nawab. *Signals and Systems (2nd Edition)*
 2. Alan V. Oppenheim, Ronald W. Schafer with John R. Buck. *Discrete-Time Signal Processing (2nd Edition)*
+3. Robert Sedgewick, Philippe Flajolet. *An Introduction to the Analysis of Algorithms (2nd Edition)*
 
 ## Reuse
 
