@@ -135,6 +135,9 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 	ctx.callSection=function(sectionFn){
 		return sectionFn(t,T,x,X,y,Y,ctx);
 	};
+	ctx.int=function(fx,x,x0,x1){
+		return '\\int\\limits_{'+x0+'}^{'+x1+'}\\!'+fx+'\\,\\mathrm{d}'+x;
+	};
 
 	// TODO decide (not) to put those under ctx.letters
 	ctx.a=ctx.letter(['a','A','alpha']); // factor 1

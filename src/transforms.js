@@ -97,13 +97,17 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'e^{-j'+T+' '+t+'_0}'+X(T)}}
 				]
 			}},
-			intdiff:function(t,T,x,X){return{
+			intdiff:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['t','tau','u']);
+			return{
 				time:[
+					{formula:{item:ctx.int(x(t1),t1,'-\\infty',t)}},
 					{formula:{item:x(t)}},
 					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
 					{formula:{item:'-j '+t+' '+x(t)}}
 				],
 				freq:[
+					{formula:{item:'\\frac{1}{j'+T+'}'+X(T)+'+\\pi'+X('0')+'\\delta('+T+')'}},
 					{formula:{item:X(T)}},
 					{formula:{item:'j'+T+' '+X(T)}},
 					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)}}
@@ -172,14 +176,16 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				cells:[
-					'.|+|+',
+					'+|+|+',
 					'.|.|.'
 				],
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
 					{formula:{item:'j'+T+' \\omega_0 '+X(T)}}
 				]
@@ -247,6 +253,7 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -255,6 +262,7 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'-j '+t+' '+x(t)}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
 					{formula:{item:'(1-e^{-j'+T+'}) '+X(T)}},
 					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)}}
@@ -322,10 +330,11 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				cells:[
-					'.|+|+',
+					'+|+|+',
 					'.|.|.'
 				],
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -333,6 +342,7 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
 					{formula:{item:'(1-e^{-j'+T+'\\omega_0}) '+X(T)}}
 				]
@@ -412,6 +422,7 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -420,6 +431,7 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'(1-W_N^{-'+t+'}) '+x(t)}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
 					{formula:{item:'(1-W_N^'+T+') '+X(T)}},
 					{formula:{
@@ -581,11 +593,13 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
 					{formula:{item:'-'+t+' '+x(t)}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{
 						item:X(T),
 						notes:{b:RoC+' = \\(R\\)'}
@@ -740,11 +754,13 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
 					{formula:{item:'-'+t+' '+x(t)}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{
 						item:X(T),
 						notes:{b:RoC+' = \\(R\\)'}
@@ -952,6 +968,7 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -963,6 +980,7 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{
 						item:X(T),
 						notes:{b:RoC+' = \\(R\\)'}
@@ -1173,6 +1191,7 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -1184,6 +1203,7 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{
 						item:X(T),
 						notes:{b:RoC+' = \\(R\\)'}
@@ -1295,6 +1315,7 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X){return{
 				time:[
+					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -1308,6 +1329,7 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				],
 				freq:[
+					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
 					{formula:{
 						item:'(1-'+T+')'+X(T)
