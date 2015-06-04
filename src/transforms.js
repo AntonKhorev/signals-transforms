@@ -175,19 +175,20 @@ $.fn.signalsTransformsTable.transforms={
 				]
 			}},
 			intdiff:function(t,T,x,X){return{
-				cells:[
-					'+|+|+',
-					'.|.|.'
-				],
 				time:[
 					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
-					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}}
+					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
+					{formula:{item:'(1-e^{j\\omega_0'+t+'})'+x(t)}}
 				],
 				freq:[
 					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
-					{formula:{item:'j'+T+' \\omega_0 '+X(T)}}
+					{formula:{item:'j'+T+' \\omega_0 '+X(T)}},
+					{formula:{
+						item:X(T)+'-'+X(T+'-1'),
+						notes:{b:'first difference'}
+					}}
 				]
 			}}
 		}
@@ -329,22 +330,23 @@ $.fn.signalsTransformsTable.transforms={
 				]
 			}},
 			intdiff:function(t,T,x,X){return{
-				cells:[
-					'+|+|+',
-					'.|.|.'
-				],
 				time:[
 					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
 						notes:{b:'first difference'}
-					}}
+					}},
+					{formula:{item:'(1-e^{j\\omega_0'+t+'})'+x(t)}}
 				],
 				freq:[
 					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
-					{formula:{item:'(1-e^{-j'+T+'\\omega_0}) '+X(T)}}
+					{formula:{item:'(1-e^{-j'+T+'\\omega_0}) '+X(T)}},
+					{formula:{
+						item:X(T)+'-'+X(T+'-1'),
+						notes:{b:'first difference'}
+					}}
 				]
 			}}
 		}
