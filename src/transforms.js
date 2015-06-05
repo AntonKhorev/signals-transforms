@@ -99,18 +99,46 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['t','tau','u']);
+				var T1=ctx.letter(['omega','theta','xi']);
 			return{
+				cells:[
+					'.|+|.',
+					'+|+|+',
+					'.|+|.'
+				],
 				time:[
-					{formula:{item:ctx.int(x(t1),t1,'-\\infty',t)}},
-					{formula:{item:x(t)}},
-					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
-					{formula:{item:'-j '+t+' '+x(t)}}
+					{formula:{
+						item:'-\\frac{'+x(t)+'}{j'+t+'}+\\pi'+x('0')+'\\delta('+t+')'
+					}},
+					{formula:{
+						item:ctx.int(x(t1),t1,'-\\infty',t)
+					}},
+					{formula:{
+						item:x(t)
+					}},
+					{formula:{
+						item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+					}},
+					{formula:{
+						item:'-j '+t+' '+x(t)
+					}}
 				],
 				freq:[
-					{formula:{item:'\\frac{'+X(T)+'}{j'+T+'}+\\pi'+X('0')+'\\delta('+T+')'}},
-					{formula:{item:X(T)}},
-					{formula:{item:'j'+T+' '+X(T)}},
-					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)}}
+					{formula:{
+						item:ctx.int(X(T1),T1,'-\\infty',T)
+					}},
+					{formula:{
+						item:'\\frac{'+X(T)+'}{j'+T+'}+\\pi'+X('0')+'\\delta('+T+')'
+					}},
+					{formula:{
+						item:X(T)
+					}},
+					{formula:{
+						item:'j'+T+' '+X(T)
+					}},
+					{formula:{
+						item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)
+					}}
 				]
 			}}
 		}
