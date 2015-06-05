@@ -1297,7 +1297,7 @@ $.fn.signalsTransformsTable.transforms={
 				time:[
 					{},{},{},
 					{formula:{
-						item:x(t)+'*'+y(t)+' = \\sum_{0\\geq'+t1+'\\geq'+t+'} '+x(t1)+y(t+'-'+t1),
+						item:x(t)+'*'+y(t)+' = \\sum_{0\\leq'+t1+'\\leq'+t+'} '+x(t1)+y(t+'-'+t1),
 						notes:{b:'convolution'}
 					}}
 				],
