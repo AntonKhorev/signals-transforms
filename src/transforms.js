@@ -144,7 +144,8 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			impstep:function(t,T,x,X){return{
 				cells:[
-					'+|+|+'
+					'+|+|+',
+					'.|+|+'
 				],
 				time:[
 					{formula:{
@@ -156,6 +157,13 @@ $.fn.signalsTransformsTable.transforms={
 					}},
 					{formula:{
 						item:'\\frac{1}{2\\pi}'
+					}},
+					{formula:{
+						item:'u('+t+')',
+						notes:{b:'unit step'+Wiki('http://en.wikipedia.org/wiki/Heaviside_step_function')}
+					}},
+					{formula:{
+						item:'-\\frac{1}{2\\pi j'+t+'}+\\frac{\\delta('+t+')}{2}' // maybe put '-' before delta - that's what comes out of duality derivation
 					}}
 				],
 				freq:[
@@ -168,6 +176,13 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{
 						item:'\\delta('+T+')',
 						notes:{b:'Dirac delta'+Wiki('http://en.wikipedia.org/wiki/Dirac_delta_function')}
+					}},
+					{formula:{
+						item:'\\frac{1}{j'+T+'}+\\pi\\delta('+T+')'
+					}},
+					{formula:{
+						item:'u('+T+')',
+						notes:{b:'unit step'+Wiki('http://en.wikipedia.org/wiki/Heaviside_step_function')}
 					}}
 				]
 			}}
