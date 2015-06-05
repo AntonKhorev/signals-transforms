@@ -1351,10 +1351,16 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				]
 			}},
-			intdiff:function(t,T,x,X){return{
+			intdiff:function(t,T,x,X,y,Y,ctx){
+				var t1=ctx.letter(['n','m']);
+			return{
 				time:[
-					{formula:{item:'?'}},
-					{formula:{item:x(t)}},
+					{formula:{
+						item:'\\sum_{0 \\leq '+t1+' \\leq '+t+'}'+x(t1)
+					}},
+					{formula:{
+						item:x(t)
+					}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
 						notes:{
@@ -1367,8 +1373,12 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				],
 				freq:[
-					{formula:{item:'?'}},
-					{formula:{item:X(T)}},
+					{formula:{
+						item:'\\frac{1}{1-'+T+'}'+X(T)
+					}},
+					{formula:{
+						item:X(T)
+					}},
 					{formula:{
 						item:'(1-'+T+')'+X(T)
 					}},
