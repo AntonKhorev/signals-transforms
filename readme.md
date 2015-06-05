@@ -4,6 +4,8 @@
 
 The idea is to group related properties and place them horizontally as well as vertically,
 unlike a [typical table](http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform#Properties) where all of the properties are listed one below another.
+Another idea is to treat domains equally.
+If there's a certain property like differentiation for time domain, attempt is made to provide similar property for frequency domain.
 
 The notation mostly matches these books:
 

@@ -25,6 +25,7 @@ $.fn.signalsTransformsTable.transformCommon={
 
 // TODO synthesis formula equality caveats for CTFT and Laplace (esp. Unilateral)
 var RoC="<abbr title='region of convergence'>RoC</abbr>";
+function Wiki(href){return "<sup><a href='"+href+"'>[W]</a></sup>"};
 $.fn.signalsTransformsTable.transforms={
 	CTFT:{
 		name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
@@ -138,6 +139,35 @@ $.fn.signalsTransformsTable.transforms={
 					}},
 					{formula:{
 						item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)
+					}}
+				]
+			}},
+			impstep:function(t,T,x,X){return{
+				cells:[
+					'+|+|+'
+				],
+				time:[
+					{formula:{
+						item:'1'
+					}},
+					{formula:{
+						item:'\\delta('+t+')',
+						notes:{b:'Dirac delta'+Wiki('http://en.wikipedia.org/wiki/Dirac_delta_function')}
+					}},
+					{formula:{
+						item:'\\frac{1}{2\\pi}'
+					}}
+				],
+				freq:[
+					{formula:{
+						item:'2\\pi\\delta('+T+')'
+					}},
+					{formula:{
+						item:'1'
+					}},
+					{formula:{
+						item:'\\delta('+T+')',
+						notes:{b:'Dirac delta'+Wiki('http://en.wikipedia.org/wiki/Dirac_delta_function')}
 					}}
 				]
 			}}

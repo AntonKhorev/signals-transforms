@@ -5,7 +5,8 @@ $.fn.signalsTransformsTable.includedSections=[
 	'duality',
 	'conjrev',
 	'modshift',
-	'intdiff'
+	'intdiff',
+	'impstep'
 ];
 
 $.fn.signalsTransformsTable.sections={
@@ -167,5 +168,8 @@ $.fn.signalsTransformsTable.sections={
 			'+|+|+',
 			'.|+|.'
 		]
-	}}
+	}},
+	impstep:function(t,T,x,X){return{
+		name:'Impulse and unis step'
+	}},
 };
