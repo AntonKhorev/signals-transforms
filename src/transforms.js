@@ -439,8 +439,11 @@ $.fn.signalsTransformsTable.transforms={
 				]
 			}},
 			intdiff:function(t,T,x,X){return{
+				cells:[
+					'.|+|+', // skipping time accumulation - no reference gives it, they all want to sum from -inf, would make sense to sum from 0?
+					'.|+|.'
+				],
 				time:[
-					{formula:{item:'?'}},
 					{formula:{item:x(t)}},
 					{formula:{
 						item:x(t)+'-'+x(t+'-1'),
@@ -449,7 +452,6 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{item:'(1-W_N^{-'+t+'}) '+x(t)}}
 				],
 				freq:[
-					{formula:{item:'?'}},
 					{formula:{item:X(T)}},
 					{formula:{item:'(1-W_N^'+T+') '+X(T)}},
 					{formula:{
