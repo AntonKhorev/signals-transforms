@@ -272,7 +272,7 @@ $.fn.signalsTransformsTable.transforms={
 				],
 				freq:[
 					{formula:{
-						item:'\\frac{'+X(T)+'}{1-e^{-j'+T+'}}+\\pi'+X('0')+'\\tilde\\delta('+T+')',
+						item:'\\tfrac{'+X(T)+'}{1-e^{-j'+T+'}}+\\pi'+X('0')+'\\tilde\\delta('+T+')',
 						notes:{b:'\\(\\tilde\\delta('+T+') = \\sum_{'+Ti+'=-\\infty}^{+\\infty} \\delta('+T+'-2\\pi'+Ti+')\\)'}
 					}},
 					{formula:{item:X(T)}},
