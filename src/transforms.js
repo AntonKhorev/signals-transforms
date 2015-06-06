@@ -342,6 +342,36 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				]
 			}},
+			duality:function(t,T,x,X,y,Y,ctx){
+				var xd=ctx.letter(['t']);
+				var Xd=ctx.letter(['k']);
+			return{
+				time:[
+					{formula:{
+						item:X('-\\omega_0'+xd)+' \\overset{\\mathtt{CTFS}}{\\longleftrightarrow}',
+						notes:{b:'period \\(T\\);<br />\\(\\omega_0=\\frac{2\\pi}{T}\\)'}
+					}},
+					{formula:{
+						item:x(t)
+					}},
+					{formula:{
+						item:X('\\omega_0'+xd)+' \\overset{\\mathtt{CTFS}}{\\longleftrightarrow}',
+						notes:{b:'period \\(T\\);<br />\\(\\omega_0=\\frac{2\\pi}{T}\\)'}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:'\\overset{\\mathtt{CTFS}}{\\longleftrightarrow} '+x(Xd)
+					}},
+					{formula:{
+						item:X(T),
+						notes:{b:'period \\(2\\pi\\)'}
+					}},
+					{formula:{
+						item:'\\overset{\\mathtt{CTFS}}{\\longleftrightarrow} '+x('-'+Xd)
+					}}
+				]
+			}},
 			conjrev:function(){return{
 			}},
 			modshift:function(t,T,x,X){return{
