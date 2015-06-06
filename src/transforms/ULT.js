@@ -202,6 +202,32 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+' = \\(R\\)'}
 				}}
 			]
+		}},
+		impstep:function(t,T,x,X){return{
+			cells:[
+				'.|+|.',
+				'.|+|.'
+			],
+			time:[
+				{formula:{
+					item:'\\delta('+t+')',
+					notes:{b:'Dirac delta'+Wiki('http://en.wikipedia.org/wiki/Dirac_delta_function')}
+				}},
+				{formula:{
+					item:'u('+t+')',
+					notes:{b:'unit step'+Wiki('http://en.wikipedia.org/wiki/Heaviside_step_function')}
+				}}
+			],
+			freq:[
+				{formula:{
+					item:'1',
+					notes:{b:RoC+': all \\('+T+'\\)'}
+				}},
+				{formula:{
+					item:'\\frac{1}{'+T+'}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
+				}}
+			]
 		}}
 	}
 };
