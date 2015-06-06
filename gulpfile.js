@@ -16,6 +16,7 @@ var jsSrc=[
 	// options
 	'src/sections.js',
 	'src/transforms.js',
+	'src/transforms/*.js',
 	'src/outro.js'
 ];
 
