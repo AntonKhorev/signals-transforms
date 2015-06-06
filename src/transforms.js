@@ -455,6 +455,18 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				]
 			}},
+			duality:function(t,T,x,X){return{
+				time:[
+					{formula:{item:'N'+X('-'+t)}},
+					{formula:{item:x(t)}},
+					{formula:{item:X(t)}}
+				],
+				freq:[
+					{formula:{item:x(T)}},
+					{formula:{item:X(T)}},
+					{formula:{item:'\\frac{1}{N}'+x('-'+T)}}
+				]
+			}},
 			conjrev:function(){return{
 			}},
 			modshift:function(t,T,x,X){return{
