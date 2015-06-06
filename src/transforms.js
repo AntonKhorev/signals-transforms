@@ -229,6 +229,36 @@ $.fn.signalsTransformsTable.transforms={
 					}}
 				]
 			}},
+			duality:function(t,T,x,X,y,Y,ctx){
+				var xd=ctx.letter(['n']);
+				var Xd=ctx.letter(['omega']);
+			return{
+				time:[
+					{formula:{
+						item:X('-'+xd)+' \\overset{\\mathtt{DTFT}}{\\longleftrightarrow}'
+					}},
+					{formula:{
+						item:x(t),
+						notes:{b:'period \\(T\\)'}
+					}},
+					{formula:{
+						item:X(xd)+' \\overset{\\mathtt{DTFT}}{\\longleftrightarrow}'
+					}}
+				],
+				freq:[
+					{formula:{
+						item:'\\overset{\\mathtt{DTFT}}{\\longleftrightarrow} '+x('\\tfrac{'+Xd+'}{\\omega_0}'),
+						notes:{b:'period \\(2\\pi\\)'}
+					}},
+					{formula:{
+						item:X(T)
+					}},
+					{formula:{
+						item:'\\overset{\\mathtt{DTFT}}{\\longleftrightarrow} '+x('-\\tfrac{'+Xd+'}{\\omega_0}'),
+						notes:{b:'period \\(2\\pi\\)'}
+					}}
+				]
+			}},
 			conjrev:function(){return{
 			}},
 			modshift:function(t,T,x,X){return{

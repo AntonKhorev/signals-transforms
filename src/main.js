@@ -256,8 +256,6 @@ return this.each(function(){
 
 	// transform tabular data
 	writeTransform(transforms[selectedTransform]);
-
-	// $$\overset{\mathcal F}{\rightarrow}$$
 });
 
 }; // plugin main fn
