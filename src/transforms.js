@@ -843,14 +843,35 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['t','tau','u']);
+				var T1=ctx.letter(['s','lambda']);
 			return{
+				cells:[
+					'.|+|.',
+					'+|+|+',
+					'.|+|.'
+				],
 				time:[
-					{formula:{item:ctx.int(x(t1),t1,'0^-',t)}},
-					{formula:{item:x(t)}},
-					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
-					{formula:{item:'-'+t+' '+x(t)}}
+					{formula:{
+						item:'\\frac{1}{'+t+'}'+x(t)
+					}},
+					{formula:{
+						item:ctx.int(x(t1),t1,'0^-',t)
+					}},
+					{formula:{
+						item:x(t)
+					}},
+					{formula:{
+						item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+					}},
+					{formula:{
+						item:'-'+t+' '+x(t)
+					}}
 				],
 				freq:[
+					{formula:{
+						item:ctx.int(X(T1),T1,T,'\\infty')
+						// TODO RoC?
+					}},
 					{formula:{
 						item:'\\frac{1}{'+T+'}'+X(T),
 						notes:{b:RoC+' includes \\(R \\cap \\{\\Re('+T+')&gt;0\\}\\)'}
@@ -1032,6 +1053,32 @@ $.fn.signalsTransformsTable.transforms={
 					{formula:{
 						item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T),
 						notes:{b:RoC+' = \\(R\\)'}
+					}}
+				]
+			}},
+			impstep:function(t,T,x,X){return{
+				cells:[
+					'.|+|.',
+					'.|+|.'
+				],
+				time:[
+					{formula:{
+						item:'\\delta('+t+')',
+						notes:{b:'Dirac delta'+Wiki('http://en.wikipedia.org/wiki/Dirac_delta_function')}
+					}},
+					{formula:{
+						item:'u('+t+')',
+						notes:{b:'unit step'+Wiki('http://en.wikipedia.org/wiki/Heaviside_step_function')}
+					}}
+				],
+				freq:[
+					{formula:{
+						item:'1',
+						notes:{b:RoC+': all \\('+T+'\\)'}
+					}},
+					{formula:{
+						item:'\\frac{1}{'+T+'}',
+						notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 					}}
 				]
 			}}

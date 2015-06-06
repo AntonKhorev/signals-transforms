@@ -170,6 +170,6 @@ $.fn.signalsTransformsTable.sections={
 		]
 	}},
 	impstep:function(t,T,x,X){return{
-		name:'Impulse and unis step'
+		name:'Impulse and unit step'
 	}},
 };
