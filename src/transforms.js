@@ -279,20 +279,51 @@ $.fn.signalsTransformsTable.transforms={
 			}},
 			intdiff:function(t,T,x,X,y,Y,ctx){
 				var t1=ctx.letter(['t','tau','u']);
+				var T1=ctx.letter(['k','l']);
+				var ti=ctx.letter(['n','m']);
 			return{
+				cells:[
+					'.|+|.',
+					'+|+|+',
+					'.|+|.'
+				],
 				time:[
-					{formula:{item:ctx.int(x(t1),t1,'-\\infty',t)}},
-					{formula:{item:x(t)}},
-					{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
-					{formula:{item:'(1-e^{j\\omega_0'+t+'})'+x(t)}}
+					{formula:{
+						item:'\\tfrac{'+x(t)+'}{1-e^{j\\omega_0'+t+'}}+\\pi'+x('0')+'\\tilde\\delta('+t+')',
+						//notes:{b:'\\(\\tilde\\delta('+t+') = \\sum_{'+ti+'=-\\infty}^{+\\infty} \\delta(\\omega_0'+t+'-2\\pi'+ti+')\\)'}
+						notes:{b:
+							'\\(\\tilde\\delta('+t+')\\) is an impulse train'+Wiki('http://en.wikipedia.org/wiki/Dirac_comb')+' with period \\(T\\): '+
+							'\\(\\tilde\\delta('+t+') = \\sum_{'+ti+'=-\\infty}^{+\\infty} \\delta('+t+'-'+ti+'T)\\)'
+						}
+					}},
+					{formula:{
+						item:ctx.int(x(t1),t1,'-\\infty',t)
+					}},
+					{formula:{
+						item:x(t)
+					}},
+					{formula:{
+						item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+					}},
+					{formula:{
+						item:'(1-e^{j\\omega_0'+t+'})'+x(t)
+					}}
 				],
 				freq:[
+					{formula:{
+						item:'\\sum_{'+T1+'=-\\infty}^'+T+X(T1),
+						notes:{b:'running sum'}
+					}},
 					{formula:{
 						item:'\\frac{1}{j'+T+'\\omega_0}'+X(T),
 						notes:{b:'only if \\('+X('0')+'=0\\)'}
 					}},
-					{formula:{item:X(T)}},
-					{formula:{item:'j'+T+' \\omega_0 '+X(T)}},
+					{formula:{
+						item:X(T)
+					}},
+					{formula:{
+						item:'j'+T+' \\omega_0 '+X(T)
+					}},
 					{formula:{
 						item:X(T)+'-'+X(T+'-1'),
 						notes:{b:'first difference'}
@@ -426,7 +457,10 @@ $.fn.signalsTransformsTable.transforms={
 					}},
 					{formula:{
 						item:'\\tfrac{'+X(T)+'}{1-e^{-j'+T+'}}+\\pi'+X('0')+'\\tilde\\delta('+T+')',
-						notes:{b:'\\(\\tilde\\delta('+T+') = \\sum_{'+Ti+'=-\\infty}^{+\\infty} \\delta('+T+'-2\\pi'+Ti+')\\)'}
+						notes:{b:
+							'\\(\\tilde\\delta('+T+')\\) is an impulse train'+Wiki('http://en.wikipedia.org/wiki/Dirac_comb')+' with period \\(2\\pi\\): '+
+							'\\(\\tilde\\delta('+T+') = \\sum_{'+Ti+'=-\\infty}^{+\\infty} \\delta('+T+'-2\\pi'+Ti+')\\)'
+						}
 					}},
 					{formula:{
 						item:X(T)
