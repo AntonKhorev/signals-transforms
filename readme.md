@@ -33,3 +33,4 @@ Some customization of the notation and selected transforms is possible although 
 1. Mrinal Mandal, Amir Asif. *Continuous and Discrete Time Signals and Systems*
 2. Alexander D. Poularikas. *Transforms and Applications Primer for Engineers with Examples and MATLAB®*
 3. *Fundamentals of Circuits and Filters* edited by Wai-Kai Chen
+4. B. P. Lathi. *Signal Processing and Linear Systems*

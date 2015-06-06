@@ -152,16 +152,19 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			var T1=ctx.letter(['s','lambda']);
 		return{
 			cells:[
-				'.|+|.',
+				'+|+|.',
 				'+|+|+',
 				'.|+|.'
 			],
 			time:[
 				{formula:{
+					item:ctx.int(x(t1),t1,'0^-',t)
+				}},
+				{formula:{
 					item:'\\frac{1}{'+t+'}'+x(t)
 				}},
 				{formula:{
-					item:ctx.int(x(t1),t1,'0^-',t)
+					item:ctx.int(x(t1),t1,'-\\infty',t)
 				}},
 				{formula:{
 					item:x(t)
@@ -175,11 +178,15 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			],
 			freq:[
 				{formula:{
+					item:'\\frac{1}{'+T+'}'+X(T),
+					notes:{b:RoC+' includes \\(R \\cap \\{\\Re('+T+')&gt;0\\}\\)'}
+				}},
+				{formula:{
 					item:ctx.int(X(T1),T1,T,'\\infty')
 					// TODO RoC?
 				}},
 				{formula:{
-					item:'\\frac{1}{'+T+'}'+X(T),
+					item:'\\frac{'+X(T)+'}{'+T+'}+\\frac{1}{'+T+'}'+ctx.int(x(t),t,'-\\infty','0^-'),
 					notes:{b:RoC+' includes \\(R \\cap \\{\\Re('+T+')&gt;0\\}\\)'}
 				}},
 				{formula:{
