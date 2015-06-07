@@ -99,8 +99,9 @@ $.fn.signalsTransformsTable.transforms.CTFS={
 			],
 			time:[
 				{formula:{
-					item:'\\tfrac{'+x(t)+'}{1-e^{j\\omega_0'+t+'}}+\\pi'+x('0')+'\\tilde\\delta('+t+')',
+					//item:'\\tfrac{'+x(t)+'}{1-e^{j\\omega_0'+t+'}}+\\pi'+x('0')+'\\tilde\\delta('+t+')',
 					//notes:{b:'\\(\\tilde\\delta('+t+') = \\sum_{'+ti+'=-\\infty}^{+\\infty} \\delta(\\omega_0'+t+'-2\\pi'+ti+')\\)'}
+					item:'\\tfrac{'+x(t)+'}{1-e^{j\\omega_0'+t+'}}+\\tfrac{\\pi'+x('0')+'}{\\omega_0} \\tilde\\delta('+t+')',
 					notes:{b:
 						'\\(\\tilde\\delta('+t+')\\) is an impulse train'+Wiki('http://en.wikipedia.org/wiki/Dirac_comb')+' with period \\(T\\): '+
 						'\\(\\tilde\\delta('+t+') = \\sum_{'+ti+'=-\\infty}^{+\\infty} \\delta('+t+'-'+ti+'T)\\)'
