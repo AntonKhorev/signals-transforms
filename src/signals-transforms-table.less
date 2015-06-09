@@ -1,12 +1,19 @@
 @n-timefreq-cols: 6;
 @timefreq-col-width: 15%;
+@gap-col-width: 100% - @timefreq-col-width * @n-timefreq-cols;
 @note-font-size: .8em;
 @cell-spacing: 2em; // need to fiddle with MathJax styles if it's lower than 2em
 @formula-highlight-background: #EDB;
+@formula-highlight-color: @formula-highlight-background - #888;
 @relation-highlight-background: #CF8;
 @note-color: #444;
 @line-color: #888;
 
+.list-reset() {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
 .triangle-expand() {
 	display: block;
 	position: absolute;
@@ -67,6 +74,7 @@
 			display: none;
 		}
 		&.is-open ul {
+			.list-reset();
 			display: block;
 			position: absolute;
 			z-index: 2;
@@ -76,9 +84,6 @@
 			color: #000;
 			box-shadow: 0 0 10px rgba(0,0,0,0.5);
 			width: 100%;
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
 			li {
 				border-radius: .5em;
 			}
@@ -96,7 +101,7 @@
 		height: 0;
 	}
 	colgroup.both col {
-		width: 100% - @timefreq-col-width * @n-timefreq-cols;
+		width: @gap-col-width;
 	}
 	td {
 		padding: @cell-spacing/2;
@@ -195,6 +200,20 @@
 				transform-origin: right;
 				transform: rotate(-45deg);
 			}
+		}
+		line-height: normal;
+		.name {
+			position: absolute;
+			text-align: center;
+			color: @formula-highlight-color;
+		}
+		.actions {
+			.list-reset();
+			position: absolute;
+			text-align: center;
+			color: @formula-highlight-color;
+			font-size: @note-font-size;
+			font-family: sans-serif;
 		}
 	}
 	.formula {

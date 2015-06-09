@@ -51,6 +51,8 @@ return this.each(function(){
 	var containerNode=$(this).empty();
 	var tableNode=$("<table class='signals-transforms-table' />").appendTo(containerNode);
 	var arrowNode=$("<div class='arrow'>"+
+		"<div class='name'>LABEL</div>"+
+		"<ul class='actions'><li>[explanation]</li><li>[proof]</li></ul>"+
 		"<div class='arrowhead at-tl' /><div class='arrowhead at-bl' />"+
 		"<div class='arrowhead at-tr' /><div class='arrowhead at-br' />"+
 	"</div>");
@@ -180,11 +182,23 @@ return this.each(function(){
 					freqNode.find('.note.at-l').eq(0).each(function(){
 						fLeft=$(this).offset().left;
 					});
-					arrowNode.appendTo(timeNode)
-						.offset({
-							top:tTop+tHeight/2-vShift,
-							left:tLeft+tWidth+hGap
-						}).width(fLeft-tLeft-tWidth-2*hGap);
+					var gapNode=timeNode.closest('tr').children('td.both');
+					var gLeft=gapNode.offset().left;
+					var gWidth=gapNode.outerWidth();
+					arrowNode.appendTo(timeNode).offset({
+						top:tTop+tHeight/2-vShift,
+						left:tLeft+tWidth+hGap
+					}).width(fLeft-tLeft-tWidth-2*hGap);
+					// have to do this after making the arrow visible, otherwise offset() doesn't work right
+					var nameNode=arrowNode.find('.name');
+					nameNode.offset({
+						top:tTop+tHeight/2-vShift-nameNode.height(),
+						left:gLeft
+					}).width(gWidth);
+					arrowNode.find('.actions').offset({
+						top:tTop+tHeight/2-vShift+arrowNode.outerHeight(),
+						left:gLeft
+					}).width(gWidth);
 				}
 
 				// formula pairs
