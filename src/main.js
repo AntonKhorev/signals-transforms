@@ -81,7 +81,7 @@ return this.each(function(){
 			}
 			tbodyNode.append(
 				$("<tr />").append(
-					$("<th colspan='"+(nDomainCols*2+1)+"' role='button'><div class='cell'>"+section.name+"</div></th>").click(function(ev){
+					$("<th colspan='"+(nDomainCols*2+1)+"' role='button' title='expand section'><div class='cell'>"+section.name+"</div></th>").click(function(ev){
 						isSectionCollapsed[id]=false;
 						tbodyNode.removeClass('is-collapsed');
 					}).mousedown(preventTextSelectionOnDoubleClick)
@@ -222,10 +222,10 @@ return this.each(function(){
 	function writeTransformCaption(transform){
 	        captionNode.text(transform.name);
 		if ('wikipedia' in transform) {
-			captionNode.append("<sup><a href='"+transform.wikipedia+"'>[W]</a></sup>");
+			captionNode.append(Wiki(transform.wikipedia));
 		}
 		if (includedTransforms.length>1) {
-			captionNode.wrapInner("<div class='signal-transform-dropdown' role='button' />");
+			captionNode.wrapInner("<div class='signal-transform-dropdown' role='button' title='select transform' />");
 			var transformDropdownNode=captionNode.children().eq(0);
 			var transformSelectNode=$("<ul class='signal-transform-select' />");
 			$.each(includedTransforms,function(_,id){
