@@ -69,6 +69,8 @@ return this.each(function(){
 			"</tr></thead>"
 		);
 
+		var stickArrow=false;
+
 		var ctx=FormulaContext(transform.timeFnTemplate,transform.freqFnTemplate);
 		$.each(includedSections,function(_,id){
 			if (!(id in transform.sections)) return;
@@ -104,7 +106,7 @@ return this.each(function(){
 						case '|':
 							var tdNode=$("<td class='"+domain+"' colspan='"+colspan+"' />");
 							if (isFormula) {
-								tdNode.append("<div class='cell'><div class='formula' /></div>");
+								tdNode.append("<div class='cell'><div class='formula' role='button' /></div>");
 							}
 							trNode.append(tdNode);
 							colspan=0;
@@ -140,7 +142,7 @@ return this.each(function(){
 						insertNotes(formulaNode,data.formula);
 					}
 					if ('relations' in data) $.each(data.relations,function(dir,relation){
-						var relationNode=$("<div class='relation at-"+dir+"' />").insertAfter(formulaNode);
+						var relationNode=$("<div class='relation at-"+dir+"' role='button' />").insertAfter(formulaNode);
 						insertNotes(relationNode,relation);
 						relationNode.on('item:highlight',function(){
 							$(this).addClass('is-highlighted');
@@ -201,30 +203,50 @@ return this.each(function(){
 					}).width(gWidth);
 				}
 
+				function stickArrowHandler(){
+					if (stickArrow) {
+						stickArrow=false;
+					} else {
+						stickArrow=true;
+					}
+				}
+
 				// formula pairs
 				timeFormulaNode.add(freqFormulaNode).hover(function(){
-					timeFormulaNode.addClass('is-highlighted');
-					freqFormulaNode.addClass('is-highlighted');
-					placeArrow(timeFormulaNode,freqFormulaNode,2);
+					if (!stickArrow) {
+						$(this).attr('title','stick transform pair');
+						timeFormulaNode.addClass('is-highlighted');
+						freqFormulaNode.addClass('is-highlighted');
+						placeArrow(timeFormulaNode,freqFormulaNode,2);
+					} else {
+						$(this).attr('title','unstick transform pair');
+					}
 				},function(){
+					if (stickArrow) return;
 					arrowNode.detach();
 					timeFormulaNode.removeClass('is-highlighted');
 					freqFormulaNode.removeClass('is-highlighted');
-				});
+				}).click(stickArrowHandler);
 
 				// relation pairs
 				$.each(['t','b','l','r','tl','tr','bl','br'],function(_,dir){
 					var timeRelationNode=timeFormulaNode.siblings('.relation.at-'+dir);
 					var freqRelationNode=freqFormulaNode.siblings('.relation.at-'+dir);
 					timeRelationNode.add(freqRelationNode).hover(function(){
+						if (stickArrow) {
+							$(this).attr('title','unstick arrow');
+							return;
+						}
+						$(this).attr('title','stick arrow');
 						timeRelationNode.trigger('item:highlight');
 						freqRelationNode.trigger('item:highlight');
 						placeArrow(timeRelationNode,freqRelationNode,4,4);
 					},function(){
+						if (stickArrow) return;
 						arrowNode.detach();
 						timeRelationNode.trigger('item:unhighlight');
 						freqRelationNode.trigger('item:unhighlight');
-					});
+					}).click(stickArrowHandler);
 				});
 			});
 		});
