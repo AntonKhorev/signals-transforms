@@ -110,23 +110,34 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				}
 			]
 		}},
-		modshift:function(t,T,x,X){return{
+		modshift:function(t,T,x,X,y,Y,ctx){return{
+			cells:[
+				'+ + +',
+				'+|+|+',
+				'+ + +'
+			],
 			time:[
 				{formula:{
 					item:x(t+'+'+t+'_0'),
-					notes:{t:'\\('+x(t+'+'+t+'_0')+'=0\\) for \\('+t+'&lt;0\\) required'}
+					notes:{b:'\\('+t+'_0 &gt; 0\\)',t:'time advance'}
 				}},
-				{formula:{item:'e^{-'+T+'_0 '+t+'}'+x(t)}},
-				{formula:{item:x(t)}},
-				{formula:{item:'e^{'+T+'_0 '+t+'}'+x(t)}},
+				{formula:{
+					item:'e^{-'+T+'_0'+t+'}'+x(t)
+				}},
+				{formula:{
+					item:x(t)
+				}},
+				{formula:{
+					item:'e^{'+T+'_0'+t+'}'+x(t)
+				}},
 				{formula:{
 					item:x(t+'-'+t+'_0'),
-					notes:{t:'\\('+x(t+'-'+t+'_0')+'=0\\) for \\('+t+'&lt;0\\) required'}
+					notes:{b:'\\('+t+'_0 &gt; 0\\)',t:'time delay'}
 				}}
 			],
 			freq:[
 				{formula:{
-					item:'e^{'+T+' '+t+'_0}'+X(T),
+					item:'e^{'+T+t+'_0}'+X(T)+'-e^{'+T+t+'_0}'+ctx.int(x(t)+'e^{-'+T+t+'}',t,'0^-',t+'_0^-'),
 					notes:{b:RoC+' = \\(R\\)'}
 				}},
 				{formula:{
@@ -142,7 +153,7 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+' = \\(R+\\Re('+T+'_0)\\)'}
 				}},
 				{formula:{
-					item:'e^{-'+T+' '+t+'_0}'+X(T),
+					item:'e^{-'+T+' '+t+'_0}'+X(T)+'+e^{-'+T+' '+t+'_0}'+ctx.int(x(t)+'e^{-'+T+t+'}',t,'(-'+t+'_0)^-','0^-'),
 					notes:{b:RoC+' = \\(R\\)'}
 				}}
 			]
