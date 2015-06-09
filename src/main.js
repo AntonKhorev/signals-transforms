@@ -106,7 +106,15 @@ return this.each(function(){
 						case '|':
 							var tdNode=$("<td class='"+domain+"' colspan='"+colspan+"' />");
 							if (isFormula) {
-								tdNode.append("<div class='cell'><div class='formula' role='button' /></div>");
+								tdNode.append(
+									$("<div class='cell' />").append(
+										$("<div class='formula' role='button' />").on('item:highlight',function(){
+											$(this).addClass('is-highlighted');
+										}).on('item:unhighlight',function(){
+											$(this).removeClass('is-highlighted');
+										})
+									)
+								);
 							}
 							trNode.append(tdNode);
 							colspan=0;
@@ -171,7 +179,6 @@ return this.each(function(){
 				insertStuff(freqFormulaNode,section.freq[i]);
 
 				function placeArrow(timeNode,freqNode,vShift,hGap){
-					if (typeof(hGap)==='undefined') hGap=0;
 					var tTop   =timeNode.offset().top;
 					var tLeft  =timeNode.offset().left;
 					var fLeft  =freqNode.offset().left;
@@ -215,18 +222,24 @@ return this.each(function(){
 				timeFormulaNode.add(freqFormulaNode).hover(function(){
 					if (!stickArrow) {
 						$(this).attr('title','stick transform pair');
-						timeFormulaNode.addClass('is-highlighted');
-						freqFormulaNode.addClass('is-highlighted');
-						placeArrow(timeFormulaNode,freqFormulaNode,2);
+						timeFormulaNode.trigger('item:highlight');
+						freqFormulaNode.trigger('item:highlight');
+						placeArrow(timeFormulaNode,freqFormulaNode,2,0);
 					} else {
 						$(this).attr('title','unstick transform pair');
 					}
 				},function(){
 					if (stickArrow) return;
 					arrowNode.detach();
-					timeFormulaNode.removeClass('is-highlighted');
-					freqFormulaNode.removeClass('is-highlighted');
-				}).click(stickArrowHandler);
+					timeFormulaNode.trigger('item:unhighlight');
+					freqFormulaNode.trigger('item:unhighlight');
+				}).click(function(){
+					if (stickArrow) {
+						stickArrow=false;
+					} else {
+						stickArrow=true;
+					}
+				});
 
 				// relation pairs
 				$.each(['t','b','l','r','tl','tr','bl','br'],function(_,dir){
@@ -246,7 +259,13 @@ return this.each(function(){
 						arrowNode.detach();
 						timeRelationNode.trigger('item:unhighlight');
 						freqRelationNode.trigger('item:unhighlight');
-					}).click(stickArrowHandler);
+					}).click(function(){
+						if (stickArrow) {
+							stickArrow=false;
+						} else {
+							stickArrow=true;
+						}
+					});
 				});
 			});
 		});
