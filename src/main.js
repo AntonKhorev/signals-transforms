@@ -218,54 +218,59 @@ return this.each(function(){
 					}
 				}
 
+				function makeItemEnterHandler(timeNode,freqNode,vShift,hGap){
+					return function(){
+						timeNode.trigger('item:highlight');
+						freqNode.trigger('item:highlight');
+						if (!stickArrow) {
+							$(this).attr('title','stick transform pair');
+							placeArrow(timeNode,freqNode,vShift,hGap);
+						} else {
+							$(this).attr('title','unstick transform pair');
+						}
+					};
+				}
+				function makeItemExitHandler(timeNode,freqNode){
+					return function(){
+						if (!stickArrow) {
+							arrowNode.detach();
+						}
+						timeNode.trigger('item:unhighlight');
+						freqNode.trigger('item:unhighlight');
+					};
+				}
+				function makeItemClickHandler(timeNode,freqNode){
+					return function(){
+						if (!stickArrow) {
+							stickArrow=true;
+							timeNode.addClass('is-stuck');
+							freqNode.addClass('is-stuck');
+						} else {
+							stickArrow=false;
+							var stuckNodes=tableNode.find('.is-stuck');
+							stuckNodes.removeClass('is-stuck');
+							if (!stuckNodes.is($(this))) {
+								arrowNode.detach();
+								$(this).mouseenter();
+							}
+						}
+					};
+				}
+
 				// formula pairs
-				timeFormulaNode.add(freqFormulaNode).hover(function(){
-					if (!stickArrow) {
-						$(this).attr('title','stick transform pair');
-						timeFormulaNode.trigger('item:highlight');
-						freqFormulaNode.trigger('item:highlight');
-						placeArrow(timeFormulaNode,freqFormulaNode,2,0);
-					} else {
-						$(this).attr('title','unstick transform pair');
-					}
-				},function(){
-					if (stickArrow) return;
-					arrowNode.detach();
-					timeFormulaNode.trigger('item:unhighlight');
-					freqFormulaNode.trigger('item:unhighlight');
-				}).click(function(){
-					if (stickArrow) {
-						stickArrow=false;
-					} else {
-						stickArrow=true;
-					}
-				});
+				timeFormulaNode.add(freqFormulaNode).hover(
+					makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0),
+					makeItemExitHandler(timeFormulaNode,freqFormulaNode)
+				).click(makeItemClickHandler(timeFormulaNode,freqFormulaNode));
 
 				// relation pairs
 				$.each(['t','b','l','r','tl','tr','bl','br'],function(_,dir){
 					var timeRelationNode=timeFormulaNode.siblings('.relation.at-'+dir);
 					var freqRelationNode=freqFormulaNode.siblings('.relation.at-'+dir);
-					timeRelationNode.add(freqRelationNode).hover(function(){
-						if (stickArrow) {
-							$(this).attr('title','unstick arrow');
-							return;
-						}
-						$(this).attr('title','stick arrow');
-						timeRelationNode.trigger('item:highlight');
-						freqRelationNode.trigger('item:highlight');
-						placeArrow(timeRelationNode,freqRelationNode,4,4);
-					},function(){
-						if (stickArrow) return;
-						arrowNode.detach();
-						timeRelationNode.trigger('item:unhighlight');
-						freqRelationNode.trigger('item:unhighlight');
-					}).click(function(){
-						if (stickArrow) {
-							stickArrow=false;
-						} else {
-							stickArrow=true;
-						}
-					});
+					timeRelationNode.add(freqRelationNode).hover(
+						makeItemEnterHandler(timeRelationNode,freqRelationNode,4,4),
+						makeItemExitHandler(timeRelationNode,freqRelationNode)
+					).click(makeItemClickHandler(timeRelationNode,freqRelationNode));
 				});
 			});
 		});
