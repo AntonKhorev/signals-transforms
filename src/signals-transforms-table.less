@@ -295,10 +295,10 @@
 			}
 		}
 		&.at-l {
-			left: -@cell-spacing;
+			left: -@cell-spacing/2;
 		}
 		&.at-r {
-			right: -@cell-spacing;
+			right: -@cell-spacing/2;
 		}
 		&.at-tl, &.at-br {
 			&::before {
@@ -307,11 +307,11 @@
 		}
 		&.at-tl {
 			top: -@cell-spacing/2;
-			left: -@cell-spacing;
+			left: -@cell-spacing/2;
 		}
 		&.at-br {
 			bottom: -@cell-spacing/2;
-			right: -@cell-spacing;
+			right: -@cell-spacing/2;
 		}
 		&::before {
 			position: relative;
