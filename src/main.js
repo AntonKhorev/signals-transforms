@@ -66,14 +66,23 @@ return this.each(function(){
 
 	function writeTransform(transformSpecific){
 		function writePanelsDropdown(tdNode){
-			var panelDropdownNode=$("<div class='panel-dropdown' role='button' title='select panel to add'>+</div>").click(function(){
+			var panelDropdownNode=$("<div class='panel-dropdown' role='button' title='add panel'>+</div>").click(function(){
 				$(this).toggleClass('is-open');
 			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(tdNode);
 			var ulNode=$("<ul />").appendTo(panelDropdownNode);
 			$.each(panels,function(_,panel){
 				$("<li>"+panel.name+"</li>").click(function(){
 					var tbodyNode=$("<tbody class='panel' />").insertAfter(tdNode.closest('thead, tbody'));
-					$("<tr><th colspan='"+(nDomainCols*2+1)+"'>"+panel.name+"</th></tr>").appendTo(tbodyNode);
+					$("<tr><th colspan='"+(nDomainCols*2+1)+" class='both'>"+panel.name+"</th></tr>").appendTo(tbodyNode);
+					$("<tr>"+
+						"<td colspan='"+nDomainCols+"' class='time' />"+
+						"<td class='both' />"+
+						"<td colspan='"+nDomainCols+"' class='freq' />"+
+					"</tr>").appendTo(tbodyNode).find('td.both').append(
+						$("<div class='panel-remove' role='button' title='remove panel'>−</div>").click(function(){
+							$(this).closest('tbody.panel').remove();
+						})
+					);
 					tbodyNode
 						.on('panel:init',panel.init)
 						.on('panel:update',panel.update)

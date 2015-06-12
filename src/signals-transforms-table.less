@@ -49,6 +49,16 @@
 		background: #EEC;
 	}
 }
+.edge-row-button() {
+	color: #444;
+	&:hover {
+		color: #000;
+	}
+	width: 100%;
+	text-align: center;
+	white-space: nowrap;
+	line-height: normal;
+}
 
 .signals-transforms-table {
 	sup a {
@@ -129,9 +139,6 @@
 		tr:first-child + tr td {
 			padding-top: 1.5em;
 		}
-		&.props tr:first-child th {
-			display: none;
-		}
 		tr:last-child td {
 			padding-bottom: 1.5em;
 		}
@@ -154,34 +161,29 @@
 		&:last-child tr:first-child th {
 			border-bottom: 0; // border hack for chrome continued
 		}
+		&.props {
+			tr:first-child th {
+				display: none;
+			}
+		}
 		&.panel {
 			text-align: center;
+			tr:last-child td {
+				padding: 0;
+			}
 		}
 	}
 	.collapse {
-		color: #444;
-		&:hover {
-			color: #000;
-		}
+		.edge-row-button();
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100%;
-		text-align: center;
-		white-space: nowrap;
 	}
-	.panel-dropdown { // TODO merge copypaste from hide button
-		color: #444;
-		&:hover {
-			color: #000;
-		}
+	.panel-dropdown {
+		.edge-row-button();
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: 100%;
-		text-align: center;
-		white-space: nowrap;
-		line-height: normal;
 		ul {
 			display: none;
 		}
@@ -192,6 +194,9 @@
 			left: 50%;
 			margin-left: -5em;
 		}
+	}
+	.panel-remove {
+		.edge-row-button();
 	}
 	.note {
 		display: none;
@@ -409,6 +414,7 @@
 	.signal-transform-dropdown ul,
 	.collapse,
 	.panel-dropdown,
+	.panel-remove,
 	.relation::before,
 	tbody.is-collapsed {
 		display: none;
