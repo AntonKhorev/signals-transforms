@@ -105,12 +105,14 @@
 		width: @gap-col-width;
 	}
 	td {
+		position: relative;
 		padding: @cell-spacing/2;
 		&.both {
 			vertical-align: top;
 		}
 	}
 	th {
+		position: relative;
 		height: 1.5em;
 		line-height: 1.5em;
 		padding: 0;
@@ -133,11 +135,11 @@
 			tr:first-child th {
 				display: table-cell;
 				border-bottom: solid 1px @line-color; // border hack for chrome
-				.cell::after {
+				&::after {
 					.triangle-expand();
 					padding-right: 1px; // to line up with caption triangle
 				}
-				&:hover .cell::after {
+				&:hover::after {
 					.triangle-hover();
 				}
 			}
@@ -149,16 +151,13 @@
 			border-bottom: 0; // border hack for chrome continued
 		}
 	}
-	.cell {
-		position: relative;
-	}
 	.collapse {
 		color: #444;
 		&:hover {
 			color: #000;
 		}
 		position: absolute;
-		top: -1.5em;
+		top: 0;
 		width: 100%;
 		text-align: center;
 		white-space: nowrap;

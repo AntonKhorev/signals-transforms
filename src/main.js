@@ -98,7 +98,7 @@ return this.each(function(){
 			}
 			tbodyNode.append(
 				$("<tr />").append(
-					$("<th colspan='"+(nDomainCols*2+1)+"' role='button' title='expand section'><div class='cell'>"+section.name+"</div></th>").click(function(ev){
+					$("<th colspan='"+(nDomainCols*2+1)+"' role='button' title='expand section'>"+section.name+"</th>").click(function(ev){
 						isSectionCollapsed[id]=false;
 						tbodyNode.removeClass('is-collapsed');
 					}).mousedown(preventTextSelectionOnDoubleClick)
@@ -118,15 +118,12 @@ return this.each(function(){
 							break;
 						case '|':
 							var tdNode=$("<td class='"+domain+"' colspan='"+colspan+"' />");
-							var cellNode=$("<div class='cell' />").appendTo(tdNode); // wrapper because position:relative is undefined behavior on table cells
 							if (isFormula) {
-								cellNode.append(
-									$("<div class='formula' role='button' />").on('item:highlight',function(){
-										$(this).addClass('is-highlighted');
-									}).on('item:unhighlight',function(){
-										$(this).removeClass('is-highlighted');
-									})
-								);
+								$("<div class='formula' role='button' />").on('item:highlight',function(){
+									$(this).addClass('is-highlighted');
+								}).on('item:unhighlight',function(){
+									$(this).removeClass('is-highlighted');
+								}).appendTo(tdNode);
 							}
 							trNode.append(tdNode);
 							colspan=0;
@@ -135,7 +132,7 @@ return this.each(function(){
 					}
 				};
 				makeDomainCells('time');
-				trNode.append("<td class='both'><div class='cell' /></td>");
+				trNode.append("<td class='both' />");
 				makeDomainCells('freq');
 				tbodyNode.append(trNode);
 			});
@@ -144,10 +141,10 @@ return this.each(function(){
 				tbodyNode.addClass('is-collapsed');
 				isSectionCollapsed[id]=true;
 			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(
-				tbodyNode.find('tr:nth-child(2) td.both .cell')
+				tbodyNode.find('tr:nth-child(2) td.both')
 			);
 			$("<div class='panel-dropdown' role='button' title='select panel to add'>+</div>").appendTo(
-				tbodyNode.find('tr:last-child td.both .cell')
+				tbodyNode.find('tr:last-child td.both')
 			);
 
 			// put in formulas, relations and notes
