@@ -24,7 +24,4 @@ $.fn.signalsTransformsTable.transformCommon={
 };
 
 // TODO synthesis formula equality caveats for CTFT and Laplace (esp. Unilateral)
-var RoC="<abbr title='region of convergence'>RoC</abbr>";
-function Wiki(href){return "<sup><a href='"+href+"' title='Wikipedia article'>[W]</a></sup>"};
-
 $.fn.signalsTransformsTable.transforms={};

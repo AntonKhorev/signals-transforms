@@ -46,8 +46,6 @@ if ('panels' in options) {
 }
 
 return this.each(function(){
-	var nDomainCols=3;
-
 	// section collapsed/shown status for this table
 	var isSectionCollapsed={};
 	$.each(sections,function(id,_){
@@ -68,15 +66,17 @@ return this.each(function(){
 
 	function writeTransform(transformSpecific){
 		function writePanelsDropdown(tdNode){
-			$("<div class='panel-dropdown' role='button' title='select panel to add'>+"+
-				"<ul>"+
-				"<li>explanation</li>"+
-				"<li>proof</li>"+
-				"<li>example</li>"+
-				"</ul>"+
-			"</div>").click(function(){
+			var panelDropdownNode=$("<div class='panel-dropdown' role='button' title='select panel to add'>+</div>").click(function(){
 				$(this).toggleClass('is-open');
 			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(tdNode);
+			var ulNode=$("<ul />").appendTo(panelDropdownNode);
+			$.each(panels,function(_,panel){
+				$("<li>"+panel.name+"</li>").click(function(){
+					var tbodyNode=$("<tbody class='panel' />").insertAfter(tdNode.closest('thead, tbody'));
+					$("<tr><th colspan='"+(nDomainCols*2+1)+"'>"+panel.name+"</th></tr>").appendTo(tbodyNode);
+					panel.init(tbodyNode);
+				}).appendTo(ulNode);
+			});
 		}
 
 		var transform=$.extend(true,{},transformCommon,transformSpecific);
@@ -115,7 +115,7 @@ return this.each(function(){
 			section=$.extend(true,{},sectionCommon,sectionSpecific);
 
 			// make section title and cells
-			var tbodyNode=$("<tbody />");
+			var tbodyNode=$("<tbody class='props' />");
 			if (isSectionCollapsed[id]) {
 				tbodyNode.addClass('is-collapsed');
 			}

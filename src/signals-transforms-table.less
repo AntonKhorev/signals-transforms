@@ -41,6 +41,7 @@
 	color: #000;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	font-weight: normal;
+	line-height: 1.5em;
 	li {
 		border-radius: .5em;
 	}
@@ -128,7 +129,7 @@
 		tr:first-child + tr td {
 			padding-top: 1.5em;
 		}
-		tr:first-child th {
+		&.props tr:first-child th {
 			display: none;
 		}
 		tr:last-child td {
@@ -152,6 +153,9 @@
 		}
 		&:last-child tr:first-child th {
 			border-bottom: 0; // border hack for chrome continued
+		}
+		&.panel {
+			text-align: center;
 		}
 	}
 	.collapse {
@@ -177,6 +181,7 @@
 		width: 100%;
 		text-align: center;
 		white-space: nowrap;
+		line-height: normal;
 		ul {
 			display: none;
 		}
