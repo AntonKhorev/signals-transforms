@@ -75,6 +75,7 @@ return this.each(function(){
 					var tbodyNode=$("<tbody class='panel' />").insertAfter(tdNode.closest('thead, tbody'));
 					$("<tr><th colspan='"+(nDomainCols*2+1)+"'>"+panel.name+"</th></tr>").appendTo(tbodyNode);
 					panel.init(tbodyNode);
+					tbodyNode.on('panel:update',panel.update);
 				}).appendTo(ulNode);
 			});
 		}
@@ -255,12 +256,17 @@ return this.each(function(){
 						freqNode.trigger('item:unhighlight');
 					};
 				}
+				function makeItemClickHandler(section,i){
+					return function(){
+						tableNode.children('tbody.panel').trigger('panel:update',[section,i]);
+					}
+				}
 
 				// formula pairs
 				timeFormulaNode.add(freqFormulaNode).hover(
 					makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0),
 					makeItemExitHandler(timeFormulaNode,freqFormulaNode)
-				).click();
+				).click(makeItemClickHandler(section,i));
 
 				// relation pairs
 				$.each(['t','b','l','r','tl','tr','bl','br'],function(_,dir){
@@ -269,7 +275,7 @@ return this.each(function(){
 					timeRelationNode.add(freqRelationNode).hover(
 						makeItemEnterHandler(timeRelationNode,freqRelationNode,4,4),
 						makeItemExitHandler(timeRelationNode,freqRelationNode)
-					).click();
+					);
 				});
 			});
 		});

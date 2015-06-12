@@ -13,6 +13,10 @@ $.fn.signalsTransformsTable.panels={
 				"select a transform property formula for an explanation"+
 				"</td></tr>"
 			);
+		},
+		update:function(ev,section,i){
+			// temporary code
+			$(this).find('tr:last-child td').text(section.name+' '+i);
 		}
 	},
 	proof:{
@@ -23,6 +27,10 @@ $.fn.signalsTransformsTable.panels={
 				"select a transform property formula for a proof"+
 				"</td></tr>"
 			);
+		},
+		update:function(ev,section,i){
+			// temporary code
+			$(this).find('tr:last-child td').text(section.name+' '+i);
 		}
 	}
 };
