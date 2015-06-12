@@ -51,8 +51,7 @@ return this.each(function(){
 	var containerNode=$(this).empty();
 	var tableNode=$("<table class='signals-transforms-table' />").appendTo(containerNode);
 	var arrowNode=$("<div class='arrow'>"+
-		"<div class='name'>LABEL</div>"+
-		"<ul class='actions'><li>[explanation]</li><li>[proof]</li></ul>"+
+		"<div class='label'>LABEL</div>"+
 		"<div class='arrowhead at-tl' /><div class='arrowhead at-bl' />"+
 		"<div class='arrowhead at-tr' /><div class='arrowhead at-br' />"+
 	"</div>");
@@ -70,8 +69,22 @@ return this.each(function(){
 		);
 
 		var stickArrow=false;
-
 		var ctx=FormulaContext(transform.timeFnTemplate,transform.freqFnTemplate);
+
+		// proof mockup (not needed for a while)
+		/*
+		arrowNode.find('.actions .panel:last-child .content').text(function(){
+			return ctx.callSection(function(t,T,x,X,y,Y,ctx){
+				return '$$\\begin{align}'+
+				'ULT\\{'+x(t+'+'+t+'_0')+'\\}'+
+				'&='+ctx.int(x(t+'+'+t+'_0')+'e^{-'+T+t+'}',t,'0^-','+\\infty')+'\\\\'+
+				'&='+ctx.int(x(t)+'e^{-'+T+'('+t+'-'+t+'_0)}',t,t+'_0^-','+\\infty')+
+				'\\end{align}$$';
+			});
+			return '$$e^{jt}$$';
+		});
+		*/
+
 		$.each(includedSections,function(_,id){
 			if (!(id in transform.sections)) return;
 			var sectionCommon=ctx.callSection(sections[id]);
@@ -199,23 +212,11 @@ return this.each(function(){
 						left:tLeft+tWidth+hGap
 					}).width(fLeft-tLeft-tWidth-2*hGap);
 					// have to do this after making the arrow visible, otherwise offset() doesn't work right
-					var nameNode=arrowNode.find('.name');
+					var nameNode=arrowNode.find('.label');
 					nameNode.offset({
 						top:tTop+tHeight/2-vShift-nameNode.height(),
 						left:gLeft
 					}).width(gWidth);
-					arrowNode.find('.actions').offset({
-						top:tTop+tHeight/2-vShift+arrowNode.outerHeight(),
-						left:gLeft
-					}).width(gWidth);
-				}
-
-				function stickArrowHandler(){
-					if (stickArrow) {
-						stickArrow=false;
-					} else {
-						stickArrow=true;
-					}
 				}
 
 				function makeItemEnterHandler(timeNode,freqNode,vShift,hGap){
@@ -251,7 +252,7 @@ return this.each(function(){
 							stuckNodes.removeClass('is-stuck');
 							if (!stuckNodes.is($(this))) {
 								arrowNode.detach();
-								$(this).mouseenter();
+								$(this).mouseenter(); // redraw arrow for this pair
 							}
 						}
 					};

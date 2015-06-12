@@ -1,3 +1,4 @@
+@table-min-width: 30em;
 @n-timefreq-cols: 6;
 @timefreq-col-width: 15%;
 @gap-col-width: 100% - @timefreq-col-width * @n-timefreq-cols;
@@ -46,7 +47,7 @@
 	}
 	border-collapse: collapse;
 	margin: auto;
-	min-width: 30em;
+	min-width: @table-min-width;
 	caption {
 		position: relative;
 		border-radius: .5em;
@@ -202,18 +203,10 @@
 			}
 		}
 		line-height: normal;
-		.name {
+		.label {
 			position: absolute;
 			text-align: center;
 			color: @formula-highlight-color;
-		}
-		.actions {
-			.list-reset();
-			position: absolute;
-			text-align: center;
-			color: @formula-highlight-color;
-			font-size: @note-font-size;
-			font-family: sans-serif;
 		}
 	}
 	.formula {
