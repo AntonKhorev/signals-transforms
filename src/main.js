@@ -143,7 +143,13 @@ return this.each(function(){
 			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(
 				tbodyNode.find('tr:nth-child(2) td.both')
 			);
-			$("<div class='panel-dropdown' role='button' title='select panel to add'>+</div>").appendTo(
+			$("<div class='panel-dropdown' role='button' title='select panel to add'>+"+
+				"<ul>"+
+				"<li>explanation</li>"+
+				"<li>proof</li>"+
+				"<li>example</li>"+
+				"</ul>"+
+			"</div>").appendTo(
 				tbodyNode.find('tr:last-child td.both')
 			);
 
@@ -289,7 +295,7 @@ return this.each(function(){
 		if (includedTransforms.length>1) {
 			captionNode.wrapInner("<div class='signal-transform-dropdown' role='button' title='select transform' />");
 			var transformDropdownNode=captionNode.children().eq(0);
-			var transformSelectNode=$("<ul class='signal-transform-select' />");
+			var transformSelectNode=$("<ul />");
 			$.each(includedTransforms,function(_,id){
 				var transform=transforms[id];
 				transformSelectNode.append(
