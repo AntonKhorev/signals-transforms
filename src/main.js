@@ -74,8 +74,10 @@ return this.each(function(){
 				$("<li>"+panel.name+"</li>").click(function(){
 					var tbodyNode=$("<tbody class='panel' />").insertAfter(tdNode.closest('thead, tbody'));
 					$("<tr><th colspan='"+(nDomainCols*2+1)+"'>"+panel.name+"</th></tr>").appendTo(tbodyNode);
-					panel.init(tbodyNode);
-					tbodyNode.on('panel:update',panel.update);
+					tbodyNode
+						.on('panel:init',panel.init)
+						.on('panel:update',panel.update)
+						.trigger('panel:init');
 				}).appendTo(ulNode);
 			});
 		}
