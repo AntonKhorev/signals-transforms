@@ -118,15 +118,14 @@ return this.each(function(){
 							break;
 						case '|':
 							var tdNode=$("<td class='"+domain+"' colspan='"+colspan+"' />");
+							var cellNode=$("<div class='cell' />").appendTo(tdNode); // wrapper because position:relative is undefined behavior on table cells
 							if (isFormula) {
-								tdNode.append(
-									$("<div class='cell' />").append(
-										$("<div class='formula' role='button' />").on('item:highlight',function(){
-											$(this).addClass('is-highlighted');
-										}).on('item:unhighlight',function(){
-											$(this).removeClass('is-highlighted');
-										})
-									)
+								cellNode.append(
+									$("<div class='formula' role='button' />").on('item:highlight',function(){
+										$(this).addClass('is-highlighted');
+									}).on('item:unhighlight',function(){
+										$(this).removeClass('is-highlighted');
+									})
 								);
 							}
 							trNode.append(tdNode);
@@ -136,15 +135,20 @@ return this.each(function(){
 					}
 				};
 				makeDomainCells('time');
-				trNode.append("<td class='both' />");
+				trNode.append("<td class='both'><div class='cell' /></td>");
 				makeDomainCells('freq');
 				tbodyNode.append(trNode);
 			});
 			tableNode.append(tbodyNode);
-			$("<div class='cell' />").append($("<div class='collapse' role='button' title='collapse section'>• • •</div>").click(function(ev){
+			$("<div class='collapse' role='button' title='collapse section'>• • •</div>").click(function(ev){
 				tbodyNode.addClass('is-collapsed');
 				isSectionCollapsed[id]=true;
-			}).mousedown(preventTextSelectionOnDoubleClick)).appendTo(tbodyNode.find('td.both').eq(0));
+			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(
+				tbodyNode.find('tr:nth-child(2) td.both .cell')
+			);
+			$("<div class='panel-dropdown' role='button' title='select panel to add'>+</div>").appendTo(
+				tbodyNode.find('tr:last-child td.both .cell')
+			);
 
 			// put in formulas, relations and notes
 			var timeFormulaNodes=tbodyNode.find('td.time .formula');
