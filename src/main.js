@@ -91,7 +91,6 @@ return this.each(function(){
 		);
 		writePanelsDropdown(tableNode.find('thead th.both'));
 
-		var stickArrow=false;
 		var ctx=FormulaContext(transform.timeFnTemplate,transform.freqFnTemplate);
 
 		// proof mockup (not needed for a while)
@@ -245,38 +244,15 @@ return this.each(function(){
 					return function(){
 						timeNode.trigger('item:highlight');
 						freqNode.trigger('item:highlight');
-						if (!stickArrow) {
-							$(this).attr('title','stick transform pair');
-							placeArrow(timeNode,freqNode,vShift,hGap);
-						} else {
-							$(this).attr('title','unstick transform pair');
-						}
+						// $(this).attr('title','click to update panels');
+						placeArrow(timeNode,freqNode,vShift,hGap);
 					};
 				}
 				function makeItemExitHandler(timeNode,freqNode){
 					return function(){
-						if (!stickArrow) {
-							arrowNode.detach();
-						}
+						arrowNode.detach();
 						timeNode.trigger('item:unhighlight');
 						freqNode.trigger('item:unhighlight');
-					};
-				}
-				function makeItemClickHandler(timeNode,freqNode){
-					return function(){
-						if (!stickArrow) {
-							stickArrow=true;
-							timeNode.addClass('is-stuck');
-							freqNode.addClass('is-stuck');
-						} else {
-							stickArrow=false;
-							var stuckNodes=tableNode.find('.is-stuck');
-							stuckNodes.removeClass('is-stuck');
-							if (!stuckNodes.is($(this))) {
-								arrowNode.detach();
-								$(this).mouseenter(); // redraw arrow for this pair
-							}
-						}
 					};
 				}
 
@@ -284,7 +260,7 @@ return this.each(function(){
 				timeFormulaNode.add(freqFormulaNode).hover(
 					makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0),
 					makeItemExitHandler(timeFormulaNode,freqFormulaNode)
-				).click(makeItemClickHandler(timeFormulaNode,freqFormulaNode));
+				).click();
 
 				// relation pairs
 				$.each(['t','b','l','r','tl','tr','bl','br'],function(_,dir){
@@ -293,7 +269,7 @@ return this.each(function(){
 					timeRelationNode.add(freqRelationNode).hover(
 						makeItemEnterHandler(timeRelationNode,freqRelationNode,4,4),
 						makeItemExitHandler(timeRelationNode,freqRelationNode)
-					).click(makeItemClickHandler(timeRelationNode,freqRelationNode));
+					).click();
 				});
 			});
 		});
