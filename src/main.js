@@ -35,6 +35,16 @@ if ('transforms' in options) {
 	transforms=$.extend(true,{},transforms,options.transforms);
 }
 
+var includedPanels=$.fn.signalsTransformsTable.includedPanels;
+if ('includedSections' in options) {
+	includedPanels=options.includedPanels;
+}
+
+var panels=$.fn.signalsTransformsTable.panels;
+if ('panels' in options) {
+	panels=$.extend(true,{},panels,options.panels);
+}
+
 return this.each(function(){
 	var nDomainCols=3;
 
@@ -57,6 +67,18 @@ return this.each(function(){
 	"</div>");
 
 	function writeTransform(transformSpecific){
+		function writePanelsDropdown(tdNode){
+			$("<div class='panel-dropdown' role='button' title='select panel to add'>+"+
+				"<ul>"+
+				"<li>explanation</li>"+
+				"<li>proof</li>"+
+				"<li>example</li>"+
+				"</ul>"+
+			"</div>").click(function(){
+				$(this).toggleClass('is-open');
+			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(tdNode);
+		}
+
 		var transform=$.extend(true,{},transformCommon,transformSpecific);
 		tableNode.append(
 			"<thead><tr class='some-browsers-ignore-col-elements'>"+
@@ -67,6 +89,7 @@ return this.each(function(){
 				"<th colspan='"+nDomainCols+"' class='freq'>"+transform.freqDomainName+"</th>"+
 			"</tr></thead>"
 		);
+		writePanelsDropdown(tableNode.find('thead th.both'));
 
 		var stickArrow=false;
 		var ctx=FormulaContext(transform.timeFnTemplate,transform.freqFnTemplate);
@@ -143,17 +166,7 @@ return this.each(function(){
 			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(
 				tbodyNode.find('tr:nth-child(2) td.both')
 			);
-			$("<div class='panel-dropdown' role='button' title='select panel to add'>+"+
-				"<ul>"+
-				"<li>explanation</li>"+
-				"<li>proof</li>"+
-				"<li>example</li>"+
-				"</ul>"+
-			"</div>").click(function(){
-				$(this).toggleClass('is-open');
-			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(
-				tbodyNode.find('tr:last-child td.both')
-			);
+			writePanelsDropdown(tbodyNode.find('tr:last-child td.both'));
 
 			// put in formulas, relations and notes
 			var timeFormulaNodes=tbodyNode.find('td.time .formula');
