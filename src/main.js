@@ -149,7 +149,9 @@ return this.each(function(){
 				"<li>proof</li>"+
 				"<li>example</li>"+
 				"</ul>"+
-			"</div>").appendTo(
+			"</div>").click(function(){
+				$(this).toggleClass('is-open');
+			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(
 				tbodyNode.find('tr:last-child td.both')
 			);
 
@@ -307,7 +309,7 @@ return this.each(function(){
 				);
 			});
 			transformDropdownNode.append(transformSelectNode).click(function(){
-				transformDropdownNode.toggleClass('is-open');
+				$(this).toggleClass('is-open');
 			}).mousedown(preventTextSelectionOnDoubleClick).find('a').click(function(ev){
 				ev.stopPropagation();
 			});
