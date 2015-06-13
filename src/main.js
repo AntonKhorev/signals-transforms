@@ -67,7 +67,11 @@ return this.each(function(){
 	function writeTransform(transformSpecific){
 		function writePanelsDropdown(tdNode){
 			var panelDropdownNode=$("<div class='panel-dropdown' role='button' title='add panel'>+</div>").click(function(){
-				$(this).toggleClass('is-open');
+				var wasOpen=$(this).hasClass('is-open');
+				tableNode.find('.panel-dropdown').removeClass('is-open');
+				if (!wasOpen) {
+					$(this).addClass('is-open');
+				}
 			}).mousedown(preventTextSelectionOnDoubleClick).appendTo(tdNode);
 			var ulNode=$("<ul />").appendTo(panelDropdownNode);
 			$.each(panels,function(_,panel){
