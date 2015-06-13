@@ -30,7 +30,7 @@ $.fn.signalsTransformsTable.transforms.UZT={
 			time:[
 				{},{},{},
 				{formula:{
-					item:x(t)+'*'+y(t)+' = \\sum_{'+t1+'=0}^{'+t+'} '+x(t1)+y(t+'-'+t1) // [Poularikas], slightly modified
+					item:x(t)+'*'+y(t)+' \\equiv \\sum_{'+t1+'=0}^{'+t+'} '+x(t1)+y(t+'-'+t1) // [Poularikas], slightly modified
 				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
 			],

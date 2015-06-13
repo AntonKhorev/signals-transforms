@@ -34,7 +34,7 @@ $.fn.signalsTransformsTable.transforms.BLT={
 			time:[
 				{},{},{},
 				{formula:{
-					item:x(t)+'*'+y(t)+' = '+ctx.int(x(t1)+y(t+'-'+t1),t1,'-\\infty','+\\infty'),
+					item:x(t)+'*'+y(t)+' \\equiv '+ctx.int(x(t1)+y(t+'-'+t1),t1,'-\\infty','+\\infty'),
 					notes:{b:'linear convolution'}
 				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -48,7 +48,7 @@ $.fn.signalsTransformsTable.transforms.BLT={
 					notes:{b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)'}
 				}},
 				{formula:{ // [Wai-Kai Chen, section 3.3.5]
-					item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,TR+'-j\\infty',TR+'+j\\infty'),
+					item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' \\equiv \\frac{1}{2\\pi j} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,TR+'-j\\infty',TR+'+j\\infty'),
 					notes:{
 						t:'s-domain convolution',
 						b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]

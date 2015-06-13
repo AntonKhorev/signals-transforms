@@ -26,7 +26,7 @@ $.fn.signalsTransformsTable.transforms.DTFT={
 			time:[
 				{},{},{},
 				{formula:{
-					item:x(t)+'*'+y(t)+' = \\sum_{'+t1+'=-\\infty}^{+\\infty} '+x(t1)+y(t+'-'+t1),
+					item:x(t)+'*'+y(t)+' \\equiv \\sum_{'+t1+'=-\\infty}^{+\\infty} '+x(t1)+y(t+'-'+t1),
 					notes:{b:'linear convolution'}
 				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}

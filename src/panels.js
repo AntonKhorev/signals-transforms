@@ -20,23 +20,31 @@ $.fn.signalsTransformsTable.panels={
 					return 'N/A';
 				}
 				function trans(i){
+					function expr(e){
+						p=e.indexOf('\\equiv');
+						if (p<0) {
+							return e;
+						} else {
+							return e.substring(0,p);
+						}
+					}
 					var tr=transform.abbr;
 					if ('transforms' in section && section.transforms[i]!==null) {
 						tr=section.transforms[i];
 					}
-					return '\\mathtt{'+tr+'}'+inv+'\\!\\left\\{'+dom2[i].formula.item+'\\right\\}='+dom1[i].formula.item;
+					return '\\mathtt{'+tr+'}'+inv+'\\!\\left\\{'+expr(dom2[i].formula.item)+'\\right\\}='+expr(dom1[i].formula.item);
 				}
 				var ics=section.iConditions;
 				if (ics.indexOf(i)>=0 || ics.length==0) {
 					return '$$'+trans(i)+'$$';
 				} else if (ics.length==1) {
-					return '\\begin{multline}'+
+					return '$$\\begin{multline}'+
 						trans(ics[0])+
 					' \\iff \\\\ \\iff '+
 						trans(i)+
-					'\\end{multline}';
+					'\\end{multline}$$';
 				} else {
-					return '\\begin{multline}'+
+					return '$$\\begin{multline}'+
 						'\\begin{cases}'+
 							$.map(ics,function(i){
 								return trans(i);
@@ -44,7 +52,7 @@ $.fn.signalsTransformsTable.panels={
 						'\\end{cases}'+
 					' \\implies \\\\ \\implies '+
 						trans(i)+
-					'\\end{multline}';
+					'\\end{multline}$$';
 				}
 			}
 			$(this).find('tr:nth-child(2)').html(

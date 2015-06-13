@@ -36,7 +36,7 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				{},{},{},
 				{formula:{
 					// sometimes limits are -inf..+inf, but then causality of x(t) and y(t) is required
-					item:x(t)+'*'+y(t)+' = '+ctx.int(x(t1)+y(t+'-'+t1),t1,'0',t), // TODO what about limits? is it 0- .. t+ ?
+					item:x(t)+'*'+y(t)+' \\equiv '+ctx.int(x(t1)+y(t+'-'+t1),t1,'0',t), // TODO what about limits? is it 0- .. t+ ?
 					notes:{
 						// t:'\\('+x(t)+'='+y(t)+'=0\\) required for \\('+t+'&lt;0\\)',
 						// b:'linear convolution'
@@ -54,7 +54,7 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				}},
 				// see [The Handbook of Formulas and Tables for Signal Processing. Ed. Alexander D. Poularikas] for the definition of complex convolution
 				{formula:{ // [Wai-Kai Chen, section 3.3.5]
-					item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi j} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,TR+'-j\\infty',TR+'+j\\infty'),
+					item:'\\frac{1}{2\\pi j} '+X(T)+'*'+Y(T)+' \\equiv \\frac{1}{2\\pi j} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,TR+'-j\\infty',TR+'+j\\infty'),
 					notes:{
 						t:'s-domain convolution',
 						b:RoC+' includes \\(R_'+ctx.letters.X+' \\cap R_'+ctx.letters.Y+'\\)' // [Mandal, p. 283]

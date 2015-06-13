@@ -35,7 +35,7 @@ $.fn.signalsTransformsTable.transforms.OGF={
 			time:[
 				{},{},{},
 				{formula:{
-					item:x(t)+'*'+y(t)+' = \\sum_{0\\leq'+t1+'\\leq'+t+'} '+x(t1)+y(t+'-'+t1),
+					item:x(t)+'*'+y(t)+' \\equiv \\sum_{0\\leq'+t1+'\\leq'+t+'} '+x(t1)+y(t+'-'+t1),
 					notes:{b:'convolution'}
 				}}
 			],

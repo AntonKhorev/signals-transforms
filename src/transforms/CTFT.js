@@ -26,7 +26,7 @@ $.fn.signalsTransformsTable.transforms.CTFT={
 			time:[
 				{},{},{},
 				{formula:{
-					item:x(t)+'*'+y(t)+' = '+ctx.int(x(t1)+y(t+'-'+t1),t1,'-\\infty','+\\infty'),
+					item:x(t)+'*'+y(t)+' \\equiv '+ctx.int(x(t1)+y(t+'-'+t1),t1,'-\\infty','+\\infty'),
 					notes:{b:'linear convolution'}
 				}},
 				{formula:{item:x(t)+' \\cdot '+y(t)}}
@@ -35,7 +35,7 @@ $.fn.signalsTransformsTable.transforms.CTFT={
 				{},{},{},
 				{formula:{item:X(T)+' \\cdot '+Y(T)}},
 				{formula:{
-					item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' = \\frac{1}{2\\pi} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,'-\\infty','+\\infty'),
+					item:'\\frac{1}{2\\pi} '+X(T)+'*'+Y(T)+' \\equiv \\frac{1}{2\\pi} '+ctx.int(X(T1)+Y(T+'-'+T1),T1,'-\\infty','+\\infty'),
 					notes:{b:'linear convolution'}
 				}}
 			]
