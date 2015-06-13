@@ -16,12 +16,9 @@ $.fn.signalsTransformsTable.panels={
 		},
 		update:function(ev,transform,section,i){
 			function pair(dom1,dom2,inv){
-				if (!section.hasExplanations[i]) {
-					return 'N/A';
-				}
 				function trans(i){
 					function expr(e){
-						p=e.indexOf('\\equiv');
+						var p=e.indexOf('\\equiv');
 						if (p<0) {
 							return e;
 						} else {
@@ -33,6 +30,15 @@ $.fn.signalsTransformsTable.panels={
 						tr=section.transforms[i];
 					}
 					return '\\mathtt{'+tr+'}'+inv+'\\!\\left\\{'+expr(dom2[i].formula.item)+'\\right\\}='+expr(dom1[i].formula.item);
+				}
+				if ('isDefinition' in section) {
+					// hack for definition
+					var dfi=dom2[i].formula.item;
+					var p=dfi.indexOf('=');
+					return '$$\\mathtt{'+transform.abbr+'}'+inv+'\\!\\left\\{'+dfi.substring(0,p)+'\\right\\}='+dom1[i].formula.item+'$$';
+				}
+				if (!section.hasExplanations[i]) {
+					return 'N/A';
 				}
 				var ics=section.iConditions;
 				if (ics.indexOf(i)>=0 || ics.length==0) {

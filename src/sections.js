@@ -9,6 +9,16 @@ $.fn.signalsTransformsTable.includedSections=[
 	'impstep'
 ];
 
+/*
+	cells format:
+	. empty cell
+	+ formula with standard explanation
+	* condition formula
+	- formula without explanation, unless some hack provides it (currently definitions do so)
+	| cell boundary
+	/ row boundary
+*/
+
 $.fn.signalsTransformsTable.sections={
 	definitions:function(t,T,x,X){return{
 		name:'Definitions',
@@ -19,7 +29,8 @@ $.fn.signalsTransformsTable.sections={
 		],
 		freq:[
 			{formula:{notes:{t:'analysis formula'}}},
-		]
+		],
+		isDefinition:true // hack
 	}},
 	linearity:function(t,T,x,X,y,Y,ctx){return{
 		name:'Linearity, convolution and multiplication',
