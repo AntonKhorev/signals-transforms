@@ -142,28 +142,28 @@
 		tr:last-child td {
 			padding-bottom: 1.5em;
 		}
-		&.is-collapsed {
-			tr:first-child th {
-				display: table-cell;
-				border-bottom: solid 1px @line-color; // border hack for chrome
-				&::after {
-					.triangle-expand();
-					padding-right: 1px; // to line up with caption triangle
-				}
-				&:hover::after {
-					.triangle-hover();
-				}
-			}
-			tr td {
-				display: none;
-			}
-		}
 		&:last-child tr:first-child th {
 			border-bottom: 0; // border hack for chrome continued
 		}
 		&.props {
 			tr:first-child th {
 				display: none;
+			}
+			&.is-collapsed {
+				tr:first-child th {
+					display: table-cell;
+					border-bottom: solid 1px @line-color; // border hack for chrome
+					&::after {
+						.triangle-expand();
+						padding-right: 1px; // to line up with caption triangle
+					}
+					&:hover::after {
+						.triangle-hover();
+					}
+				}
+				tr td {
+					display: none;
+				}
 			}
 		}
 		&.panel {
