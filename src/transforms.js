@@ -7,8 +7,8 @@ $.fn.signalsTransformsTable.includedTransforms=[
 	'DFT',
 	'ULT',
 	'BLT',
-	'Z1',
-	'Z2',
+	'UZT',
+	'BZT',
 	'OGF'
 ];
 

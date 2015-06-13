@@ -1,5 +1,5 @@
-$.fn.signalsTransformsTable.transforms.Z1={
-	name:'Unilateral Z-transform',
+$.fn.signalsTransformsTable.transforms.UZT={
+	name:'Unilateral Z-transform (UZT)',
 	wikipedia:'http://en.wikipedia.org/wiki/Z-transform#Unilateral_Z-transform',
 	timeFnTemplate:['x[n]','y[n]'],
 	freqFnTemplate:['X(z)','Y(z)'],
