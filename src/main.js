@@ -246,7 +246,7 @@ return this.each(function(){
 					}).width(fLeft-tLeft-tWidth-2*hGap);
 					// have to do this after making the arrow visible, otherwise offset() doesn't work right
 					var labelNode=arrowNode.find('.label');
-					labelNode.text(label).offset({
+					labelNode.html(label).offset({
 						top:tTop+tHeight/2-vShift-labelNode.height(),
 						left:gLeft
 					}).width(gWidth);
@@ -279,7 +279,7 @@ return this.each(function(){
 						var label=transform.abbr;
 						var data=section.time[i];
 						if (data.formula!==null && 'arrowLabel' in data.formula) {
-							label=data.formula.arrowLabel;
+							label='<em>'+data.formula.arrowLabel+'</em>';
 						}
 						return makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0,label);
 					})(),
