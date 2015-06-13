@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.DTFS={
-	name:'Discrete-time Fourier series (DTFS)',
+	name:'Discrete-time Fourier series',
+	abbr:'DTFS',
 	timeFnTemplate:['x[n]','y[n]'],
 	freqFnTemplate:['a_k','b_k'],
 	sections:{

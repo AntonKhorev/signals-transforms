@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.OGF={
-	name:'Ordinary generating function (OGF)',
+	name:'Ordinary generating function',
+	abbr:'OGF',
 	wikipedia:'http://en.wikipedia.org/wiki/Generating_function#Ordinary_generating_function',
 	timeFnTemplate:['a_n','b_n'],
 	freqFnTemplate:['A(z)','B(z)'],

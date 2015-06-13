@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.CTFT={
-	name:'Continuous-time Fourier transform (CTFT)', // angular frequency, non-unitary
+	name:'Continuous-time Fourier transform', // angular frequency, non-unitary
+	abbr:'CTFT',
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_transform',
 	timeFnTemplate:['x(t)','y(t)'],
 	freqFnTemplate:['X(j*omega)','Y(j*omega)'],

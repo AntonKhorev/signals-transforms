@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.ULT={
-	name:'Unilateral Laplace transform (ULT)',
+	name:'Unilateral Laplace transform',
+	abbr:'ULT',
 	wikipedia:'http://en.wikipedia.org/wiki/Laplace_transform',
 	timeFnTemplate:['x(t)','y(t)'],
 	freqFnTemplate:['X(s)','Y(s)'],

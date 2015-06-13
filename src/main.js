@@ -296,7 +296,7 @@ return this.each(function(){
 	// table caption with transform selection dropdown
 	var captionNode=$('<caption />').appendTo(tableNode);
 	function writeTransformCaption(transform){
-	        captionNode.text(transform.name);
+	        captionNode.text(transform.name+' ('+transform.abbr+')');
 		if ('wikipedia' in transform) {
 			captionNode.append(Wiki(transform.wikipedia));
 		}
@@ -307,7 +307,7 @@ return this.each(function(){
 			$.each(includedTransforms,function(_,id){
 				var transform=transforms[id];
 				transformSelectNode.append(
-					$("<li role='button'>"+transform.name+"</li>").click(function(){
+					$("<li role='button'>"+transform.name+" ("+transform.abbr+")</li>").click(function(){
 						writeTransformCaption(transform);
 						tableNode.find('thead,tbody').remove();
 						writeTransform(transform);

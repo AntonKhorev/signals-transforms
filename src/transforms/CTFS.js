@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.CTFS={
-	name:'Continuous-time Fourier series (CTFS)',
+	name:'Continuous-time Fourier series',
+	abbr:'CTFS',
 	wikipedia:'http://en.wikipedia.org/wiki/Fourier_series',
 	timeFnTemplate:['x(t)','y(t)'],
 	freqFnTemplate:['a_k','b_k'],

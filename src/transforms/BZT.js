@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.BZT={
-	name:'Bilateral Z-transform (BZT)',
+	name:'Bilateral Z-transform',
+	abbr:'BZT',
 	wikipedia:'http://en.wikipedia.org/wiki/Z-transform',
 	timeFnTemplate:['x[n]','y[n]'],
 	freqFnTemplate:['X(z)','Y(z)'],

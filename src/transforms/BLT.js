@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.BLT={
-	name:'Bilateral Laplace transform (BLT)',
+	name:'Bilateral Laplace transform',
+	abbr:'BLT',
 	wikipedia:'http://en.wikipedia.org/wiki/Two-sided_Laplace_transform',
 	timeFnTemplate:['x(t)','y(t)'],
 	freqFnTemplate:['X(s)','Y(s)'],

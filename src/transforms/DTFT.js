@@ -1,5 +1,6 @@
 $.fn.signalsTransformsTable.transforms.DTFT={
-	name:'Discrete-time Fourier transform (DTFT)',
+	name:'Discrete-time Fourier transform',
+	abbr:'DTFT',
 	wikipedia:'http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform',
 	timeFnTemplate:['x[n]','y[n]'],
 	freqFnTemplate:['X(e^(j*omega))','Y(e^(j*omega))'],
