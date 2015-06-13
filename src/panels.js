@@ -15,8 +15,16 @@ $.fn.signalsTransformsTable.panels={
 			);
 		},
 		update:function(ev,section,i){
-			// temporary code
-			$(this).find('tr:nth-child(2) td').text(section.name+' '+i);
+			$(this).find('tr:nth-child(2)').html(
+				"<td colspan='"+nDomainCols+"' class='time'>"+
+					'$$F^{-1}\\{'+section.freq[i].formula.item+'\\}='+section.time[i].formula.item+'$$'+
+				"</td>"+
+				"<td class='both'></td>"+
+				"<td colspan='"+nDomainCols+"' class='freq'>"+
+					'$$F\\{'+section.time[i].formula.item+'\\}='+section.freq[i].formula.item+'$$'+
+				"</td>"
+			);
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub,this]);
 		}
 	},
 	proof:{
