@@ -1,7 +1,7 @@
 $.fn.signalsTransformsTable.allPanels=
 $.fn.signalsTransformsTable.includedPanels=[
-	'explanation',
-	'proof'
+	'explanation'
+	// 'proof'
 ];
 
 $.fn.signalsTransformsTable.panels={
@@ -26,7 +26,7 @@ $.fn.signalsTransformsTable.panels={
 			);
 			MathJax.Hub.Queue(["Typeset",MathJax.Hub,this]);
 		}
-	},
+	}/*,
 	proof:{
 		name:'Proof',
 		init:function(){
@@ -40,5 +40,5 @@ $.fn.signalsTransformsTable.panels={
 			// temporary code
 			$(this).find('tr:nth-child(2) td').text(transform.abbr+' '+section.name+' '+i);
 		}
-	}
+	}*/
 };
