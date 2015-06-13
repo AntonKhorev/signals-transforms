@@ -16,6 +16,9 @@ $.fn.signalsTransformsTable.panels={
 		},
 		update:function(ev,transform,section,i){
 			function pair(dom1,dom2,inv){
+				if (!section.hasExplanations[i]) {
+					return 'N/A';
+				}
 				var tr=transform.abbr;
 				if ('transforms' in section && section.transforms[i]!==null) {
 					tr=section.transforms[i];

@@ -125,6 +125,29 @@ return this.each(function(){
 			var sectionSpecific=ctx.callSection(transform.sections[id]);
 			section=$.extend(true,{},sectionCommon,sectionSpecific);
 
+			// parse cells data
+			section.hasExplanations=[];
+			section.iConditions=[];
+			var cc='';
+			var j=0;
+			for (var i=0;i<=section.cells.length;i++) {
+				var c=section.cells.charAt(i);
+				switch (i<section.cells.length ? c : '/') {
+					case '-':
+					case '+':
+					case '*':
+					case '.':
+						cc=c;
+						break;
+					case '|':
+					case '/':
+						if (cc=='.') break;
+						section.hasExplanations.push(cc!='-');
+						if (cc=='*') section.iConditions.push(j);
+						j++;
+				}
+			}
+
 			// make section title and cells
 			var tbodyNode=$("<tbody class='props' />");
 			if (isSectionCollapsed[id]) {
@@ -140,7 +163,7 @@ return this.each(function(){
 			);
 			$.each(section.cells.split('/'),function(_,row){
 				var trNode=$("<tr />");
-				function makeDomainCells(domain){
+				function writeDomainCells(domain){
 					var colspan=0;
 					var isFormula=false;
 					for (var i=0;i<=row.length;i++) {
@@ -167,9 +190,9 @@ return this.each(function(){
 						}
 					}
 				};
-				makeDomainCells('time');
+				writeDomainCells('time');
 				trNode.append("<td class='both' />");
-				makeDomainCells('freq');
+				writeDomainCells('freq');
 				tbodyNode.append(trNode);
 			});
 			tableNode.append(tbodyNode);
