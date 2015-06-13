@@ -59,7 +59,7 @@ return this.each(function(){
 	var containerNode=$(this).empty();
 	var tableNode=$("<table class='signals-transforms-table' />").appendTo(containerNode);
 	var arrowNode=$("<div class='arrow'>"+
-		"<div class='label'>LABEL</div>"+
+		"<div class='label'></div>"+
 		"<div class='arrowhead at-tl' /><div class='arrowhead at-bl' />"+
 		"<div class='arrowhead at-tr' /><div class='arrowhead at-br' />"+
 	"</div>");
@@ -224,7 +224,7 @@ return this.each(function(){
 				insertStuff(timeFormulaNode,section.time[i]);
 				insertStuff(freqFormulaNode,section.freq[i]);
 
-				function placeArrow(timeNode,freqNode,vShift,hGap){
+				function placeArrow(timeNode,freqNode,vShift,hGap,label){
 					var tTop   =timeNode.offset().top;
 					var tLeft  =timeNode.offset().left;
 					var fLeft  =freqNode.offset().left;
@@ -245,19 +245,19 @@ return this.each(function(){
 						left:tLeft+tWidth+hGap
 					}).width(fLeft-tLeft-tWidth-2*hGap);
 					// have to do this after making the arrow visible, otherwise offset() doesn't work right
-					var nameNode=arrowNode.find('.label');
-					nameNode.offset({
-						top:tTop+tHeight/2-vShift-nameNode.height(),
+					var labelNode=arrowNode.find('.label');
+					labelNode.text(label).offset({
+						top:tTop+tHeight/2-vShift-labelNode.height(),
 						left:gLeft
 					}).width(gWidth);
 				}
 
-				function makeItemEnterHandler(timeNode,freqNode,vShift,hGap){
+				function makeItemEnterHandler(timeNode,freqNode,vShift,hGap,label){
 					return function(){
 						timeNode.trigger('item:highlight');
 						freqNode.trigger('item:highlight');
 						// $(this).attr('title','click to update panels');
-						placeArrow(timeNode,freqNode,vShift,hGap);
+						placeArrow(timeNode,freqNode,vShift,hGap,label);
 					};
 				}
 				function makeItemExitHandler(timeNode,freqNode){
@@ -275,7 +275,7 @@ return this.each(function(){
 
 				// formula pairs
 				timeFormulaNode.add(freqFormulaNode).hover(
-					makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0),
+					makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0,transform.abbr),
 					makeItemExitHandler(timeFormulaNode,freqFormulaNode)
 				).click(makeItemClickHandler(section,i));
 
@@ -284,7 +284,7 @@ return this.each(function(){
 					var timeRelationNode=timeFormulaNode.siblings('.relation.at-'+dir);
 					var freqRelationNode=freqFormulaNode.siblings('.relation.at-'+dir);
 					timeRelationNode.add(freqRelationNode).hover(
-						makeItemEnterHandler(timeRelationNode,freqRelationNode,4,4),
+						makeItemEnterHandler(timeRelationNode,freqRelationNode,4,4,''),
 						makeItemExitHandler(timeRelationNode,freqRelationNode)
 					);
 				});
