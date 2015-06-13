@@ -46,27 +46,29 @@ $.fn.signalsTransformsTable.transforms.DTFT={
 		return{
 			time:[
 				{formula:{
-					item:X('-\\omega_0'+xd)+' \\overset{\\mathtt{CTFS}}{\\longleftrightarrow}',
+					item:X('-\\omega_0'+xd),
+					arrowLabel:'CTFS',
 					notes:{b:'period \\(T\\);<br />\\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 				}},
 				{formula:{
 					item:x(t)
 				}},
 				{formula:{
-					item:X('\\omega_0'+xd)+' \\overset{\\mathtt{CTFS}}{\\longleftrightarrow}',
+					item:X('\\omega_0'+xd),
+					arrowLabel:'CTFS',
 					notes:{b:'period \\(T\\);<br />\\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 				}}
 			],
 			freq:[
 				{formula:{
-					item:'\\overset{\\mathtt{CTFS}}{\\longleftrightarrow} '+x(Xd)
+					item:x(Xd)
 				}},
 				{formula:{
 					item:X(T),
 					notes:{b:'period \\(2\\pi\\)'}
 				}},
 				{formula:{
-					item:'\\overset{\\mathtt{CTFS}}{\\longleftrightarrow} '+x('-'+Xd)
+					item:x('-'+Xd)
 				}}
 			]
 		}},

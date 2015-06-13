@@ -275,7 +275,14 @@ return this.each(function(){
 
 				// formula pairs
 				timeFormulaNode.add(freqFormulaNode).hover(
-					makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0,transform.abbr),
+					(function(){
+						var label=transform.abbr;
+						var data=section.time[i];
+						if (data.formula!==null && 'arrowLabel' in data.formula) {
+							label=data.formula.arrowLabel;
+						}
+						return makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0,label);
+					})(),
 					makeItemExitHandler(timeFormulaNode,freqFormulaNode)
 				).click(makeItemClickHandler(section,i));
 
