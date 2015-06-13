@@ -15,13 +15,20 @@ $.fn.signalsTransformsTable.panels={
 			);
 		},
 		update:function(ev,transform,section,i){
+			function pair(dom1,dom2,inv){
+				var tr=transform.abbr;
+				if ('transforms' in section && section.transforms[i]!==null) {
+					tr=section.transforms[i];
+				}
+				return '$$\\mathtt{'+tr+'}'+inv+'\\!\\left\\{'+dom2[i].formula.item+'\\right\\}='+dom1[i].formula.item+'$$';
+			}
 			$(this).find('tr:nth-child(2)').html(
 				"<td colspan='"+nDomainCols+"' class='time'>"+
-					'$$\\mathtt{'+transform.abbr+'}^{-1}\\!\\left\\{'+section.freq[i].formula.item+'\\right\\}='+section.time[i].formula.item+'$$'+
+					pair(section.time,section.freq,'^{-1}')+
 				"</td>"+
 				"<td class='both'></td>"+
 				"<td colspan='"+nDomainCols+"' class='freq'>"+
-					'$$\\mathtt{'+transform.abbr+'}\\!\\left\\{'+section.time[i].formula.item+'\\right\\}='+section.freq[i].formula.item+'$$'+
+					pair(section.freq,section.time,'')+
 				"</td>"
 			);
 			MathJax.Hub.Queue(["Typeset",MathJax.Hub,this]);

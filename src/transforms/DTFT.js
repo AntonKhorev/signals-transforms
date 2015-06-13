@@ -44,10 +44,12 @@ $.fn.signalsTransformsTable.transforms.DTFT={
 			var xd=ctx.letter(['t']);
 			var Xd=ctx.letter(['k']);
 		return{
+			transforms:[
+				'CTFS',null,'CTFS'
+			],
 			time:[
 				{formula:{
 					item:X('-\\omega_0'+xd),
-					arrowLabel:'CTFS',
 					notes:{b:'period \\(T\\);<br />\\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 				}},
 				{formula:{
@@ -55,7 +57,6 @@ $.fn.signalsTransformsTable.transforms.DTFT={
 				}},
 				{formula:{
 					item:X('\\omega_0'+xd),
-					arrowLabel:'CTFS',
 					notes:{b:'period \\(T\\);<br />\\(\\omega_0=\\frac{2\\pi}{T}\\)'}
 				}}
 			],

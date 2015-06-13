@@ -277,9 +277,8 @@ return this.each(function(){
 				timeFormulaNode.add(freqFormulaNode).hover(
 					(function(){
 						var label=transform.abbr;
-						var data=section.time[i];
-						if (data.formula!==null && 'arrowLabel' in data.formula) {
-							label='<em>'+data.formula.arrowLabel+'</em>';
+						if ('transforms' in section && section.transforms[i]!==null) {
+							label='<em>'+section.transforms[i]+'</em>';
 						}
 						return makeItemEnterHandler(timeFormulaNode,freqFormulaNode,2,0,label);
 					})(),

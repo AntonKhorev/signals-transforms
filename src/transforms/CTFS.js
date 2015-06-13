@@ -44,18 +44,19 @@ $.fn.signalsTransformsTable.transforms.CTFS={
 			var xd=ctx.letter(['n']);
 			var Xd=ctx.letter(['omega']);
 		return{
+			transforms:[
+				'DTFT',null,'DTFT'
+			],
 			time:[
 				{formula:{
-					item:X('-'+xd),
-					arrowLabel:'DTFT'
+					item:X('-'+xd)
 				}},
 				{formula:{
 					item:x(t),
 					notes:{b:'period \\(T\\)'}
 				}},
 				{formula:{
-					item:X(xd),
-					arrowLabel:'DTFT'
+					item:X(xd)
 				}}
 			],
 			freq:[
