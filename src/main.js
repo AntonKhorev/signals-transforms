@@ -76,6 +76,7 @@ return this.each(function(){
 			var ulNode=$("<ul />").appendTo(panelDropdownNode);
 			$.each(panels,function(_,panel){
 				$("<li>"+panel.name+"</li>").click(function(){
+					tableNode.children('tbody.panel').remove(); // TODO remove only panels of selected type
 					var tbodyNode=$("<tbody class='panel' />").insertAfter(tdNode.closest('thead, tbody'));
 					$("<tr><th colspan='"+(nDomainCols*2+1)+" class='both'>"+panel.name+"</th></tr>").appendTo(tbodyNode);
 					$("<tr>"+
