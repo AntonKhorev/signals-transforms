@@ -281,7 +281,11 @@ return this.each(function(){
 					return function(){
 						timeNode.trigger('item:highlight');
 						freqNode.trigger('item:highlight');
-						// $(this).attr('title','click to update panels');
+						if (tableNode.children('tbody.panel').length) {
+							$(this).attr('title','click to update the explanation panel');
+						} else {
+							$(this).removeAttr('title');
+						}
 						placeArrow(timeNode,freqNode,vShift,hGap,label);
 					};
 				}
