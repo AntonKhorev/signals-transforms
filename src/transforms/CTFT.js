@@ -74,11 +74,10 @@ $.fn.signalsTransformsTable.transforms.CTFT={
 			var t1=ctx.letter(['t','tau','u']);
 			var T1=ctx.letter(['omega','theta','xi']);
 		return{
-			cells:[
+			cells:
+				'.|+|.'+'/'+
+				'+|*|+'+'/'+
 				'.|+|.',
-				'+|+|+',
-				'.|+|.'
-			],
 			time:[
 				{formula:{
 					item:'-\\frac{'+x(t)+'}{j'+t+'}+\\pi'+x('0')+'\\delta('+t+')'
@@ -115,10 +114,9 @@ $.fn.signalsTransformsTable.transforms.CTFT={
 			]
 		}},
 		impstep:function(t,T,x,X){return{
-			cells:[
-				'+|+|+',
-				'.|+|+'
-			],
+			cells:
+				'+|+|+'+'/'+
+				'.|+|+',
 			time:[
 				{formula:{
 					item:'1'

@@ -138,14 +138,16 @@ return this.each(function(){
 					}).mousedown(preventTextSelectionOnDoubleClick)
 				)
 			);
-			$.each(section.cells,function(_,row){
+			$.each(section.cells.split('/'),function(_,row){
 				var trNode=$("<tr />");
 				function makeDomainCells(domain){
 					var colspan=0;
 					var isFormula=false;
 					for (var i=0;i<=row.length;i++) {
 						switch (i<row.length ? row.charAt(i) : '|') {
+						case '-':
 						case '+':
+						case '*':
 							isFormula=true;
 						case '.':
 							colspan++;

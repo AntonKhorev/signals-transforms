@@ -60,11 +60,8 @@ $.fn.signalsTransformsTable.transforms.UZT={
 			]
 		}},
 		conjrev:function(t,T,x,X){return{
-			cells:[
-				'.|.|.', // TODO real row deletion
-				'+|+|+',
-				'.|.|.'
-			],
+			cells:
+				'+|*|+',
 			time:[
 				{
 					formula:{
@@ -112,11 +109,10 @@ $.fn.signalsTransformsTable.transforms.UZT={
 			var t1=ctx.letter(['n','m']);
 			var T1=ctx.letter(['omega','theta','xi']);
 		return{
-			cells:[
-				'+|+ +',
-				'+|+|+',
-				'+ +|+'
-			],
+			cells:
+				'+|+ +'+'/'+
+				'+|*|+'+'/'+
+				'+ +|+',
 			time:[
 				{formula:{
 					item:'e^{-j'+T1+'_0 '+t+'}'+x(t),

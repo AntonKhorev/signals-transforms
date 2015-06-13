@@ -111,11 +111,10 @@ $.fn.signalsTransformsTable.transforms.BZT={
 		modshift:function(t,T,x,X,y,Y,ctx){
 			var T1=ctx.letter(['omega','theta','xi']);
 		return{
-			cells:[
-				'+|+|.',
-				'+|+|+',
-				'.|+|+'
-			],
+			cells:
+				'+|+|.'+'/'+
+				'+|*|+'+'/'+
+				'.|+|+',
 			time:[
 				{formula:{
 					item:'e^{-j'+T1+'_0 '+t+'}'+x(t),

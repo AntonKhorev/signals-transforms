@@ -63,11 +63,8 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			]
 		}},
 		conjrev:function(t,T,x,X){return{
-			cells:[
-				'.|.|.', // TODO real row deletion
-				'+|+|+',
-				'.|.|.'
-			],
+			cells:
+				'+|*|+',
 			time:[
 				{
 					formula:{
@@ -112,11 +109,10 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			]
 		}},
 		modshift:function(t,T,x,X,y,Y,ctx){return{
-			cells:[
+			cells:
+				'+ + +'+'/'+
+				'+|*|+'+'/'+
 				'+ + +',
-				'+|+|+',
-				'+ + +'
-			],
 			time:[
 				{formula:{
 					item:x(t+'+'+t+'_0'),
@@ -163,11 +159,10 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			var t1=ctx.letter(['t','tau','u']);
 			var T1=ctx.letter(['s','lambda']);
 		return{
-			cells:[
-				'+|+|.',
-				'+|+|+',
-				'.|+|.'
-			],
+			cells:
+				'+|+|.'+'/'+
+				'+|*|+'+'/'+
+				'.|+|.',
 			time:[
 				{formula:{
 					item:ctx.int(x(t1),t1,'0^-',t)
@@ -216,10 +211,9 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			]
 		}},
 		impstep:function(t,T,x,X){return{
-			cells:[
+			cells:
+				'.|+|.'+'/'+
 				'.|+|.',
-				'.|+|.'
-			],
 			time:[
 				{formula:{
 					item:'\\delta('+t+')',

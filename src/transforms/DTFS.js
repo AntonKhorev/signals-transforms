@@ -73,11 +73,10 @@ $.fn.signalsTransformsTable.transforms.DTFS={
 			var t1=ctx.letter(['n','m']);
 			var T1=ctx.letter(['k','l']);
 		return{
-			cells:[
+			cells:
+				'.|+|.'+'/'+
+				'+|*|+'+'/'+
 				'.|+|.',
-				'+|+|+',
-				'.|+|.'
-			],
 			time:[
 				{formula:{
 					item:'\\frac{1}{1-e^{j\\omega_0'+t+'}}'+x(t),

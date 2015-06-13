@@ -96,11 +96,10 @@ $.fn.signalsTransformsTable.transforms.DTFT={
 			var T1=ctx.letter(['omega','theta','xi']);
 			var Ti=ctx.letter(['k','l']);
 		return{
-			cells:[
+			cells:
+				'.|+|.'+'/'+
+				'+|*|+'+'/'+
 				'.|+|.',
-				'+|+|+',
-				'.|+|.'
-			],
 			time:[
 				{formula:{
 					item:'-\\frac{1}{j'+t+'}'+x(t),

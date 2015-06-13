@@ -96,11 +96,10 @@ $.fn.signalsTransformsTable.transforms.CTFS={
 			var T1=ctx.letter(['k','l']);
 			var ti=ctx.letter(['n','m']);
 		return{
-			cells:[
+			cells:
+				'.|+|.'+'/'+
+				'+|*|+'+'/'+
 				'.|+|.',
-				'+|+|+',
-				'.|+|.'
-			],
 			time:[
 				{formula:{
 					//item:'\\tfrac{'+x(t)+'}{1-e^{j\\omega_0'+t+'}}+\\pi'+x('0')+'\\tilde\\delta('+t+')',

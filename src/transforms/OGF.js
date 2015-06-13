@@ -27,12 +27,11 @@ $.fn.signalsTransformsTable.transforms.OGF={
 		linearity:function(t,T,x,X,y,Y,ctx){
 			var t1=ctx.letter(['n','m']);
 		return{
-			cells:[
-				'+|.|+',
+			cells:
+				'*|.|*'+'/'+
+				'+ + +'+'/'+
 				'+ + +',
-				'+ + +',
-				'. . .', // skip multiplication
-			],
+				// skip multiplication
 			time:[
 				{},{},{},
 				{formula:{

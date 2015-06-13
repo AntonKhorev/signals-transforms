@@ -71,10 +71,9 @@ $.fn.signalsTransformsTable.transforms.DFT={
 			]
 		}},
 		intdiff:function(t,T,x,X){return{
-			cells:[
-				'.|+|+', // skipping time accumulation - no reference gives it, they all want to sum from -inf, would make sense to sum from 0?
-				'.|+|.'
-			],
+			cells:
+				'.|*|+'+'/'+ // skipping time accumulation - no reference gives it, they all want to sum from -inf, would make sense to sum from 0?
+				'.|+|.',
 			time:[
 				{formula:{item:x(t)}},
 				{formula:{

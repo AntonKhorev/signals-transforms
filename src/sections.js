@@ -12,9 +12,8 @@ $.fn.signalsTransformsTable.includedSections=[
 $.fn.signalsTransformsTable.sections={
 	definitions:function(t,T,x,X){return{
 		name:'Definitions',
-		cells:[
-			'+ + +'
-		],
+		cells:
+			'- - -',
 		time:[
 			{formula:{notes:{t:'synthesis formula'}}}
 		],
@@ -24,12 +23,11 @@ $.fn.signalsTransformsTable.sections={
 	}},
 	linearity:function(t,T,x,X,y,Y,ctx){return{
 		name:'Linearity, convolution and multiplication',
-		cells:[
-			'+|.|+',
+		cells:
+			'*|.|*'+'/'+
+			'+ + +'+'/'+
+			'+ + +'+'/'+
 			'+ + +',
-			'+ + +',
-			'+ + +',
-		],
 		time:[
 			{formula:{item:x(t)}},
 			{formula:{item:y(t)}},
@@ -44,17 +42,15 @@ $.fn.signalsTransformsTable.sections={
 	}},
 	duality:function(t,T,x,X){return{
 		name:'Duality',
-		cells:[
-			'+|+|+'
-		]
+		cells:
+			'+|*|+'
 	}},
 	conjrev:function(t,T,x,X){return{
 		name:'Complex conjugation and time/frequency reversal',
-		cells:[
-			'+|+|.',
-			'+|+|+',
-			'.|+|+'
-		],
+		cells:
+			'+|+|.'+'/'+
+			'+|*|+'+'/'+
+			'.|+|+',
 		time:[
 			{
 				formula:{
@@ -142,11 +138,10 @@ $.fn.signalsTransformsTable.sections={
 	}},
 	modshift:function(t,T,x,X){return{
 		name:'Modulation and time/frequency shifting',
-		cells:[
+		cells:
+			'.|+|.'+'/'+
+			'+|*|+'+'/'+
 			'.|+|.',
-			'+|+|+',
-			'.|+|.'
-		],
 		time:[
 			{formula:{notes:{b:'time shifting'}}},
 			{formula:{notes:{b:'modulation'}}},
@@ -164,10 +159,9 @@ $.fn.signalsTransformsTable.sections={
 	}},
 	intdiff:function(t,T,x,X){return{
 		name:'Integration and differentiation',
-		cells:[
-			'+|+|+',
+		cells:
+			'+|*|+'+'/'+
 			'.|+|.'
-		]
 	}},
 	impstep:function(t,T,x,X){return{
 		name:'Impulse and unit step'

@@ -164,10 +164,9 @@ $.fn.signalsTransformsTable.transforms.BLT={
 			]
 		}},
 		impstep:function(t,T,x,X){return{
-			cells:[
+			cells:
+				'.|+|.'+'/'+
 				'.|+|.',
-				'.|+|.'
-			],
 			time:[
 				{formula:{
 					item:'\\delta('+t+')',
