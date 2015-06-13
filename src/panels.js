@@ -19,11 +19,33 @@ $.fn.signalsTransformsTable.panels={
 				if (!section.hasExplanations[i]) {
 					return 'N/A';
 				}
-				var tr=transform.abbr;
-				if ('transforms' in section && section.transforms[i]!==null) {
-					tr=section.transforms[i];
+				function trans(i){
+					var tr=transform.abbr;
+					if ('transforms' in section && section.transforms[i]!==null) {
+						tr=section.transforms[i];
+					}
+					return '\\mathtt{'+tr+'}'+inv+'\\!\\left\\{'+dom2[i].formula.item+'\\right\\}='+dom1[i].formula.item;
 				}
-				return '$$\\mathtt{'+tr+'}'+inv+'\\!\\left\\{'+dom2[i].formula.item+'\\right\\}='+dom1[i].formula.item+'$$';
+				var ics=section.iConditions;
+				if (ics.indexOf(i)>=0 || ics.length==0) {
+					return '$$'+trans(i)+'$$';
+				} else if (ics.length==1) {
+					return '\\begin{multline}'+
+						trans(ics[0])+
+					' \\iff \\\\ \\iff '+
+						trans(i)+
+					'\\end{multline}';
+				} else {
+					return '\\begin{multline}'+
+						'\\begin{cases}'+
+							$.map(ics,function(i){
+								return trans(i);
+							}).join('\\\\')+
+						'\\end{cases}'+
+					' \\implies \\\\ \\implies '+
+						trans(i)+
+					'\\end{multline}';
+				}
 			}
 			$(this).find('tr:nth-child(2)').html(
 				"<td colspan='"+nDomainCols+"' class='time'>"+
