@@ -14,14 +14,14 @@ $.fn.signalsTransformsTable.panels={
 				"</td></tr>"
 			);
 		},
-		update:function(ev,section,i){
+		update:function(ev,transform,section,i){
 			$(this).find('tr:nth-child(2)').html(
 				"<td colspan='"+nDomainCols+"' class='time'>"+
-					'$$F^{-1}\\{'+section.freq[i].formula.item+'\\}='+section.time[i].formula.item+'$$'+
+					'$$\\mathtt{'+transform.abbr+'}^{-1}\\!\\left\\{'+section.freq[i].formula.item+'\\right\\}='+section.time[i].formula.item+'$$'+
 				"</td>"+
 				"<td class='both'></td>"+
 				"<td colspan='"+nDomainCols+"' class='freq'>"+
-					'$$F\\{'+section.time[i].formula.item+'\\}='+section.freq[i].formula.item+'$$'+
+					'$$\\mathtt{'+transform.abbr+'}\\!\\left\\{'+section.time[i].formula.item+'\\right\\}='+section.freq[i].formula.item+'$$'+
 				"</td>"
 			);
 			MathJax.Hub.Queue(["Typeset",MathJax.Hub,this]);
@@ -36,9 +36,9 @@ $.fn.signalsTransformsTable.panels={
 				"</td></tr>"
 			);
 		},
-		update:function(ev,section,i){
+		update:function(ev,transform,section,i){
 			// temporary code
-			$(this).find('tr:nth-child(2) td').text(section.name+' '+i);
+			$(this).find('tr:nth-child(2) td').text(transform.abbr+' '+section.name+' '+i);
 		}
 	}
 };

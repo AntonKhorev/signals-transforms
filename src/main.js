@@ -269,7 +269,7 @@ return this.each(function(){
 				}
 				function makeItemClickHandler(section,i){
 					return function(){
-						tableNode.children('tbody.panel').trigger('panel:update',[section,i]);
+						tableNode.children('tbody.panel').trigger('panel:update',[transform,section,i]);
 					}
 				}
 
