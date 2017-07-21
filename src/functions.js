@@ -7,39 +7,15 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 		}
 	}
 
-	function parseFunctionOptions(argument,options){
-		if (typeof(options)==='undefined') options='';
-		var startsWithMinus = argument.charAt(0)=='-';
-		if (startsWithMinus) {
-			var argWithoutMinus=argument.substr(1);
-		} else {
-			var argWithoutMinus=argument;
+	function needsBrackets(arg){
+		if (arg.indexOf('+')<0 && (arg.indexOf('-')<0)) {
+			return false; // will be wrong for expressions like a*(b+c)
 		}
-		function needsBrackets(arg){
-			if (arg.indexOf('+')<0 && (arg.indexOf('-')<0)) {
-				return false; // will be wrong for expressions like a*(b+c)
-			}
-			if (arg.charAt(0)=='(' && arg.charAt(arg.length-1)==')' && arg.substr(1).indexOf('(')<0) {
-				return false; // will be wrong for expressions like (a*b)*(c*d)
-			}
-			return true;
+		if (arg.charAt(0)=='(' && arg.charAt(arg.length-1)==')' && arg.substr(1).indexOf('(')<0) {
+			return false; // will be wrong for expressions like (a*b)*(c*d)
 		}
-		var o={}
-		o.fnConj = options.indexOf('*')>=0?'^*':'';
-		if (needsBrackets(argWithoutMinus)) {
-			o.argSign='';
-			o.argRest='('+argument+')';
-		} else {
-			if (startsWithMinus) {
-				o.argSign='-';
-				o.argRest=argWithoutMinus;
-			} else {
-				o.argSign='';
-				o.argRest=argument;
-			}
-		}
-		return o;
-	};
+		return true;
+	}
 
 	function parseTemplate(s){
 		var reLetter='([a-zA-Z]+)';
@@ -64,23 +40,23 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 		var templateSyntaxVariants=[
 			[
 				reLetter+reOpen+reLetter+reClose,
-				function(x,o,arg,open,close){
-					return '{'+x+o.fnConj+'}'+open+arg+close;
+				function(x,arg,argSign,argRest,open,close){
+					return '{'+x+'}'+open+arg+close;
 				}
 			],[
 				reLetter+reOpen+'[ij]\\*'+reLetter+reClose,
-				function(x,o,arg,open,close){
-					return '{'+x+o.fnConj+'}'+open+arg+close;
+				function(x,arg,argSign,argRest,open,close){
+					return '{'+x+'}'+open+arg+close;
 				}
 			],[
 				reLetter+reOpen+'e\\^\\([ij]\\*'+reLetter+'\\)'+reClose,
-				function(x,o,arg,open,close){
-					return '{'+x+o.fnConj+'}'+open+'e^{'+o.argSign+'j'+o.argRest+'}'+close;
+				function(x,arg,argSign,argRest,open,close){
+					return '{'+x+'}'+open+'e^{'+argSign+'j'+argRest+'}'+close;
 				}
 			],[
 				reLetter+'_'+reOpen0+reLetter+reClose0,
-				function(x,o,arg,open,close){
-					return '{'+x+o.fnConj+'}_{'+open+arg+close+'}';
+				function(x,arg,argSign,argRest,open,close){
+					return '{'+x+'}_{'+open+arg+close+'}';
 				}
 			]
 		];
@@ -89,13 +65,32 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 			var fn=templateSyntaxVariants[i][1];
 			var m=s.match(re);
 			if (!m) continue;
-			var x=texLetter(m[1]);
-			var t=texLetter(m[3]);
 			return [
-				function(arg,opts){
-					return fn(x,parseFunctionOptions(arg,opts),arg,texOpen[m[2]],texClose[m[4]]);
+				function(arg,options){
+					if (options===undefined) options='';
+					var x=texLetter(m[1]);
+					if (options.indexOf('*')>=0) x+='^*';
+					var startsWithMinus = arg.charAt(0)=='-';
+					if (startsWithMinus) {
+						var argWithoutMinus=arg.substr(1);
+					} else {
+						var argWithoutMinus=arg;
+					}
+					if (needsBrackets(argWithoutMinus)) {
+						var argSign='';
+						var argRest='('+arg+')';
+					} else {
+						if (startsWithMinus) {
+							var argSign='-';
+							var argRest=argWithoutMinus;
+						} else {
+							var argSign='';
+							var argRest=arg;
+						}
+					}
+					return fn(x,arg,argSign,argRest,texOpen[m[2]],texClose[m[4]]);
 				},
-				'{'+t+'}',m[1],m[3]
+				'{'+texLetter(m[3])+'}',m[1],m[3]
 			];
 		}
 		throw 'invalid function template';
