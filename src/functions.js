@@ -136,10 +136,15 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 		return sectionFn(t,T,x,X,y,Y,ctx);
 	};
 	ctx.int=function(fx,x,x0,x1){
-		r='\\int\\limits_{'+x0+'}';
-		if (typeof(x1)!=='undefined') r+='^{'+x1+'}';
+		var r='\\int\\limits_{'+x0+'}';
+		if (x1!==undefined) r+='^{'+x1+'}';
 		r+='\\!'+fx+'\\,\\mathrm{d}'+x;
 		return r;
+	};
+	ctx.diff=function(fx,x,n){
+		var p='';
+		if (n!==undefined) p='^{'+n+'}'
+		return '\\frac{\\mathrm{d}'+p+'}{\\mathrm{d}'+x+p+'} '+fx
 	};
 
 	// TODO decide (not) to put those under ctx.letters
