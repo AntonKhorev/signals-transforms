@@ -222,7 +222,7 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+' includes \\(R\\)'}
 				}},
 				{formula:{
-					item:T+'^'+n+X(T)+'-'+x('0^-')+T+'^{'+n+'-1}-'+x('0^-',"'")+T+'^{'+n+'-2}-\\cdots-'+x('0^-',"(n-1)"),
+					item:T+'^'+n+X(T)+'{-}'+x('0^-')+T+'^{'+n+'-1}{-}'+x('0^-',"'")+T+'^{'+n+'-2}{-}\\cdots{-}'+x('0^-',"(n-1)"),
 					notes:{b:RoC+' includes \\(R\\)'}
 				}}
 			]
