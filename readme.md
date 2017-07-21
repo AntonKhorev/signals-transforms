@@ -3,7 +3,7 @@
 **[See the table][demo-v1]**.
 
 The idea is to group related properties and place them horizontally as well as vertically,
-unlike a [typical table](http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform#Properties) where all of the properties are listed one below another.
+unlike a [typical table](https://en.wikipedia.org/wiki/Discrete-time_Fourier_transform#Properties) where all of the properties are listed one below another.
 Another idea is to treat domains equally.
 If there's a certain property like differentiation for time domain, attempt is made to provide similar property for frequency domain.
 
@@ -15,18 +15,18 @@ The notation mostly matches these books:
 
 ## Reuse
 
-The table is implemented as a jQuery plugin and requires [MathJax](https://www.mathjax.org/) and [jQuery](http://jquery.com/) libraries.
+The table is implemented as a jQuery plugin and requires [MathJax](https://www.mathjax.org/) and [jQuery](https://jquery.com/) libraries.
 
 Currently there's no releases. Latest builds are available here:
 
-* [css](http://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.css) ([optional source map](http://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.css.map))
-* [javascript](http://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.js) ([optional source map](http://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.js.map))
+* [css](https://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.css) ([optional source map](https://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.css.map))
+* [javascript](https://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.js) ([optional source map](https://antonkhorev.github.io/signals-transforms/lib/signals-transforms-table.js.map))
 
 See the html source of [the demo][demo-v1] for an usage example.
 Some customization of the notation and selected transforms is possible although api may change, see the html source of [*function templates* demo][demo-templates].
 
-[demo-v1]:http://antonkhorev.github.io/signals-transforms/v1/
-[demo-templates]:http://antonkhorev.github.io/signals-transforms/templates/
+[demo-v1]:https://antonkhorev.github.io/signals-transforms/v1/
+[demo-templates]:https://antonkhorev.github.io/signals-transforms/templates/
 
 ## Additional references
 
