@@ -162,7 +162,8 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			cells:
 				'+|+|.'+'/'+
 				'+|*|+'+'/'+
-				'.|+|.',
+				'.|+|.'+'/'+
+				'+ + +',
 			time:[
 				{formula:{
 					item:ctx.int(x(t1),t1,'-\\infty',t)
@@ -181,6 +182,9 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				}},
 				{formula:{
 					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+				}},
+				{formula:{
+					item:'\\frac{\\mathrm{d}^2}{\\mathrm{d}'+t+'^2} '+x(t)
 				}}
 			],
 			freq:[
@@ -206,6 +210,10 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				}},
 				{formula:{
 					item:T+X(T)+'-'+x('0^-'),
+					notes:{b:RoC+' includes \\(R\\)'}
+				}},
+				{formula:{
+					item:T+'^2'+X(T)+'-'+x('0^-')+T+'-\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'}'+x('0^-'),
 					notes:{b:RoC+' includes \\(R\\)'}
 				}}
 			]
