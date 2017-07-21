@@ -165,13 +165,13 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				'.|+|.',
 			time:[
 				{formula:{
-					item:ctx.int(x(t1),t1,'0^-',t)
+					item:ctx.int(x(t1),t1,'-\\infty',t)
 				}},
 				{formula:{
 					item:'\\frac{1}{'+t+'}'+x(t)
 				}},
 				{formula:{
-					item:ctx.int(x(t1),t1,'-\\infty',t)
+					item:ctx.int(x(t1),t1,'0^-',t)
 				}},
 				{formula:{
 					item:x(t)
@@ -185,7 +185,7 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			],
 			freq:[
 				{formula:{
-					item:'\\frac{1}{'+T+'}'+X(T),
+					item:'\\frac{'+X(T)+'}{'+T+'}+\\frac{1}{'+T+'}'+ctx.int(x(t),t,'-\\infty','0^-'),
 					notes:{b:RoC+' includes \\(R \\cap \\{\\Re('+T+')&gt;0\\}\\)'}
 				}},
 				{formula:{
@@ -193,7 +193,7 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					// TODO RoC?
 				}},
 				{formula:{
-					item:'\\frac{'+X(T)+'}{'+T+'}+\\frac{1}{'+T+'}'+ctx.int(x(t),t,'-\\infty','0^-'),
+					item:'\\frac{1}{'+T+'}'+X(T),
 					notes:{b:RoC+' includes \\(R \\cap \\{\\Re('+T+')&gt;0\\}\\)'}
 				}},
 				{formula:{
