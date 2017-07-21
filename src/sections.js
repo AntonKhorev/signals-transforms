@@ -6,7 +6,8 @@ $.fn.signalsTransformsTable.includedSections=[
 	'conjrev',
 	'modshift',
 	'intdiff',
-	'impstep'
+	'impstep',
+	'expsin'
 ];
 
 /*
@@ -178,4 +179,7 @@ $.fn.signalsTransformsTable.sections={
 	impstep:function(t,T,x,X){return{
 		name:'Impulse and unit step'
 	}},
+	expsin:function(t,T,x,X){return{
+		name:'Exponential and trigonometric functions'
+	}}
 };

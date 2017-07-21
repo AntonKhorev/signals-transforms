@@ -251,6 +251,66 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}}
 			]
+		}},
+		expsin:function(t,T,x,X,y,Y,ctx){
+			var omega=ctx.letter(['omega','phi','theta']);
+			var r=ctx.letter(['r','alpha']);
+		return{
+			cells:
+				'+|+|+'+'/'+
+				'+|+|+',
+			time:[
+				{formula:{
+					item:'\\cos '+omega+t,
+					notes:{b:'for \\('+t+' \\ge 0\\)'}
+				}},
+				{formula:{
+					item:'1',
+					notes:{b:'for \\('+t+' \\ge 0\\)'}
+				}},
+				{formula:{
+					item:'\\sin '+omega+t,
+					notes:{b:'for \\('+t+' \\ge 0\\)'}
+				}},
+				{formula:{
+					item:'e^{'+r+t+'} \\cos '+omega+t,
+					notes:{b:'for \\('+t+' \\ge 0\\)'}
+				}},
+				{formula:{
+					item:'e^{'+r+t+'}',
+					notes:{b:'for \\('+t+' \\ge 0\\)'}
+				}},
+				{formula:{
+					item:'e^{'+r+t+'} \\sin '+omega+t,
+					notes:{b:'for \\('+t+' \\ge 0\\)'}
+				}}
+			],
+			freq:[
+				{formula:{
+					item:'\\frac{'+T+'}{'+T+'^2+'+omega+'^2}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
+				}},
+				{formula:{
+					item:'\\frac{1}{'+T+'}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
+				}},
+				{formula:{
+					item:'\\frac{'+omega+'}{'+T+'^2+'+omega+'^2}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
+				}},
+				{formula:{
+					item:'\\frac{'+T+'}{('+T+'-'+r+')^2+'+omega+'^2}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
+				}},
+				{formula:{
+					item:'\\frac{1}{'+T+'-'+r+'}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
+				}},
+				{formula:{
+					item:'\\frac{'+omega+'}{('+T+'-'+r+')^2+'+omega+'^2}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
+				}}
+			]
 		}}
 	}
 };
