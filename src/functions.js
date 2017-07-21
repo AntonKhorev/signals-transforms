@@ -61,50 +61,39 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 			'}':'\\}',
 			'>':' \\rangle'
 		};
-		var m=s.match(reLetter+reOpen+reLetter+reClose);
-		if (m) {
+		var templateSyntaxVariants=[
+			[
+				reLetter+reOpen+reLetter+reClose,
+				function(x,o,arg,open,close){
+					return '{'+x+o.fnConj+'}'+open+arg+close;
+				}
+			],[
+				reLetter+reOpen+'[ij]\\*'+reLetter+reClose,
+				function(x,o,arg,open,close){
+					return '{'+x+o.fnConj+'}'+open+arg+close;
+				}
+			],[
+				reLetter+reOpen+'e\\^\\([ij]\\*'+reLetter+'\\)'+reClose,
+				function(x,o,arg,open,close){
+					return '{'+x+o.fnConj+'}'+open+'e^{'+o.argSign+'j'+o.argRest+'}'+close;
+				}
+			],[
+				reLetter+'_'+reOpen0+reLetter+reClose0,
+				function(x,o,arg,open,close){
+					return '{'+x+o.fnConj+'}_{'+open+arg+close+'}';
+				}
+			]
+		];
+		for (var i=0;i<templateSyntaxVariants.length;i++) {
+			var re=templateSyntaxVariants[i][0];
+			var fn=templateSyntaxVariants[i][1];
+			var m=s.match(re);
+			if (!m) continue;
 			var x=texLetter(m[1]);
 			var t=texLetter(m[3]);
 			return [
 				function(arg,opts){
-					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}'+texOpen[m[2]]+arg+texClose[m[4]];
-				},
-				'{'+t+'}',m[1],m[3]
-			];
-		}
-		var m=s.match(reLetter+reOpen+'[ij]\\*'+reLetter+reClose);
-		if (m) {
-			var x=texLetter(m[1]);
-			var t=texLetter(m[3]);
-			return [
-				function(arg,opts){
-					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}'+texOpen[m[2]]+o.argSign+'j'+o.argRest+texClose[m[4]];
-				},
-				'{'+t+'}',m[1],m[3]
-			];
-		}
-		var m=s.match(reLetter+reOpen+'e\\^\\([ij]\\*'+reLetter+'\\)'+reClose);
-		if (m) {
-			var x=texLetter(m[1]);
-			var t=texLetter(m[3]);
-			return [
-				function(arg,opts){
-					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}'+texOpen[m[2]]+'e^{'+o.argSign+'j'+o.argRest+'}'+texClose[m[4]];
-				},
-				'{'+t+'}',m[1],m[3]
-			];
-		}
-		var m=s.match(reLetter+'_'+reOpen0+reLetter+reClose0);
-		if (m) {
-			var x=texLetter(m[1]);
-			var t=texLetter(m[3]);
-			return [
-				function(arg,opts){
-					var o=parseFunctionOptions(arg,opts);
-					return '{'+x+o.fnConj+'}_{'+texOpen[m[2]]+arg+texClose[m[4]]+'}';
+					return fn(x,parseFunctionOptions(arg,opts),arg,texOpen[m[2]],texClose[m[4]]);
 				},
 				'{'+t+'}',m[1],m[3]
 			];
