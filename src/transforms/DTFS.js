@@ -79,42 +79,42 @@ $.fn.signalsTransformsTable.transforms.DTFS={
 				'.|+|.',
 			time:[
 				{formula:{
-					item:'\\frac{1}{1-e^{j\\omega_0'+t+'}}'+x(t),
-					notes:{b:'only if \\('+x('0')+'=0\\)'}
-				}},
-				{formula:{
 					item:'\\sum_{'+t1+'=-\\infty}^'+t+x(t1),
 					notes:{b:'running sum'}
+				}},
+				{formula:{
+					item:'\\frac{1}{1-e^{j\\omega_0'+t+'}}'+x(t),
+					notes:{b:'only if \\('+x('0')+'=0\\)'}
 				}},
 				{formula:{
 					item:x(t)
 				}},
 				{formula:{
-					item:x(t)+'-'+x(t+'-1'),
-					notes:{b:'first difference'}
+					item:'(1-e^{j\\omega_0'+t+'})'+x(t)
 				}},
 				{formula:{
-					item:'(1-e^{j\\omega_0'+t+'})'+x(t)
+					item:x(t)+'-'+x(t+'-1'),
+					notes:{b:'first difference'}
 				}}
 			],
 			freq:[
-				{formula:{
-					item:'\\sum_{'+T1+'=-\\infty}^'+T+X(T1),
-					notes:{b:'running sum'}
-				}},
 				{formula:{
 					item:'\\frac{1}{1-e^{-j'+T+'\\omega_0}}'+X(T),
 					notes:{b:'only if \\('+X('0')+'=0\\)'}
 				}},
 				{formula:{
-					item:X(T)
+					item:'\\sum_{'+T1+'=-\\infty}^'+T+X(T1),
+					notes:{b:'running sum'}
 				}},
 				{formula:{
-					item:'(1-e^{-j'+T+'\\omega_0}) '+X(T)
+					item:X(T)
 				}},
 				{formula:{
 					item:X(T)+'-'+X(T+'-1'),
 					notes:{b:'first difference'}
+				}},
+				{formula:{
+					item:'(1-e^{-j'+T+'\\omega_0}) '+X(T)
 				}}
 			]
 		}}

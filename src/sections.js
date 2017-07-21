@@ -171,7 +171,8 @@ $.fn.signalsTransformsTable.sections={
 	intdiff:function(t,T,x,X){return{
 		name:'Integration and differentiation',
 		cells:
-			'+|*|+'+'/'+
+			'.|+|.'+'/'+
+			'.|*|+'+'/'+
 			'.|+|.'
 	}},
 	impstep:function(t,T,x,X){return{

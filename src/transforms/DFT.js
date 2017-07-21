@@ -76,19 +76,19 @@ $.fn.signalsTransformsTable.transforms.DFT={
 				'.|+|.',
 			time:[
 				{formula:{item:x(t)}},
+				{formula:{item:'(1-W_N^{-'+t+'}) '+x(t)}},
 				{formula:{
 					item:x(t)+'-'+x(t+'-1'),
 					notes:{b:'first difference'}
-				}},
-				{formula:{item:'(1-W_N^{-'+t+'}) '+x(t)}}
+				}}
 			],
 			freq:[
 				{formula:{item:X(T)}},
-				{formula:{item:'(1-W_N^'+T+') '+X(T)}},
 				{formula:{
 					item:X(T)+'-'+X(T+'-1'),
 					notes:{b:'first difference'}
-				}}
+				}},
+				{formula:{item:'(1-W_N^'+T+') '+X(T)}}
 			]
 		}}
 	}

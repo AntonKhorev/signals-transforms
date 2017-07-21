@@ -102,6 +102,9 @@ $.fn.signalsTransformsTable.transforms.CTFS={
 				'.|+|.',
 			time:[
 				{formula:{
+					item:ctx.int(x(t1),t1,'-\\infty',t)
+				}},
+				{formula:{
 					//item:'\\tfrac{'+x(t)+'}{1-e^{j\\omega_0'+t+'}}+\\pi'+x('0')+'\\tilde\\delta('+t+')',
 					//notes:{b:'\\(\\tilde\\delta('+t+') = \\sum_{'+ti+'=-\\infty}^{+\\infty} \\delta(\\omega_0'+t+'-2\\pi'+ti+')\\)'}
 					item:'\\tfrac{'+x(t)+'}{1-e^{j\\omega_0'+t+'}}+\\tfrac{\\pi'+x('0')+'}{\\omega_0} \\tilde\\delta('+t+')',
@@ -111,36 +114,33 @@ $.fn.signalsTransformsTable.transforms.CTFS={
 					}
 				}},
 				{formula:{
-					item:ctx.int(x(t1),t1,'-\\infty',t)
-				}},
-				{formula:{
 					item:x(t)
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+					item:'(1-e^{j\\omega_0'+t+'})'+x(t)
 				}},
 				{formula:{
-					item:'(1-e^{j\\omega_0'+t+'})'+x(t)
+					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
 				}}
 			],
 			freq:[
-				{formula:{
-					item:'\\sum_{'+T1+'=-\\infty}^'+T+X(T1),
-					notes:{b:'running sum'}
-				}},
 				{formula:{
 					item:'\\frac{1}{j'+T+'\\omega_0}'+X(T),
 					notes:{b:'only if \\('+X('0')+'=0\\)'}
 				}},
 				{formula:{
-					item:X(T)
+					item:'\\sum_{'+T1+'=-\\infty}^'+T+X(T1),
+					notes:{b:'running sum'}
 				}},
 				{formula:{
-					item:'j'+T+' \\omega_0 '+X(T)
+					item:X(T)
 				}},
 				{formula:{
 					item:X(T)+'-'+X(T+'-1'),
 					notes:{b:'first difference'}
+				}},
+				{formula:{
+					item:'j'+T+' \\omega_0 '+X(T)
 				}}
 			]
 		}}

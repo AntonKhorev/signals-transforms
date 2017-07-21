@@ -168,19 +168,19 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					item:ctx.int(x(t1),t1,'-\\infty',t)
 				}},
 				{formula:{
-					item:'\\frac{1}{'+t+'}'+x(t)
+					item:ctx.int(x(t1),t1,'0^-',t)
 				}},
 				{formula:{
-					item:ctx.int(x(t1),t1,'0^-',t)
+					item:'\\frac{1}{'+t+'}'+x(t)
 				}},
 				{formula:{
 					item:x(t)
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+					item:'-'+t+' '+x(t)
 				}},
 				{formula:{
-					item:'-'+t+' '+x(t)
+					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
 				}}
 			],
 			freq:[
@@ -189,24 +189,24 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+' includes \\(R \\cap \\{\\Re('+T+')&gt;0\\}\\)'}
 				}},
 				{formula:{
-					item:ctx.int(X(T1),T1,T,'\\infty')
-					// TODO RoC?
-				}},
-				{formula:{
 					item:'\\frac{1}{'+T+'}'+X(T),
 					notes:{b:RoC+' includes \\(R \\cap \\{\\Re('+T+')&gt;0\\}\\)'}
+				}},
+				{formula:{
+					item:ctx.int(X(T1),T1,T,'\\infty')
+					// TODO RoC?
 				}},
 				{formula:{
 					item:X(T),
 					notes:{b:RoC+' = \\(R\\)'}
 				}},
 				{formula:{
-					item:T+X(T)+'-'+x('0^-'),
-					notes:{b:RoC+' includes \\(R\\)'}
-				}},
-				{formula:{
 					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T),
 					notes:{b:RoC+' = \\(R\\)'}
+				}},
+				{formula:{
+					item:T+X(T)+'-'+x('0^-'),
+					notes:{b:RoC+' includes \\(R\\)'}
 				}}
 			]
 		}},

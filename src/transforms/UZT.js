@@ -191,12 +191,12 @@ $.fn.signalsTransformsTable.transforms.UZT={
 				{formula:{item:'\\sum_{'+t1+'=0}^{'+t+'}'+x(t1)}},
 				{formula:{item:x(t)}},
 				{formula:{
-					item:x(t)+'-'+x(t+'-1'),
-					notes:{b:'first difference'}
-				}},
-				{formula:{
 					item:t+x(t),
 					notes:{b:'multiplication by a ramp'}
+				}},
+				{formula:{
+					item:x(t)+'-'+x(t+'-1'),
+					notes:{b:'first difference'}
 				}}
 			],
 			freq:[
@@ -209,12 +209,12 @@ $.fn.signalsTransformsTable.transforms.UZT={
 					notes:{b:RoC+' = \\(R\\)'}
 				}},
 				{formula:{
-					item:'(1-'+T+'^{-1})'+X(T)+'-'+x('-1'),
-					notes:{b:RoC+' includes \\(R \\setminus \\{0\\} \\)'}
-				}},
-				{formula:{
 					item:'-'+T+' \\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T),
 					notes:{b:RoC+' = \\(R\\)'}
+				}},
+				{formula:{
+					item:'(1-'+T+'^{-1})'+X(T)+'-'+x('-1'),
+					notes:{b:RoC+' includes \\(R \\setminus \\{0\\} \\)'}
 				}}
 			]
 			// also true: -(n-1)x[n-1] <-> (d/dz) X(z), RoC includes R\{0}

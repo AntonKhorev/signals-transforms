@@ -102,28 +102,25 @@ $.fn.signalsTransformsTable.transforms.DTFT={
 				'.|+|.',
 			time:[
 				{formula:{
-					item:'-\\frac{1}{j'+t+'}'+x(t),
-					notes:{b:'only if \\('+x('0')+'=0\\)'}
-				}},
-				{formula:{
 					item:'\\sum_{'+t1+'=-\\infty}^'+t+x(t1),
 					notes:{b:'running sum'}
+				}},
+				{formula:{
+					item:'-\\frac{1}{j'+t+'}'+x(t),
+					notes:{b:'only if \\('+x('0')+'=0\\)'}
 				}},
 				{formula:{
 					item:x(t)
 				}},
 				{formula:{
-					item:x(t)+'-'+x(t+'-1'),
-					notes:{b:'first difference'}
+					item:'-j'+t+x(t)
 				}},
 				{formula:{
-					item:'-j'+t+x(t)
+					item:x(t)+'-'+x(t+'-1'),
+					notes:{b:'first difference'}
 				}}
 			],
 			freq:[
-				{formula:{
-					item:ctx.int(X(T1),T1,'-\\infty',T)
-				}},
 				{formula:{
 					item:'\\tfrac{'+X(T)+'}{1-e^{-j'+T+'}}+\\pi'+X('0')+'\\tilde\\delta('+T+')',
 					notes:{b:
@@ -132,13 +129,16 @@ $.fn.signalsTransformsTable.transforms.DTFT={
 					}
 				}},
 				{formula:{
+					item:ctx.int(X(T1),T1,'-\\infty',T)
+				}},
+				{formula:{
 					item:X(T)
 				}},
 				{formula:{
-					item:'(1-e^{-j'+T+'})'+X(T)
+					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'}'+X(T)
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'}'+X(T)
+					item:'(1-e^{-j'+T+'})'+X(T)
 				}}
 			]
 		}}

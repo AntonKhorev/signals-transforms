@@ -100,14 +100,14 @@ $.fn.signalsTransformsTable.transforms.OGF={
 					item:x(t)
 				}},
 				{formula:{
+					item:'('+t+'+1)'+x(t+'+1')
+				}},
+				{formula:{
 					item:x(t)+'-'+x(t+'-1'),
 					notes:{
 						t:'first difference',
 						b:'\\('+x('0')+', '+x('1')+'-'+x('0')+',...,'+x(t)+'-'+x(t+'-1')+',...\\)'
 					}
-				}},
-				{formula:{
-					item:'('+t+'+1)'+x(t+'+1')
 				}}
 			],
 			freq:[
@@ -118,10 +118,10 @@ $.fn.signalsTransformsTable.transforms.OGF={
 					item:X(T)
 				}},
 				{formula:{
-					item:'(1-'+T+')'+X(T)
+					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)
+					item:'(1-'+T+')'+X(T)
 				}}
 			]
 		}}

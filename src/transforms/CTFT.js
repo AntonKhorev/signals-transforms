@@ -80,36 +80,36 @@ $.fn.signalsTransformsTable.transforms.CTFT={
 				'.|+|.',
 			time:[
 				{formula:{
-					item:'-\\frac{'+x(t)+'}{j'+t+'}+\\pi'+x('0')+'\\delta('+t+')'
+					item:ctx.int(x(t1),t1,'-\\infty',t)
 				}},
 				{formula:{
-					item:ctx.int(x(t1),t1,'-\\infty',t)
+					item:'-\\frac{'+x(t)+'}{j'+t+'}+\\pi'+x('0')+'\\delta('+t+')'
 				}},
 				{formula:{
 					item:x(t)
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+					item:'-j '+t+' '+x(t)
 				}},
 				{formula:{
-					item:'-j '+t+' '+x(t)
+					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
 				}}
 			],
 			freq:[
 				{formula:{
-					item:ctx.int(X(T1),T1,'-\\infty',T)
+					item:'\\frac{'+X(T)+'}{j'+T+'}+\\pi'+X('0')+'\\delta('+T+')'
 				}},
 				{formula:{
-					item:'\\frac{'+X(T)+'}{j'+T+'}+\\pi'+X('0')+'\\delta('+T+')'
+					item:ctx.int(X(T1),T1,'-\\infty',T)
 				}},
 				{formula:{
 					item:X(T)
 				}},
 				{formula:{
-					item:'j'+T+' '+X(T)
+					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T)
+					item:'j'+T+' '+X(T)
 				}}
 			]
 		}},

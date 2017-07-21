@@ -141,8 +141,8 @@ $.fn.signalsTransformsTable.transforms.BLT={
 			time:[
 				{formula:{item:ctx.int(x(t1),t1,'-\\infty',t)}},
 				{formula:{item:x(t)}},
-				{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}},
-				{formula:{item:'-'+t+' '+x(t)}}
+				{formula:{item:'-'+t+' '+x(t)}},
+				{formula:{item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)}}
 			],
 			freq:[
 				{formula:{
@@ -154,12 +154,12 @@ $.fn.signalsTransformsTable.transforms.BLT={
 					notes:{b:RoC+' = \\(R\\)'}
 				}},
 				{formula:{
-					item:T+' '+X(T),
-					notes:{b:RoC+' includes \\(R\\)'}
-				}},
-				{formula:{
 					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+T+'} '+X(T),
 					notes:{b:RoC+' = \\(R\\)'}
+				}},
+				{formula:{
+					item:T+' '+X(T),
+					notes:{b:RoC+' includes \\(R\\)'}
 				}}
 			]
 		}},
