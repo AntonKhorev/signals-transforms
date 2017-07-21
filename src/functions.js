@@ -69,7 +69,9 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 				function(arg,options){
 					if (options===undefined) options='';
 					var x=texLetter(m[1]);
-					if (options.indexOf('*')>=0) x+='^*';
+					if (options=='*') x+='^*';
+					if (options.charAt(0)=="'") x+=options;
+					if (options.charAt(0)=='(') x+='^{'+options+'}';
 					var startsWithMinus = arg.charAt(0)=='-';
 					if (startsWithMinus) {
 						var argWithoutMinus=arg.substr(1);
@@ -125,11 +127,11 @@ function FormulaContext(timeFnTemplate,freqFnTemplate){
 		r+='\\!'+fx+'\\,\\mathrm{d}'+x;
 		return r;
 	};
-	ctx.diff=function(fx,x,n){
-		var p='';
-		if (n!==undefined) p='^{'+n+'}'
-		return '\\frac{\\mathrm{d}'+p+'}{\\mathrm{d}'+x+p+'} '+fx
-	};
+	//ctx.diff=function(fx,x,n){
+	//	var p='';
+	//	if (n!==undefined) p='^{'+n+'}'
+	//	return '\\frac{\\mathrm{d}'+p+'}{\\mathrm{d}'+x+p+'} '+fx
+	//};
 
 	// TODO decide (not) to put those under ctx.letters
 	ctx.a=ctx.letter(['a','A','alpha']); // factor 1

@@ -183,13 +183,13 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					item:'-'+t+' '+x(t)
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x(t)
+					item:x(t,"'")
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}^2}{\\mathrm{d}'+t+'^2} '+x(t)
+					item:x(t,"''")
 				}},
 				{formula:{
-					item:'\\frac{\\mathrm{d}^'+n+'}{\\mathrm{d}'+t+'^'+n+'} '+x(t)
+					item:x(t,"(n)")
 				}}
 			],
 			freq:[
@@ -218,11 +218,11 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+' includes \\(R\\)'}
 				}},
 				{formula:{
-					item:T+'^2'+X(T)+'-'+x('0^-')+T+'-\\frac{\\mathrm{d}}{\\mathrm{d}'+t+'} '+x('0^-'),
+					item:T+'^2'+X(T)+'-'+x('0^-')+T+'-'+x('0^-',"'"),
 					notes:{b:RoC+' includes \\(R\\)'}
 				}},
 				{formula:{
-					item:T+'^'+n+X(T)+'-'+x('0^-')+T+'^{'+n+'-1}-'+ctx.diff(x('0^-'),t)+T+'^{'+n+'-2}-\\cdots-'+ctx.diff(x('0^-'),t,n+'-1'),
+					item:T+'^'+n+X(T)+'-'+x('0^-')+T+'^{'+n+'-1}-'+x('0^-',"'")+T+'^{'+n+'-2}-\\cdots-'+x('0^-',"(n-1)"),
 					notes:{b:RoC+' includes \\(R\\)'}
 				}}
 			]
