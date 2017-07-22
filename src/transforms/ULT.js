@@ -299,7 +299,7 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}},
 				{formula:{
-					item:'\\frac{'+T+'}{('+T+'-'+r+')^2+'+omega+'^2}',
+					item:'\\frac{'+T+'-'+r+'}{('+T+'-'+r+')^2+'+omega+'^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
 				}},
 				{formula:{
