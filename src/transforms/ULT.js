@@ -243,11 +243,11 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
-					item:'\\cos '+omega+t,
+					item:'\\sin '+omega+t,
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
-					item:'\\sin '+omega+t,
+					item:'\\cos '+omega+t,
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
@@ -255,11 +255,11 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
-					item:'e^{'+r+t+'} \\cos '+omega+t,
+					item:'e^{'+r+t+'} \\sin '+omega+t,
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
-					item:'e^{'+r+t+'} \\sin '+omega+t,
+					item:'e^{'+r+t+'} \\cos '+omega+t,
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
@@ -267,11 +267,11 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
-					item:t+'\\cos '+omega+t,
+					item:t+'\\sin '+omega+t,
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
-					item:t+'\\sin '+omega+t,
+					item:t+'\\cos '+omega+t,
 					notes:{b:'for \\('+t+' \\ge 0\\)'}
 				}},
 				{formula:{
@@ -289,11 +289,11 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}},
 				{formula:{
-					item:'\\frac{'+T+'}{'+T+'^2+'+omega+'^2}',
+					item:'\\frac{'+omega+'}{'+T+'^2+'+omega+'^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}},
 				{formula:{
-					item:'\\frac{'+omega+'}{'+T+'^2+'+omega+'^2}',
+					item:'\\frac{'+T+'}{'+T+'^2+'+omega+'^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}},
 				{formula:{
@@ -301,11 +301,11 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
 				}},
 				{formula:{
-					item:'\\frac{'+T+'-'+r+'}{('+T+'-'+r+')^2+'+omega+'^2}',
+					item:'\\frac{'+omega+'}{('+T+'-'+r+')^2+'+omega+'^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
 				}},
 				{formula:{
-					item:'\\frac{'+omega+'}{('+T+'-'+r+')^2+'+omega+'^2}',
+					item:'\\frac{'+T+'-'+r+'}{('+T+'-'+r+')^2+'+omega+'^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
 				}},
 				{formula:{
@@ -313,11 +313,11 @@ $.fn.signalsTransformsTable.transforms.ULT={
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}},
 				{formula:{
-					item:'\\frac{'+T+'^2-'+omega+'^2}{('+T+'^2+'+omega+'^2)^2}',
+					item:'\\frac{2'+omega+T+'}{('+T+'^2+'+omega+'^2)^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}},
 				{formula:{
-					item:'\\frac{2'+omega+T+'}{('+T+'^2+'+omega+'^2)^2}',
+					item:'\\frac{'+T+'^2-'+omega+'^2}{('+T+'^2+'+omega+'^2)^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}},
 				{formula:{
