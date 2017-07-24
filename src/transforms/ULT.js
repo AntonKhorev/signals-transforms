@@ -227,31 +227,6 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				}}
 			]
 		}},
-		impstep:function(t,T,x,X){return{
-			cells:
-				'.|+|.'+'/'+
-				'.|+|.',
-			time:[
-				{formula:{
-					item:'\\delta('+t+')',
-					notes:{b:'Dirac delta'+Wiki('http://en.wikipedia.org/wiki/Dirac_delta_function')}
-				}},
-				{formula:{
-					item:'u('+t+')',
-					notes:{b:'unit step'+Wiki('http://en.wikipedia.org/wiki/Heaviside_step_function')}
-				}}
-			],
-			freq:[
-				{formula:{
-					item:'1',
-					notes:{b:RoC+': all \\('+T+'\\)'}
-				}},
-				{formula:{
-					item:'\\frac{1}{'+T+'}',
-					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
-				}}
-			]
-		}},
 		expsin:function(t,T,x,X,y,Y,ctx){
 			var omega=ctx.letter(['omega','phi','theta']);
 			var r=ctx.letter(['r','alpha']);
@@ -309,6 +284,31 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				{formula:{
 					item:'\\frac{'+omega+'}{('+T+'-'+r+')^2+'+omega+'^2}',
 					notes:{b:RoC+': \\(\\Re('+T+')&gt;'+r+'\\)'}
+				}}
+			]
+		}},
+		impstep:function(t,T,x,X){return{
+			cells:
+				'.|+|.'+'/'+
+				'.|+|.',
+			time:[
+				{formula:{
+					item:'\\delta('+t+')',
+					notes:{b:'Dirac delta'+Wiki('http://en.wikipedia.org/wiki/Dirac_delta_function')}
+				}},
+				{formula:{
+					item:'u('+t+')',
+					notes:{b:'unit step'+Wiki('http://en.wikipedia.org/wiki/Heaviside_step_function')}
+				}}
+			],
+			freq:[
+				{formula:{
+					item:'1',
+					notes:{b:RoC+': all \\('+T+'\\)'}
+				}},
+				{formula:{
+					item:'\\frac{1}{'+T+'}',
+					notes:{b:RoC+': \\(\\Re('+T+')&gt;0\\)'}
 				}}
 			]
 		}}
