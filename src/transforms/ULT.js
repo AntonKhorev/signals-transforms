@@ -112,7 +112,8 @@ $.fn.signalsTransformsTable.transforms.ULT={
 			cells:
 				'+ + +'+'/'+
 				'+|*|+'+'/'+
-				'+ + +',
+				'+ + +'+'/'+
+				'.|+|.',
 			time:[
 				{formula:{
 					item:x(t+'+'+t+'_0'),
@@ -130,6 +131,10 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				{formula:{
 					item:x(t+'-'+t+'_0'),
 					notes:{b:'\\('+t+'_0 &gt; 0\\)',t:'time delay'}
+				}},
+				{formula:{
+					item:x(ctx.a+t),
+					notes:{b:'\\('+ctx.a+' &gt; 0\\)',t:'time scaling'}
 				}}
 			],
 			freq:[
@@ -152,6 +157,10 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				{formula:{
 					item:'e^{-'+T+' '+t+'_0}'+X(T)+'+e^{-'+T+' '+t+'_0}'+ctx.int(x(t)+'e^{-'+T+t+'}',t,'(-'+t+'_0)^-','0^-'),
 					notes:{b:RoC+' = \\(R\\)'}
+				}},
+				{formula:{
+					item:'\\frac1{'+ctx.a+'}'+X('\\frac{'+T+'}{'+ctx.a+'}'),
+					notes:{b:RoC+': \\(\\frac{'+T+'}{'+ctx.a+'} \\in R\\)'}
 				}}
 			]
 		}},

@@ -104,13 +104,22 @@ $.fn.signalsTransformsTable.transforms.BLT={
 				}
 			]
 		}},
-		modshift:function(t,T,x,X){return{
+		modshift:function(t,T,x,X,y,Y,ctx){return{
+			cells:
+				'.|+|.'+'/'+
+				'+|*|+'+'/'+
+				'.|+|.'+'/'+
+				'.|+|.',
 			time:[
 				{formula:{item:x(t+'+'+t+'_0')}},
 				{formula:{item:'e^{-'+T+'_0 '+t+'}'+x(t)}},
 				{formula:{item:x(t)}},
 				{formula:{item:'e^{'+T+'_0 '+t+'}'+x(t)}},
-				{formula:{item:x(t+'-'+t+'_0')}}
+				{formula:{item:x(t+'-'+t+'_0')}},
+				{formula:{
+					item:x(ctx.a+t),
+					notes:{b:'\\('+ctx.a+' &gt; 0\\)',t:'time scaling'}
+				}}
 			],
 			freq:[
 				{formula:{
@@ -132,6 +141,10 @@ $.fn.signalsTransformsTable.transforms.BLT={
 				{formula:{
 					item:'e^{-'+T+' '+t+'_0}'+X(T),
 					notes:{b:RoC+' = \\(R\\)'}
+				}},
+				{formula:{
+					item:'\\frac1{'+ctx.a+'}'+X('\\frac{'+T+'}{'+ctx.a+'}'),
+					notes:{b:RoC+': \\(\\frac{'+T+'}{'+ctx.a+'} \\in R\\)'}
 				}}
 			]
 		}},
