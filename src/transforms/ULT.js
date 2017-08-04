@@ -110,9 +110,9 @@ $.fn.signalsTransformsTable.transforms.ULT={
 		}},
 		modshift:function(t,T,x,X,y,Y,ctx){return{
 			cells:
-				'+ + +'+'/'+
+				'.|+ +'+'/'+
 				'+|*|+'+'/'+
-				'+ + +'+'/'+
+				'+|+ +'+'/'+
 				'.|+|.',
 			time:[
 				{formula:{
@@ -127,6 +127,10 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				}},
 				{formula:{
 					item:'e^{'+T+'_0'+t+'}'+x(t)
+				}},
+				{formula:{
+					item:x(t+'-'+t+'_0')+'u('+t+'-'+t+'_0)',
+					notes:{b:'\\('+t+'_0 &gt; 0\\)',t:'time delay'}
 				}},
 				{formula:{
 					item:x(t+'-'+t+'_0'),
@@ -153,6 +157,10 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				{formula:{
 					item:X(''+T+'-'+T+'_0'),
 					notes:{b:RoC+' = \\(R+\\Re('+T+'_0)\\)'}
+				}},
+				{formula:{
+					item:'e^{-'+T+' '+t+'_0}'+X(T),
+					notes:{b:RoC+' = \\(R\\)'}
 				}},
 				{formula:{
 					item:'e^{-'+T+' '+t+'_0}'+X(T)+'+e^{-'+T+' '+t+'_0}'+ctx.int(x(t)+'e^{-'+T+t+'}',t,'(-'+t+'_0)^-','0^-'),
