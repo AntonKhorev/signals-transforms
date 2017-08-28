@@ -34,4 +34,5 @@ Some customization of the notation and selected transforms is possible although 
 2. Alexander D. Poularikas. *Transforms and Applications Primer for Engineers with Examples and MATLAB®*
 3. *Fundamentals of Circuits and Filters* edited by Wai-Kai Chen
 4. B. P. Lathi. *Signal Processing and Linear Systems*
-5. [Transfer Functions and the Laplace Transform](https://www.edx.org/course/transfer-functions-laplace-transform-mitx-18-03lx) MOOC on edX
+5. [*Transfer Functions and the Laplace Transform*](https://www.edx.org/course/transfer-functions-laplace-transform-mitx-18-03lx) MOOC on edX
+6. Kent H. Lundberg, Haynes R. Miller, David L. Trumper. [*Initial Conditions, Generalized Functions, and the Laplace Transform*](http://www-math.mit.edu/~hrm/papers/lmt.pdf)
