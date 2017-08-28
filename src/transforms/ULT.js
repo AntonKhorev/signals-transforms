@@ -36,9 +36,9 @@ $.fn.signalsTransformsTable.transforms.ULT={
 				{},{},{},
 				{formula:{
 					// sometimes limits are -inf..+inf, but then causality of x(t) and y(t) is required
-					item:x(t)+'*'+y(t)+' \\equiv '+ctx.int(x(t1)+y(t+'-'+t1),t1,'0',t), // TODO what about limits? is it 0- .. t+ ?
+					item:x(t)+'*'+y(t)+' \\equiv '+ctx.int(x(t1)+y(t+'-'+t1),t1,'0^-',t+'^+'),
 					notes:{
-						// t:'\\('+x(t)+'='+y(t)+'=0\\) required for \\('+t+'&lt;0\\)',
+						b:'\\('+x(t)+'='+y(t)+'=0\\) required for \\('+t+'&lt;0\\)',
 						// b:'linear convolution'
 					}
 				}},
